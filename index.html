@@ -3,25 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#0077e5" id="themeColorMeta">
+<meta name="theme-color" content="#0077e5">
 <meta name="description" content="Tools, Phone Directory & Documents for Nepal">
 
 <!-- PWA Meta Tags -->
+<meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Mero App">
-<meta name="mobile-web-app-capable" content="yes">
 <meta name="application-name" content="Mero App">
 
 <title>Mero App</title>
 
-<!-- ⭐ PWA ICONS (PNG FILES - CRITICAL FOR APP INSTALL) -->
+<!-- PWA Icons (PNG - CRITICAL for no badge) -->
 <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="./icons/icon-512.png">
 <link rel="apple-touch-icon" sizes="192x192" href="./icons/icon-192.png">
 <link rel="apple-touch-icon" sizes="512x512" href="./icons/icon-512.png">
 
-<!-- ⭐ EXTERNAL MANIFEST (Required for real app install) -->
+<!-- PWA Manifest (External File) -->
 <link rel="manifest" href="./manifest.json">
 
 <!-- Bootstrap & Icons -->
@@ -129,8 +129,6 @@ body {
   transition: transform 0.25s;
 }
 .nav-btn.active::before { transform: translateX(-50%) scaleX(1); }
-
-/* Welcome Card */
 .welcome-card {
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: white; border-radius: 20px;
@@ -161,10 +159,8 @@ body {
 }
 @keyframes wave {
   0%, 60%, 100% { transform: rotate(0deg); }
-  10% { transform: rotate(14deg); }
-  20% { transform: rotate(-8deg); }
-  30% { transform: rotate(14deg); }
-  40% { transform: rotate(-4deg); }
+  10%, 30% { transform: rotate(14deg); }
+  20%, 40% { transform: rotate(-8deg); }
   50% { transform: rotate(10deg); }
 }
 .welcome-datetime {
@@ -180,8 +176,6 @@ body {
   border: 1px solid rgba(255,255,255,0.2);
 }
 .welcome-time i { font-size: 0.75rem; }
-
-/* Weather */
 .weather-strip {
   position: relative; z-index: 1;
   background: rgba(255,255,255,0.15);
@@ -218,7 +212,6 @@ body {
 }
 .weather-loading i { animation: spin 1s linear infinite; }
 .weather-error { cursor: pointer; }
-
 .section-title {
   font-size: 0.8rem; font-weight: 700;
   color: var(--text-secondary);
@@ -250,8 +243,6 @@ body {
 .tool-icon.weather { background: linear-gradient(135deg, #00a2e2, #0077b3); }
 .tool-icon.unicode { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
 .tool-icon.panchang { background: linear-gradient(135deg, #64748b, #475569); }
-
-/* Directory */
 .search-wrap { position: sticky; top: 0; background: var(--bg-body); padding-bottom: 12px; z-index: 5; }
 .search-box {
   background: var(--bg-card); border: 1px solid var(--border);
@@ -280,14 +271,11 @@ body {
 .relation-tag { display: inline-block; background: rgba(0,119,229,0.12); color: var(--primary); font-size: 0.7rem; font-weight: 600; padding: 2px 8px; border-radius: 10px; }
 .call-btn { width: 42px; height: 42px; background: rgba(0,119,229,0.12); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; text-decoration: none; flex-shrink: 0; }
 .call-btn:active { background: var(--primary); color: white; }
-
 .state-msg { text-align: center; padding: 60px 20px; color: var(--text-secondary); }
 .state-msg i { font-size: 3.5rem; color: var(--text-tertiary); margin-bottom: 16px; display: block; }
 .state-msg h4 { color: var(--text-primary); font-weight: 600; margin: 0 0 6px; font-size: 1.1rem; }
 .state-msg p { margin: 0; font-size: 0.9rem; }
 .d-none { display: none !important; }
-
-/* Settings */
 .settings-group { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 16px; box-shadow: var(--shadow-sm); }
 .settings-item { display: flex; align-items: center; padding: 14px 16px; border-bottom: 1px solid var(--border); gap: 14px; cursor: pointer; }
 .settings-item:last-child { border-bottom: none; }
@@ -301,8 +289,6 @@ body {
 .toggle::after { content: ''; position: absolute; top: 2px; left: 2px; width: 24px; height: 24px; background: white; border-radius: 50%; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
 .toggle.on { background: var(--primary); }
 .toggle.on::after { transform: translateX(20px); }
-
-/* Modals */
 .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.25s; display: flex; align-items: flex-end; justify-content: center; }
 .modal-overlay.show { opacity: 1; pointer-events: auto; }
 .bottom-sheet { background: var(--bg-elevated); width: 100%; max-width: 500px; max-height: 92vh; max-height: 92dvh; border-radius: 20px 20px 0 0; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1); display: flex; flex-direction: column; overflow: hidden; }
@@ -313,15 +299,12 @@ body {
 .sheet-close { width: 32px; height: 32px; border-radius: 50%; background: var(--border); border: none; color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem; }
 .sheet-body { flex: 1; overflow: auto; padding: 16px; background: var(--bg-body); }
 .sheet-body iframe { width: 100%; border: none; border-radius: 10px; background: white; }
-
 .about-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 24px 20px; text-align: center; margin-bottom: 16px; box-shadow: var(--shadow-sm); }
 .app-logo { width: 72px; height: 72px; border-radius: 18px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 12px; box-shadow: var(--shadow-md); overflow: hidden; }
 .app-logo img { width: 100%; height: 100%; object-fit: cover; }
 .about-card h3 { margin: 0 0 4px; font-weight: 700; color: var(--text-primary); }
 .about-card p { margin: 0; color: var(--text-secondary); font-size: 0.85rem; }
 .version { display: inline-block; background: var(--border); color: var(--text-secondary); padding: 3px 10px; border-radius: 10px; font-size: 0.75rem; margin-top: 8px; font-weight: 600; }
-
-/* Documents */
 .doc-welcome { background: linear-gradient(135deg, #1a1f2e, #0f1420); color: #f0ece3; border-radius: 20px; padding: 24px 20px; margin-bottom: 20px; position: relative; overflow: hidden; box-shadow: var(--shadow-md); }
 .doc-welcome::before { content: ''; position: absolute; top: -50%; right: -20%; width: 200px; height: 200px; background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%); border-radius: 50%; }
 .doc-welcome .eyebrow { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; position: relative; z-index: 1; }
@@ -362,7 +345,6 @@ body {
 .doc-modal-footer { padding: 14px 16px calc(var(--safe-bottom) + 14px); border-top: 1px solid var(--border); display: flex; align-items: center; gap: 12px; flex-shrink: 0; background: var(--bg-elevated); }
 .doc-modal-desc { flex: 1; font-size: 0.8rem; color: var(--text-secondary); margin: 0; line-height: 1.4; }
 .doc-download-btn { background: linear-gradient(135deg, var(--gold), #a07830); color: #0b0c0f; border: none; padding: 10px 16px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-family: inherit; white-space: nowrap; }
-
 @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
 .pulse { animation: pulse 2s infinite ease-in-out; }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -378,7 +360,6 @@ body {
   </header>
 
   <main class="screens">
-    <!-- Tools Screen -->
     <section class="screen active" id="screen-tools">
       <div class="welcome-card">
         <div class="greeting-wrap">
@@ -418,7 +399,6 @@ body {
       </div>
     </section>
 
-    <!-- Directory Screen -->
     <section class="screen" id="screen-directory">
       <div class="search-wrap">
         <div class="search-box">
@@ -439,7 +419,6 @@ body {
       <div id="resultsContainer"></div>
     </section>
 
-    <!-- Documents Screen -->
     <section class="screen" id="screen-documents">
       <div class="doc-welcome">
         <p class="eyebrow">Personal Vault</p>
@@ -468,7 +447,6 @@ body {
       <div class="doc-grid" id="docGrid"></div>
     </section>
 
-    <!-- Settings Screen -->
     <section class="screen" id="screen-settings">
       <div class="about-card">
         <div class="app-logo">
@@ -476,7 +454,7 @@ body {
         </div>
         <h3>Mero App</h3>
         <p>Tools, Directory & Documents</p>
-        <span class="version">v1.8.0</span>
+        <span class="version">v2.0.0</span>
       </div>
       <div class="section-title">Preferences</div>
       <div class="settings-group">
@@ -498,7 +476,7 @@ body {
       <div class="settings-group">
         <div class="settings-item">
           <div class="settings-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8)"><i class="bi bi-info-circle-fill"></i></div>
-          <div class="settings-item-content"><h4>Version</h4><p>1.8.0 • July 2026</p></div>
+          <div class="settings-item-content"><h4>Version</h4><p>2.0.0 • July 2026</p></div>
         </div>
         <div class="settings-item">
           <div class="settings-icon" style="background: linear-gradient(135deg, #ec4899, #be185d)"><i class="bi bi-heart-fill"></i></div>
@@ -516,7 +494,6 @@ body {
   </nav>
 </div>
 
-<!-- Tool Modal -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="bottom-sheet" id="bottomSheet">
     <div class="sheet-handle"></div>
@@ -528,7 +505,6 @@ body {
   </div>
 </div>
 
-<!-- Document Modal -->
 <div class="doc-modal-overlay" id="docModalOverlay">
   <div class="doc-modal">
     <div class="doc-modal-header">
@@ -597,7 +573,7 @@ function updateDateTime() {
   const hour = nepalNow.getHours();
   let greeting, emoji;
   if (hour >= 5 && hour < 12) { greeting = 'Good morning'; emoji = '🌅'; }
-  else if (hour >= 12 && hour < 17) { greeting = 'Good afternoon'; emoji = '☀️'; }
+  else if (hour >= 12 && hour < 17) { greeting = 'Good afternoon'; emoji = '️'; }
   else if (hour >= 17 && hour < 21) { greeting = 'Good evening'; emoji = '🌇'; }
   else { greeting = 'Good night'; emoji = '🌙'; }
   greetingText.textContent = greeting;
@@ -616,11 +592,11 @@ const KATHMANDU = { lat: 27.7172, lon: 85.3240, name: 'Kathmandu, Nepal' };
 
 function decodeWeather(code) {
   const map = {
-    0:{icon:'☀️',desc:'Clear sky'},1:{icon:'🌤️',desc:'Mainly clear'},2:{icon:'⛅',desc:'Partly cloudy'},3:{icon:'☁️',desc:'Overcast'},
+    0:{icon:'☀️',desc:'Clear sky'},1:{icon:'🌤️',desc:'Mainly clear'},2:{icon:'⛅',desc:'Partly cloudy'},3:{icon:'️',desc:'Overcast'},
     45:{icon:'🌫️',desc:'Foggy'},48:{icon:'🌫️',desc:'Rime fog'},51:{icon:'🌦️',desc:'Light drizzle'},53:{icon:'🌦️',desc:'Drizzle'},
-    55:{icon:'🌧️',desc:'Dense drizzle'},61:{icon:'🌧️',desc:'Light rain'},63:{icon:'🌧️',desc:'Rain'},65:{icon:'🌧️',desc:'Heavy rain'},
+    55:{icon:'️',desc:'Dense drizzle'},61:{icon:'🌧️',desc:'Light rain'},63:{icon:'🌧️',desc:'Rain'},65:{icon:'🌧️',desc:'Heavy rain'},
     71:{icon:'🌨️',desc:'Light snow'},73:{icon:'🌨️',desc:'Snow'},75:{icon:'❄️',desc:'Heavy snow'},80:{icon:'🌦️',desc:'Rain showers'},
-    81:{icon:'🌧️',desc:'Heavy showers'},82:{icon:'⛈️',desc:'Violent showers'},95:{icon:'⛈️',desc:'Thunderstorm'},96:{icon:'⛈️',desc:'Thunder + hail'},99:{icon:'⛈️',desc:'Severe storm'}
+    81:{icon:'🌧️',desc:'Heavy showers'},82:{icon:'⛈️',desc:'Violent showers'},95:{icon:'️',desc:'Thunderstorm'},96:{icon:'⛈️',desc:'Thunder + hail'},99:{icon:'⛈️',desc:'Severe storm'}
   };
   return map[code] || { icon: '🌡️', desc: 'Unknown' };
 }
