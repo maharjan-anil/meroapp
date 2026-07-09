@@ -9,6 +9,7 @@
   "background_color": "#f5f7fa",
   "theme_color": "#0077e5",
   "lang": "en",
+  "categories": ["utilities", "productivity"],
   "icons": [
     {
       "src": "./icons/icon-192.png",
