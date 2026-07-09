@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mero-app-v1.8';
+const CACHE_NAME = 'mero-app-v2.0';
 const ASSETS = [
   './',
   './index.html',
