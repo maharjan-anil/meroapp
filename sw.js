@@ -4,25 +4,19 @@ const ASSETS = [
   './index.html',
   './manifest.json',
   './icons/icon-192.png',
-  './icons/icon-512.png',
-  'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css',
-  'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css',
-  'https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js'
+  './icons/icon-512.png'
 ];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      console.log('Caching assets');
-      return cache.addAll(ASSETS);
-    })
+    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
   );
   self.skipWaiting();
 });
 
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    caches.keys().then(keys => 
+    caches.keys().then(keys =>
       Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k)))
     )
   );
@@ -31,12 +25,11 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
-  
-  // Skip external APIs
   if (event.request.url.includes('ashesh.com.np')) return;
   if (event.request.url.includes('docs.google.com')) return;
   if (event.request.url.includes('dropbox.com')) return;
-  
+  if (event.request.url.includes('open-meteo.com')) return;
+
   event.respondWith(
     caches.match(event.request).then(cached => {
       const fetchPromise = fetch(event.request).then(response => {
@@ -46,7 +39,6 @@ self.addEventListener('fetch', (event) => {
         }
         return response;
       }).catch(() => cached);
-      
       return cached || fetchPromise;
     })
   );
