@@ -5,28 +5,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#0077e5" id="themeColorMeta">
 <meta name="description" content="Tools, Phone Directory & Documents for Nepal">
-
-<!-- PWA Meta Tags -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Mero App">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="application-name" content="Mero App">
-
 <title>Mero App</title>
-
-<!-- PWA Icons -->
 <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="./icons/icon-512.png">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
-
-<!-- PWA Manifest (External File) -->
 <link rel="manifest" href="./manifest.json">
-
-<!-- Bootstrap & Icons -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
 <style>
 :root {
   --primary: #0077e5;
@@ -90,14 +79,6 @@ body {
   font-size: 1.3rem; font-weight: 700; margin: 0;
   color: var(--text-primary); letter-spacing: -0.02em;
 }
-.icon-btn {
-  width: 40px; height: 40px; border-radius: 50%;
-  border: none; background: transparent;
-  color: var(--text-primary);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.2rem; cursor: pointer;
-}
-.icon-btn:active { background: var(--border); }
 .screens { flex: 1; overflow: hidden; position: relative; }
 .screen {
   position: absolute; inset: 0;
@@ -203,36 +184,15 @@ body {
   display: flex; align-items: center; gap: 12px;
   margin-top: 4px;
 }
-.weather-icon {
-  font-size: 1.8rem;
-  flex-shrink: 0;
-  line-height: 1;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
-}
+.weather-icon { font-size: 1.8rem; flex-shrink: 0; line-height: 1; }
 .weather-info { flex: 1; min-width: 0; }
-.weather-main {
-  display: flex; align-items: baseline; gap: 6px;
-  font-size: 0.95rem; font-weight: 600;
-}
+.weather-main { display: flex; align-items: baseline; gap: 6px; font-size: 0.95rem; font-weight: 600; }
 .weather-temp { font-size: 1.1rem; font-weight: 700; }
-.weather-cond {
-  font-size: 0.8rem; opacity: 0.9;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.weather-meta {
-  display: flex; gap: 10px;
-  font-size: 0.72rem; opacity: 0.85;
-  margin-top: 2px;
-}
-.weather-meta span {
-  display: inline-flex; align-items: center; gap: 3px;
-}
+.weather-cond { font-size: 0.8rem; opacity: 0.9; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.weather-meta { display: flex; gap: 10px; font-size: 0.72rem; opacity: 0.85; margin-top: 2px; }
+.weather-meta span { display: inline-flex; align-items: center; gap: 3px; }
 .weather-meta i { font-size: 0.7rem; }
-.weather-location {
-  font-size: 0.7rem; opacity: 0.85;
-  display: flex; align-items: center; gap: 3px;
-  margin-top: 3px;
-}
+.weather-location { font-size: 0.7rem; opacity: 0.85; display: flex; align-items: center; gap: 3px; margin-top: 3px; }
 .weather-location i { font-size: 0.7rem; }
 .weather-loading, .weather-error {
   position: relative; z-index: 1;
@@ -246,7 +206,6 @@ body {
 }
 .weather-loading i { animation: spin 1s linear infinite; }
 .weather-error { cursor: pointer; }
-.weather-error:active { opacity: 0.7; }
 .section-title {
   font-size: 0.8rem; font-weight: 700;
   color: var(--text-secondary);
@@ -292,350 +251,183 @@ body {
   color: var(--text-primary); font-size: 1rem; font-family: inherit;
 }
 .search-box input::placeholder { color: var(--text-tertiary); }
-.clear-btn {
-  background: none; border: none; color: var(--text-tertiary);
-  font-size: 1.2rem; cursor: pointer; padding: 4px; display: none;
-}
+.clear-btn { background: none; border: none; color: var(--text-tertiary); font-size: 1.2rem; cursor: pointer; padding: 4px; display: none; }
 .clear-btn.show { display: block; }
-.filter-toggle {
-  display: flex; background: var(--bg-card);
-  border: 1px solid var(--border); border-radius: 12px;
-  padding: 4px; margin-top: 10px; gap: 4px;
-}
-.filter-btn {
-  flex: 1; background: transparent; border: none;
-  padding: 10px; border-radius: 8px;
-  font-weight: 600; font-size: 0.85rem;
-  color: var(--text-secondary); cursor: pointer;
-  transition: all 0.2s; font-family: inherit;
-}
+.filter-toggle { display: flex; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 4px; margin-top: 10px; gap: 4px; }
+.filter-btn { flex: 1; background: transparent; border: none; padding: 10px; border-radius: 8px; font-weight: 600; font-size: 0.85rem; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; font-family: inherit; }
 .filter-btn.active { background: var(--primary); color: white; }
-.contact-card {
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: 14px; padding: 12px;
-  margin-bottom: 10px; display: flex; align-items: center; gap: 12px;
-  box-shadow: var(--shadow-sm);
-}
-.fav-btn {
-  background: none; border: none; color: var(--text-tertiary);
-  font-size: 1.3rem; cursor: pointer; padding: 4px;
-}
+.contact-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 12px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; box-shadow: var(--shadow-sm); }
+.fav-btn { background: none; border: none; color: var(--text-tertiary); font-size: 1.3rem; cursor: pointer; padding: 4px; }
 .fav-btn.active { color: #f59e0b; }
-.avatar {
-  width: 46px; height: 46px; border-radius: 50%;
-  background: linear-gradient(135deg, #e0eafc, #cfdef3);
-  color: var(--primary);
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 700; font-size: 1rem; flex-shrink: 0;
-}
-[data-theme="dark"] .avatar {
-  background: linear-gradient(135deg, #1e3a5f, #2d4a7c); color: #60a5fa;
-}
+.avatar { width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, #e0eafc, #cfdef3); color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1rem; flex-shrink: 0; }
+[data-theme="dark"] .avatar { background: linear-gradient(135deg, #1e3a5f, #2d4a7c); color: #60a5fa; }
 .contact-info { flex: 1; min-width: 0; }
-.contact-info h5 {
-  font-size: 1rem; font-weight: 600; margin: 0 0 4px;
-  color: var(--text-primary);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.relation-tag {
-  display: inline-block; background: rgba(0,119,229,0.12);
-  color: var(--primary); font-size: 0.7rem; font-weight: 600;
-  padding: 2px 8px; border-radius: 10px;
-}
-.call-btn {
-  width: 42px; height: 42px;
-  background: rgba(0,119,229,0.12); color: var(--primary);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem; text-decoration: none; flex-shrink: 0;
-}
+.contact-info h5 { font-size: 1rem; font-weight: 600; margin: 0 0 4px; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.relation-tag { display: inline-block; background: rgba(0,119,229,0.12); color: var(--primary); font-size: 0.7rem; font-weight: 600; padding: 2px 8px; border-radius: 10px; }
+.call-btn { width: 42px; height: 42px; background: rgba(0,119,229,0.12); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; text-decoration: none; flex-shrink: 0; }
 .call-btn:active { background: var(--primary); color: white; }
 .state-msg { text-align: center; padding: 60px 20px; color: var(--text-secondary); }
 .state-msg i { font-size: 3.5rem; color: var(--text-tertiary); margin-bottom: 16px; display: block; }
 .state-msg h4 { color: var(--text-primary); font-weight: 600; margin: 0 0 6px; font-size: 1.1rem; }
 .state-msg p { margin: 0; font-size: 0.9rem; }
 .d-none { display: none !important; }
-.settings-group {
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: 14px; overflow: hidden;
-  margin-bottom: 16px; box-shadow: var(--shadow-sm);
-}
-.settings-item {
-  display: flex; align-items: center;
-  padding: 14px 16px; border-bottom: 1px solid var(--border);
-  gap: 14px; cursor: pointer;
-}
+.settings-group { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-bottom: 16px; box-shadow: var(--shadow-sm); }
+.settings-item { display: flex; align-items: center; padding: 14px 16px; border-bottom: 1px solid var(--border); gap: 14px; cursor: pointer; }
 .settings-item:last-child { border-bottom: none; }
 .settings-item:active { background: var(--border); }
-.settings-icon {
-  width: 36px; height: 36px; border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem; color: white; flex-shrink: 0;
-}
+.settings-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; color: white; flex-shrink: 0; }
 .settings-item-content { flex: 1; min-width: 0; }
 .settings-item-content h4 { margin: 0; font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
 .settings-item-content p { margin: 2px 0 0; font-size: 0.8rem; color: var(--text-secondary); }
 .chevron { color: var(--text-tertiary); font-size: 0.9rem; }
-.toggle {
-  position: relative; width: 48px; height: 28px;
-  background: var(--border); border-radius: 14px;
-  cursor: pointer; transition: background 0.2s; flex-shrink: 0;
-}
-.toggle::after {
-  content: ''; position: absolute; top: 2px; left: 2px;
-  width: 24px; height: 24px; background: white;
-  border-radius: 50%; transition: transform 0.2s;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-}
+.toggle { position: relative; width: 48px; height: 28px; background: var(--border); border-radius: 14px; cursor: pointer; transition: background 0.2s; flex-shrink: 0; }
+.toggle::after { content: ''; position: absolute; top: 2px; left: 2px; width: 24px; height: 24px; background: white; border-radius: 50%; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
 .toggle.on { background: var(--primary); }
 .toggle.on::after { transform: translateX(20px); }
-.modal-overlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 1000; opacity: 0; pointer-events: none;
-  transition: opacity 0.25s;
-  display: flex; align-items: flex-end; justify-content: center;
-}
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.25s; display: flex; align-items: flex-end; justify-content: center; }
 .modal-overlay.show { opacity: 1; pointer-events: auto; }
-.bottom-sheet {
-  background: var(--bg-elevated);
-  width: 100%; max-width: 500px;
-  max-height: 92vh; max-height: 92dvh;
-  border-radius: 20px 20px 0 0;
-  transform: translateY(100%);
-  transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
-  display: flex; flex-direction: column; overflow: hidden;
-}
+.bottom-sheet { background: var(--bg-elevated); width: 100%; max-width: 500px; max-height: 92vh; max-height: 92dvh; border-radius: 20px 20px 0 0; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1); display: flex; flex-direction: column; overflow: hidden; }
 .modal-overlay.show .bottom-sheet { transform: translateY(0); }
-.sheet-handle {
-  width: 36px; height: 4px;
-  background: var(--border); border-radius: 2px;
-  margin: 10px auto 0; flex-shrink: 0;
-}
-.sheet-header {
-  padding: 12px 16px;
-  display: flex; align-items: center; justify-content: space-between;
-  border-bottom: 1px solid var(--border); flex-shrink: 0;
-}
+.sheet-handle { width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 10px auto 0; flex-shrink: 0; }
+.sheet-header { padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); flex-shrink: 0; }
 .sheet-header h3 { margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--text-primary); }
-.sheet-close {
-  width: 32px; height: 32px; border-radius: 50%;
-  background: var(--border); border: none;
-  color: var(--text-primary);
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; font-size: 1.1rem;
-}
+.sheet-close { width: 32px; height: 32px; border-radius: 50%; background: var(--border); border: none; color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem; }
 .sheet-body { flex: 1; overflow: auto; padding: 16px; background: var(--bg-body); }
 .sheet-body iframe { width: 100%; border: none; border-radius: 10px; background: white; }
-.install-banner {
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: white; padding: 16px; border-radius: 14px;
-  margin-bottom: 16px; display: flex; align-items: center; gap: 12px;
-  box-shadow: var(--shadow-md);
-}
-.install-banner i { font-size: 2rem; }
-.install-banner-content { flex: 1; }
-.install-banner h4 { margin: 0 0 2px; font-size: 0.95rem; font-weight: 700; }
-.install-banner p { margin: 0; font-size: 0.8rem; opacity: 0.9; }
-.install-btn {
-  background: white; color: var(--primary);
-  border: none; padding: 8px 16px; border-radius: 20px;
-  font-weight: 700; font-size: 0.85rem; cursor: pointer; font-family: inherit;
-}
-.about-card {
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: 14px; padding: 24px 20px;
-  text-align: center; margin-bottom: 16px;
-  box-shadow: var(--shadow-sm);
-}
-.app-logo {
-  width: 72px; height: 72px; border-radius: 18px;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: white;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 2rem; margin: 0 auto 12px;
-  box-shadow: var(--shadow-md);
-}
+.about-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 24px 20px; text-align: center; margin-bottom: 16px; box-shadow: var(--shadow-sm); }
+.app-logo { width: 72px; height: 72px; border-radius: 18px; background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 12px; box-shadow: var(--shadow-md); }
 .about-card h3 { margin: 0 0 4px; font-weight: 700; color: var(--text-primary); }
 .about-card p { margin: 0; color: var(--text-secondary); font-size: 0.85rem; }
-.version {
-  display: inline-block; background: var(--border);
-  color: var(--text-secondary); padding: 3px 10px;
-  border-radius: 10px; font-size: 0.75rem;
-  margin-top: 8px; font-weight: 600;
-}
-.doc-welcome {
-  background: linear-gradient(135deg, #1a1f2e, #0f1420);
-  color: #f0ece3;
-  border-radius: 20px;
-  padding: 24px 20px;
-  margin-bottom: 20px;
-  position: relative; overflow: hidden;
-  box-shadow: var(--shadow-md);
-}
-.doc-welcome::before {
-  content: ''; position: absolute;
-  top: -50%; right: -20%;
-  width: 200px; height: 200px;
-  background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
-  border-radius: 50%;
-}
-.doc-welcome .eyebrow {
-  font-size: 0.7rem; font-weight: 500;
-  letter-spacing: 0.3em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 8px;
-  position: relative; z-index: 1;
-}
-.doc-welcome h2 {
-  font-size: 1.4rem; font-weight: 300; margin: 0 0 6px;
-  position: relative; z-index: 1;
-  font-family: Georgia, serif;
-}
+.version { display: inline-block; background: var(--border); color: var(--text-secondary); padding: 3px 10px; border-radius: 10px; font-size: 0.75rem; margin-top: 8px; font-weight: 600; }
+.doc-welcome { background: linear-gradient(135deg, #1a1f2e, #0f1420); color: #f0ece3; border-radius: 20px; padding: 24px 20px; margin-bottom: 20px; position: relative; overflow: hidden; box-shadow: var(--shadow-md); }
+.doc-welcome::before { content: ''; position: absolute; top: -50%; right: -20%; width: 200px; height: 200px; background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%); border-radius: 50%; }
+.doc-welcome .eyebrow { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; position: relative; z-index: 1; }
+.doc-welcome h2 { font-size: 1.4rem; font-weight: 300; margin: 0 0 6px; position: relative; z-index: 1; font-family: Georgia, serif; }
 .doc-welcome h2 em { font-style: italic; color: var(--gold-light); }
-.doc-welcome p {
-  margin: 0; font-size: 0.85rem; opacity: 0.7;
-  position: relative; z-index: 1;
-}
-.doc-search {
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: 14px; display: flex; align-items: center;
-  padding: 0 14px; box-shadow: var(--shadow-sm);
-  margin-bottom: 12px;
-}
+.doc-welcome p { margin: 0; font-size: 0.85rem; opacity: 0.7; position: relative; z-index: 1; }
+.doc-search { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; display: flex; align-items: center; padding: 0 14px; box-shadow: var(--shadow-sm); margin-bottom: 12px; }
 .doc-search i { color: var(--gold); font-size: 1.1rem; }
-.doc-search input {
-  flex: 1; border: none; outline: none;
-  padding: 14px 10px; background: transparent;
-  color: var(--text-primary); font-size: 1rem; font-family: inherit;
-}
+.doc-search input { flex: 1; border: none; outline: none; padding: 14px 10px; background: transparent; color: var(--text-primary); font-size: 1rem; font-family: inherit; }
 .doc-search input::placeholder { color: var(--text-tertiary); }
-.doc-clear {
-  background: none; border: none; color: var(--text-tertiary);
-  font-size: 1.2rem; cursor: pointer; padding: 4px; display: none;
-}
+.doc-clear { background: none; border: none; color: var(--text-tertiary); font-size: 1.2rem; cursor: pointer; padding: 4px; display: none; }
 .doc-clear.show { display: block; }
-.doc-actions {
-  display: flex; gap: 8px; margin-bottom: 16px;
-  overflow-x: auto; padding-bottom: 4px;
-  -ms-overflow-style: none; scrollbar-width: none;
-}
+.doc-actions { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 4px; -ms-overflow-style: none; scrollbar-width: none; }
 .doc-actions::-webkit-scrollbar { display: none; }
-.doc-chip {
-  background: var(--bg-card); border: 1px solid var(--border);
-  color: var(--text-secondary);
-  padding: 8px 14px; border-radius: 20px;
-  font-size: 0.8rem; font-weight: 600;
-  cursor: pointer; white-space: nowrap;
-  transition: all 0.2s; font-family: inherit;
+.doc-chip { background: var(--bg-card); border: 1px solid var(--border); color: var(--text-secondary); padding: 8px 14px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all 0.2s; font-family: inherit; display: flex; align-items: center; gap: 6px; }
+.doc-chip.active { background: var(--primary); color: white; border-color: var(--primary); }
+.doc-chip i { font-size: 0.85rem; }
+.doc-count { font-size: 0.75rem; color: var(--text-secondary); margin: 0 4px 12px; letter-spacing: 0.05em; }
+.doc-count span { color: var(--primary); font-weight: 700; }
+.doc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.doc-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; cursor: pointer; box-shadow: var(--shadow-sm); transition: transform 0.15s; }
+.doc-card:active { transform: scale(0.97); }
+.doc-card-img { width: 100%; height: 110px; background: var(--border); background-size: cover; background-position: center; position: relative; }
+.doc-card-img::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.3), transparent 50%); }
+.doc-card-tag { position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); color: white; font-size: 0.65rem; font-weight: 600; padding: 3px 8px; border-radius: 8px; letter-spacing: 0.05em; text-transform: uppercase; z-index: 1; }
+.doc-card-body { padding: 10px 12px 12px; }
+.doc-card-body h4 { font-size: 0.85rem; font-weight: 600; margin: 0 0 4px; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.doc-card-body p { font-size: 0.7rem; color: var(--text-secondary); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.doc-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 1100; opacity: 0; pointer-events: none; transition: opacity 0.25s; display: flex; align-items: flex-end; justify-content: center; }
+.doc-modal-overlay.show { opacity: 1; pointer-events: auto; }
+.doc-modal { background: var(--bg-elevated); width: 100%; max-width: 500px; max-height: 95vh; max-height: 95dvh; border-radius: 20px 20px 0 0; transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1); display: flex; flex-direction: column; overflow: hidden; }
+.doc-modal-overlay.show .doc-modal { transform: translateY(0); }
+.doc-modal-header { padding: 14px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+.doc-modal-header .eyebrow { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 2px; }
+.doc-modal-header h3 { margin: 0; font-size: 1rem; font-weight: 700; color: var(--text-primary); }
+.doc-modal-body { flex: 1; overflow: auto; background: var(--bg-body); display: flex; align-items: center; justify-content: center; padding: 16px; min-height: 300px; }
+.doc-modal-body img { max-width: 100%; max-height: 60vh; border-radius: 10px; box-shadow: var(--shadow-md); display: block; }
+.doc-modal-footer { padding: 14px 16px calc(var(--safe-bottom) + 14px); border-top: 1px solid var(--border); display: flex; align-items: center; gap: 12px; flex-shrink: 0; background: var(--bg-elevated); }
+.doc-modal-desc { flex: 1; font-size: 0.8rem; color: var(--text-secondary); margin: 0; line-height: 1.4; }
+.doc-download-btn { background: linear-gradient(135deg, var(--gold), #a07830); color: #0b0c0f; border: none; padding: 10px 16px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-family: inherit; white-space: nowrap; }
+/* ===== AUTO-INSTALL OVERLAY ===== */
+.install-overlay {
+  position: fixed; inset: 0;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  z-index: 9999;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 24px;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  transition: opacity 0.4s, transform 0.4s;
+}
+.install-overlay.hidden {
+  opacity: 0;
+  transform: scale(1.05);
+  pointer-events: none;
+}
+.install-logo {
+  width: 90px; height: 90px;
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.5rem;
+  margin-bottom: 24px;
+  border: 1px solid rgba(255,255,255,0.25);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  animation: logoPulse 2s ease-in-out infinite;
+}
+@keyframes logoPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 8px 32px rgba(0,0,0,0.15); }
+  50% { transform: scale(1.05); box-shadow: 0 12px 40px rgba(0,0,0,0.25); }
+}
+.install-title {
+  font-size: 1.8rem; font-weight: 700;
+  margin: 0 0 8px; letter-spacing: -0.02em;
+}
+.install-subtitle {
+  font-size: 0.95rem; opacity: 0.9;
+  margin: 0 0 32px; max-width: 280px;
+  line-height: 1.5;
+}
+.install-cta {
+  background: white; color: var(--primary);
+  padding: 14px 32px; border-radius: 30px;
+  font-weight: 700; font-size: 1rem;
+  display: inline-flex; align-items: center; gap: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  animation: ctaBounce 1.8s ease-in-out infinite;
+}
+@keyframes ctaBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+.install-hint {
+  margin-top: 24px;
+  font-size: 0.8rem; opacity: 0.75;
   display: flex; align-items: center; gap: 6px;
 }
-.doc-chip.active {
-  background: var(--primary); color: white; border-color: var(--primary);
+.install-hint i { font-size: 0.9rem; }
+/* iOS specific instructions */
+.ios-instructions {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 16px;
+  padding: 16px 20px;
+  margin-top: 20px;
+  max-width: 300px;
+  text-align: left;
+  backdrop-filter: blur(10px);
 }
-.doc-chip i { font-size: 0.85rem; }
-.doc-count {
-  font-size: 0.75rem; color: var(--text-secondary);
-  margin: 0 4px 12px; letter-spacing: 0.05em;
+.ios-instructions h4 {
+  font-size: 0.9rem; font-weight: 700;
+  margin: 0 0 10px; display: flex; align-items: center; gap: 6px;
 }
-.doc-count span { color: var(--primary); font-weight: 700; }
-.doc-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+.ios-instructions ol {
+  margin: 0; padding-left: 20px;
+  font-size: 0.82rem; line-height: 1.7;
+  opacity: 0.95;
 }
-.doc-card {
-  background: var(--bg-card); border: 1px solid var(--border);
-  border-radius: 14px; overflow: hidden;
-  cursor: pointer; box-shadow: var(--shadow-sm);
-  transition: transform 0.15s;
-}
-.doc-card:active { transform: scale(0.97); }
-.doc-card-img {
-  width: 100%; height: 110px;
-  background: var(--border);
-  background-size: cover; background-position: center;
-  position: relative;
-}
-.doc-card-img::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.3), transparent 50%);
-}
-.doc-card-tag {
-  position: absolute; top: 8px; left: 8px;
-  background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
-  color: white; font-size: 0.65rem; font-weight: 600;
-  padding: 3px 8px; border-radius: 8px;
-  letter-spacing: 0.05em; text-transform: uppercase;
-  z-index: 1;
-}
-.doc-card-body { padding: 10px 12px 12px; }
-.doc-card-body h4 {
-  font-size: 0.85rem; font-weight: 600; margin: 0 0 4px;
-  color: var(--text-primary);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.doc-card-body p {
-  font-size: 0.7rem; color: var(--text-secondary); margin: 0;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.doc-modal-overlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.85);
-  z-index: 1100; opacity: 0; pointer-events: none;
-  transition: opacity 0.25s;
-  display: flex; align-items: flex-end; justify-content: center;
-}
-.doc-modal-overlay.show { opacity: 1; pointer-events: auto; }
-.doc-modal {
-  background: var(--bg-elevated);
-  width: 100%; max-width: 500px;
-  max-height: 95vh; max-height: 95dvh;
-  border-radius: 20px 20px 0 0;
-  transform: translateY(100%);
-  transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
-  display: flex; flex-direction: column; overflow: hidden;
-}
-.doc-modal-overlay.show .doc-modal { transform: translateY(0); }
-.doc-modal-header {
-  padding: 14px 16px;
-  display: flex; align-items: center; justify-content: space-between;
-  border-bottom: 1px solid var(--border); flex-shrink: 0;
-}
-.doc-modal-header .eyebrow {
-  font-size: 0.65rem; letter-spacing: 0.25em;
-  text-transform: uppercase; color: var(--gold);
-  margin-bottom: 2px;
-}
-.doc-modal-header h3 {
-  margin: 0; font-size: 1rem; font-weight: 700;
-  color: var(--text-primary);
-}
-.doc-modal-body {
-  flex: 1; overflow: auto; background: var(--bg-body);
-  display: flex; align-items: center; justify-content: center;
-  padding: 16px; min-height: 300px;
-}
-.doc-modal-body img {
-  max-width: 100%; max-height: 60vh;
-  border-radius: 10px; box-shadow: var(--shadow-md);
-  display: block;
-}
-.doc-modal-footer {
-  padding: 14px 16px calc(var(--safe-bottom) + 14px);
-  border-top: 1px solid var(--border);
-  display: flex; align-items: center; gap: 12px;
-  flex-shrink: 0; background: var(--bg-elevated);
-}
-.doc-modal-desc {
-  flex: 1; font-size: 0.8rem; color: var(--text-secondary);
-  margin: 0; line-height: 1.4;
-}
-.doc-download-btn {
-  background: linear-gradient(135deg, var(--gold), #a07830);
-  color: #0b0c0f; border: none;
-  padding: 10px 16px; border-radius: 20px;
-  font-weight: 700; font-size: 0.8rem;
-  cursor: pointer; text-decoration: none;
-  display: inline-flex; align-items: center; gap: 6px;
-  font-family: inherit; white-space: nowrap;
+.ios-instructions ol li { margin-bottom: 4px; }
+.ios-instructions .skip-btn {
+  background: transparent; color: white;
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 8px 16px; border-radius: 20px;
+  font-size: 0.8rem; margin-top: 12px;
+  cursor: pointer; font-family: inherit;
+  width: 100%; font-weight: 600;
 }
 @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
 .pulse { animation: pulse 2s infinite ease-in-out; }
@@ -645,18 +437,40 @@ body {
 </style>
 </head>
 <body>
+
+<!-- ===== AUTO-INSTALL OVERLAY ===== -->
+<div class="install-overlay" id="installOverlay">
+  <div class="install-logo">
+    <i class="bi bi-grid-1x2-fill"></i>
+  </div>
+  <h1 class="install-title">Mero App</h1>
+  <p class="install-subtitle">Your personal toolkit for Nepal — Tools, Directory & Documents</p>
+  <div class="install-cta" id="installCta">
+    <i class="bi bi-download"></i>
+    <span id="ctaText">Tap to Install</span>
+  </div>
+  <div class="install-hint">
+    <i class="bi bi-hand-index-thumb"></i>
+    <span id="hintText">Tap anywhere to continue</span>
+  </div>
+  <div class="ios-instructions d-none" id="iosInstructions">
+    <h4><i class="bi bi-apple"></i> iPhone Users</h4>
+    <ol>
+      <li>Tap the <strong>Share</strong> button (↑) below</li>
+      <li>Scroll and tap <strong>"Add to Home Screen"</strong></li>
+      <li>Tap <strong>"Add"</strong> to confirm</li>
+    </ol>
+    <button class="skip-btn" id="iosSkipBtn">Continue to App</button>
+  </div>
+</div>
+
 <div class="app">
   <header class="app-header">
     <h1 id="headerTitle">Mero App</h1>
-    <div>
-      <button class="icon-btn" id="installBtn" style="display:none" aria-label="Install">
-        <i class="bi bi-download"></i>
-      </button>
-    </div>
+    <div></div>
   </header>
 
   <main class="screens">
-    <!-- Tools Screen -->
     <section class="screen active" id="screen-tools">
       <div class="welcome-card">
         <div class="greeting-wrap">
@@ -720,7 +534,6 @@ body {
       </div>
     </section>
 
-    <!-- Directory Screen -->
     <section class="screen" id="screen-directory">
       <div class="search-wrap">
         <div class="search-box">
@@ -756,7 +569,6 @@ body {
       <div id="resultsContainer"></div>
     </section>
 
-    <!-- Documents Screen -->
     <section class="screen" id="screen-documents">
       <div class="doc-welcome">
         <p class="eyebrow">Personal Vault</p>
@@ -788,15 +600,13 @@ body {
       <div class="doc-grid" id="docGrid"></div>
     </section>
 
-    <!-- Settings Screen -->
     <section class="screen" id="screen-settings">
       <div class="about-card">
         <div class="app-logo"><i class="bi bi-grid-1x2-fill"></i></div>
         <h3>Mero App</h3>
         <p>Tools, Directory & Documents</p>
-        <span class="version">v1.5.0</span>
+        <span class="version">v1.6.0</span>
       </div>
-      <div id="installBannerContainer"></div>
       <div class="section-title">Preferences</div>
       <div class="settings-group">
         <div class="settings-item" id="themeToggle">
@@ -811,25 +621,6 @@ body {
       </div>
       <div class="section-title">App</div>
       <div class="settings-group">
-        <div class="settings-item" id="installSettings">
-          <div class="settings-icon" style="background: linear-gradient(135deg, #10b981, #059669)">
-            <i class="bi bi-download"></i>
-          </div>
-          <div class="settings-item-content">
-            <h4>Install App</h4><p>Add to home screen</p>
-          </div>
-          <i class="bi bi-chevron-right chevron"></i>
-        </div>
-        <div class="settings-item" id="iosInstallGuide" style="display:none;">
-          <div class="settings-icon" style="background: linear-gradient(135deg, #ff375f, #d7004d)">
-            <i class="bi bi-apple"></i>
-          </div>
-          <div class="settings-item-content">
-            <h4>Add to Home Screen</h4>
-            <p>Tap Share (↑) → "Add to Home Screen"</p>
-          </div>
-          <i class="bi bi-chevron-right chevron"></i>
-        </div>
         <div class="settings-item" id="refreshData">
           <div class="settings-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706)">
             <i class="bi bi-arrow-clockwise"></i>
@@ -847,7 +638,7 @@ body {
             <i class="bi bi-info-circle-fill"></i>
           </div>
           <div class="settings-item-content">
-            <h4>Version</h4><p>1.5.0 • July 2026</p>
+            <h4>Version</h4><p>1.6.0 • July 2026</p>
           </div>
         </div>
         <div class="settings-item">
@@ -878,7 +669,6 @@ body {
   </nav>
 </div>
 
-<!-- Tool Bottom Sheet Modal -->
 <div class="modal-overlay" id="modalOverlay">
   <div class="bottom-sheet" id="bottomSheet">
     <div class="sheet-handle"></div>
@@ -890,7 +680,6 @@ body {
   </div>
 </div>
 
-<!-- Document Preview Modal -->
 <div class="doc-modal-overlay" id="docModalOverlay">
   <div class="doc-modal">
     <div class="doc-modal-header">
@@ -914,6 +703,96 @@ body {
 
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script>
+// ========== AUTO-INSTALL SYSTEM ==========
+const installOverlay = document.getElementById('installOverlay');
+const installCta = document.getElementById('installCta');
+const ctaText = document.getElementById('ctaText');
+const hintText = document.getElementById('hintText');
+const iosInstructions = document.getElementById('iosInstructions');
+const iosSkipBtn = document.getElementById('iosSkipBtn');
+
+let deferredPrompt = null;
+let installTriggered = false;
+
+// Check if already installed
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches
+  || window.navigator.standalone === true;
+
+// Detect iOS
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+// Listen for install prompt (Android/Chrome)
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  // Auto-trigger install immediately when prompt is available
+  if (!installTriggered) {
+    installTriggered = true;
+    setTimeout(() => triggerAutoInstall(), 300);
+  }
+});
+
+function triggerAutoInstall() {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  deferredPrompt.userChoice.then((choice) => {
+    deferredPrompt = null;
+    dismissOverlay();
+  });
+}
+
+function dismissOverlay() {
+  installOverlay.classList.add('hidden');
+  setTimeout(() => {
+    installOverlay.style.display = 'none';
+    document.body.style.overflow = '';
+  }, 400);
+}
+
+// Initialize overlay behavior
+(function initInstallOverlay() {
+  document.body.style.overflow = 'hidden';
+  
+  // If already installed → skip overlay entirely
+  if (isStandalone) {
+    installOverlay.style.display = 'none';
+    document.body.style.overflow = '';
+    return;
+  }
+  
+  // iOS: show manual instructions (no auto-install possible)
+  if (isIOS) {
+    ctaText.textContent = 'Install on iPhone';
+    hintText.textContent = 'Follow the steps below';
+    iosInstructions.classList.remove('d-none');
+    installCta.style.display = 'none';
+    
+    iosSkipBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dismissOverlay();
+    });
+    return;
+  }
+  
+  // Android/Desktop: listen for tap anywhere to trigger install
+  installOverlay.addEventListener('click', () => {
+    if (deferredPrompt) {
+      triggerAutoInstall();
+    } else {
+      // No prompt available yet — dismiss and continue
+      dismissOverlay();
+    }
+  });
+  
+  // Auto-dismiss after 10 seconds if no install prompt arrives (fallback)
+  setTimeout(() => {
+    if (!installTriggered && !deferredPrompt && !isIOS) {
+      dismissOverlay();
+    }
+  }, 10000);
+})();
+
 // ========== THEME ==========
 const html = document.getElementById('htmlRoot');
 const themeSwitch = document.getElementById('themeSwitch');
@@ -950,7 +829,7 @@ navBtns.forEach(btn => {
   });
 });
 
-// ========== SMART GREETING (Nepal Time) ==========
+// ========== SMART GREETING ==========
 const greetingText = document.getElementById('greetingText');
 const greetingEmoji = document.getElementById('greetingEmoji');
 const welcomeDateEl = document.getElementById('welcomeDate');
@@ -966,33 +845,18 @@ function updateGreeting() {
   const nepalNow = getNepalTime();
   const hour = nepalNow.getHours();
   let greeting, emoji;
-
-  if (hour >= 5 && hour < 12) {
-    greeting = 'Good morning';
-    emoji = '🌅';
-  } else if (hour >= 12 && hour < 17) {
-    greeting = 'Good afternoon';
-    emoji = '☀️';
-  } else if (hour >= 17 && hour < 21) {
-    greeting = 'Good evening';
-    emoji = '🌇';
-  } else {
-    greeting = 'Good night';
-    emoji = '🌙';
-  }
-
+  if (hour >= 5 && hour < 12) { greeting = 'Good morning'; emoji = '🌅'; }
+  else if (hour >= 12 && hour < 17) { greeting = 'Good afternoon'; emoji = '☀️'; }
+  else if (hour >= 17 && hour < 21) { greeting = 'Good evening'; emoji = '🌇'; }
+  else { greeting = 'Good night'; emoji = '🌙'; }
   greetingText.textContent = greeting;
   greetingEmoji.textContent = emoji;
 }
 
 function updateDateTime() {
   const now = new Date();
-  const dateStr = now.toLocaleDateString('en-US', {
-    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-  });
-  const timeStr = now.toLocaleTimeString('en-US', {
-    hour: '2-digit', minute: '2-digit', hour12: true
-  });
+  const dateStr = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  const timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
   welcomeDateEl.textContent = dateStr;
   timeTextEl.textContent = timeStr;
   updateGreeting();
@@ -1001,38 +865,25 @@ function updateDateTime() {
 updateDateTime();
 setInterval(updateDateTime, 30000);
 document.addEventListener('visibilitychange', () => {
-  if (!document.hidden) {
-    updateDateTime();
-    fetchWeather();
-  }
+  if (!document.hidden) { updateDateTime(); fetchWeather(); }
 });
 
-// ========== LIVE WEATHER (Open-Meteo API) ==========
+// ========== LIVE WEATHER ==========
 const weatherContainer = document.getElementById('weatherContainer');
 const KATHMANDU = { lat: 27.7172, lon: 85.3240, name: 'Kathmandu, Nepal' };
 
 function decodeWeather(code) {
   const map = {
-    0:  { icon: '☀️', desc: 'Clear sky' },
-    1:  { icon: '🌤️', desc: 'Mainly clear' },
-    2:  { icon: '⛅', desc: 'Partly cloudy' },
-    3:  { icon: '☁️', desc: 'Overcast' },
-    45: { icon: '🌫️', desc: 'Foggy' },
-    48: { icon: '🌫️', desc: 'Rime fog' },
-    51: { icon: '🌦️', desc: 'Light drizzle' },
-    53: { icon: '🌦️', desc: 'Drizzle' },
-    55: { icon: '🌧️', desc: 'Dense drizzle' },
-    61: { icon: '🌧️', desc: 'Light rain' },
-    63: { icon: '🌧️', desc: 'Rain' },
-    65: { icon: '🌧️', desc: 'Heavy rain' },
-    71: { icon: '🌨️', desc: 'Light snow' },
-    73: { icon: '🌨️', desc: 'Snow' },
-    75: { icon: '❄️', desc: 'Heavy snow' },
-    80: { icon: '🌦️', desc: 'Rain showers' },
-    81: { icon: '🌧️', desc: 'Heavy showers' },
-    82: { icon: '⛈️', desc: 'Violent showers' },
-    95: { icon: '⛈️', desc: 'Thunderstorm' },
-    96: { icon: '⛈️', desc: 'Thunder + hail' },
+    0: { icon: '☀️', desc: 'Clear sky' }, 1: { icon: '🌤️', desc: 'Mainly clear' },
+    2: { icon: '⛅', desc: 'Partly cloudy' }, 3: { icon: '☁️', desc: 'Overcast' },
+    45: { icon: '🌫️', desc: 'Foggy' }, 48: { icon: '🌫️', desc: 'Rime fog' },
+    51: { icon: '🌦️', desc: 'Light drizzle' }, 53: { icon: '🌦️', desc: 'Drizzle' },
+    55: { icon: '🌧️', desc: 'Dense drizzle' }, 61: { icon: '🌧️', desc: 'Light rain' },
+    63: { icon: '🌧️', desc: 'Rain' }, 65: { icon: '🌧️', desc: 'Heavy rain' },
+    71: { icon: '🌨️', desc: 'Light snow' }, 73: { icon: '🌨️', desc: 'Snow' },
+    75: { icon: '❄️', desc: 'Heavy snow' }, 80: { icon: '🌦️', desc: 'Rain showers' },
+    81: { icon: '🌧️', desc: 'Heavy showers' }, 82: { icon: '⛈️', desc: 'Violent showers' },
+    95: { icon: '⛈️', desc: 'Thunderstorm' }, 96: { icon: '⛈️', desc: 'Thunder + hail' },
     99: { icon: '⛈️', desc: 'Severe storm' }
   };
   return map[code] || { icon: '🌡️', desc: 'Unknown' };
@@ -1040,19 +891,13 @@ function decodeWeather(code) {
 
 async function fetchWeather() {
   try {
-    weatherContainer.innerHTML = `
-      <div class="weather-loading">
-        <i class="bi bi-arrow-repeat spin"></i>
-        <span>Fetching weather...</span>
-      </div>`;
-
+    weatherContainer.innerHTML = `<div class="weather-loading"><i class="bi bi-arrow-repeat spin"></i><span>Fetching weather...</span></div>`;
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${KATHMANDU.lat}&longitude=${KATHMANDU.lon}&current=temperature_2m,weather_code,relative_humidity_2m,wind_speed_10m,apparent_temperature&timezone=Asia/Kathmandu`;
     const res = await fetch(url);
     if (!res.ok) throw new Error('Weather fetch failed');
     const data = await res.json();
     const cur = data.current;
     const info = decodeWeather(cur.weather_code);
-
     weatherContainer.innerHTML = `
       <div class="weather-strip">
         <div class="weather-icon">${info.icon}</div>
@@ -1066,22 +911,15 @@ async function fetchWeather() {
             <span><i class="bi bi-wind"></i> ${Math.round(cur.wind_speed_10m)} km/h</span>
             <span><i class="bi bi-thermometer-half"></i> Feels ${Math.round(cur.apparent_temperature)}°</span>
           </div>
-          <div class="weather-location">
-            <i class="bi bi-geo-alt-fill"></i> ${KATHMANDU.name}
-          </div>
+          <div class="weather-location"><i class="bi bi-geo-alt-fill"></i> ${KATHMANDU.name}</div>
         </div>
       </div>`;
   } catch (e) {
     console.error('Weather error:', e);
-    weatherContainer.innerHTML = `
-      <div class="weather-error" id="weatherRetry">
-        <i class="bi bi-cloud-slash"></i>
-        <span>Weather unavailable • Tap to retry</span>
-      </div>`;
+    weatherContainer.innerHTML = `<div class="weather-error" id="weatherRetry"><i class="bi bi-cloud-slash"></i><span>Weather unavailable • Tap to retry</span></div>`;
     document.getElementById('weatherRetry').addEventListener('click', fetchWeather);
   }
 }
-
 fetchWeather();
 setInterval(fetchWeather, 15 * 60 * 1000);
 
@@ -1121,9 +959,7 @@ function closeModal() {
 }
 
 sheetClose.addEventListener('click', closeModal);
-modalOverlay.addEventListener('click', (e) => {
-  if (e.target === modalOverlay) closeModal();
-});
+modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
 
 // ========== PHONE DIRECTORY ==========
 const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTENWe1Qp3ojkeAr_bBwdujlOdFPVtNsaNYB8cQ7INXBr3kg5LuN5MkSwPuJspOmWRjy9yP3Fu22yK0/pub?output=csv';
@@ -1142,12 +978,8 @@ const states = {
 const filterAllBtn = document.getElementById('filterAll');
 const filterFavsBtn = document.getElementById('filterFavs');
 
-function getFavorites() {
-  return JSON.parse(localStorage.getItem('phoneDirectoryFavorites') || '[]');
-}
-function saveFavorites(favs) {
-  localStorage.setItem('phoneDirectoryFavorites', JSON.stringify(favs));
-}
+function getFavorites() { return JSON.parse(localStorage.getItem('phoneDirectoryFavorites') || '[]'); }
+function saveFavorites(favs) { localStorage.setItem('phoneDirectoryFavorites', JSON.stringify(favs)); }
 function toggleFavorite(phone) {
   let favs = getFavorites();
   if (favs.includes(phone)) favs = favs.filter(p => p !== phone);
@@ -1162,16 +994,10 @@ async function loadDirectory() {
     const res = await fetch(SHEET_CSV_URL);
     if (!res.ok) throw new Error('Network error');
     const csv = await res.text();
-    const parsed = Papa.parse(csv, {
-      header: true, skipEmptyLines: true,
-      transformHeader: h => h.trim()
-    });
+    const parsed = Papa.parse(csv, { header: true, skipEmptyLines: true, transformHeader: h => h.trim() });
     directoryData = parsed.data;
     showDirState('idle');
-  } catch (e) {
-    console.error(e);
-    showDirState('error');
-  }
+  } catch (e) { console.error(e); showDirState('error'); }
 }
 
 function showDirState(state) {
@@ -1234,27 +1060,13 @@ function renderResults(data) {
 }
 
 searchInput.addEventListener('input', handleSearch);
-clearBtn.addEventListener('click', () => {
-  searchInput.value = '';
-  clearBtn.classList.remove('show');
-  handleSearch();
-});
-filterAllBtn.addEventListener('click', () => {
-  currentFilter = 'all';
-  filterAllBtn.classList.add('active');
-  filterFavsBtn.classList.remove('active');
-  handleSearch();
-});
-filterFavsBtn.addEventListener('click', () => {
-  currentFilter = 'favorites';
-  filterFavsBtn.classList.add('active');
-  filterAllBtn.classList.remove('active');
-  handleSearch();
-});
+clearBtn.addEventListener('click', () => { searchInput.value = ''; clearBtn.classList.remove('show'); handleSearch(); });
+filterAllBtn.addEventListener('click', () => { currentFilter = 'all'; filterAllBtn.classList.add('active'); filterFavsBtn.classList.remove('active'); handleSearch(); });
+filterFavsBtn.addEventListener('click', () => { currentFilter = 'favorites'; filterFavsBtn.classList.add('active'); filterAllBtn.classList.remove('active'); handleSearch(); });
 document.getElementById('refreshData').addEventListener('click', loadDirectory);
 loadDirectory();
 
-// ========== DOCUMENTS (SEARCH-ONLY MODE) ==========
+// ========== DOCUMENTS ==========
 const docData = [
   { id: 1,  name: "Citizenship",               description: "Front View | Number:- 28-01-065-02165",                               url: "https://dl.dropboxusercontent.com/s/isx1t8tpvnp5pwxxalze1/front.jpg?rlkey=9143n6wfcgw359zvjzwicz8ol&dl=1" },
   { id: 2,  name: "Citizenship",               description: "Back View | Issued Date:- 2065-04-15",                                url: "https://dl.dropboxusercontent.com/s/e6qkt0zcie9hcgg0m73hd/citizenship_back.jpg?rlkey=q6ch49fuq3mk5uxk7vxrtni4h&dl=1" },
@@ -1312,11 +1124,7 @@ function renderDocs(items, term = '') {
   docIdleState.classList.add('d-none');
   docGrid.innerHTML = '';
   docEmpty.classList.add('d-none');
-  if (!items.length) {
-    docCount.classList.add('d-none');
-    docEmpty.classList.remove('d-none');
-    return;
-  }
+  if (!items.length) { docCount.classList.add('d-none'); docEmpty.classList.remove('d-none'); return; }
   docCount.classList.remove('d-none');
   docCount.innerHTML = term
     ? `<span>${items.length}</span> result${items.length !== 1 ? 's' : ''} for "${term}"`
@@ -1341,29 +1149,15 @@ function renderDocs(items, term = '') {
 function filterDocs() {
   const term = docSearchInput.value.toLowerCase().trim();
   docClearBtn.classList.toggle('show', term.length > 0);
-  if (!term && currentDocCat === 'all') {
-    showDocIdle();
-    return;
-  }
+  if (!term && currentDocCat === 'all') { showDocIdle(); return; }
   let filtered = docData;
-  if (currentDocCat !== 'all') {
-    filtered = filtered.filter(d => getDocTag(d.name) === currentDocCat);
-  }
-  if (term) {
-    filtered = filtered.filter(d =>
-      d.name.toLowerCase().includes(term) ||
-      d.description.toLowerCase().includes(term)
-    );
-  }
+  if (currentDocCat !== 'all') filtered = filtered.filter(d => getDocTag(d.name) === currentDocCat);
+  if (term) filtered = filtered.filter(d => d.name.toLowerCase().includes(term) || d.description.toLowerCase().includes(term));
   renderDocs(filtered, term);
 }
 
 docSearchInput.addEventListener('input', filterDocs);
-docClearBtn.addEventListener('click', () => {
-  docSearchInput.value = '';
-  docClearBtn.classList.remove('show');
-  filterDocs();
-});
+docClearBtn.addEventListener('click', () => { docSearchInput.value = ''; docClearBtn.classList.remove('show'); filterDocs(); });
 docChips.querySelectorAll('.doc-chip').forEach(chip => {
   chip.addEventListener('click', () => {
     docChips.querySelectorAll('.doc-chip').forEach(c => c.classList.remove('active'));
@@ -1374,7 +1168,6 @@ docChips.querySelectorAll('.doc-chip').forEach(chip => {
 });
 showDocIdle();
 
-// Doc Modal
 const docModalOverlay = document.getElementById('docModalOverlay');
 const docModalTitle = document.getElementById('docModalTitle');
 const docModalImg = document.getElementById('docModalImg');
@@ -1398,74 +1191,7 @@ function closeDocModal() {
   document.body.style.overflow = '';
 }
 docModalClose.addEventListener('click', closeDocModal);
-docModalOverlay.addEventListener('click', (e) => {
-  if (e.target === docModalOverlay) closeDocModal();
-});
-
-// ========== PWA INSTALL (IMPROVED) ==========
-let deferredPrompt = null;
-const installBtn = document.getElementById('installBtn');
-const installBannerContainer = document.getElementById('installBannerContainer');
-const installSettings = document.getElementById('installSettings');
-const iosInstallGuide = document.getElementById('iosInstallGuide');
-
-// Check if already installed
-const isStandalone = window.matchMedia('(display-mode: standalone)').matches
-  || window.navigator.standalone === true;
-
-// Detect iOS
-const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-
-// Show iOS guide if on iOS and not installed
-if (isIOS && !isStandalone) {
-  iosInstallGuide.style.display = 'flex';
-  installSettings.style.display = 'none'; // Hide regular install on iOS
-}
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  installBtn.style.display = 'flex';
-  showInstallBanner();
-});
-
-function showInstallBanner() {
-  if (!deferredPrompt || isStandalone) return;
-  installBannerContainer.innerHTML = `
-    <div class="install-banner">
-      <i class="bi bi-phone"></i>
-      <div class="install-banner-content">
-        <h4>Install Mero App</h4>
-        <p>Quick access from home screen</p>
-      </div>
-      <button class="install-btn" id="bannerInstallBtn">Install</button>
-    </div>
-  `;
-  document.getElementById('bannerInstallBtn').addEventListener('click', triggerInstall);
-}
-
-async function triggerInstall() {
-  if (!deferredPrompt) {
-    if (isIOS) {
-      alert('To install on iPhone:\n\n1. Tap the Share button (↑)\n2. Scroll down and tap "Add to Home Screen"\n3. Tap "Add"');
-    } else {
-      alert('App is already installed or your browser doesn\'t support installation.');
-    }
-    return;
-  }
-  
-  deferredPrompt.prompt();
-  const { outcome } = await deferredPrompt.userChoice;
-  if (outcome === 'accepted') {
-    installBtn.style.display = 'none';
-    installBannerContainer.innerHTML = '';
-  }
-  deferredPrompt = null;
-}
-
-installBtn.addEventListener('click', triggerInstall);
-installSettings.addEventListener('click', triggerInstall);
+docModalOverlay.addEventListener('click', (e) => { if (e.target === docModalOverlay) closeDocModal(); });
 
 // ========== SERVICE WORKER ==========
 if ('serviceWorker' in navigator) {
