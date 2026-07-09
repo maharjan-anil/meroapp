@@ -126,7 +126,7 @@ body {
   transition: transform 0.25s;
 }
 .nav-btn.active::before { transform: translateX(-50%) scaleX(1); }
-/* Welcome Card */
+/* ===== WELCOME CARD ===== */
 .welcome-card {
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: white; border-radius: 20px;
@@ -140,17 +140,37 @@ body {
   width: 200px; height: 200px;
   background: rgba(255,255,255,0.1); border-radius: 50%;
 }
-.welcome-card h2 { font-size: 1.3rem; font-weight: 700; margin: 0 0 6px; position: relative; z-index: 1; }
-.welcome-card p { margin: 0; opacity: 0.9; font-size: 0.9rem; position: relative; z-index: 1; }
-/* Date & Time Display */
+.greeting-wrap { position: relative; z-index: 1; }
+.greeting-text {
+  font-size: 1.35rem; font-weight: 700;
+  margin: 0 0 2px; line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+.greeting-name {
+  font-size: 1.35rem; font-weight: 700;
+  margin: 0 0 10px; line-height: 1.25;
+  letter-spacing: -0.01em;
+  display: flex; align-items: center; gap: 8px;
+}
+.greeting-emoji {
+  font-size: 1.2rem;
+  display: inline-block;
+  animation: wave 2.5s ease-in-out infinite;
+  transform-origin: 70% 70%;
+}
+@keyframes wave {
+  0%, 60%, 100% { transform: rotate(0deg); }
+  10% { transform: rotate(14deg); }
+  20% { transform: rotate(-8deg); }
+  30% { transform: rotate(14deg); }
+  40% { transform: rotate(-4deg); }
+  50% { transform: rotate(10deg); }
+}
 .welcome-datetime {
-  position: relative; z-index: 1;
   display: flex; align-items: center; flex-wrap: wrap;
-  gap: 8px; margin-top: 2px;
+  gap: 8px; margin-bottom: 14px;
 }
-.welcome-date {
-  font-size: 0.85rem; opacity: 0.9;
-}
+.welcome-date { font-size: 0.85rem; opacity: 0.9; }
 .welcome-time {
   display: inline-flex; align-items: center; gap: 5px;
   background: rgba(255,255,255,0.18);
@@ -161,6 +181,62 @@ body {
   border: 1px solid rgba(255,255,255,0.2);
 }
 .welcome-time i { font-size: 0.75rem; }
+/* Weather Strip */
+.weather-strip {
+  position: relative; z-index: 1;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 14px;
+  padding: 10px 12px;
+  display: flex; align-items: center; gap: 12px;
+  margin-top: 4px;
+}
+.weather-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+.weather-info { flex: 1; min-width: 0; }
+.weather-main {
+  display: flex; align-items: baseline; gap: 6px;
+  font-size: 0.95rem; font-weight: 600;
+}
+.weather-temp { font-size: 1.1rem; font-weight: 700; }
+.weather-cond {
+  font-size: 0.8rem; opacity: 0.9;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.weather-meta {
+  display: flex; gap: 10px;
+  font-size: 0.72rem; opacity: 0.85;
+  margin-top: 2px;
+}
+.weather-meta span {
+  display: inline-flex; align-items: center; gap: 3px;
+}
+.weather-meta i { font-size: 0.7rem; }
+.weather-location {
+  font-size: 0.7rem; opacity: 0.85;
+  display: flex; align-items: center; gap: 3px;
+  margin-top: 3px;
+}
+.weather-location i { font-size: 0.7rem; }
+/* Weather loading/error */
+.weather-loading, .weather-error {
+  position: relative; z-index: 1;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 14px;
+  padding: 12px;
+  font-size: 0.8rem;
+  display: flex; align-items: center; gap: 8px;
+  opacity: 0.9;
+}
+.weather-loading i { animation: spin 1s linear infinite; }
+.weather-error { cursor: pointer; }
+.weather-error:active { opacity: 0.7; }
 .section-title {
   font-size: 0.8rem; font-weight: 700;
   color: var(--text-secondary);
@@ -193,7 +269,6 @@ body {
 .tool-icon.weather { background: linear-gradient(135deg, #00a2e2, #0077b3); }
 .tool-icon.unicode { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
 .tool-icon.panchang { background: linear-gradient(135deg, #64748b, #475569); }
-/* Directory */
 .search-wrap { position: sticky; top: 0; background: var(--bg-body); padding-bottom: 12px; z-index: 5; }
 .search-box {
   background: var(--bg-card); border: 1px solid var(--border);
@@ -575,13 +650,25 @@ body {
     <!-- Tools Screen -->
     <section class="screen active" id="screen-tools">
       <div class="welcome-card">
-        <h2>Namaste! 🙏</h2>
-        <div class="welcome-datetime">
-          <span class="welcome-date" id="welcomeDate">Loading...</span>
-          <span class="welcome-time" id="welcomeTime">
-            <i class="bi bi-clock"></i>
-            <span id="timeText">--:--</span>
-          </span>
+        <div class="greeting-wrap">
+          <p class="greeting-text" id="greetingText">Hello</p>
+          <h2 class="greeting-name">
+            <span id="userName">Anil Maharjan</span>
+            <span class="greeting-emoji" id="greetingEmoji">🙏</span>
+          </h2>
+          <div class="welcome-datetime">
+            <span class="welcome-date" id="welcomeDate">Loading...</span>
+            <span class="welcome-time" id="welcomeTime">
+              <i class="bi bi-clock"></i>
+              <span id="timeText">--:--</span>
+            </span>
+          </div>
+        </div>
+        <div id="weatherContainer">
+          <div class="weather-loading">
+            <i class="bi bi-arrow-repeat spin"></i>
+            <span>Fetching weather...</span>
+          </div>
         </div>
       </div>
       <div class="section-title">Live Rates</div>
@@ -669,7 +756,7 @@ body {
       </div>
       <div class="doc-search">
         <i class="bi bi-search"></i>
-        <input type="text" id="docSearchInput" placeholder="Search by name or description..." autocomplete="off">
+        <input type="text" id="docSearchInput" placeholder="Search documents..." autocomplete="off">
         <button class="doc-clear" id="docClearBtn"><i class="bi bi-x-circle-fill"></i></button>
       </div>
       <div class="doc-actions" id="docChips">
@@ -679,11 +766,12 @@ body {
         <button class="doc-chip" data-cat="QR / Payment"><i class="bi bi-qr-code"></i> QR</button>
         <button class="doc-chip" data-cat="Medical"><i class="bi bi-capsule"></i> Medical</button>
       </div>
-      <div class="doc-count" id="docCount"></div>
-      <div id="docLoading" class="state-msg d-none">
-        <i class="bi bi-arrow-repeat spin"></i>
-        <h4>Loading...</h4><p>Preparing documents</p>
+      <div id="docIdleState" class="state-msg">
+        <i class="bi bi-folder2-open pulse"></i>
+        <h4>Your Document Vault</h4>
+        <p>Search for a document or tap a category to browse</p>
       </div>
+      <div class="doc-count d-none" id="docCount"></div>
       <div id="docEmpty" class="state-msg d-none">
         <i class="bi bi-emoji-frown"></i>
         <h4>No Documents</h4><p>Try a different search or category</p>
@@ -697,7 +785,7 @@ body {
         <div class="app-logo"><i class="bi bi-grid-1x2-fill"></i></div>
         <h3>Mero App</h3>
         <p>Tools, Directory & Documents</p>
-        <span class="version">v1.2.0</span>
+        <span class="version">v1.4.0</span>
       </div>
       <div id="installBannerContainer"></div>
       <div class="section-title">Preferences</div>
@@ -740,7 +828,7 @@ body {
             <i class="bi bi-info-circle-fill"></i>
           </div>
           <div class="settings-item-content">
-            <h4>Version</h4><p>1.2.0 • July 2026</p>
+            <h4>Version</h4><p>1.4.0 • July 2026</p>
           </div>
         </div>
         <div class="settings-item">
@@ -843,30 +931,143 @@ navBtns.forEach(btn => {
   });
 });
 
-// ========== WELCOME DATE & LIVE TIME ==========
+// ========== SMART GREETING (Nepal Time) ==========
+const greetingText = document.getElementById('greetingText');
+const greetingEmoji = document.getElementById('greetingEmoji');
 const welcomeDateEl = document.getElementById('welcomeDate');
 const timeTextEl = document.getElementById('timeText');
 
+function getNepalTime() {
+  // Get current time in Nepal (Asia/Kathmandu = UTC+5:45)
+  const now = new Date();
+  const nepalStr = now.toLocaleString('en-US', { timeZone: 'Asia/Kathmandu' });
+  return new Date(nepalStr);
+}
+
+function updateGreeting() {
+  const nepalNow = getNepalTime();
+  const hour = nepalNow.getHours();
+  let greeting, emoji;
+
+  if (hour >= 5 && hour < 12) {
+    greeting = 'Good morning';
+    emoji = '🌅';
+  } else if (hour >= 12 && hour < 17) {
+    greeting = 'Good afternoon';
+    emoji = '☀️';
+  } else if (hour >= 17 && hour < 21) {
+    greeting = 'Good evening';
+    emoji = '🌇';
+  } else {
+    greeting = 'Good night';
+    emoji = '🌙';
+  }
+
+  greetingText.textContent = greeting;
+  greetingEmoji.textContent = emoji;
+}
+
 function updateDateTime() {
   const now = new Date();
-  // Date: "Thursday, July 9, 2026"
   const dateStr = now.toLocaleDateString('en-US', {
     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
   });
-  // Time: "10:30 AM"
   const timeStr = now.toLocaleTimeString('en-US', {
     hour: '2-digit', minute: '2-digit', hour12: true
   });
   welcomeDateEl.textContent = dateStr;
   timeTextEl.textContent = timeStr;
+  updateGreeting();
 }
+
 updateDateTime();
-// Update every 30 seconds for smooth minute transitions
 setInterval(updateDateTime, 30000);
-// Also update when the page becomes visible again
 document.addEventListener('visibilitychange', () => {
-  if (!document.hidden) updateDateTime();
+  if (!document.hidden) {
+    updateDateTime();
+    fetchWeather();
+  }
 });
+
+// ========== LIVE WEATHER (Open-Meteo API - Free, No Key) ==========
+const weatherContainer = document.getElementById('weatherContainer');
+const KATHMANDU = { lat: 27.7172, lon: 85.3240, name: 'Kathmandu, Nepal' };
+
+// WMO Weather code → emoji + description
+function decodeWeather(code) {
+  const map = {
+    0:  { icon: '☀️', desc: 'Clear sky' },
+    1:  { icon: '🌤️', desc: 'Mainly clear' },
+    2:  { icon: '⛅', desc: 'Partly cloudy' },
+    3:  { icon: '☁️', desc: 'Overcast' },
+    45: { icon: '🌫️', desc: 'Foggy' },
+    48: { icon: '🌫️', desc: 'Rime fog' },
+    51: { icon: '🌦️', desc: 'Light drizzle' },
+    53: { icon: '🌦️', desc: 'Drizzle' },
+    55: { icon: '🌧️', desc: 'Dense drizzle' },
+    61: { icon: '🌧️', desc: 'Light rain' },
+    63: { icon: '🌧️', desc: 'Rain' },
+    65: { icon: '🌧️', desc: 'Heavy rain' },
+    71: { icon: '🌨️', desc: 'Light snow' },
+    73: { icon: '🌨️', desc: 'Snow' },
+    75: { icon: '❄️', desc: 'Heavy snow' },
+    80: { icon: '🌦️', desc: 'Rain showers' },
+    81: { icon: '🌧️', desc: 'Heavy showers' },
+    82: { icon: '⛈️', desc: 'Violent showers' },
+    95: { icon: '⛈️', desc: 'Thunderstorm' },
+    96: { icon: '⛈️', desc: 'Thunder + hail' },
+    99: { icon: '⛈️', desc: 'Severe storm' }
+  };
+  return map[code] || { icon: '🌡️', desc: 'Unknown' };
+}
+
+async function fetchWeather() {
+  try {
+    weatherContainer.innerHTML = `
+      <div class="weather-loading">
+        <i class="bi bi-arrow-repeat spin"></i>
+        <span>Fetching weather...</span>
+      </div>`;
+
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${KATHMANDU.lat}&longitude=${KATHMANDU.lon}&current=temperature_2m,weather_code,relative_humidity_2m,wind_speed_10m,apparent_temperature&timezone=Asia/Kathmandu`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('Weather fetch failed');
+    const data = await res.json();
+    const cur = data.current;
+    const info = decodeWeather(cur.weather_code);
+
+    weatherContainer.innerHTML = `
+      <div class="weather-strip">
+        <div class="weather-icon">${info.icon}</div>
+        <div class="weather-info">
+          <div class="weather-main">
+            <span class="weather-temp">${Math.round(cur.temperature_2m)}°C</span>
+            <span class="weather-cond">• ${info.desc}</span>
+          </div>
+          <div class="weather-meta">
+            <span><i class="bi bi-droplet"></i> ${cur.relative_humidity_2m}%</span>
+            <span><i class="bi bi-wind"></i> ${Math.round(cur.wind_speed_10m)} km/h</span>
+            <span><i class="bi bi-thermometer-half"></i> Feels ${Math.round(cur.apparent_temperature)}°</span>
+          </div>
+          <div class="weather-location">
+            <i class="bi bi-geo-alt-fill"></i> ${KATHMANDU.name}
+          </div>
+        </div>
+      </div>`;
+  } catch (e) {
+    console.error('Weather error:', e);
+    weatherContainer.innerHTML = `
+      <div class="weather-error" id="weatherRetry">
+        <i class="bi bi-cloud-slash"></i>
+        <span>Weather unavailable • Tap to retry</span>
+      </div>`;
+    document.getElementById('weatherRetry').addEventListener('click', fetchWeather);
+  }
+}
+
+fetchWeather();
+// Refresh weather every 15 minutes
+setInterval(fetchWeather, 15 * 60 * 1000);
 
 // ========== TOOLS MODAL ==========
 const toolData = {
@@ -1037,7 +1238,7 @@ filterFavsBtn.addEventListener('click', () => {
 document.getElementById('refreshData').addEventListener('click', loadDirectory);
 loadDirectory();
 
-// ========== DOCUMENTS ==========
+// ========== DOCUMENTS (SEARCH-ONLY MODE) ==========
 const docData = [
   { id: 1,  name: "Citizenship",               description: "Front View | Number:- 28-01-065-02165",                               url: "https://dl.dropboxusercontent.com/s/isx1t8tpvnp5pwxxalze1/front.jpg?rlkey=9143n6wfcgw359zvjzwicz8ol&dl=1" },
   { id: 2,  name: "Citizenship",               description: "Back View | Issued Date:- 2065-04-15",                                url: "https://dl.dropboxusercontent.com/s/e6qkt0zcie9hcgg0m73hd/citizenship_back.jpg?rlkey=q6ch49fuq3mk5uxk7vxrtni4h&dl=1" },
@@ -1079,22 +1280,31 @@ const docGrid = document.getElementById('docGrid');
 const docCount = document.getElementById('docCount');
 const docSearchInput = document.getElementById('docSearchInput');
 const docClearBtn = document.getElementById('docClearBtn');
-const docLoading = document.getElementById('docLoading');
+const docIdleState = document.getElementById('docIdleState');
 const docEmpty = document.getElementById('docEmpty');
 const docChips = document.getElementById('docChips');
 let currentDocCat = 'all';
 
+function showDocIdle() {
+  docIdleState.classList.remove('d-none');
+  docEmpty.classList.add('d-none');
+  docCount.classList.add('d-none');
+  docGrid.innerHTML = '';
+}
+
 function renderDocs(items, term = '') {
+  docIdleState.classList.add('d-none');
   docGrid.innerHTML = '';
   docEmpty.classList.add('d-none');
   if (!items.length) {
-    docCount.innerHTML = '';
+    docCount.classList.add('d-none');
     docEmpty.classList.remove('d-none');
     return;
   }
+  docCount.classList.remove('d-none');
   docCount.innerHTML = term
     ? `<span>${items.length}</span> result${items.length !== 1 ? 's' : ''} for "${term}"`
-    : `Showing all <span>${items.length}</span> documents`;
+    : `Showing <span>${items.length}</span> documents in ${currentDocCat}`;
   items.forEach(doc => {
     const card = document.createElement('div');
     card.className = 'doc-card';
@@ -1115,6 +1325,10 @@ function renderDocs(items, term = '') {
 function filterDocs() {
   const term = docSearchInput.value.toLowerCase().trim();
   docClearBtn.classList.toggle('show', term.length > 0);
+  if (!term && currentDocCat === 'all') {
+    showDocIdle();
+    return;
+  }
   let filtered = docData;
   if (currentDocCat !== 'all') {
     filtered = filtered.filter(d => getDocTag(d.name) === currentDocCat);
@@ -1142,8 +1356,7 @@ docChips.querySelectorAll('.doc-chip').forEach(chip => {
     filterDocs();
   });
 });
-
-filterDocs();
+showDocIdle();
 
 // Doc Modal
 const docModalOverlay = document.getElementById('docModalOverlay');
