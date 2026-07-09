@@ -12,7 +12,6 @@
 <meta name="application-name" content="Mero App">
 <title>Mero App</title>
 
-<!-- PWA Icons -->
 <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="./icons/icon-512.png">
 <link rel="apple-touch-icon" href="./icons/icon-192.png">
@@ -37,7 +36,7 @@
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --header-height: 60px;
-  --nav-height: 70px;
+  --nav-height: 56px;
   --gold: #c9a84c;
   --gold-light: #e8c97a;
 }
@@ -86,39 +85,42 @@ body {
   position: absolute; inset: 0;
   overflow-y: auto; overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
-  padding: 16px 16px calc(var(--nav-height) + var(--safe-bottom) + 20px);
+  padding: 16px 16px calc(var(--nav-height) + var(--safe-bottom) + 16px);
   opacity: 0; transform: translateY(10px);
   pointer-events: none;
   transition: opacity 0.25s, transform 0.25s;
 }
 .screen.active { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+/* ===== COMPACT BOTTOM NAV ===== */
 .bottom-nav {
   position: absolute; bottom: 0; left: 0; right: 0;
   background: var(--bg-elevated);
   border-top: 1px solid var(--border);
   display: flex; justify-content: space-around;
-  padding: 8px 0 calc(var(--safe-bottom) + 8px);
+  padding: 4px 0 calc(var(--safe-bottom) + 4px);
   z-index: 100;
   backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
 }
-:root:not([data-theme="dark"]) .bottom-nav { background: rgba(255,255,255,0.85); }
-[data-theme="dark"] .bottom-nav { background: rgba(21,26,40,0.9); }
+:root:not([data-theme="dark"]) .bottom-nav { background: rgba(255,255,255,0.92); }
+[data-theme="dark"] .bottom-nav { background: rgba(21,26,40,0.95); }
 .nav-btn {
   flex: 1; background: none; border: none;
-  padding: 8px 4px; color: var(--text-tertiary);
-  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 4px 2px 3px;
+  color: var(--text-tertiary);
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
   cursor: pointer; transition: color 0.2s;
   position: relative; font-family: inherit;
 }
-.nav-btn i { font-size: 1.3rem; transition: transform 0.2s; }
-.nav-btn span { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.02em; }
+.nav-btn i { font-size: 1.15rem; transition: transform 0.2s; line-height: 1; }
+.nav-btn span { font-size: 0.58rem; font-weight: 600; letter-spacing: 0.02em; line-height: 1.1; }
 .nav-btn.active { color: var(--primary); }
-.nav-btn.active i { transform: scale(1.15); }
+.nav-btn.active i { transform: scale(1.1); }
 .nav-btn::before {
   content: ''; position: absolute; top: 0; left: 50%;
   transform: translateX(-50%) scaleX(0);
-  width: 28px; height: 3px;
-  background: var(--primary); border-radius: 0 0 3px 3px;
+  width: 24px; height: 2px;
+  background: var(--primary); border-radius: 0 0 2px 2px;
   transition: transform 0.25s;
 }
 .nav-btn.active::before { transform: translateX(-50%) scaleX(1); }
@@ -167,6 +169,16 @@ body {
   border: 1px solid rgba(255,255,255,0.2);
 }
 .welcome-time i { font-size: 0.75rem; }
+/* Nepali Date Display */
+.nepali-date {
+  font-size: 0.8rem;
+  opacity: 0.85;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nepali-date i { font-size: 0.75rem; }
 
 /* Weather */
 .weather-strip {
@@ -372,6 +384,11 @@ body {
               <span id="timeText">--:--</span>
             </span>
           </div>
+          <!-- Nepali Date Display -->
+          <div class="nepali-date" id="nepaliDate">
+            <i class="bi bi-calendar3"></i>
+            <span id="nepaliDateText">Loading...</span>
+          </div>
         </div>
         <div id="weatherContainer">
           <div class="weather-loading">
@@ -454,7 +471,7 @@ body {
         </div>
         <h3>Mero App</h3>
         <p>Tools, Directory & Documents</p>
-        <span class="version">v2.0.0</span>
+        <span class="version">v2.2.0</span>
       </div>
       <div class="section-title">Preferences</div>
       <div class="settings-group">
@@ -476,7 +493,7 @@ body {
       <div class="settings-group">
         <div class="settings-item">
           <div class="settings-icon" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8)"><i class="bi bi-info-circle-fill"></i></div>
-          <div class="settings-item-content"><h4>Version</h4><p>2.0.0 • July 2026</p></div>
+          <div class="settings-item-content"><h4>Version</h4><p>2.2.0 • July 2026</p></div>
         </div>
         <div class="settings-item">
           <div class="settings-icon" style="background: linear-gradient(135deg, #ec4899, #be185d)"><i class="bi bi-heart-fill"></i></div>
@@ -560,11 +577,63 @@ navBtns.forEach(btn => {
   });
 });
 
-// ========== GREETING + TIME ==========
+// ========== GREETING + TIME + NEPALI DATE ==========
 const greetingText = document.getElementById('greetingText');
 const greetingEmoji = document.getElementById('greetingEmoji');
 const welcomeDateEl = document.getElementById('welcomeDate');
 const timeTextEl = document.getElementById('timeText');
+const nepaliDateText = document.getElementById('nepaliDateText');
+
+// Nepali months array
+const nepaliMonths = [
+  'Baisakh', 'Jestha', 'Ashadh', 'Shrawan', 
+  'Bhadra', 'Ashwin', 'Kartik', 'Mangsir', 
+  'Poush', 'Magh', 'Falgun', 'Chaitra'
+];
+
+// Simple English to Nepali date conversion (approximate)
+// Note: This is an approximation. For production, use a proper library like nepali-date-converter
+function convertToNepaliDate(date) {
+  // Nepali calendar is approximately 56.7 years ahead of Gregorian
+  // and starts from mid-April
+  const year = date.getFullYear();
+  const month = date.getMonth(); // 0-11
+  const day = date.getDate();
+  
+  // Approximate conversion
+  let nepaliYear = year + 57;
+  let nepaliMonth = month - 3; // Nepali year starts in mid-April (month 3)
+  let nepaliDay = day;
+  
+  if (nepaliMonth < 0) {
+    nepaliMonth += 12;
+    nepaliYear -= 1;
+  }
+  
+  // Adjust day for mid-month start (approximate)
+  if (day > 14) {
+    nepaliDay = day - 14;
+  } else {
+    nepaliDay = day + 16;
+    if (nepaliMonth === 0) {
+      nepaliMonth = 11;
+      nepaliYear -= 1;
+    } else {
+      nepaliMonth -= 1;
+    }
+  }
+  
+  // Ensure day is within reasonable range (Nepali months have 29-32 days)
+  if (nepaliDay > 32) nepaliDay = nepaliDay - 30;
+  if (nepaliDay < 1) nepaliDay = 1;
+  
+  return {
+    year: nepaliYear,
+    month: nepaliMonth,
+    day: nepaliDay,
+    monthName: nepaliMonths[nepaliMonth]
+  };
+}
 
 function getNepalTime() {
   return new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kathmandu' }));
@@ -575,7 +644,7 @@ function updateDateTime() {
   const hour = nepalNow.getHours();
   let greeting, emoji;
   if (hour >= 5 && hour < 12) { greeting = 'Good morning'; emoji = '🌅'; }
-  else if (hour >= 12 && hour < 17) { greeting = 'Good afternoon'; emoji = '️'; }
+  else if (hour >= 12 && hour < 17) { greeting = 'Good afternoon'; emoji = '☀️'; }
   else if (hour >= 17 && hour < 21) { greeting = 'Good evening'; emoji = '🌇'; }
   else { greeting = 'Good night'; emoji = '🌙'; }
   greetingText.textContent = greeting;
@@ -584,6 +653,10 @@ function updateDateTime() {
   const now = new Date();
   welcomeDateEl.textContent = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
   timeTextEl.textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
+  
+  // Update Nepali date
+  const nepaliDate = convertToNepaliDate(now);
+  nepaliDateText.textContent = `${nepaliDate.day} ${nepaliDate.monthName} ${nepaliDate.year} BS`;
 }
 updateDateTime();
 setInterval(updateDateTime, 30000);
@@ -594,11 +667,11 @@ const KATHMANDU = { lat: 27.7172, lon: 85.3240, name: 'Kathmandu, Nepal' };
 
 function decodeWeather(code) {
   const map = {
-    0:{icon:'☀️',desc:'Clear sky'},1:{icon:'🌤️',desc:'Mainly clear'},2:{icon:'⛅',desc:'Partly cloudy'},3:{icon:'️',desc:'Overcast'},
+    0:{icon:'☀️',desc:'Clear sky'},1:{icon:'🌤️',desc:'Mainly clear'},2:{icon:'',desc:'Partly cloudy'},3:{icon:'☁️',desc:'Overcast'},
     45:{icon:'🌫️',desc:'Foggy'},48:{icon:'🌫️',desc:'Rime fog'},51:{icon:'🌦️',desc:'Light drizzle'},53:{icon:'🌦️',desc:'Drizzle'},
-    55:{icon:'️',desc:'Dense drizzle'},61:{icon:'🌧️',desc:'Light rain'},63:{icon:'🌧️',desc:'Rain'},65:{icon:'🌧️',desc:'Heavy rain'},
-    71:{icon:'🌨️',desc:'Light snow'},73:{icon:'🌨️',desc:'Snow'},75:{icon:'❄️',desc:'Heavy snow'},80:{icon:'🌦️',desc:'Rain showers'},
-    81:{icon:'🌧️',desc:'Heavy showers'},82:{icon:'⛈️',desc:'Violent showers'},95:{icon:'⛈️',desc:'Thunderstorm'},96:{icon:'⛈️',desc:'Thunder + hail'},99:{icon:'⛈️',desc:'Severe storm'}
+    55:{icon:'🌧️',desc:'Dense drizzle'},61:{icon:'🌧️',desc:'Light rain'},63:{icon:'️',desc:'Rain'},65:{icon:'🌧️',desc:'Heavy rain'},
+    71:{icon:'🌨️',desc:'Light snow'},73:{icon:'️',desc:'Snow'},75:{icon:'❄️',desc:'Heavy snow'},80:{icon:'🌦️',desc:'Rain showers'},
+    81:{icon:'️',desc:'Heavy showers'},82:{icon:'⛈️',desc:'Violent showers'},95:{icon:'⛈️',desc:'Thunderstorm'},96:{icon:'⛈️',desc:'Thunder + hail'},99:{icon:'⛈️',desc:'Severe storm'}
   };
   return map[code] || { icon: '🌡️', desc: 'Unknown' };
 }
