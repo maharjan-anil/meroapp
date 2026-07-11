@@ -35,7 +35,6 @@
   --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
-  --header-height: 60px;
   --nav-height: 56px;
   --gold: #c9a84c;
   --gold-light: #e8c97a;
@@ -74,7 +73,7 @@ body.modal-open { overflow: hidden; }
   padding: calc(var(--safe-top) + 14px) 16px 14px;
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center;
-  min-height: calc(var(--header-height) + var(--safe-top));
+  min-height: 50px;
   z-index: 10;
 }
 .screens { flex: 1; overflow: hidden; position: relative; }
@@ -379,7 +378,7 @@ body.modal-open { overflow: hidden; }
 .settings-toggle.on::after { transform: translateX(22px); }
 .settings-chevron { color: var(--text-tertiary); font-size: 0.9rem; flex-shrink: 0; }
 
-/* ===== LINK DIRECTORY (Updated) ===== */
+/* Link Directory */
 .link-header-bar {
   display: flex; align-items: center; justify-content: space-between;
   margin-bottom: 14px;
@@ -473,64 +472,6 @@ body.modal-open { overflow: hidden; }
 .link-empty { text-align: center; padding: 60px 20px; color: var(--text-secondary); }
 .link-empty i { font-size: 3rem; color: var(--text-tertiary); margin-bottom: 12px; display: block; opacity: 0.5; }
 
-/* Link Form Modal */
-.link-form-overlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 1100; opacity: 0; pointer-events: none;
-  transition: opacity 0.25s;
-  display: flex; align-items: center; justify-content: center;
-  padding: 16px;
-  backdrop-filter: blur(4px);
-}
-.link-form-overlay.show { opacity: 1; pointer-events: auto; }
-.link-form-box {
-  background: var(--bg-elevated);
-  border-radius: 20px; width: 100%; max-width: 440px;
-  max-height: 90vh; overflow-y: auto;
-  transform: scale(0.95); transition: transform 0.25s;
-  box-shadow: var(--shadow-md);
-}
-.link-form-overlay.show .link-form-box { transform: scale(1); }
-.link-form-header {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border);
-  display: flex; justify-content: space-between; align-items: center;
-}
-.link-form-header h3 { margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--text-primary); }
-.link-form-body { padding: 20px; }
-.form-group { margin-bottom: 14px; }
-.form-group label {
-  display: block; font-size: 0.8rem; font-weight: 600;
-  color: var(--text-primary); margin-bottom: 6px;
-}
-.form-group input, .form-group textarea {
-  width: 100%; padding: 10px 12px;
-  border: 1px solid var(--border); border-radius: 10px;
-  font-size: 0.9rem; font-family: inherit;
-  background: var(--bg-body); color: var(--text-primary);
-  outline: none; transition: border-color 0.2s;
-}
-.form-group input:focus, .form-group textarea:focus {
-  border-color: var(--primary);
-}
-.form-group textarea { resize: vertical; min-height: 70px; }
-.form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-tertiary); }
-.link-form-footer {
-  padding: 14px 20px;
-  border-top: 1px solid var(--border);
-  display: flex; gap: 10px; justify-content: flex-end;
-}
-.btn-form {
-  padding: 9px 18px; border-radius: 10px;
-  font-size: 0.85rem; font-weight: 600;
-  cursor: pointer; border: none; font-family: inherit;
-  transition: opacity 0.2s;
-}
-.btn-form.cancel { background: var(--border); color: var(--text-primary); }
-.btn-form.save { background: var(--text-primary); color: var(--bg-body); }
-.btn-form.save:disabled { opacity: 0.6; }
-
 /* Documents */
 .doc-welcome { background: linear-gradient(135deg, #1a1f2e, #0f1420); color: #f0ece3; border-radius: 20px; padding: 24px 20px; margin-bottom: 20px; position: relative; overflow: hidden; box-shadow: var(--shadow-md); }
 .doc-welcome::before { content: ''; position: absolute; top: -50%; right: -20%; width: 200px; height: 200px; background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%); border-radius: 50%; }
@@ -577,7 +518,7 @@ body.modal-open { overflow: hidden; }
 .pulse { animation: pulse 2s infinite ease-in-out; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .spin { animation: spin 1s linear infinite; }
-.screen::-webkit-scrollbar, .sheet-body::-webkit-scrollbar, .doc-modal-body::-webkit-scrollbar, .link-form-box::-webkit-scrollbar { width: 0; }
+.screen::-webkit-scrollbar, .sheet-body::-webkit-scrollbar, .doc-modal-body::-webkit-scrollbar { width: 0; }
 
 /* Toast */
 .toast-msg {
@@ -694,7 +635,7 @@ body.modal-open { overflow: hidden; }
       <div class="doc-grid" id="docGrid"></div>
     </section>
 
-    <!-- Link Directory Screen (Updated) -->
+    <!-- Link Directory Screen -->
     <section class="screen" id="screen-links">
       <div class="link-header-bar">
         <div class="section-title" style="margin:0">My Links</div>
@@ -728,7 +669,7 @@ body.modal-open { overflow: hidden; }
         </div>
         <h3>Mero App</h3>
         <p>Tools, Directory & Documents</p>
-        <span class="settings-version-badge">v2.9.3</span>
+        <span class="settings-version-badge">v3.0.1</span>
       </div>
 
       <div class="section-title">Preferences</div>
@@ -756,7 +697,7 @@ body.modal-open { overflow: hidden; }
         <div class="settings-icon-box blue"><i class="bi bi-info-circle-fill"></i></div>
         <div class="settings-item-content">
           <h4>Version</h4>
-          <p>2.9.3 • July 2026</p>
+          <p>3.0.1 • July 2026</p>
         </div>
       </div>
       <div class="settings-item">
@@ -778,15 +719,15 @@ body.modal-open { overflow: hidden; }
   </nav>
 </div>
 
-<!-- Tool Modal -->
-<div class="modal-overlay" id="modalOverlay">
-  <div class="bottom-sheet" id="bottomSheet">
-    <div class="sheet-handle"></div>
-    <div class="sheet-header">
-      <h3 id="sheetTitle">Tool</h3>
-      <button class="sheet-close" id="sheetClose"><i class="bi bi-x"></i></button>
+<!-- Tool Modal (FIXED - Uses inline styles for reliability) -->
+<div id="toolModalOverlay" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: flex-end; justify-content: center;">
+  <div style="background: var(--bg-elevated); width: 100%; max-width: 500px; max-height: 92vh; border-radius: 20px 20px 0 0; transform: translateY(100%); transition: transform 0.3s; display: flex; flex-direction: column; overflow: hidden;" id="toolModalBox">
+    <div style="width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 10px auto 0;"></div>
+    <div style="padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border);">
+      <h3 id="toolModalTitle" style="margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--text-primary);">Tool</h3>
+      <button id="toolModalClose" style="width: 32px; height: 32px; border-radius: 50%; background: var(--border); border: none; color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem;"><i class="bi bi-x"></i></button>
     </div>
-    <div class="sheet-body" id="sheetBody"></div>
+    <div id="toolModalBody" style="flex: 1; overflow: auto; padding: 16px; background: var(--bg-body);"></div>
   </div>
 </div>
 
@@ -808,37 +749,37 @@ body.modal-open { overflow: hidden; }
   </div>
 </div>
 
-<!-- Link Form Modal -->
-<div class="link-form-overlay" id="linkFormOverlay">
-  <div class="link-form-box">
-    <div class="link-form-header">
-      <h3 id="linkFormTitle">Add Link</h3>
-      <button class="sheet-close" id="linkFormClose"><i class="bi bi-x"></i></button>
+<!-- Link Form Modal (FIXED - Uses inline styles) -->
+<div id="linkFormOverlay" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1100; align-items: center; justify-content: center; padding: 16px; backdrop-filter: blur(4px);">
+  <div style="background: var(--bg-elevated); border-radius: 20px; width: 100%; max-width: 440px; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-md);">
+    <div style="padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
+      <h3 id="linkFormTitle" style="margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--text-primary);">Add Link</h3>
+      <button id="linkFormClose" style="width: 32px; height: 32px; border-radius: 50%; background: var(--border); border: none; color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem;"><i class="bi bi-x"></i></button>
     </div>
-    <div class="link-form-body">
-      <form id="linkForm">
+    <div style="padding: 20px;">
+      <form id="linkForm" onsubmit="return false;">
         <input type="hidden" id="linkId">
-        <div class="form-group">
-          <label>Title *</label>
-          <input type="text" id="linkTitle" required placeholder="e.g., Google">
+        <div style="margin-bottom: 14px;">
+          <label style="display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">Title *</label>
+          <input type="text" id="linkTitle" required placeholder="e.g., Google" style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-size: 0.9rem; font-family: inherit; background: var(--bg-body); color: var(--text-primary); outline: none;">
         </div>
-        <div class="form-group">
-          <label>URL *</label>
-          <input type="url" id="linkUrl" required placeholder="https://example.com">
+        <div style="margin-bottom: 14px;">
+          <label style="display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">URL *</label>
+          <input type="url" id="linkUrl" required placeholder="https://example.com" style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-size: 0.9rem; font-family: inherit; background: var(--bg-body); color: var(--text-primary); outline: none;">
         </div>
-        <div class="form-group">
-          <label>Description</label>
-          <textarea id="linkDescription" placeholder="Brief description..."></textarea>
+        <div style="margin-bottom: 14px;">
+          <label style="display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">Description</label>
+          <textarea id="linkDescription" placeholder="Brief description..." style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-size: 0.9rem; font-family: inherit; background: var(--bg-body); color: var(--text-primary); outline: none; resize: vertical; min-height: 70px;"></textarea>
         </div>
-        <div class="form-group">
-          <label>Category</label>
-          <input type="text" id="linkCategory" placeholder="e.g., Work, Personal">
+        <div style="margin-bottom: 14px;">
+          <label style="display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">Category</label>
+          <input type="text" id="linkCategory" placeholder="e.g., Work, Personal" style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-size: 0.9rem; font-family: inherit; background: var(--bg-body); color: var(--text-primary); outline: none;">
         </div>
       </form>
     </div>
-    <div class="link-form-footer">
-      <button class="btn-form cancel" id="linkFormCancel">Cancel</button>
-      <button class="btn-form save" id="linkFormSave">Save</button>
+    <div style="padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 10px; justify-content: flex-end;">
+      <button id="linkFormCancel" style="padding: 9px 18px; border-radius: 10px; font-size: 0.85rem; font-weight: 600; cursor: pointer; border: none; background: var(--border); color: var(--text-primary); font-family: inherit;">Cancel</button>
+      <button id="linkFormSave" style="padding: 9px 18px; border-radius: 10px; font-size: 0.85rem; font-weight: 600; cursor: pointer; border: none; background: var(--text-primary); color: var(--bg-body); font-family: inherit;">Save</button>
     </div>
   </div>
 </div>
@@ -889,7 +830,7 @@ const nepaliDateText = document.getElementById('nepaliDateText');
 
 const nepaliMonthsDev = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मंसिर', 'पौष', 'माघ', 'फागुन', 'चैत'];
 const nepaliDaysDev = ['आइतबार', 'सोमबार', 'मङ्गलबार', 'बुधबार', 'बिहीबार', 'शुक्रबार', 'शनिबार'];
-const engToNepaliNum = { '0': '०', '1': '१', '2': '२', '3': '३', '4': '', '5': '५', '6': '६', '7': '७', '8': '८', '9': '९' };
+const engToNepaliNum = { '0': '०', '1': '१', '2': '', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '९' };
 
 function toNepaliNumber(num) {
   return num.toString().split('').map(d => engToNepaliNum[d] || d).join('');
@@ -918,7 +859,7 @@ function updateDateTime() {
   const nepalNow = getNepalTime();
   const hour = nepalNow.getHours();
   let greeting, emoji;
-  if (hour >= 5 && hour < 12) { greeting = 'Good morning'; emoji = ''; }
+  if (hour >= 5 && hour < 12) { greeting = 'Good morning'; emoji = '🌅'; }
   else if (hour >= 12 && hour < 17) { greeting = 'Good afternoon'; emoji = '☀️'; }
   else if (hour >= 17 && hour < 21) { greeting = 'Good evening'; emoji = '🌇'; }
   else { greeting = 'Good night'; emoji = '🌙'; }
@@ -942,8 +883,8 @@ const KATHMANDU = { lat: 27.7172, lon: 85.3240, name: 'Kathmandu' };
 
 function decodeWeather(code, isDay) {
   const map = {
-    0:  { icon: isDay ? '☀️' : '', desc: 'Clear' },
-    1:  { icon: isDay ? '️' : '🌙', desc: 'Mainly clear' },
+    0:  { icon: isDay ? '☀️' : '🌙', desc: 'Clear' },
+    1:  { icon: isDay ? '🌤️' : '🌙', desc: 'Mainly clear' },
     2:  { icon: isDay ? '⛅' : '☁️', desc: 'Partly cloudy' },
     3:  { icon: '☁️', desc: 'Overcast' },
     45: { icon: '🌫️', desc: 'Foggy' },
@@ -951,7 +892,7 @@ function decodeWeather(code, isDay) {
     51: { icon: '🌦️', desc: 'Light drizzle' },
     53: { icon: '🌦️', desc: 'Drizzle' },
     55: { icon: '🌧️', desc: 'Dense drizzle' },
-    61: { icon: '🌧️', desc: 'Light rain' },
+    61: { icon: '️', desc: 'Light rain' },
     63: { icon: '🌧️', desc: 'Rain' },
     65: { icon: '🌧️', desc: 'Heavy rain' },
     71: { icon: '🌨️', desc: 'Light snow' },
@@ -964,7 +905,7 @@ function decodeWeather(code, isDay) {
     96: { icon: '⛈️', desc: 'Thunder + hail' },
     99: { icon: '⛈️', desc: 'Severe storm' }
   };
-  return map[code] || { icon: '🌡️', desc: 'Unknown' };
+  return map[code] || { icon: '️', desc: 'Unknown' };
 }
 
 async function fetchWeather() {
@@ -1020,7 +961,7 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 
-// ========== TOOLS MODAL ==========
+// ========== TOOLS MODAL (FIXED) ==========
 const toolData = {
   gold: { title: 'Gold & Silver Price', iframe: 'https://www.ashesh.com.np/gold/widget.php?api=621113p553&header_color=0077e5', height: 265 },
   forex: { title: 'Foreign Exchange Rates', iframe: 'https://www.ashesh.com.np/forex/widget2.php?api=621117p597&header_color=38b45e&background_color=faf8ee&header_title=Nepal%20Exchange%20Rates', height: 383 },
@@ -1032,27 +973,46 @@ const toolData = {
   panchang: { title: 'Nepali Panchang', iframe: 'https://www.ashesh.com.np/panchang/widget.php?header_title=Nepali%20Panchang&header_color=e6e5e2&api=641113p383', height: 365 }
 };
 
-const modalOverlay = document.getElementById('modalOverlay');
-const sheetTitle = document.getElementById('sheetTitle');
-const sheetBody = document.getElementById('sheetBody');
-const sheetClose = document.getElementById('sheetClose');
+const toolModalOverlay = document.getElementById('toolModalOverlay');
+const toolModalBox = document.getElementById('toolModalBox');
+const toolModalTitle = document.getElementById('toolModalTitle');
+const toolModalBody = document.getElementById('toolModalBody');
+const toolModalClose = document.getElementById('toolModalClose');
 
+// Tool card click handlers
 document.querySelectorAll('.tool-card').forEach(card => {
   card.addEventListener('click', () => {
-    const data = toolData[card.dataset.tool];
+    const tool = card.dataset.tool;
+    const data = toolData[tool];
     if (!data) return;
-    sheetTitle.textContent = data.title;
-    sheetBody.innerHTML = `<iframe src="${data.iframe}" style="height:${data.height}px" allowtransparency="true"></iframe>`;
-    modalOverlay.classList.add('show');
+    
+    toolModalTitle.textContent = data.title;
+    toolModalBody.innerHTML = `<iframe src="${data.iframe}" style="width: 100%; height: ${data.height}px; border: none; border-radius: 10px; background: white;" allowtransparency="true"></iframe>`;
+    
+    // Show modal using inline styles
+    toolModalOverlay.style.display = 'flex';
+    document.body.classList.add('modal-open');
+    
+    // Animate in
+    setTimeout(() => {
+      toolModalBox.style.transform = 'translateY(0)';
+    }, 10);
   });
 });
 
-function closeModal() {
-  modalOverlay.classList.remove('show');
-  setTimeout(() => { sheetBody.innerHTML = ''; }, 300);
+function closeToolModal() {
+  toolModalBox.style.transform = 'translateY(100%)';
+  setTimeout(() => {
+    toolModalOverlay.style.display = 'none';
+    toolModalBody.innerHTML = '';
+    document.body.classList.remove('modal-open');
+  }, 300);
 }
-sheetClose.addEventListener('click', closeModal);
-modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+
+toolModalClose.addEventListener('click', closeToolModal);
+toolModalOverlay.addEventListener('click', (e) => {
+  if (e.target === toolModalOverlay) closeToolModal();
+});
 
 // ========== DIRECTORY ==========
 const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTENWe1Qp3ojkeAr_bBwdujlOdFPVtNsaNYB8cQ7INXBr3kg5LuN5MkSwPuJspOmWRjy9yP3Fu22yK0/pub?output=csv';
@@ -1250,7 +1210,7 @@ function closeDocModal() { docModalOverlay.classList.remove('show'); }
 docModalClose.addEventListener('click', closeDocModal);
 docModalOverlay.addEventListener('click', (e) => { if (e.target === docModalOverlay) closeDocModal(); });
 
-// ========== LINK DIRECTORY (Updated from attached file) ==========
+// ========== LINK DIRECTORY (FULLY FIXED) ==========
 const LINK_API_URL = 'https://script.google.com/macros/s/AKfycbwJqpLJMiAvqssQ-Dqj71o5Pd1U45lNWiesswQYLrFEv3hiwNlrrbcTHXSSMLWh7wo/exec';
 let allLinks = [];
 let editingLinkId = null;
@@ -1280,16 +1240,22 @@ function getThumbnailUrl(url) {
 }
 
 async function fetchLinks() {
+  console.log('📥 Fetching links...');
   linkLoader.classList.remove('d-none');
   linkGrid.innerHTML = '';
   linkEmpty.classList.add('d-none');
+  
   try {
     const response = await fetch(`${LINK_API_URL}?t=${Date.now()}`);
     const result = await response.json();
+    console.log('API Response:', result);
+    
     if (!result.success) throw new Error(result.error);
     allLinks = result.data || [];
+    console.log('✅ Loaded', allLinks.length, 'links');
     filterLinks();
   } catch (error) {
+    console.error('❌ Fetch error:', error);
     showToast('Failed to load links', 'error');
     linkLoader.classList.add('d-none');
     linkEmpty.classList.remove('d-none');
@@ -1309,6 +1275,7 @@ function filterLinks() {
 }
 
 function renderLinks(links) {
+  console.log('🎨 Rendering', links.length, 'links');
   linkStats.innerHTML = `Showing <strong>${links.length}</strong> link${links.length !== 1 ? 's' : ''}`;
   linkLoader.classList.add('d-none');
   
@@ -1324,7 +1291,7 @@ function renderLinks(links) {
   linkGrid.innerHTML = links.map(link => {
     const thumbUrl = getThumbnailUrl(link.url);
     return `
-    <div class="link-card">
+    <div class="link-card" data-id="${link.id}">
       <div class="link-card-header">
         <div class="link-title-wrapper">
           <img src="${thumbUrl}" class="site-thumbnail" onerror="this.src='${fallbackIcon}'" alt="icon">
@@ -1350,60 +1317,100 @@ function renderLinks(links) {
 }
 
 function openLinkForm(link = null) {
+  console.log('📝 Opening form, link:', link);
   editingLinkId = link ? link.id : null;
   linkFormTitle.textContent = link ? 'Edit Link' : 'Add Link';
+  
   document.getElementById('linkId').value = link ? link.id || '' : '';
   document.getElementById('linkTitle').value = link ? link.title || '' : '';
   document.getElementById('linkUrl').value = link ? link.url || '' : '';
   document.getElementById('linkDescription').value = link ? link.description || '' : '';
   document.getElementById('linkCategory').value = link ? link.category || '' : '';
-  linkFormOverlay.classList.add('show');
+  
+  // Force modal to show using inline styles
+  linkFormOverlay.style.display = 'flex';
   document.body.classList.add('modal-open');
-  setTimeout(() => document.getElementById('linkTitle').focus(), 100);
+  
+  console.log('Modal display:', linkFormOverlay.style.display);
+  
+  setTimeout(() => {
+    const titleInput = document.getElementById('linkTitle');
+    if (titleInput) titleInput.focus();
+  }, 100);
 }
 
 function closeLinkForm() {
-  linkFormOverlay.classList.remove('show');
+  console.log('❌ Closing form');
+  linkFormOverlay.style.display = 'none';
   document.body.classList.remove('modal-open');
   editingLinkId = null;
+  document.getElementById('linkForm').reset();
 }
 
-document.getElementById('addLinkBtn').addEventListener('click', () => openLinkForm());
-document.getElementById('linkFormClose').addEventListener('click', closeLinkForm);
-document.getElementById('linkFormCancel').addEventListener('click', closeLinkForm);
-linkFormOverlay.addEventListener('click', (e) => { if (e.target === linkFormOverlay) closeLinkForm(); });
+// Event Listeners for Link Directory
+document.getElementById('addLinkBtn').addEventListener('click', () => {
+  console.log('➕ Add button clicked');
+  openLinkForm();
+});
+
+document.getElementById('linkFormClose').addEventListener('click', () => {
+  console.log('❌ Close button clicked');
+  closeLinkForm();
+});
+
+document.getElementById('linkFormCancel').addEventListener('click', () => {
+  console.log('🚫 Cancel button clicked');
+  closeLinkForm();
+});
+
+linkFormOverlay.addEventListener('click', (e) => {
+  if (e.target === linkFormOverlay) {
+    console.log('🔲 Overlay clicked');
+    closeLinkForm();
+  }
+});
+
+// Escape key to close
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && linkFormOverlay.style.display === 'flex') {
+    console.log('⌨️ Escape key pressed');
+    closeLinkForm();
+  }
+});
 
 // Event delegation for edit/delete buttons
 linkGrid.addEventListener('click', (e) => {
   const editBtn = e.target.closest('[data-action="edit"]');
   const deleteBtn = e.target.closest('[data-action="delete"]');
+  
   if (editBtn) {
     e.preventDefault();
     e.stopPropagation();
     const id = parseInt(editBtn.dataset.id);
+    console.log('✏️ Edit clicked for ID:', id);
     const link = allLinks.find(l => l.id === id);
     if (link) openLinkForm(link);
+    else showToast('Link not found', 'error');
   }
+  
   if (deleteBtn) {
     e.preventDefault();
     e.stopPropagation();
     const id = parseInt(deleteBtn.dataset.id);
+    console.log('🗑️ Delete clicked for ID:', id);
     deleteLink(id);
   }
 });
 
-// Escape key to close modal
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && linkFormOverlay.classList.contains('show')) {
-    closeLinkForm();
-  }
-});
-
 async function saveLink() {
+  console.log('💾 Saving link...');
+  
   const title = document.getElementById('linkTitle').value.trim();
   const url = document.getElementById('linkUrl').value.trim();
   const description = document.getElementById('linkDescription').value.trim();
   const category = document.getElementById('linkCategory').value.trim();
+  
+  console.log('Form data:', { title, url, description, category });
   
   if (!title || !url) {
     showToast('Title and URL required', 'error');
@@ -1413,6 +1420,8 @@ async function saveLink() {
   const data = { title, url, description, category };
   const action = editingLinkId ? 'update' : 'add';
   if (editingLinkId) data.id = editingLinkId;
+  
+  console.log('Action:', action, 'Data:', data);
   
   // Optimistic UI update for edits
   if (action === 'update') {
@@ -1429,15 +1438,26 @@ async function saveLink() {
   showToast(action === 'add' ? 'Adding...' : 'Saving...', 'success');
   
   try {
+    console.log('📡 Sending request to:', `${LINK_API_URL}?action=${action}`);
+    
     await fetch(`${LINK_API_URL}?action=${action}`, {
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify(data)
     });
+    
+    console.log('✅ Save successful');
     showToast(editingLinkId ? 'Updated!' : 'Added!', 'success');
-    setTimeout(fetchLinks, 600);
+    
+    // Refresh after delay
+    setTimeout(() => {
+      console.log('🔄 Refreshing links...');
+      fetchLinks();
+    }, 600);
+    
   } catch (error) {
+    console.error('❌ Save error:', error);
     showToast('Error saving link', 'error');
     setTimeout(fetchLinks, 600);
   } finally {
@@ -1446,27 +1466,41 @@ async function saveLink() {
   }
 }
 
-linkFormSave.addEventListener('click', saveLink);
+document.getElementById('linkFormSave').addEventListener('click', (e) => {
+  e.preventDefault();
+  console.log('💾 Save button clicked');
+  saveLink();
+});
 
 async function deleteLink(id) {
+  console.log('🗑️ Deleting link ID:', id);
+  
   if (!confirm('Delete this link?')) return;
   
   // Optimistic UI update
+  const originalLinks = [...allLinks];
   allLinks = allLinks.filter(l => l.id !== id);
   filterLinks();
   showToast('Deleting...', 'success');
   
   try {
+    console.log(' Sending delete request');
+    
     await fetch(`${LINK_API_URL}?action=delete`, {
       method: 'POST',
       mode: 'no-cors',
       headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify({ id })
     });
+    
+    console.log('✅ Delete successful');
     showToast('Deleted!', 'success');
+    
   } catch (error) {
+    console.error('❌ Delete error:', error);
     showToast('Error deleting', 'error');
-    setTimeout(fetchLinks, 600);
+    allLinks = originalLinks;
+    filterLinks();
   }
 }
 
@@ -1479,9 +1513,19 @@ function debounce(fn, wait) {
 
 function showToast(msg, type = 'success') {
   const toast = document.getElementById('toastMsg');
+  if (!toast) {
+    console.error(' Toast element not found!');
+    alert(msg);
+    return;
+  }
+  
   toast.textContent = msg;
   toast.className = `toast-msg show ${type}`;
-  setTimeout(() => toast.classList.remove('show'), 2500);
+  console.log('🍞 Toast:', msg, type);
+  
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 2500);
 }
 
 // ========== SERVICE WORKER ==========
