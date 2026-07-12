@@ -40,6 +40,7 @@
   --gold-light: #e8c97a;
   --danger: #ef4444;
   --success: #10b981;
+  --warning: #f59e0b;
 }
 [data-theme="dark"] {
   --bg-body: #0a0e1a;
@@ -95,7 +96,8 @@ body.modal-open { overflow: hidden; }
 [data-theme="dark"] .bottom-nav { background: rgba(21,26,40,0.95); }
 .nav-btn {
   flex: 1; background: none; border: none;
-  padding: 4px 2px 3px; color: var(--text-tertiary);
+  padding: 4px 2px 3px;
+  color: var(--text-tertiary);
   display: flex; flex-direction: column; align-items: center; gap: 2px;
   cursor: pointer; transition: color 0.2s;
   position: relative; font-family: inherit;
@@ -231,7 +233,32 @@ body.modal-open { overflow: hidden; }
 .tool-icon.unicode { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
 .tool-icon.panchang { background: linear-gradient(135deg, #64748b, #475569); }
 
-/* ===== DIRECTORY TAB ===== */
+/* IPO Banner */
+.ipo-banner {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white; border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 14px;
+  cursor: pointer; transition: transform 0.15s, box-shadow 0.2s;
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+.ipo-banner:active { transform: scale(0.98); }
+.ipo-banner:hover { box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3); }
+.ipo-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: rgba(255,255,255,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; flex-shrink: 0;
+}
+.ipo-content { flex: 1; min-width: 0; }
+.ipo-title { font-size: 1rem; font-weight: 700; margin: 0 0 2px; color: white; }
+.ipo-subtitle { font-size: 0.75rem; opacity: 0.9; margin: 0; }
+.ipo-arrow { font-size: 1.2rem; flex-shrink: 0; transition: transform 0.2s; }
+.ipo-banner:hover .ipo-arrow { transform: translateX(4px); }
+
+/* Directory */
 .dir-header-bar {
   display: flex; justify-content: space-between; align-items: center;
   margin-bottom: 12px;
@@ -264,14 +291,23 @@ body.modal-open { overflow: hidden; }
 .filter-btn { flex: 1; background: transparent; border: none; padding: 10px; border-radius: 8px; font-weight: 600; font-size: 0.85rem; color: var(--text-secondary); cursor: pointer; font-family: inherit; transition: all 0.2s; }
 .filter-btn.active { background: var(--primary); color: white; }
 
-/* Contact Card with Actions */
 .contact-card {
   background: var(--bg-card); border: 1px solid var(--border);
   border-radius: 14px; padding: 12px;
-  margin-bottom: 10px; display: flex; align-items: center; gap: 12px;
+  margin-bottom: 10px; display: flex; align-items: center; gap: 10px;
   box-shadow: var(--shadow-sm);
+  position: relative;
 }
-.fav-btn { background: none; border: none; color: var(--text-tertiary); font-size: 1.3rem; cursor: pointer; padding: 4px; }
+.fav-btn {
+  background: none; border: none;
+  color: var(--text-tertiary); font-size: 1.3rem;
+  cursor: pointer; padding: 6px;
+  transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
+  min-width: 32px; min-height: 32px;
+  z-index: 10; position: relative;
+}
+.fav-btn:active { transform: scale(1.2); }
 .fav-btn.active { color: #f59e0b; }
 .avatar {
   width: 46px; height: 46px; border-radius: 50%;
@@ -292,21 +328,25 @@ body.modal-open { overflow: hidden; }
   color: var(--primary); font-size: 0.7rem; font-weight: 600;
   padding: 2px 8px; border-radius: 10px;
 }
-.contact-actions { display: flex; gap: 2px; flex-shrink: 0; }
+.contact-actions {
+  display: flex; gap: 2px; flex-shrink: 0;
+  z-index: 10; position: relative;
+}
 .contact-action-btn {
-  width: 32px; height: 32px; border-radius: 8px;
+  width: 34px; height: 34px; border-radius: 8px;
   background: transparent; border: none;
-  color: var(--text-tertiary); font-size: 0.9rem;
+  color: var(--text-tertiary); font-size: 0.95rem;
   cursor: pointer; display: flex; align-items: center; justify-content: center;
   transition: all 0.15s;
 }
-.contact-action-btn:hover { background: var(--border); color: var(--text-primary); }
-.contact-action-btn.delete:hover { background: #fee2e2; color: var(--danger); }
+.contact-action-btn:active { background: var(--border); color: var(--text-primary); }
+.contact-action-btn.delete:active { background: #fee2e2; color: var(--danger); }
 .call-btn {
   width: 42px; height: 42px; background: rgba(0,119,229,0.12);
   color: var(--primary); border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-size: 1.1rem; text-decoration: none; flex-shrink: 0;
+  z-index: 10; position: relative;
 }
 .call-btn:active { background: var(--primary); color: white; }
 
@@ -376,7 +416,7 @@ body.modal-open { overflow: hidden; }
 .settings-toggle.on { background: var(--primary); }
 .settings-toggle.on::after { transform: translateX(22px); }
 
-/* ===== LINKS TAB ===== */
+/* Links Tab */
 .links-header-card {
   background: linear-gradient(135deg, #3b82f6, #2563eb);
   color: white; border-radius: 20px;
@@ -484,8 +524,8 @@ body.modal-open { overflow: hidden; }
   cursor: pointer; display: flex; align-items: center; justify-content: center;
   transition: all 0.15s;
 }
-.link-icon-btn:hover { background: var(--border); color: var(--text-primary); }
-.link-icon-btn.delete:hover { background: #fee2e2; color: var(--danger); }
+.link-icon-btn:active { background: var(--border); color: var(--text-primary); }
+.link-icon-btn.delete:active { background: #fee2e2; color: var(--danger); }
 .link-card-url {
   display: block; color: var(--primary);
   text-decoration: none; font-size: 0.78rem;
@@ -518,11 +558,11 @@ body.modal-open { overflow: hidden; }
   font-weight: 500; font-family: inherit;
   transition: all 0.2s;
 }
-.link-visit-btn:hover { background: var(--text-primary); color: var(--bg-body); border-color: var(--text-primary); }
+.link-visit-btn:active { background: var(--text-primary); color: var(--bg-body); border-color: var(--text-primary); }
 .links-loader { text-align: center; padding: 40px 20px; }
 .links-loader i { font-size: 2rem; color: var(--text-tertiary); animation: spin 1s linear infinite; display: block; margin-bottom: 10px; }
 
-/* ===== DOCUMENTS TAB ===== */
+/* Documents Tab */
 .docs-header-bar {
   display: flex; justify-content: space-between; align-items: center;
   margin-bottom: 12px;
@@ -600,13 +640,11 @@ body.modal-open { overflow: hidden; }
   letter-spacing: 0.05em; text-transform: uppercase;
   z-index: 1;
 }
-/* Doc Card Action Buttons */
 .doc-card-actions {
   position: absolute; top: 8px; right: 8px;
   display: flex; gap: 4px; z-index: 2;
   opacity: 0; transition: opacity 0.2s;
 }
-.doc-card:hover .doc-card-actions,
 .doc-card:active .doc-card-actions { opacity: 1; }
 .doc-action-btn {
   width: 28px; height: 28px; border-radius: 8px;
@@ -615,8 +653,8 @@ body.modal-open { overflow: hidden; }
   cursor: pointer; display: flex; align-items: center; justify-content: center;
   transition: all 0.15s;
 }
-.doc-action-btn:hover { background: var(--primary); }
-.doc-action-btn.delete:hover { background: var(--danger); }
+.doc-action-btn:active { background: var(--primary); }
+.doc-action-btn.delete:active { background: var(--danger); }
 .doc-card-body { padding: 10px 12px 12px; }
 .doc-card-body h4 {
   font-size: 0.85rem; font-weight: 600; margin: 0 0 4px;
@@ -685,7 +723,7 @@ body.modal-open { overflow: hidden; }
   font-family: inherit; white-space: nowrap;
 }
 
-/* ===== MODALS ===== */
+/* Modals */
 .form-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -759,7 +797,7 @@ body.modal-open { overflow: hidden; }
 .pulse { animation: pulse 2s infinite ease-in-out; }
 @keyframes spin { to { transform: rotate(360deg); } }
 .spin { animation: spin 1s linear infinite; }
-.screen::-webkit-scrollbar, .sheet-body::-webkit-scrollbar, .doc-modal-body::-webkit-scrollbar { width: 0; }
+.screen::-webkit-scrollbar, .doc-modal-body::-webkit-scrollbar { width: 0; }
 
 /* Toast */
 .toast-msg {
@@ -807,6 +845,17 @@ body.modal-open { overflow: hidden; }
           </div>
         </div>
       </div>
+
+      <!-- Existing Issues Banner -->
+      <a href="https://www.sharesansar.com/existing-issues" target="_blank" rel="noopener" class="ipo-banner">
+        <div class="ipo-icon"><i class="bi bi-graph-up-arrow"></i></div>
+        <div class="ipo-content">
+          <h3 class="ipo-title">Existing Issues</h3>
+          <p class="ipo-subtitle">View IPO/FPO allotment results</p>
+        </div>
+        <i class="bi bi-arrow-right ipo-arrow"></i>
+      </a>
+
       <div class="section-title">Live Rates</div>
       <div class="tools-grid">
         <div class="tool-card" data-tool="gold"><div class="tool-icon gold"><i class="bi bi-coin"></i></div><div><h3>Gold & Silver</h3><p>Today's rates</p></div></div>
@@ -909,7 +958,7 @@ body.modal-open { overflow: hidden; }
         </div>
         <h3>Mero App</h3>
         <p>Tools, Directory, Documents & Links</p>
-        <span class="settings-version-badge">v8.0.0</span>
+        <span class="settings-version-badge">v11.0.0</span>
       </div>
       <div class="section-title">Preferences</div>
       <div class="settings-item">
@@ -934,7 +983,7 @@ body.modal-open { overflow: hidden; }
         <div class="settings-icon-box blue"><i class="bi bi-info-circle-fill"></i></div>
         <div class="settings-item-content">
           <h4>Version</h4>
-          <p>8.0.0 • July 2026</p>
+          <p>11.0.0 • July 2026</p>
         </div>
       </div>
       <div class="settings-item">
@@ -1089,7 +1138,6 @@ body.modal-open { overflow: hidden; }
 
 <div class="toast-msg" id="toastMsg"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script>
 // ========== CONFIGURATION ==========
 // ⚠️ REPLACE WITH YOUR ACTUAL GOOGLE APPS SCRIPT URLs
@@ -1100,12 +1148,14 @@ const LINKS_API_URL = 'https://script.google.com/macros/s/AKfycbyLv0VT5o2ORuS_zX
 // ========== THEME ==========
 const htmlEl = document.getElementById('htmlRoot');
 const themeToggle = document.getElementById('themeToggle');
+const themeColorMeta = document.getElementById('themeColorMeta');
 const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 applyTheme(savedTheme);
 
 function applyTheme(theme) {
   htmlEl.setAttribute('data-theme', theme);
   themeToggle.classList.toggle('on', theme === 'dark');
+  themeColorMeta.content = theme === 'dark' ? '#0a0e1a' : '#0077e5';
   localStorage.setItem('theme', theme);
 }
 
@@ -1329,13 +1379,6 @@ const dirStates = {
 
 function getFavorites() { return JSON.parse(localStorage.getItem('phoneDirectoryFavorites') || '[]'); }
 function saveFavorites(favs) { localStorage.setItem('phoneDirectoryFavorites', JSON.stringify(favs)); }
-function toggleFavorite(phone) {
-  let favs = getFavorites();
-  if (favs.includes(phone)) favs = favs.filter(p => p !== phone);
-  else favs.push(phone);
-  saveFavorites(favs);
-  handleSearch();
-}
 
 async function loadDirectory() {
   showDirState('loading');
@@ -1370,7 +1413,7 @@ function handleSearch() {
   
   if (currentFilter === 'favorites') {
     const favPhones = getFavorites();
-    data = data.filter(p => favPhones.includes(p.Phone));
+    data = data.filter(p => favPhones.includes(String(p.Phone || '')));
     if (data.length === 0 && !query) { showDirState('empty-favs'); return; }
   } else if (!query) {
     if (data.length === 0) { showDirState('idle'); return; }
@@ -1381,9 +1424,9 @@ function handleSearch() {
   
   if (query) {
     data = data.filter(p =>
-      (p.Name && p.Name.toLowerCase().includes(query)) ||
-      (p.Phone && p.Phone.includes(query)) ||
-      (p.Relation && p.Relation.toLowerCase().includes(query))
+      (p.Name && String(p.Name).toLowerCase().includes(query)) ||
+      (p.Phone && String(p.Phone).includes(query)) ||
+      (p.Relation && String(p.Relation).toLowerCase().includes(query))
     );
   }
   
@@ -1396,49 +1439,104 @@ function renderResults(data) {
   const favPhones = getFavorites();
   
   data.forEach(person => {
-    const name = person.Name || 'Unknown';
-    const phone = (person.Phone || '').trim();
-    const initials = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+    // ✅ FIX: Convert to string to prevent .split() errors
+    const name = String(person.Name || 'Unknown');
+    const phone = String(person.Phone || '').trim();
+    const relation = String(person.Relation || 'N/A');
+    
+    // ✅ Safe initials extraction
+    const initials = name.split(' ')
+      .map(n => n.charAt(0))
+      .filter(c => c)
+      .join('')
+      .substring(0, 2)
+      .toUpperCase();
+    
     const isFav = favPhones.includes(phone);
     
     const card = document.createElement('div');
     card.className = 'contact-card';
     card.innerHTML = `
-      <button class="fav-btn ${isFav ? 'active' : ''}" data-phone="${phone}"><i class="bi ${isFav ? 'bi-star-fill' : 'bi-star'}"></i></button>
-      <div class="avatar">${initials}</div>
+      <button type="button" class="fav-btn ${isFav ? 'active' : ''}" data-action="fav" data-phone="${escapeHtml(phone)}" title="Toggle Favorite">
+        <i class="bi ${isFav ? 'bi-star-fill' : 'bi-star'}"></i>
+      </button>
+      <div class="avatar">${escapeHtml(initials)}</div>
       <div class="contact-info">
         <h5>${escapeHtml(name)}</h5>
-        <span class="relation-tag">${escapeHtml(person.Relation || 'N/A')}</span>
+        <span class="relation-tag">${escapeHtml(relation)}</span>
       </div>
       <div class="contact-actions">
-        <button class="contact-action-btn edit" data-id="${person.id}" title="Edit"><i class="bi bi-pencil"></i></button>
-        <button class="contact-action-btn delete" data-id="${person.id}" title="Delete"><i class="bi bi-trash"></i></button>
+        <button type="button" class="contact-action-btn edit" data-action="edit" data-id="${person.id}" title="Edit">
+          <i class="bi bi-pencil"></i>
+        </button>
+        <button type="button" class="contact-action-btn delete" data-action="delete" data-id="${person.id}" title="Delete">
+          <i class="bi bi-trash"></i>
+        </button>
       </div>
-      <a href="tel:${phone}" class="call-btn"><i class="bi bi-telephone-fill"></i></a>
+      <a href="tel:${escapeHtml(phone)}" class="call-btn" title="Call ${escapeHtml(name)}">
+        <i class="bi bi-telephone-fill"></i>
+      </a>
     `;
     resultsContainer.appendChild(card);
   });
+}
+
+// ✅ ROBUST EVENT DELEGATION - Single listener on parent
+resultsContainer.addEventListener('click', function(e) {
+  const actionBtn = e.target.closest('[data-action]');
+  if (!actionBtn) return;
   
-  resultsContainer.querySelectorAll('.fav-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const phone = btn.dataset.phone;
-      if (phone) toggleFavorite(phone);
-    });
-  });
+  e.preventDefault();
+  e.stopPropagation();
   
-  resultsContainer.querySelectorAll('.contact-action-btn.edit').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const id = parseInt(btn.dataset.id);
-      editContact(id);
-    });
-  });
+  const action = actionBtn.getAttribute('data-action');
   
-  resultsContainer.querySelectorAll('.contact-action-btn.delete').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const id = parseInt(btn.dataset.id);
-      deleteContact(id);
+  if (action === 'fav') {
+    const phone = actionBtn.getAttribute('data-phone');
+    if (phone) toggleFavorite(phone);
+  }
+  else if (action === 'edit') {
+    const id = parseInt(actionBtn.getAttribute('data-id'));
+    if (!isNaN(id)) editContact(id);
+  }
+  else if (action === 'delete') {
+    const id = parseInt(actionBtn.getAttribute('data-id'));
+    if (!isNaN(id)) deleteContact(id);
+  }
+}, true);
+
+function toggleFavorite(phone) {
+  let favs = getFavorites();
+  if (favs.includes(phone)) {
+    favs = favs.filter(p => p !== phone);
+  } else {
+    favs.push(phone);
+  }
+  saveFavorites(favs);
+  handleSearch();
+}
+
+function editContact(id) {
+  const contact = directoryData.find(c => c.id == id);
+  if (contact) openContactForm(contact);
+  else showToast('Contact not found', 'error');
+}
+
+async function deleteContact(id) {
+  if (!confirm('Are you sure you want to delete this contact?')) return;
+  
+  try {
+    await fetch(CONTACTS_API_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: 'delete', id: id })
     });
-  });
+    showToast('Contact deleted!', 'success');
+    setTimeout(loadDirectory, 800);
+  } catch (error) {
+    showToast('Error deleting contact', 'error');
+  }
 }
 
 searchInput.addEventListener('input', handleSearch);
@@ -1463,9 +1561,9 @@ function openContactForm(contact = null) {
   editingContactId = contact ? contact.id : null;
   contactFormTitle.textContent = contact ? 'Edit Contact' : 'Add Contact';
   document.getElementById('contactId').value = contact ? contact.id : '';
-  document.getElementById('contactName').value = contact ? contact.Name : '';
-  document.getElementById('contactPhone').value = contact ? contact.Phone : '';
-  document.getElementById('contactRelation').value = contact ? contact.Relation : '';
+  document.getElementById('contactName').value = contact ? (contact.Name || '') : '';
+  document.getElementById('contactPhone').value = contact ? (contact.Phone || '') : '';
+  document.getElementById('contactRelation').value = contact ? (contact.Relation || '') : '';
   contactFormOverlay.classList.add('active');
   document.body.classList.add('modal-open');
   setTimeout(() => document.getElementById('contactName').focus(), 100);
@@ -1475,29 +1573,6 @@ function closeContactForm() {
   contactFormOverlay.classList.remove('active');
   document.body.classList.remove('modal-open');
   editingContactId = null;
-}
-
-function editContact(id) {
-  const contact = directoryData.find(c => c.id == id);
-  if (contact) openContactForm(contact);
-  else showToast('Contact not found', 'error');
-}
-
-async function deleteContact(id) {
-  if (!confirm('Delete this contact?')) return;
-  
-  try {
-    await fetch(CONTACTS_API_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify({ action: 'delete', id: id })
-    });
-    showToast('Deleted!', 'success');
-    setTimeout(loadDirectory, 800);
-  } catch (error) {
-    showToast('Error deleting', 'error');
-  }
 }
 
 contactFormSave.addEventListener('click', async () => {
@@ -1551,7 +1626,7 @@ let currentDocCat = 'all';
 let docListVisible = false;
 
 function getDocTag(name) {
-  const n = name.toLowerCase();
+  const n = String(name).toLowerCase();
   if (n.includes('bank') || n.includes('nabil') || n.includes('global') || n.includes('sunrise') || n.includes('banijya') || n.includes('mero share') || n.includes('kukl')) return 'Finance';
   if (n.includes('citizen') || n.includes('passport') || n.includes('national id') || n.includes('pan') || n.includes('nid') || n.includes('voter') || n.includes('license') || n.includes('marriage')) return 'Identity';
   if (n.includes('milk') || n.includes('parlour') || n.includes('fonepay') || n.includes('esewa') || n.includes('qr')) return 'QR / Payment';
@@ -1579,30 +1654,27 @@ async function loadDocuments() {
 }
 
 function renderDocChips() {
-  // Extract unique categories from data
   const categories = new Set();
   docData.forEach(doc => {
     const cat = doc.category || getDocTag(doc.name);
     if (cat) categories.add(cat);
   });
   
-  // Build chips: All + dynamic categories
-  let chipsHtml = `<button class="doc-chip ${currentDocCat === 'all' ? 'active' : ''}" data-cat="all"><i class="bi bi-border-all"></i> All</button>`;
+  let chipsHtml = `<button type="button" class="doc-chip ${currentDocCat === 'all' ? 'active' : ''}" data-cat="all"><i class="bi bi-border-all"></i> All</button>`;
   
   categories.forEach(cat => {
     const isActive = currentDocCat === cat ? 'active' : '';
     let icon = 'bi-tag';
-    if (cat.toLowerCase() === 'identity') icon = 'bi-person-badge';
-    else if (cat.toLowerCase() === 'finance') icon = 'bi-bank';
-    else if (cat.toLowerCase().includes('qr') || cat.toLowerCase().includes('payment')) icon = 'bi-qr-code';
-    else if (cat.toLowerCase() === 'medical') icon = 'bi-capsule';
+    if (String(cat).toLowerCase() === 'identity') icon = 'bi-person-badge';
+    else if (String(cat).toLowerCase() === 'finance') icon = 'bi-bank';
+    else if (String(cat).toLowerCase().includes('qr') || String(cat).toLowerCase().includes('payment')) icon = 'bi-qr-code';
+    else if (String(cat).toLowerCase() === 'medical') icon = 'bi-capsule';
     
-    chipsHtml += `<button class="doc-chip ${isActive}" data-cat="${escapeHtml(cat)}"><i class="bi ${icon}"></i> ${escapeHtml(cat)}</button>`;
+    chipsHtml += `<button type="button" class="doc-chip ${isActive}" data-cat="${escapeHtml(cat)}"><i class="bi ${icon}"></i> ${escapeHtml(cat)}</button>`;
   });
   
   docChips.innerHTML = chipsHtml;
   
-  // Attach click handlers
   docChips.querySelectorAll('.doc-chip').forEach(chip => {
     chip.addEventListener('click', () => {
       docChips.querySelectorAll('.doc-chip').forEach(c => c.classList.remove('active'));
@@ -1645,8 +1717,8 @@ function renderDocs(items, term = '') {
       <div class="doc-card-img" style="background-image:url('${doc.url}')">
         <span class="doc-card-tag">${escapeHtml(doc.category || getDocTag(doc.name))}</span>
         <div class="doc-card-actions">
-          <button class="doc-action-btn edit" data-id="${doc.id}" title="Edit"><i class="bi bi-pencil"></i></button>
-          <button class="doc-action-btn delete" data-id="${doc.id}" title="Delete"><i class="bi bi-trash"></i></button>
+          <button type="button" class="doc-action-btn edit" data-action="edit-doc" data-id="${doc.id}" title="Edit"><i class="bi bi-pencil"></i></button>
+          <button type="button" class="doc-action-btn delete" data-action="delete-doc" data-id="${doc.id}" title="Delete"><i class="bi bi-trash"></i></button>
         </div>
       </div>
       <div class="doc-card-body">
@@ -1655,14 +1727,13 @@ function renderDocs(items, term = '') {
       </div>
     `;
     card.addEventListener('click', (e) => {
-      // Don't open modal if clicking action buttons
       if (e.target.closest('.doc-action-btn')) return;
       openDocModal(doc);
     });
     docGrid.appendChild(card);
   });
   
-  // Attach edit/delete handlers
+  // ✅ Event delegation for doc actions
   docGrid.querySelectorAll('.doc-action-btn.edit').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -1684,7 +1755,6 @@ function filterDocs() {
   const term = docSearchInput.value.toLowerCase().trim();
   docClearBtn.classList.toggle('show', term.length > 0);
   
-  // If no search term and category is 'all' and list not visible, show idle
   if (!term && currentDocCat === 'all' && !docListVisible) {
     showDocIdle();
     return;
@@ -1696,8 +1766,8 @@ function filterDocs() {
   }
   if (term) {
     filtered = filtered.filter(d =>
-      d.name.toLowerCase().includes(term) ||
-      (d.description && d.description.toLowerCase().includes(term))
+      String(d.name).toLowerCase().includes(term) ||
+      (d.description && String(d.description).toLowerCase().includes(term))
     );
   }
   renderDocs(filtered, term);
@@ -1733,10 +1803,10 @@ function openDocForm(doc = null) {
   editingDocId = doc ? doc.id : null;
   docFormTitle.textContent = doc ? 'Edit Document' : 'Add Document';
   document.getElementById('docId').value = doc ? doc.id : '';
-  document.getElementById('docName').value = doc ? doc.name : '';
-  document.getElementById('docDescription').value = doc ? doc.description : '';
-  document.getElementById('docUrl').value = doc ? doc.url : '';
-  document.getElementById('docCategory').value = doc ? doc.category : '';
+  document.getElementById('docName').value = doc ? (doc.name || '') : '';
+  document.getElementById('docDescription').value = doc ? (doc.description || '') : '';
+  document.getElementById('docUrl').value = doc ? (doc.url || '') : '';
+  document.getElementById('docCategory').value = doc ? (doc.category || '') : '';
   docFormOverlay.classList.add('active');
   document.body.classList.add('modal-open');
   setTimeout(() => document.getElementById('docName').focus(), 100);
@@ -1892,10 +1962,10 @@ function renderLinkContent() {
   let filtered = allLinks;
   if (term) {
     filtered = allLinks.filter(link => {
-      return (link.title && link.title.toLowerCase().includes(term)) ||
-             (link.description && link.description.toLowerCase().includes(term)) ||
-             (link.category && link.category.toLowerCase().includes(term)) ||
-             (link.url && link.url.toLowerCase().includes(term));
+      return (link.title && String(link.title).toLowerCase().includes(term)) ||
+             (link.description && String(link.description).toLowerCase().includes(term)) ||
+             (link.category && String(link.category).toLowerCase().includes(term)) ||
+             (link.url && String(link.url).toLowerCase().includes(term));
     });
   }
   
@@ -1938,10 +2008,10 @@ function renderLinks(links) {
             <h3 class="link-card-title">${escapeHtml(link.title || 'Untitled')}</h3>
           </div>
           <div class="link-card-actions">
-            <button class="link-icon-btn" data-action="edit" data-id="${link.id}" title="Edit">
+            <button type="button" class="link-icon-btn" data-action="edit-link" data-id="${link.id}" title="Edit">
               <i class="bi bi-pencil"></i>
             </button>
-            <button class="link-icon-btn delete" data-action="delete" data-id="${link.id}" title="Delete">
+            <button type="button" class="link-icon-btn delete" data-action="delete-link" data-id="${link.id}" title="Delete">
               <i class="bi bi-trash"></i>
             </button>
           </div>
@@ -1958,8 +2028,7 @@ function renderLinks(links) {
     `;
   }).join('');
   
-  // Event delegation
-  linkGrid.querySelectorAll('[data-action="edit"]').forEach(btn => {
+  linkGrid.querySelectorAll('[data-action="edit-link"]').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = parseInt(btn.dataset.id);
       const link = allLinks.find(l => l.id === id);
@@ -1968,7 +2037,7 @@ function renderLinks(links) {
     });
   });
   
-  linkGrid.querySelectorAll('[data-action="delete"]').forEach(btn => {
+  linkGrid.querySelectorAll('[data-action="delete-link"]').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = parseInt(btn.dataset.id);
       deleteLink(id);
@@ -1980,10 +2049,10 @@ function openLinkForm(link = null) {
   editingLinkId = link ? link.id : null;
   linkFormTitle.textContent = link ? 'Edit Link' : 'Add Link';
   document.getElementById('linkId').value = link ? link.id : '';
-  document.getElementById('linkTitle').value = link ? link.title : '';
-  document.getElementById('linkUrl').value = link ? link.url : '';
-  document.getElementById('linkDescription').value = link ? link.description : '';
-  document.getElementById('linkCategory').value = link ? link.category : '';
+  document.getElementById('linkTitle').value = link ? (link.title || '') : '';
+  document.getElementById('linkUrl').value = link ? (link.url || '') : '';
+  document.getElementById('linkDescription').value = link ? (link.description || '') : '';
+  document.getElementById('linkCategory').value = link ? (link.category || '') : '';
   linkFormOverlay.classList.add('active');
   document.body.classList.add('modal-open');
   setTimeout(() => document.getElementById('linkTitle').focus(), 100);
