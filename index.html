@@ -73,8 +73,7 @@ body.modal-open { overflow: hidden; }
   padding: calc(var(--safe-top) + 14px) 16px 14px;
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center;
-  min-height: 50px;
-  z-index: 10;
+  min-height: 50px; z-index: 10;
 }
 .screens { flex: 1; overflow: hidden; position: relative; }
 .screen {
@@ -101,8 +100,7 @@ body.modal-open { overflow: hidden; }
 [data-theme="dark"] .bottom-nav { background: rgba(21,26,40,0.95); }
 .nav-btn {
   flex: 1; background: none; border: none;
-  padding: 4px 2px 3px;
-  color: var(--text-tertiary);
+  padding: 4px 2px 3px; color: var(--text-tertiary);
   display: flex; flex-direction: column; align-items: center; gap: 2px;
   cursor: pointer; transition: color 0.2s;
   position: relative; font-family: inherit;
@@ -129,8 +127,7 @@ body.modal-open { overflow: hidden; }
   position: relative; overflow: hidden;
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 14px;
-  align-items: center;
+  gap: 14px; align-items: center;
 }
 .welcome-card::after {
   content: ''; position: absolute;
@@ -143,8 +140,7 @@ body.modal-open { overflow: hidden; }
 .greeting-text { font-size: 1.15rem; font-weight: 700; margin: 0 0 2px; line-height: 1.2; }
 .greeting-name {
   font-size: 1.15rem; font-weight: 700; margin: 0 0 6px;
-  display: flex; align-items: center; gap: 6px;
-  flex-wrap: wrap;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
 }
 .greeting-emoji {
   font-size: 1rem; display: inline-block;
@@ -171,18 +167,16 @@ body.modal-open { overflow: hidden; }
 }
 .welcome-time i { font-size: 0.65rem; }
 .nepali-date {
-  font-size: 0.7rem; opacity: 0.9;
-  margin-top: 2px;
+  font-size: 0.7rem; opacity: 0.9; margin-top: 2px;
   display: flex; align-items: center; gap: 4px;
 }
 .nepali-date i { font-size: 0.65rem; }
 
-/* Minimal Weather */
+/* Weather */
 .weather-mini {
   position: relative; z-index: 1;
   display: flex; flex-direction: column;
-  align-items: flex-end;
-  text-align: right;
+  align-items: flex-end; text-align: right;
   min-width: 110px;
 }
 .weather-mini-icon { font-size: 2rem; line-height: 1; margin-bottom: 2px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15)); }
@@ -280,76 +274,40 @@ body.modal-open { overflow: hidden; }
 
 /* Settings */
 .settings-app-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 28px 20px;
-  text-align: center;
-  margin-bottom: 20px;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: 20px; padding: 28px 20px;
+  text-align: center; margin-bottom: 20px;
   box-shadow: var(--shadow-sm);
 }
 .settings-app-logo {
-  width: 80px; height: 80px;
-  border-radius: 22px;
+  width: 80px; height: 80px; border-radius: 22px;
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  color: white;
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 14px;
-  box-shadow: var(--shadow-md);
-  overflow: hidden;
-  position: relative;
+  color: white; display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 14px; box-shadow: var(--shadow-md);
+  overflow: hidden; position: relative;
 }
-.settings-app-logo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.settings-app-logo .logo-fallback {
-  font-size: 2rem;
-  font-weight: 700;
-  font-family: 'Segoe UI', system-ui, sans-serif;
-  letter-spacing: -0.02em;
-}
-.settings-app-card h3 {
-  margin: 0 0 6px;
-  font-size: 1.4rem; font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.02em;
-}
-.settings-app-card p {
-  margin: 0 0 12px;
-  color: var(--text-secondary);
-  font-size: 0.88rem;
-}
+.settings-app-logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.settings-app-logo .logo-fallback { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; }
+.settings-app-card h3 { margin: 0 0 6px; font-size: 1.4rem; font-weight: 700; color: var(--text-primary); letter-spacing: -0.02em; }
+.settings-app-card p { margin: 0 0 12px; color: var(--text-secondary); font-size: 0.88rem; }
 .settings-version-badge {
-  display: inline-block;
-  background: var(--border);
-  color: var(--text-secondary);
-  padding: 5px 14px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 600;
+  display: inline-block; background: var(--border);
+  color: var(--text-secondary); padding: 5px 14px;
+  border-radius: 20px; font-size: 0.75rem; font-weight: 600;
 }
 .settings-item {
   display: flex; align-items: center;
-  padding: 14px 16px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  margin-bottom: 10px;
-  gap: 14px;
-  cursor: pointer;
+  padding: 14px 16px; background: var(--bg-card);
+  border: 1px solid var(--border); border-radius: 16px;
+  margin-bottom: 10px; gap: 14px; cursor: pointer;
   transition: transform 0.15s, background 0.2s;
   box-shadow: var(--shadow-sm);
 }
 .settings-item:active { transform: scale(0.98); background: var(--border); }
 .settings-icon-box {
-  width: 42px; height: 42px;
-  border-radius: 12px;
+  width: 42px; height: 42px; border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1.2rem; color: white;
-  flex-shrink: 0;
+  font-size: 1.2rem; color: white; flex-shrink: 0;
 }
 .settings-icon-box.purple { background: linear-gradient(135deg, #6366f1, #4f46e5); }
 .settings-icon-box.orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
@@ -357,12 +315,8 @@ body.modal-open { overflow: hidden; }
 .settings-icon-box.pink { background: linear-gradient(135deg, #ec4899, #be185d); }
 .settings-icon-box.green { background: linear-gradient(135deg, #10b981, #059669); }
 .settings-item-content { flex: 1; min-width: 0; }
-.settings-item-content h4 {
-  margin: 0; font-size: 0.95rem; font-weight: 600; color: var(--text-primary);
-}
-.settings-item-content p {
-  margin: 2px 0 0; font-size: 0.78rem; color: var(--text-secondary);
-}
+.settings-item-content h4 { margin: 0; font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+.settings-item-content p { margin: 2px 0 0; font-size: 0.78rem; color: var(--text-secondary); }
 .settings-toggle {
   position: relative; width: 50px; height: 28px;
   background: var(--border); border-radius: 14px;
@@ -378,99 +332,150 @@ body.modal-open { overflow: hidden; }
 .settings-toggle.on::after { transform: translateX(22px); }
 .settings-chevron { color: var(--text-tertiary); font-size: 0.9rem; flex-shrink: 0; }
 
-/* Link Directory */
-.link-header-bar {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 14px;
+/* ========== LINK DIRECTORY TAB ========== */
+.links-header-card {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white; border-radius: 20px;
+  padding: 24px 20px; margin-bottom: 16px;
+  box-shadow: var(--shadow-md);
+  position: relative; overflow: hidden;
+  text-align: center;
 }
-.link-header-bar .section-title { margin: 0; }
-.btn-add-link {
-  background: var(--text-primary); color: var(--bg-body); border: none;
-  padding: 8px 14px; border-radius: 10px; font-size: 0.82rem;
-  font-weight: 600; display: flex; align-items: center; gap: 5px;
-  cursor: pointer; font-family: inherit;
+.links-header-card::after {
+  content: ''; position: absolute;
+  top: -50%; right: -20%;
+  width: 200px; height: 200px;
+  background: rgba(255,255,255,0.1); border-radius: 50%;
+  pointer-events: none;
+}
+.links-header-card h2 {
+  position: relative; z-index: 1;
+  font-size: 1.5rem; font-weight: 800;
+  margin: 0 0 6px; letter-spacing: -0.02em;
+}
+.links-header-card p {
+  position: relative; z-index: 1;
+  margin: 0; opacity: 0.9; font-size: 0.9rem;
+}
+.links-search-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 14px;
   box-shadow: var(--shadow-sm);
-  transition: transform 0.15s;
+  margin-bottom: 12px;
+}
+.links-search-wrap {
+  display: flex; align-items: center;
+  background: var(--bg-body);
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  padding: 0 14px;
+  transition: all 0.2s;
+}
+.links-search-wrap:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0,119,229,0.1);
+}
+.links-search-wrap i { color: var(--text-muted); font-size: 1.1rem; margin-right: 8px; }
+.links-search-wrap input {
+  border: none; outline: none;
+  background: transparent;
+  flex: 1; font-size: 0.95rem;
+  color: var(--text-primary);
+  padding: 12px 0;
+  font-family: inherit;
+}
+.links-search-wrap input::placeholder { color: var(--text-tertiary); }
+.links-actions {
+  display: flex; justify-content: space-between;
+  align-items: center;
+  margin-top: 12px; padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.links-stats { color: var(--text-secondary); font-size: 0.85rem; }
+.links-stats strong { color: var(--primary); font-weight: 700; }
+.btn-add-link {
+  background: var(--text-primary); color: var(--bg-body);
+  border: none; padding: 8px 14px; border-radius: 10px;
+  font-size: 0.85rem; font-weight: 600; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: inherit; transition: all 0.2s;
 }
 .btn-add-link:active { transform: scale(0.96); }
-.link-stats {
-  font-size: 0.78rem; color: var(--text-secondary);
-  margin-bottom: 12px; letter-spacing: 0.02em;
-}
-.link-stats strong { color: var(--text-primary); font-weight: 700; }
+[data-theme="dark"] .btn-add-link { background: var(--text-primary); color: var(--bg-body); }
 .link-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 14px;
-  margin-bottom: 10px;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.2s, box-shadow 0.2s;
+  border-radius: 14px; padding: 14px;
+  margin-bottom: 10px; box-shadow: var(--shadow-sm);
+  transition: all 0.2s;
 }
 .link-card:active { transform: scale(0.98); }
-.link-card:hover { box-shadow: var(--shadow-md); }
 .link-card-header {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  margin-bottom: 6px; gap: 8px;
+  display: flex; justify-content: space-between;
+  align-items: flex-start; margin-bottom: 6px; gap: 8px;
 }
 .link-title-wrapper {
-  display: flex; align-items: center; gap: 10px;
-  flex: 1; min-width: 0;
+  display: flex; align-items: center;
+  gap: 10px; flex: 1; min-width: 0;
 }
 .site-thumbnail {
-  width: 36px; height: 36px; border-radius: 10px;
-  object-fit: cover; background: var(--border); flex-shrink: 0;
+  width: 40px; height: 40px;
+  border-radius: 10px; object-fit: cover;
+  background: var(--bg-body); flex-shrink: 0;
   border: 1px solid var(--border);
 }
 .link-card-title {
-  font-size: 0.95rem; font-weight: 600; color: var(--text-primary);
-  flex: 1; min-width: 0;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  margin: 0;
+  font-size: 0.95rem; font-weight: 600;
+  margin: 0; white-space: nowrap;
+  overflow: hidden; text-overflow: ellipsis;
+  color: var(--text-primary);
 }
-.link-card-actions { display: flex; gap: 4px; flex-shrink: 0; }
+.link-card-actions { display: flex; gap: 2px; flex-shrink: 0; }
 .link-icon-btn {
-  width: 30px; height: 30px; border-radius: 8px;
   background: transparent; border: none;
-  color: var(--text-tertiary); font-size: 0.85rem;
-  cursor: pointer; display: flex; align-items: center; justify-content: center;
-  transition: background 0.15s, color 0.15s;
+  padding: 6px; border-radius: 8px;
+  cursor: pointer; color: var(--text-tertiary);
+  transition: all 0.15s;
 }
-.link-icon-btn:active { background: var(--border); }
-.link-icon-btn.delete:hover { background: #fee2e2; color: #dc2626; }
+.link-icon-btn:active { background: var(--border); color: var(--text-primary); }
+.link-icon-btn.delete:active { background: #fee2e2; color: #dc2626; }
 .link-card-url {
-  display: block; color: var(--primary); text-decoration: none;
-  font-size: 0.75rem; margin-bottom: 6px;
+  display: block; color: var(--primary);
+  text-decoration: none; font-size: 0.78rem;
+  margin-bottom: 6px;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .link-card-desc {
-  font-size: 0.78rem; color: var(--text-secondary);
-  margin-bottom: 10px; line-height: 1.4;
+  color: var(--text-secondary);
+  font-size: 0.82rem; margin-bottom: 10px;
+  line-height: 1.5;
   display: -webkit-box; -webkit-line-clamp: 2;
   -webkit-box-orient: vertical; overflow: hidden;
 }
 .link-card-footer {
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex; justify-content: space-between;
+  align-items: center;
   padding-top: 10px; border-top: 1px solid var(--border);
 }
 .link-badge {
-  background: var(--border); color: var(--text-secondary);
-  padding: 3px 10px; border-radius: 8px; font-size: 0.7rem;
-  font-weight: 500;
+  background: var(--bg-body); color: var(--text-secondary);
+  padding: 3px 10px; border-radius: 20px;
+  font-size: 0.72rem; font-weight: 500;
 }
 .link-visit-btn {
   background: transparent; border: 1px solid var(--border);
-  color: var(--text-primary); padding: 5px 12px;
-  border-radius: 8px; font-size: 0.78rem; font-weight: 500;
-  text-decoration: none; display: inline-flex; align-items: center; gap: 4px;
-  font-family: inherit;
-  transition: background 0.15s, color 0.15s;
+  color: var(--text-primary);
+  padding: 5px 12px; border-radius: 8px;
+  font-size: 0.8rem; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 4px;
+  font-weight: 500; font-family: inherit;
+  transition: all 0.2s;
 }
 .link-visit-btn:active { background: var(--text-primary); color: var(--bg-body); border-color: var(--text-primary); }
-.link-loader { text-align: center; padding: 40px 20px; }
-.link-loader i { font-size: 2rem; color: var(--text-tertiary); animation: spin 1s linear infinite; display: block; margin-bottom: 10px; }
-.link-empty { text-align: center; padding: 60px 20px; color: var(--text-secondary); }
-.link-empty i { font-size: 3rem; color: var(--text-tertiary); margin-bottom: 12px; display: block; opacity: 0.5; }
+.links-loader { text-align: center; padding: 40px 20px; }
+.links-loader i { font-size: 2rem; color: var(--text-tertiary); animation: spin 1s linear infinite; display: block; margin-bottom: 10px; }
 
 /* Documents */
 .doc-welcome { background: linear-gradient(135deg, #1a1f2e, #0f1420); color: #f0ece3; border-radius: 20px; padding: 24px 20px; margin-bottom: 20px; position: relative; overflow: hidden; box-shadow: var(--shadow-md); }
@@ -514,6 +519,70 @@ body.modal-open { overflow: hidden; }
 .doc-modal-desc { flex: 1; font-size: 0.8rem; color: var(--text-secondary); margin: 0; line-height: 1.4; }
 .doc-download-btn { background: linear-gradient(135deg, var(--gold), #a07830); color: #0b0c0f; border: none; padding: 10px 16px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-family: inherit; white-space: nowrap; }
 
+/* Tool Modal */
+#toolModalOverlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5); z-index: 1000;
+  align-items: flex-end; justify-content: center;
+}
+#toolModalBox {
+  background: var(--bg-elevated);
+  width: 100%; max-width: 500px; max-height: 92vh;
+  border-radius: 20px 20px 0 0;
+  transform: translateY(100%); transition: transform 0.3s;
+  display: flex; flex-direction: column; overflow: hidden;
+}
+
+/* Link Form Modal */
+.link-form-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5); z-index: 1100;
+  align-items: center; justify-content: center;
+  padding: 16px; backdrop-filter: blur(4px);
+}
+.link-form-overlay.active { display: flex; }
+.link-form-box {
+  background: var(--bg-elevated); border-radius: 20px;
+  width: 100%; max-width: 440px; max-height: 90vh;
+  overflow-y: auto; box-shadow: var(--shadow-md);
+}
+.link-form-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.link-form-header h3 { margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--text-primary); }
+.link-form-body { padding: 20px; }
+.form-group { margin-bottom: 14px; }
+.form-group label {
+  display: block; font-size: 0.8rem; font-weight: 600;
+  color: var(--text-primary); margin-bottom: 6px;
+}
+.form-group input, .form-group textarea {
+  width: 100%; padding: 10px 12px;
+  border: 1.5px solid var(--border); border-radius: 10px;
+  font-size: 0.9rem; font-family: inherit;
+  background: var(--bg-body); color: var(--text-primary);
+  outline: none; transition: border-color 0.2s;
+}
+.form-group input:focus, .form-group textarea:focus { border-color: var(--primary); }
+.form-group textarea { resize: vertical; min-height: 70px; }
+.form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-tertiary); }
+.link-form-footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  display: flex; gap: 10px; justify-content: flex-end;
+}
+.btn-form {
+  padding: 9px 18px; border-radius: 10px;
+  font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; border: none; font-family: inherit;
+  transition: opacity 0.2s;
+}
+.btn-form.cancel { background: var(--border); color: var(--text-primary); }
+.btn-form.save { background: var(--primary); color: white; }
+.btn-form.save:disabled { opacity: 0.6; cursor: not-allowed; }
+.sheet-close { width: 32px; height: 32px; border-radius: 50%; background: var(--border); border: none; color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem; }
+
 @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
 .pulse { animation: pulse 2s infinite ease-in-out; }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -528,8 +597,7 @@ body.modal-open { overflow: hidden; }
   padding: 10px 18px; border-radius: 20px;
   font-size: 0.82rem; font-weight: 500;
   z-index: 2000; opacity: 0; pointer-events: none;
-  transition: all 0.3s;
-  box-shadow: var(--shadow-md);
+  transition: all 0.3s; box-shadow: var(--shadow-md);
 }
 .toast-msg.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 .toast-msg.success { background: #10b981; color: white; }
@@ -635,29 +703,32 @@ body.modal-open { overflow: hidden; }
       <div class="doc-grid" id="docGrid"></div>
     </section>
 
-    <!-- Link Directory Screen -->
+    <!-- ========== LINKS SCREEN (NEW) ========== -->
     <section class="screen" id="screen-links">
-      <div class="link-header-bar">
-        <div class="section-title" style="margin:0">My Links</div>
-        <button class="btn-add-link" id="addLinkBtn"><i class="bi bi-plus-lg"></i> Add</button>
+      <div class="links-header-card">
+        <h2><i class="bi bi-link-45deg"></i> Link Directory</h2>
+        <p>Search and manage your curated links</p>
       </div>
-      <div class="search-wrap" style="position:static; padding-bottom:0;">
-        <div class="search-box">
+
+      <div class="links-search-card">
+        <div class="links-search-wrap">
           <i class="bi bi-search"></i>
-          <input type="text" id="linkSearchInput" placeholder="Search links..." autocomplete="off">
+          <input type="text" id="linkSearchInput" placeholder="Search by title, URL, or category..." autocomplete="off">
+        </div>
+        <div class="links-actions">
+          <div class="links-stats">Showing <strong id="linkResultCount">0</strong> links</div>
+          <button class="btn-add-link" id="addLinkBtn">
+            <i class="bi bi-plus-lg"></i> Add Link
+          </button>
         </div>
       </div>
-      <div class="link-stats" id="linkStats">Showing <strong>0</strong> links</div>
-      <div id="linkLoader" class="link-loader">
+
+      <div id="linkLoader" class="links-loader d-none">
         <i class="bi bi-arrow-repeat spin"></i>
         <p>Loading links...</p>
       </div>
-      <div id="linkEmpty" class="link-empty d-none">
-        <i class="bi bi-inbox"></i>
-        <h4>No links yet</h4>
-        <p>Tap "Add" to create your first link</p>
-      </div>
-      <div id="linkGrid"></div>
+
+      <div id="linkContentArea"></div>
     </section>
 
     <!-- Settings Screen -->
@@ -665,11 +736,11 @@ body.modal-open { overflow: hidden; }
       <div class="settings-app-card">
         <div class="settings-app-logo">
           <img src="./icons/icon-512.png" alt="Mero App" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <div class="logo-fallback" style="display:none">ma</div>
+          <div class="logo-fallback" style="display:none">MA</div>
         </div>
         <h3>Mero App</h3>
-        <p>Tools, Directory & Documents</p>
-        <span class="settings-version-badge">v3.0.1</span>
+        <p>Tools, Directory, Documents & Links</p>
+        <span class="settings-version-badge">v4.0.0</span>
       </div>
 
       <div class="section-title">Preferences</div>
@@ -697,7 +768,7 @@ body.modal-open { overflow: hidden; }
         <div class="settings-icon-box blue"><i class="bi bi-info-circle-fill"></i></div>
         <div class="settings-item-content">
           <h4>Version</h4>
-          <p>3.0.1 • July 2026</p>
+          <p>4.0.0 • July 2026</p>
         </div>
       </div>
       <div class="settings-item">
@@ -719,13 +790,13 @@ body.modal-open { overflow: hidden; }
   </nav>
 </div>
 
-<!-- Tool Modal (FIXED - Uses inline styles for reliability) -->
-<div id="toolModalOverlay" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: flex-end; justify-content: center;">
-  <div style="background: var(--bg-elevated); width: 100%; max-width: 500px; max-height: 92vh; border-radius: 20px 20px 0 0; transform: translateY(100%); transition: transform 0.3s; display: flex; flex-direction: column; overflow: hidden;" id="toolModalBox">
+<!-- Tool Modal -->
+<div id="toolModalOverlay">
+  <div id="toolModalBox">
     <div style="width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 10px auto 0;"></div>
     <div style="padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border);">
       <h3 id="toolModalTitle" style="margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--text-primary);">Tool</h3>
-      <button id="toolModalClose" style="width: 32px; height: 32px; border-radius: 50%; background: var(--border); border: none; color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem;"><i class="bi bi-x"></i></button>
+      <button id="toolModalClose" class="sheet-close"><i class="bi bi-x"></i></button>
     </div>
     <div id="toolModalBody" style="flex: 1; overflow: auto; padding: 16px; background: var(--bg-body);"></div>
   </div>
@@ -749,42 +820,41 @@ body.modal-open { overflow: hidden; }
   </div>
 </div>
 
-<!-- Link Form Modal (FIXED - Uses inline styles) -->
-<div id="linkFormOverlay" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1100; align-items: center; justify-content: center; padding: 16px; backdrop-filter: blur(4px);">
-  <div style="background: var(--bg-elevated); border-radius: 20px; width: 100%; max-width: 440px; max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-md);">
-    <div style="padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center;">
-      <h3 id="linkFormTitle" style="margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--text-primary);">Add Link</h3>
-      <button id="linkFormClose" style="width: 32px; height: 32px; border-radius: 50%; background: var(--border); border: none; color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem;"><i class="bi bi-x"></i></button>
+<!-- Link Form Modal -->
+<div class="link-form-overlay" id="linkFormOverlay">
+  <div class="link-form-box">
+    <div class="link-form-header">
+      <h3 id="linkFormTitle">Add Link</h3>
+      <button class="sheet-close" id="linkFormClose"><i class="bi bi-x"></i></button>
     </div>
-    <div style="padding: 20px;">
+    <div class="link-form-body">
       <form id="linkForm" onsubmit="return false;">
         <input type="hidden" id="linkId">
-        <div style="margin-bottom: 14px;">
-          <label style="display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">Title *</label>
-          <input type="text" id="linkTitle" required placeholder="e.g., Google" style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-size: 0.9rem; font-family: inherit; background: var(--bg-body); color: var(--text-primary); outline: none;">
+        <div class="form-group">
+          <label>Title *</label>
+          <input type="text" id="linkTitle" required placeholder="e.g., Google">
         </div>
-        <div style="margin-bottom: 14px;">
-          <label style="display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">URL *</label>
-          <input type="url" id="linkUrl" required placeholder="https://example.com" style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-size: 0.9rem; font-family: inherit; background: var(--bg-body); color: var(--text-primary); outline: none;">
+        <div class="form-group">
+          <label>URL *</label>
+          <input type="url" id="linkUrl" required placeholder="https://example.com">
         </div>
-        <div style="margin-bottom: 14px;">
-          <label style="display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">Description</label>
-          <textarea id="linkDescription" placeholder="Brief description..." style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-size: 0.9rem; font-family: inherit; background: var(--bg-body); color: var(--text-primary); outline: none; resize: vertical; min-height: 70px;"></textarea>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea id="linkDescription" placeholder="Brief description..."></textarea>
         </div>
-        <div style="margin-bottom: 14px;">
-          <label style="display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-primary); margin-bottom: 6px;">Category</label>
-          <input type="text" id="linkCategory" placeholder="e.g., Work, Personal" style="width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; font-size: 0.9rem; font-family: inherit; background: var(--bg-body); color: var(--text-primary); outline: none;">
+        <div class="form-group">
+          <label>Category</label>
+          <input type="text" id="linkCategory" placeholder="e.g., Work, Social, News">
         </div>
       </form>
     </div>
-    <div style="padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 10px; justify-content: flex-end;">
-      <button id="linkFormCancel" style="padding: 9px 18px; border-radius: 10px; font-size: 0.85rem; font-weight: 600; cursor: pointer; border: none; background: var(--border); color: var(--text-primary); font-family: inherit;">Cancel</button>
-      <button id="linkFormSave" style="padding: 9px 18px; border-radius: 10px; font-size: 0.85rem; font-weight: 600; cursor: pointer; border: none; background: var(--text-primary); color: var(--bg-body); font-family: inherit;">Save</button>
+    <div class="link-form-footer">
+      <button class="btn-form cancel" id="linkFormCancel">Cancel</button>
+      <button class="btn-form save" id="linkFormSave">Save</button>
     </div>
   </div>
 </div>
 
-<!-- Toast -->
 <div class="toast-msg" id="toastMsg"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
@@ -811,13 +881,17 @@ themeToggle.addEventListener('click', () => {
 // ========== NAVIGATION ==========
 const screens = document.querySelectorAll('.screen');
 const navBtns = document.querySelectorAll('.nav-btn');
+let linksLoaded = false;
 
 navBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     const target = btn.dataset.screen;
     navBtns.forEach(b => b.classList.toggle('active', b === btn));
     screens.forEach(s => s.classList.toggle('active', s.id === `screen-${target}`));
-    if (target === 'links' && allLinks.length === 0) fetchLinks();
+    if (target === 'links' && !linksLoaded) {
+      fetchLinks();
+      linksLoaded = true;
+    }
   });
 });
 
@@ -830,7 +904,7 @@ const nepaliDateText = document.getElementById('nepaliDateText');
 
 const nepaliMonthsDev = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मंसिर', 'पौष', 'माघ', 'फागुन', 'चैत'];
 const nepaliDaysDev = ['आइतबार', 'सोमबार', 'मङ्गलबार', 'बुधबार', 'बिहीबार', 'शुक्रबार', 'शनिबार'];
-const engToNepaliNum = { '0': '०', '1': '१', '2': '', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '९' };
+const engToNepaliNum = { '0': '०', '1': '१', '2': '२', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '९' };
 
 function toNepaliNumber(num) {
   return num.toString().split('').map(d => engToNepaliNum[d] || d).join('');
@@ -892,7 +966,7 @@ function decodeWeather(code, isDay) {
     51: { icon: '🌦️', desc: 'Light drizzle' },
     53: { icon: '🌦️', desc: 'Drizzle' },
     55: { icon: '🌧️', desc: 'Dense drizzle' },
-    61: { icon: '️', desc: 'Light rain' },
+    61: { icon: '🌧️', desc: 'Light rain' },
     63: { icon: '🌧️', desc: 'Rain' },
     65: { icon: '🌧️', desc: 'Heavy rain' },
     71: { icon: '🌨️', desc: 'Light snow' },
@@ -905,7 +979,7 @@ function decodeWeather(code, isDay) {
     96: { icon: '⛈️', desc: 'Thunder + hail' },
     99: { icon: '⛈️', desc: 'Severe storm' }
   };
-  return map[code] || { icon: '️', desc: 'Unknown' };
+  return map[code] || { icon: '🌡️', desc: 'Unknown' };
 }
 
 async function fetchWeather() {
@@ -961,7 +1035,7 @@ document.addEventListener('visibilitychange', () => {
   }
 });
 
-// ========== TOOLS MODAL (FIXED) ==========
+// ========== TOOLS MODAL ==========
 const toolData = {
   gold: { title: 'Gold & Silver Price', iframe: 'https://www.ashesh.com.np/gold/widget.php?api=621113p553&header_color=0077e5', height: 265 },
   forex: { title: 'Foreign Exchange Rates', iframe: 'https://www.ashesh.com.np/forex/widget2.php?api=621117p597&header_color=38b45e&background_color=faf8ee&header_title=Nepal%20Exchange%20Rates', height: 383 },
@@ -979,7 +1053,6 @@ const toolModalTitle = document.getElementById('toolModalTitle');
 const toolModalBody = document.getElementById('toolModalBody');
 const toolModalClose = document.getElementById('toolModalClose');
 
-// Tool card click handlers
 document.querySelectorAll('.tool-card').forEach(card => {
   card.addEventListener('click', () => {
     const tool = card.dataset.tool;
@@ -989,11 +1062,9 @@ document.querySelectorAll('.tool-card').forEach(card => {
     toolModalTitle.textContent = data.title;
     toolModalBody.innerHTML = `<iframe src="${data.iframe}" style="width: 100%; height: ${data.height}px; border: none; border-radius: 10px; background: white;" allowtransparency="true"></iframe>`;
     
-    // Show modal using inline styles
     toolModalOverlay.style.display = 'flex';
     document.body.classList.add('modal-open');
     
-    // Animate in
     setTimeout(() => {
       toolModalBox.style.transform = 'translateY(0)';
     }, 10);
@@ -1210,16 +1281,15 @@ function closeDocModal() { docModalOverlay.classList.remove('show'); }
 docModalClose.addEventListener('click', closeDocModal);
 docModalOverlay.addEventListener('click', (e) => { if (e.target === docModalOverlay) closeDocModal(); });
 
-// ========== LINK DIRECTORY (FULLY FIXED) ==========
-const LINK_API_URL = 'https://script.google.com/macros/s/AKfycbwJqpLJMiAvqssQ-Dqj71o5Pd1U45lNWiesswQYLrFEv3hiwNlrrbcTHXSSMLWh7wo/exec';
+// ========== LINK DIRECTORY (Integrated into App) ==========
+const LINK_API_URL = 'https://script.google.com/macros/s/AKfycbyLv0VT5o2ORuS_zXFIqN5m8egOAyNcKUg1QSfgasIk9oPQZKHDcv_UysPpDvZd3i0MBw/exec';
 let allLinks = [];
 let editingLinkId = null;
 
-const linkGrid = document.getElementById('linkGrid');
+const linkGrid = document.getElementById('linkContentArea');
 const linkSearchInput = document.getElementById('linkSearchInput');
-const linkStats = document.getElementById('linkStats');
+const linkResultCount = document.getElementById('linkResultCount');
 const linkLoader = document.getElementById('linkLoader');
-const linkEmpty = document.getElementById('linkEmpty');
 const linkFormOverlay = document.getElementById('linkFormOverlay');
 const linkFormTitle = document.getElementById('linkFormTitle');
 const linkFormSave = document.getElementById('linkFormSave');
@@ -1230,7 +1300,8 @@ function escapeHtml(text) {
 }
 
 function getDomain(url) {
-  try { return new URL(url).hostname; } catch (e) { return ''; }
+  try { return new URL(url).hostname; }
+  catch (e) { return ''; }
 }
 
 function getThumbnailUrl(url) {
@@ -1240,145 +1311,140 @@ function getThumbnailUrl(url) {
 }
 
 async function fetchLinks() {
-  console.log('📥 Fetching links...');
   linkLoader.classList.remove('d-none');
   linkGrid.innerHTML = '';
-  linkEmpty.classList.add('d-none');
   
   try {
     const response = await fetch(`${LINK_API_URL}?t=${Date.now()}`);
     const result = await response.json();
-    console.log('API Response:', result);
-    
     if (!result.success) throw new Error(result.error);
     allLinks = result.data || [];
-    console.log('✅ Loaded', allLinks.length, 'links');
-    filterLinks();
+    renderLinkContent();
   } catch (error) {
-    console.error('❌ Fetch error:', error);
+    console.error('Fetch links error:', error);
     showToast('Failed to load links', 'error');
+    showLinkWelcome();
+  } finally {
     linkLoader.classList.add('d-none');
-    linkEmpty.classList.remove('d-none');
   }
 }
 
 function filterLinks() {
+  renderLinkContent();
+}
+
+function renderLinkContent() {
   const term = linkSearchInput.value.toLowerCase().trim();
+  
+  if (!term) {
+    showLinkWelcome();
+    return;
+  }
+  
   const filtered = allLinks.filter(link => {
-    if (!term) return true;
     return (link.title && link.title.toLowerCase().includes(term)) ||
            (link.description && link.description.toLowerCase().includes(term)) ||
            (link.category && link.category.toLowerCase().includes(term)) ||
            (link.url && link.url.toLowerCase().includes(term));
   });
+  
+  linkResultCount.textContent = filtered.length;
+  
+  if (filtered.length === 0) {
+    showLinkNoResults(term);
+    return;
+  }
+  
   renderLinks(filtered);
 }
 
-function renderLinks(links) {
-  console.log('🎨 Rendering', links.length, 'links');
-  linkStats.innerHTML = `Showing <strong>${links.length}</strong> link${links.length !== 1 ? 's' : ''}`;
-  linkLoader.classList.add('d-none');
-  
-  if (links.length === 0) {
-    linkGrid.innerHTML = '';
-    linkEmpty.classList.remove('d-none');
-    return;
-  }
-  linkEmpty.classList.add('d-none');
-  
-  const fallbackIcon = 'https://via.placeholder.com/36?text=🔗';
-  
-  linkGrid.innerHTML = links.map(link => {
-    const thumbUrl = getThumbnailUrl(link.url);
-    return `
-    <div class="link-card" data-id="${link.id}">
-      <div class="link-card-header">
-        <div class="link-title-wrapper">
-          <img src="${thumbUrl}" class="site-thumbnail" onerror="this.src='${fallbackIcon}'" alt="icon">
-          <h3 class="link-card-title">${escapeHtml(link.title || 'Untitled')}</h3>
-        </div>
-        <div class="link-card-actions">
-          <button class="link-icon-btn" data-action="edit" data-id="${link.id}" title="Edit">
-            <i class="bi bi-pencil"></i>
-          </button>
-          <button class="link-icon-btn delete" data-action="delete" data-id="${link.id}" title="Delete">
-            <i class="bi bi-trash"></i>
-          </button>
-        </div>
-      </div>
-      <a href="${escapeHtml(link.url)}" target="_blank" rel="noopener" class="link-card-url">${escapeHtml(link.url)}</a>
-      <p class="link-card-desc">${escapeHtml(link.description || 'No description')}</p>
-      <div class="link-card-footer">
-        ${link.category ? `<span class="link-badge">${escapeHtml(link.category)}</span>` : '<span></span>'}
-        <a href="${escapeHtml(link.url)}" target="_blank" rel="noopener" class="link-visit-btn">Visit <i class="bi bi-arrow-up-right"></i></a>
-      </div>
+function showLinkWelcome() {
+  linkResultCount.textContent = allLinks.length;
+  linkGrid.innerHTML = `
+    <div class="state-msg">
+      <i class="bi bi-search pulse"></i>
+      <h4>Search Your Links</h4>
+      <p>Type in the search bar above to find links by title, URL, category, or description.</p>
     </div>
-  `}).join('');
+  `;
+}
+
+function showLinkNoResults(term) {
+  linkGrid.innerHTML = `
+    <div class="state-msg">
+      <i class="bi bi-emoji-frown"></i>
+      <h4>No Results Found</h4>
+      <p>No links match "<strong>${escapeHtml(term)}</strong>". Try a different search or add a new link.</p>
+    </div>
+  `;
+}
+
+function renderLinks(links) {
+  linkGrid.innerHTML = links.map(link => {
+    const domain = getDomain(link.url);
+    const thumb = domain ? getThumbnailUrl(link.url) : '';
+    const fallback = 'https://via.placeholder.com/40/e2e8f0/64748b?text=🔗';
+    
+    return `
+      <div class="link-card">
+        <div class="link-card-header">
+          <div class="link-title-wrapper">
+            <img src="${thumb}" class="site-thumbnail" onerror="this.src='${fallback}'" alt="">
+            <h3 class="link-card-title">${escapeHtml(link.title || 'Untitled')}</h3>
+          </div>
+          <div class="link-card-actions">
+            <button class="link-icon-btn" data-action="edit" data-id="${link.id}" title="Edit">
+              <i class="bi bi-pencil"></i>
+            </button>
+            <button class="link-icon-btn delete" data-action="delete" data-id="${link.id}" title="Delete">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </div>
+        <a href="${escapeHtml(link.url)}" target="_blank" rel="noopener" class="link-card-url">${escapeHtml(link.url)}</a>
+        ${link.description ? `<p class="link-card-desc">${escapeHtml(link.description)}</p>` : ''}
+        <div class="link-card-footer">
+          ${link.category ? `<span class="link-badge">${escapeHtml(link.category)}</span>` : '<span></span>'}
+          <a href="${escapeHtml(link.url)}" target="_blank" rel="noopener" class="link-visit-btn">
+            Visit <i class="bi bi-arrow-up-right"></i>
+          </a>
+        </div>
+      </div>
+    `;
+  }).join('');
 }
 
 function openLinkForm(link = null) {
-  console.log('📝 Opening form, link:', link);
   editingLinkId = link ? link.id : null;
   linkFormTitle.textContent = link ? 'Edit Link' : 'Add Link';
-  
-  document.getElementById('linkId').value = link ? link.id || '' : '';
-  document.getElementById('linkTitle').value = link ? link.title || '' : '';
-  document.getElementById('linkUrl').value = link ? link.url || '' : '';
-  document.getElementById('linkDescription').value = link ? link.description || '' : '';
-  document.getElementById('linkCategory').value = link ? link.category || '' : '';
-  
-  // Force modal to show using inline styles
-  linkFormOverlay.style.display = 'flex';
+  document.getElementById('linkId').value = link ? link.id : '';
+  document.getElementById('linkTitle').value = link ? link.title : '';
+  document.getElementById('linkUrl').value = link ? link.url : '';
+  document.getElementById('linkDescription').value = link ? link.description : '';
+  document.getElementById('linkCategory').value = link ? link.category : '';
+  linkFormOverlay.classList.add('active');
   document.body.classList.add('modal-open');
-  
-  console.log('Modal display:', linkFormOverlay.style.display);
-  
-  setTimeout(() => {
-    const titleInput = document.getElementById('linkTitle');
-    if (titleInput) titleInput.focus();
-  }, 100);
+  setTimeout(() => document.getElementById('linkTitle').focus(), 100);
 }
 
 function closeLinkForm() {
-  console.log('❌ Closing form');
-  linkFormOverlay.style.display = 'none';
+  linkFormOverlay.classList.remove('active');
   document.body.classList.remove('modal-open');
   editingLinkId = null;
-  document.getElementById('linkForm').reset();
 }
 
-// Event Listeners for Link Directory
-document.getElementById('addLinkBtn').addEventListener('click', () => {
-  console.log('➕ Add button clicked');
-  openLinkForm();
-});
-
-document.getElementById('linkFormClose').addEventListener('click', () => {
-  console.log('❌ Close button clicked');
-  closeLinkForm();
-});
-
-document.getElementById('linkFormCancel').addEventListener('click', () => {
-  console.log('🚫 Cancel button clicked');
-  closeLinkForm();
-});
-
+document.getElementById('addLinkBtn').addEventListener('click', () => openLinkForm());
+document.getElementById('linkFormClose').addEventListener('click', closeLinkForm);
+document.getElementById('linkFormCancel').addEventListener('click', closeLinkForm);
 linkFormOverlay.addEventListener('click', (e) => {
-  if (e.target === linkFormOverlay) {
-    console.log('🔲 Overlay clicked');
-    closeLinkForm();
-  }
+  if (e.target === linkFormOverlay) closeLinkForm();
 });
 
-// Escape key to close
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && linkFormOverlay.style.display === 'flex') {
-    console.log('⌨️ Escape key pressed');
-    closeLinkForm();
-  }
+  if (e.key === 'Escape' && linkFormOverlay.classList.contains('active')) closeLinkForm();
 });
 
-// Event delegation for edit/delete buttons
+// Event delegation for edit/delete
 linkGrid.addEventListener('click', (e) => {
   const editBtn = e.target.closest('[data-action="edit"]');
   const deleteBtn = e.target.closest('[data-action="delete"]');
@@ -1387,7 +1453,6 @@ linkGrid.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
     const id = parseInt(editBtn.dataset.id);
-    console.log('✏️ Edit clicked for ID:', id);
     const link = allLinks.find(l => l.id === id);
     if (link) openLinkForm(link);
     else showToast('Link not found', 'error');
@@ -1397,38 +1462,30 @@ linkGrid.addEventListener('click', (e) => {
     e.preventDefault();
     e.stopPropagation();
     const id = parseInt(deleteBtn.dataset.id);
-    console.log('🗑️ Delete clicked for ID:', id);
     deleteLink(id);
   }
 });
 
 async function saveLink() {
-  console.log('💾 Saving link...');
-  
   const title = document.getElementById('linkTitle').value.trim();
   const url = document.getElementById('linkUrl').value.trim();
   const description = document.getElementById('linkDescription').value.trim();
   const category = document.getElementById('linkCategory').value.trim();
-  
-  console.log('Form data:', { title, url, description, category });
   
   if (!title || !url) {
     showToast('Title and URL required', 'error');
     return;
   }
   
-  const data = { title, url, description, category };
   const action = editingLinkId ? 'update' : 'add';
-  if (editingLinkId) data.id = editingLinkId;
+  const payload = { action, title, url, description, category };
+  if (editingLinkId) payload.id = editingLinkId;
   
-  console.log('Action:', action, 'Data:', data);
-  
-  // Optimistic UI update for edits
+  // Optimistic UI update
   if (action === 'update') {
     const index = allLinks.findIndex(l => l.id === editingLinkId);
     if (index !== -1) {
       allLinks[index] = { ...allLinks[index], title, url, description, category };
-      filterLinks();
     }
   }
   
@@ -1436,71 +1493,45 @@ async function saveLink() {
   linkFormSave.textContent = 'Saving...';
   closeLinkForm();
   showToast(action === 'add' ? 'Adding...' : 'Saving...', 'success');
+  renderLinkContent();
   
   try {
-    console.log('📡 Sending request to:', `${LINK_API_URL}?action=${action}`);
-    
-    await fetch(`${LINK_API_URL}?action=${action}`, {
+    await fetch(LINK_API_URL, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(data)
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify(payload)
     });
-    
-    console.log('✅ Save successful');
     showToast(editingLinkId ? 'Updated!' : 'Added!', 'success');
-    
-    // Refresh after delay
-    setTimeout(() => {
-      console.log('🔄 Refreshing links...');
-      fetchLinks();
-    }, 600);
-    
+    setTimeout(fetchLinks, 1000);
   } catch (error) {
-    console.error('❌ Save error:', error);
-    showToast('Error saving link', 'error');
-    setTimeout(fetchLinks, 600);
+    showToast('Error saving', 'error');
+    fetchLinks();
   } finally {
     linkFormSave.disabled = false;
     linkFormSave.textContent = 'Save';
   }
 }
 
-document.getElementById('linkFormSave').addEventListener('click', (e) => {
-  e.preventDefault();
-  console.log('💾 Save button clicked');
-  saveLink();
-});
-
 async function deleteLink(id) {
-  console.log('🗑️ Deleting link ID:', id);
-  
   if (!confirm('Delete this link?')) return;
   
   // Optimistic UI update
-  const originalLinks = [...allLinks];
   allLinks = allLinks.filter(l => l.id !== id);
-  filterLinks();
   showToast('Deleting...', 'success');
+  renderLinkContent();
   
   try {
-    console.log(' Sending delete request');
-    
-    await fetch(`${LINK_API_URL}?action=delete`, {
+    await fetch(LINK_API_URL, {
       method: 'POST',
       mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({ id })
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: 'delete', id: id })
     });
-    
-    console.log('✅ Delete successful');
     showToast('Deleted!', 'success');
-    
   } catch (error) {
-    console.error('❌ Delete error:', error);
     showToast('Error deleting', 'error');
-    allLinks = originalLinks;
-    filterLinks();
+    fetchLinks();
   }
 }
 
@@ -1513,25 +1544,17 @@ function debounce(fn, wait) {
 
 function showToast(msg, type = 'success') {
   const toast = document.getElementById('toastMsg');
-  if (!toast) {
-    console.error(' Toast element not found!');
-    alert(msg);
-    return;
-  }
-  
   toast.textContent = msg;
   toast.className = `toast-msg show ${type}`;
-  console.log('🍞 Toast:', msg, type);
-  
-  setTimeout(() => {
-    toast.classList.remove('show');
-  }, 2500);
+  setTimeout(() => toast.classList.remove('show'), 2500);
 }
 
 // ========== SERVICE WORKER ==========
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').then(reg => console.log('✅ SW:', reg.scope)).catch(err => console.log('❌ SW:', err));
+    navigator.serviceWorker.register('./sw.js')
+      .then(reg => console.log('✅ SW:', reg.scope))
+      .catch(err => console.log('❌ SW:', err));
   });
 }
 </script>
