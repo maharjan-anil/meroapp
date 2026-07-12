@@ -824,7 +824,7 @@ body.modal-open { overflow: hidden; }
           <p class="greeting-text" id="greetingText">Hello</p>
           <h2 class="greeting-name">
             <span>Anil Maharjan</span>
-            <span class="greeting-emoji" id="greetingEmoji">🙏</span>
+            <span class="greeting-emoji" id="greetingEmoji"></span>
           </h2>
           <div class="welcome-datetime">
             <span class="welcome-date" id="welcomeDate">Loading...</span>
@@ -958,7 +958,7 @@ body.modal-open { overflow: hidden; }
         </div>
         <h3>Mero App</h3>
         <p>Tools, Directory, Documents & Links</p>
-        <span class="settings-version-badge">v11.0.0</span>
+        <span class="settings-version-badge">v12.0.0</span>
       </div>
       <div class="section-title">Preferences</div>
       <div class="settings-item">
@@ -983,7 +983,7 @@ body.modal-open { overflow: hidden; }
         <div class="settings-icon-box blue"><i class="bi bi-info-circle-fill"></i></div>
         <div class="settings-item-content">
           <h4>Version</h4>
-          <p>11.0.0 • July 2026</p>
+          <p>12.0.0 • July 2026</p>
         </div>
       </div>
       <div class="settings-item">
@@ -1189,7 +1189,7 @@ const nepaliDateText = document.getElementById('nepaliDateText');
 
 const nepaliMonthsDev = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मंसिर', 'पौष', 'माघ', 'फागुन', 'चैत'];
 const nepaliDaysDev = ['आइतबार', 'सोमबार', 'मङ्गलबार', 'बुधबार', 'बिहीबार', 'शुक्रबार', 'शनिबार'];
-const engToNepaliNum = { '0': '०', '1': '१', '2': '२', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '९' };
+const engToNepaliNum = { '0': '', '1': '१', '2': '२', '3': '३', '4': '४', '5': '', '6': '६', '7': '७', '8': '८', '9': '९' };
 
 function toNepaliNumber(num) {
   return num.toString().split('').map(d => engToNepaliNum[d] || d).join('');
@@ -1219,7 +1219,7 @@ function updateDateTime() {
   const hour = nepalNow.getHours();
   let greeting, emoji;
   if (hour >= 5 && hour < 12) { greeting = 'Good morning'; emoji = '🌅'; }
-  else if (hour >= 12 && hour < 17) { greeting = 'Good afternoon'; emoji = '☀️'; }
+  else if (hour >= 12 && hour < 17) { greeting = 'Good afternoon'; emoji = '️'; }
   else if (hour >= 17 && hour < 21) { greeting = 'Good evening'; emoji = '🌇'; }
   else { greeting = 'Good night'; emoji = '🌙'; }
   greetingText.textContent = greeting;
@@ -1243,9 +1243,9 @@ const KATHMANDU = { lat: 27.7172, lon: 85.3240, name: 'Kathmandu' };
 function decodeWeather(code, isDay) {
   const map = {
     0: { icon: isDay ? '☀️' : '🌙', desc: 'Clear' },
-    1: { icon: isDay ? '🌤️' : '🌙', desc: 'Mainly clear' },
+    1: { icon: isDay ? '️' : '🌙', desc: 'Mainly clear' },
     2: { icon: isDay ? '⛅' : '☁️', desc: 'Partly cloudy' },
-    3: { icon: '☁️', desc: 'Overcast' },
+    3: { icon: '️', desc: 'Overcast' },
     45: { icon: '🌫️', desc: 'Foggy' },
     48: { icon: '🌫️', desc: 'Rime fog' },
     51: { icon: '🌦️', desc: 'Light drizzle' },
@@ -1264,7 +1264,7 @@ function decodeWeather(code, isDay) {
     96: { icon: '⛈️', desc: 'Thunder + hail' },
     99: { icon: '⛈️', desc: 'Severe storm' }
   };
-  return map[code] || { icon: '🌡️', desc: 'Unknown' };
+  return map[code] || { icon: '️', desc: 'Unknown' };
 }
 
 async function fetchWeather() {
@@ -1481,7 +1481,7 @@ function renderResults(data) {
   });
 }
 
-// ✅ ROBUST EVENT DELEGATION - Single listener on parent
+// ✅ ROBUST EVENT DELEGATION
 resultsContainer.addEventListener('click', function(e) {
   const actionBtn = e.target.closest('[data-action]');
   if (!actionBtn) return;
@@ -1544,7 +1544,7 @@ clearBtn.addEventListener('click', () => { searchInput.value = ''; clearBtn.clas
 document.getElementById('filterAll').addEventListener('click', () => { currentFilter = 'all'; document.getElementById('filterAll').classList.add('active'); document.getElementById('filterFavs').classList.remove('active'); handleSearch(); });
 document.getElementById('filterFavs').addEventListener('click', () => { currentFilter = 'favorites'; document.getElementById('filterFavs').classList.add('active'); document.getElementById('filterAll').classList.remove('active'); handleSearch(); });
 
-// ========== CONTACT FORM ==========
+// ========== CONTACT FORM - FIXED WITH DEBUGGING ==========
 const contactFormOverlay = document.getElementById('contactFormOverlay');
 const contactFormTitle = document.getElementById('contactFormTitle');
 const contactFormSave = document.getElementById('contactFormSave');
@@ -1557,13 +1557,48 @@ document.getElementById('contactFormClose').addEventListener('click', closeConta
 document.getElementById('contactFormCancel').addEventListener('click', closeContactForm);
 contactFormOverlay.addEventListener('click', (e) => { if (e.target === contactFormOverlay) closeContactForm(); });
 
+// ✅ FIXED: Properly handle the contact data
 function openContactForm(contact = null) {
   editingContactId = contact ? contact.id : null;
   contactFormTitle.textContent = contact ? 'Edit Contact' : 'Add Contact';
-  document.getElementById('contactId').value = contact ? contact.id : '';
-  document.getElementById('contactName').value = contact ? (contact.Name || '') : '';
-  document.getElementById('contactPhone').value = contact ? (contact.Phone || '') : '';
-  document.getElementById('contactRelation').value = contact ? (contact.Relation || '') : '';
+  
+  // Clear all fields first
+  document.getElementById('contactId').value = '';
+  document.getElementById('contactName').value = '';
+  document.getElementById('contactPhone').value = '';
+  document.getElementById('contactRelation').value = '';
+  
+  if (contact) {
+    // Log the contact data for debugging
+    console.log('📞 Editing contact:', contact);
+    console.log('Contact keys:', Object.keys(contact));
+    
+    // Set ID
+    document.getElementById('contactId').value = contact.id || '';
+    
+    // ✅ CRITICAL FIX: Handle all possible variations
+    const nameValue = contact.Name !== undefined ? contact.Name : 
+                     contact.name !== undefined ? contact.name : '';
+    document.getElementById('contactName').value = String(nameValue).trim();
+    
+    // ✅ CRITICAL FIX: Phone might be a number, convert to string
+    const phoneValue = contact.Phone !== undefined ? contact.Phone : 
+                      contact.phone !== undefined ? contact.phone : 
+                      contact.Mobile !== undefined ? contact.Mobile :
+                      contact.mobile !== undefined ? contact.mobile : '';
+    document.getElementById('contactPhone').value = String(phoneValue).trim();
+    
+    const relationValue = contact.Relation !== undefined ? contact.Relation : 
+                         contact.relation !== undefined ? contact.relation : '';
+    document.getElementById('contactRelation').value = String(relationValue).trim();
+    
+    console.log('Filled form with:', {
+      name: document.getElementById('contactName').value,
+      phone: document.getElementById('contactPhone').value,
+      relation: document.getElementById('contactRelation').value
+    });
+  }
+  
   contactFormOverlay.classList.add('active');
   document.body.classList.add('modal-open');
   setTimeout(() => document.getElementById('contactName').focus(), 100);
@@ -1733,7 +1768,6 @@ function renderDocs(items, term = '') {
     docGrid.appendChild(card);
   });
   
-  // ✅ Event delegation for doc actions
   docGrid.querySelectorAll('.doc-action-btn.edit').forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
