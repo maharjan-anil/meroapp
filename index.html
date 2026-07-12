@@ -68,13 +68,7 @@ body.modal-open { overflow: hidden; }
   max-width: 500px; margin: 0 auto;
   position: relative; background: var(--bg-body);
 }
-.app-header {
-  background: var(--bg-elevated);
-  padding: calc(var(--safe-top) + 14px) 16px 14px;
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  min-height: 50px; z-index: 10;
-}
+/* HEADER REMOVED - No title bar */
 .screens { flex: 1; overflow: hidden; position: relative; }
 .screen {
   position: absolute; inset: 0;
@@ -100,7 +94,8 @@ body.modal-open { overflow: hidden; }
 [data-theme="dark"] .bottom-nav { background: rgba(21,26,40,0.95); }
 .nav-btn {
   flex: 1; background: none; border: none;
-  padding: 4px 2px 3px; color: var(--text-tertiary);
+  padding: 4px 2px 3px;
+  color: var(--text-tertiary);
   display: flex; flex-direction: column; align-items: center; gap: 2px;
   cursor: pointer; transition: color 0.2s;
   position: relative; font-family: inherit;
@@ -332,7 +327,7 @@ body.modal-open { overflow: hidden; }
 .settings-toggle.on::after { transform: translateX(22px); }
 .settings-chevron { color: var(--text-tertiary); font-size: 0.9rem; flex-shrink: 0; }
 
-/* ========== LINK DIRECTORY TAB ========== */
+/* ========== LINKS TAB (FIXED) ========== */
 .links-header-card {
   background: linear-gradient(135deg, #3b82f6, #2563eb);
   color: white; border-radius: 20px;
@@ -477,6 +472,78 @@ body.modal-open { overflow: hidden; }
 .links-loader { text-align: center; padding: 40px 20px; }
 .links-loader i { font-size: 2rem; color: var(--text-tertiary); animation: spin 1s linear infinite; display: block; margin-bottom: 10px; }
 
+/* ========== LINK FORM MODAL (FIXED FOR APP) ========== */
+.link-form-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.link-form-overlay.active {
+  display: flex !important;
+}
+.link-form-box {
+  background: var(--bg-elevated);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 440px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: modalSlideIn 0.3s ease;
+}
+@keyframes modalSlideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.link-form-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.link-form-header h3 { margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--text-primary); }
+.link-form-body { padding: 20px; }
+.form-group { margin-bottom: 14px; }
+.form-group label {
+  display: block; font-size: 0.8rem; font-weight: 600;
+  color: var(--text-primary); margin-bottom: 6px;
+}
+.form-group input, .form-group textarea {
+  width: 100%; padding: 10px 12px;
+  border: 1.5px solid var(--border); border-radius: 10px;
+  font-size: 0.9rem; font-family: inherit;
+  background: var(--bg-body); color: var(--text-primary);
+  outline: none; transition: border-color 0.2s;
+}
+.form-group input:focus, .form-group textarea:focus { border-color: var(--primary); }
+.form-group textarea { resize: vertical; min-height: 70px; }
+.form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-tertiary); }
+.link-form-footer {
+  padding: 14px 20px; border-top: 1px solid var(--border);
+  display: flex; gap: 10px; justify-content: flex-end;
+}
+.btn-form {
+  padding: 9px 18px; border-radius: 10px;
+  font-size: 0.85rem; font-weight: 600;
+  cursor: pointer; border: none; font-family: inherit;
+  transition: opacity 0.2s;
+}
+.btn-form.cancel { background: var(--border); color: var(--text-primary); }
+.btn-form.save { background: var(--primary); color: white; }
+.btn-form.save:disabled { opacity: 0.6; cursor: not-allowed; }
+.sheet-close {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--border); border: none;
+  color: var(--text-primary);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 1.1rem;
+}
+
 /* Documents */
 .doc-welcome { background: linear-gradient(135deg, #1a1f2e, #0f1420); color: #f0ece3; border-radius: 20px; padding: 24px 20px; margin-bottom: 20px; position: relative; overflow: hidden; box-shadow: var(--shadow-md); }
 .doc-welcome::before { content: ''; position: absolute; top: -50%; right: -20%; width: 200px; height: 200px; background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%); border-radius: 50%; }
@@ -533,56 +600,6 @@ body.modal-open { overflow: hidden; }
   display: flex; flex-direction: column; overflow: hidden;
 }
 
-/* Link Form Modal */
-.link-form-overlay {
-  display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,0.5); z-index: 1100;
-  align-items: center; justify-content: center;
-  padding: 16px; backdrop-filter: blur(4px);
-}
-.link-form-overlay.active { display: flex; }
-.link-form-box {
-  background: var(--bg-elevated); border-radius: 20px;
-  width: 100%; max-width: 440px; max-height: 90vh;
-  overflow-y: auto; box-shadow: var(--shadow-md);
-}
-.link-form-header {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border);
-  display: flex; justify-content: space-between; align-items: center;
-}
-.link-form-header h3 { margin: 0; font-size: 1.05rem; font-weight: 700; color: var(--text-primary); }
-.link-form-body { padding: 20px; }
-.form-group { margin-bottom: 14px; }
-.form-group label {
-  display: block; font-size: 0.8rem; font-weight: 600;
-  color: var(--text-primary); margin-bottom: 6px;
-}
-.form-group input, .form-group textarea {
-  width: 100%; padding: 10px 12px;
-  border: 1.5px solid var(--border); border-radius: 10px;
-  font-size: 0.9rem; font-family: inherit;
-  background: var(--bg-body); color: var(--text-primary);
-  outline: none; transition: border-color 0.2s;
-}
-.form-group input:focus, .form-group textarea:focus { border-color: var(--primary); }
-.form-group textarea { resize: vertical; min-height: 70px; }
-.form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-tertiary); }
-.link-form-footer {
-  padding: 14px 20px; border-top: 1px solid var(--border);
-  display: flex; gap: 10px; justify-content: flex-end;
-}
-.btn-form {
-  padding: 9px 18px; border-radius: 10px;
-  font-size: 0.85rem; font-weight: 600;
-  cursor: pointer; border: none; font-family: inherit;
-  transition: opacity 0.2s;
-}
-.btn-form.cancel { background: var(--border); color: var(--text-primary); }
-.btn-form.save { background: var(--primary); color: white; }
-.btn-form.save:disabled { opacity: 0.6; cursor: not-allowed; }
-.sheet-close { width: 32px; height: 32px; border-radius: 50%; background: var(--border); border: none; color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem; }
-
 @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
 .pulse { animation: pulse 2s infinite ease-in-out; }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -606,7 +623,7 @@ body.modal-open { overflow: hidden; }
 </head>
 <body>
 <div class="app">
-  <header class="app-header"></header>
+  <!-- HEADER REMOVED -->
 
   <main class="screens">
     <!-- Tools Screen -->
@@ -703,7 +720,7 @@ body.modal-open { overflow: hidden; }
       <div class="doc-grid" id="docGrid"></div>
     </section>
 
-    <!-- ========== LINKS SCREEN (NEW) ========== -->
+    <!-- ========== LINKS SCREEN (FIXED) ========== -->
     <section class="screen" id="screen-links">
       <div class="links-header-card">
         <h2><i class="bi bi-link-45deg"></i> Link Directory</h2>
@@ -740,7 +757,7 @@ body.modal-open { overflow: hidden; }
         </div>
         <h3>Mero App</h3>
         <p>Tools, Directory, Documents & Links</p>
-        <span class="settings-version-badge">v4.0.0</span>
+        <span class="settings-version-badge">v4.0.1</span>
       </div>
 
       <div class="section-title">Preferences</div>
@@ -768,7 +785,7 @@ body.modal-open { overflow: hidden; }
         <div class="settings-icon-box blue"><i class="bi bi-info-circle-fill"></i></div>
         <div class="settings-item-content">
           <h4>Version</h4>
-          <p>4.0.0 • July 2026</p>
+          <p>4.0.1 • July 2026</p>
         </div>
       </div>
       <div class="settings-item">
@@ -820,7 +837,7 @@ body.modal-open { overflow: hidden; }
   </div>
 </div>
 
-<!-- Link Form Modal -->
+<!-- Link Form Modal (FIXED) -->
 <div class="link-form-overlay" id="linkFormOverlay">
   <div class="link-form-box">
     <div class="link-form-header">
@@ -934,7 +951,7 @@ function updateDateTime() {
   const hour = nepalNow.getHours();
   let greeting, emoji;
   if (hour >= 5 && hour < 12) { greeting = 'Good morning'; emoji = '🌅'; }
-  else if (hour >= 12 && hour < 17) { greeting = 'Good afternoon'; emoji = '☀️'; }
+  else if (hour >= 12 && hour < 17) { greeting = 'Good afternoon'; emoji = '️'; }
   else if (hour >= 17 && hour < 21) { greeting = 'Good evening'; emoji = '🌇'; }
   else { greeting = 'Good night'; emoji = '🌙'; }
   greetingText.textContent = greeting;
@@ -957,8 +974,8 @@ const KATHMANDU = { lat: 27.7172, lon: 85.3240, name: 'Kathmandu' };
 
 function decodeWeather(code, isDay) {
   const map = {
-    0:  { icon: isDay ? '☀️' : '🌙', desc: 'Clear' },
-    1:  { icon: isDay ? '🌤️' : '🌙', desc: 'Mainly clear' },
+    0:  { icon: isDay ? '️' : '🌙', desc: 'Clear' },
+    1:  { icon: isDay ? '🌤️' : '', desc: 'Mainly clear' },
     2:  { icon: isDay ? '⛅' : '☁️', desc: 'Partly cloudy' },
     3:  { icon: '☁️', desc: 'Overcast' },
     45: { icon: '🌫️', desc: 'Foggy' },
@@ -967,11 +984,11 @@ function decodeWeather(code, isDay) {
     53: { icon: '🌦️', desc: 'Drizzle' },
     55: { icon: '🌧️', desc: 'Dense drizzle' },
     61: { icon: '🌧️', desc: 'Light rain' },
-    63: { icon: '🌧️', desc: 'Rain' },
+    63: { icon: '️', desc: 'Rain' },
     65: { icon: '🌧️', desc: 'Heavy rain' },
     71: { icon: '🌨️', desc: 'Light snow' },
     73: { icon: '🌨️', desc: 'Snow' },
-    75: { icon: '❄️', desc: 'Heavy snow' },
+    75: { icon: '️', desc: 'Heavy snow' },
     80: { icon: '🌦️', desc: 'Rain showers' },
     81: { icon: '🌧️', desc: 'Heavy showers' },
     82: { icon: '⛈️', desc: 'Violent showers' },
@@ -979,7 +996,7 @@ function decodeWeather(code, isDay) {
     96: { icon: '⛈️', desc: 'Thunder + hail' },
     99: { icon: '⛈️', desc: 'Severe storm' }
   };
-  return map[code] || { icon: '🌡️', desc: 'Unknown' };
+  return map[code] || { icon: '️', desc: 'Unknown' };
 }
 
 async function fetchWeather() {
@@ -1086,7 +1103,7 @@ toolModalOverlay.addEventListener('click', (e) => {
 });
 
 // ========== DIRECTORY ==========
-const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTENWe1Qp3ojkeAr_bBwdujlOdFPVtNsaNYB8cQ7INXBr3kg5LuN5MkSwPuJspOmWRjy9yP3Fu22yK0/pub?output=csv';
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQKEYgGIjZW1WSpslqWWEVvgwNqPElh-f-VIfZWi5J0j80Oyn8cVnZ45epbXJxdwZE9IzsLISynIfR4/pub?output=csv';
 let directoryData = [];
 let currentFilter = 'all';
 const searchInput = document.getElementById('searchInput');
@@ -1281,7 +1298,7 @@ function closeDocModal() { docModalOverlay.classList.remove('show'); }
 docModalClose.addEventListener('click', closeDocModal);
 docModalOverlay.addEventListener('click', (e) => { if (e.target === docModalOverlay) closeDocModal(); });
 
-// ========== LINK DIRECTORY (Integrated into App) ==========
+// ========== LINK DIRECTORY (FIXED FOR APP) ==========
 const LINK_API_URL = 'https://script.google.com/macros/s/AKfycbyLv0VT5o2ORuS_zXFIqN5m8egOAyNcKUg1QSfgasIk9oPQZKHDcv_UysPpDvZd3i0MBw/exec';
 let allLinks = [];
 let editingLinkId = null;
@@ -1422,26 +1439,48 @@ function openLinkForm(link = null) {
   document.getElementById('linkUrl').value = link ? link.url : '';
   document.getElementById('linkDescription').value = link ? link.description : '';
   document.getElementById('linkCategory').value = link ? link.category : '';
+  
+  // CRITICAL FIX: Force display using class AND inline style
   linkFormOverlay.classList.add('active');
+  linkFormOverlay.style.display = 'flex';
   document.body.classList.add('modal-open');
-  setTimeout(() => document.getElementById('linkTitle').focus(), 100);
+  
+  console.log('Modal opened - display:', linkFormOverlay.style.display);
+  console.log('Modal classList:', linkFormOverlay.classList);
+  
+  setTimeout(() => {
+    document.getElementById('linkTitle').focus();
+  }, 100);
 }
 
 function closeLinkForm() {
+  console.log('Closing modal...');
   linkFormOverlay.classList.remove('active');
+  linkFormOverlay.style.display = 'none';
   document.body.classList.remove('modal-open');
   editingLinkId = null;
 }
 
-document.getElementById('addLinkBtn').addEventListener('click', () => openLinkForm());
+// FIXED: Add Link Button Event
+document.getElementById('addLinkBtn').addEventListener('click', () => {
+  console.log('Add Link button clicked');
+  openLinkForm();
+});
+
 document.getElementById('linkFormClose').addEventListener('click', closeLinkForm);
 document.getElementById('linkFormCancel').addEventListener('click', closeLinkForm);
+
 linkFormOverlay.addEventListener('click', (e) => {
-  if (e.target === linkFormOverlay) closeLinkForm();
+  if (e.target === linkFormOverlay) {
+    console.log('Overlay clicked');
+    closeLinkForm();
+  }
 });
 
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && linkFormOverlay.classList.contains('active')) closeLinkForm();
+  if (e.key === 'Escape' && linkFormOverlay.classList.contains('active')) {
+    closeLinkForm();
+  }
 });
 
 // Event delegation for edit/delete
@@ -1454,14 +1493,19 @@ linkGrid.addEventListener('click', (e) => {
     e.stopPropagation();
     const id = parseInt(editBtn.dataset.id);
     const link = allLinks.find(l => l.id === id);
-    if (link) openLinkForm(link);
-    else showToast('Link not found', 'error');
+    if (link) {
+      console.log('Editing link:', link);
+      openLinkForm(link);
+    } else {
+      showToast('Link not found', 'error');
+    }
   }
   
   if (deleteBtn) {
     e.preventDefault();
     e.stopPropagation();
     const id = parseInt(deleteBtn.dataset.id);
+    console.log('Deleting link ID:', id);
     deleteLink(id);
   }
 });
