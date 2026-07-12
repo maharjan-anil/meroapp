@@ -24,7 +24,7 @@
 :root {
   --primary: #0077e5;
   --primary-dark: #005bb5;
-  --bg-body: #0a0e1a; /* Dark theme base */
+  --bg-body: #0a0e1a;
   --bg-card: #151a28;
   --bg-elevated: #1e2536;
   --text-primary: #f1f5f9;
@@ -165,6 +165,128 @@ body.modal-open { overflow: hidden; }
 .doc-count { font-size: 0.75rem; color: var(--text-secondary); margin: 0 4px 12px; letter-spacing: 0.05em; }
 .doc-count span { color: var(--primary); font-weight: 700; }
 
+/* Documents Grid - RESTORED to v12.0.0 */
+.doc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+.doc-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s;
+  position: relative;
+}
+.doc-card:active { transform: scale(0.97); }
+.doc-card-img {
+  width: 100%;
+  height: 110px;
+  background: var(--border);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+.doc-card-img::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.3), transparent 50%);
+}
+.doc-card-tag {
+  position: absolute; top: 8px; left: 8px;
+  background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
+  color: white; font-size: 0.65rem; font-weight: 600;
+  padding: 3px 8px; border-radius: 8px;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  z-index: 1;
+}
+.doc-card-actions {
+  position: absolute; top: 8px; right: 8px;
+  display: flex; gap: 4px; z-index: 2;
+  opacity: 0; transition: opacity 0.2s;
+}
+.doc-card:active .doc-card-actions { opacity: 1; }
+.doc-action-btn {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: rgba(0,0,0,0.6); backdrop-filter: blur(8px);
+  border: none; color: white; font-size: 0.75rem;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+}
+.doc-action-btn:active { background: var(--primary); }
+.doc-action-btn.delete:active { background: var(--danger); }
+.doc-card-body { padding: 10px 12px 12px; }
+.doc-card-body h4 {
+  font-size: 0.85rem; font-weight: 600; margin: 0 0 4px;
+  color: var(--text-primary);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.doc-card-body p {
+  font-size: 0.7rem; color: var(--text-secondary); margin: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Document Modal - RESTORED to v12.0.0 */
+.doc-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.85);
+  z-index: 1100; opacity: 0; pointer-events: none;
+  transition: opacity 0.25s;
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.doc-modal-overlay.show { opacity: 1; pointer-events: auto; }
+.doc-modal {
+  background: var(--bg-elevated);
+  width: 100%; max-width: 500px;
+  max-height: 95vh; max-height: 95dvh;
+  border-radius: 20px 20px 0 0;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.doc-modal-overlay.show .doc-modal { transform: translateY(0); }
+.doc-modal-header {
+  padding: 14px 16px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border); flex-shrink: 0;
+}
+.doc-modal-header .eyebrow {
+  font-size: 0.65rem; letter-spacing: 0.25em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 2px;
+}
+.doc-modal-header h3 { margin: 0; font-size: 1rem; font-weight: 700; color: var(--text-primary); }
+.doc-modal-body {
+  flex: 1; overflow: auto; background: var(--bg-body);
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px; min-height: 300px;
+}
+.doc-modal-body img {
+  max-width: 100%; max-height: 60vh;
+  border-radius: 10px; box-shadow: var(--shadow-md);
+  display: block;
+}
+.doc-modal-footer {
+  padding: 14px 16px calc(var(--safe-bottom) + 14px);
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px;
+  flex-shrink: 0; background: var(--bg-elevated);
+}
+.doc-modal-desc {
+  flex: 1; font-size: 0.8rem; color: var(--text-secondary);
+  margin: 0; line-height: 1.4;
+}
+.doc-download-btn {
+  background: linear-gradient(135deg, var(--gold), #a07830);
+  color: #0b0c0f; border: none;
+  padding: 10px 16px; border-radius: 20px;
+  font-weight: 700; font-size: 0.8rem;
+  cursor: pointer; text-decoration: none;
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: inherit; white-space: nowrap;
+}
+
 /* Links Grid Layout */
 .links-grid {
   display: grid;
@@ -237,6 +359,53 @@ body.modal-open { overflow: hidden; }
 }
 .link-visit-btn:active { background: var(--text-primary); color: var(--bg-body); }
 
+/* Video Card */
+.video-card {
+  position: relative;
+  cursor: pointer;
+}
+.video-thumbnail {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+.play-button {
+  position: absolute;
+  top: 90px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  background: rgba(0,0,0,0.8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  z-index: 2;
+}
+
+/* Sticky Note Card */
+.note-card {
+  background: #fef3c7;
+  border: none;
+  transform: rotate(-1deg);
+  transition: transform 0.2s;
+}
+.note-card:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+.note-content {
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  color: #1f2937;
+  white-space: pre-wrap;
+  margin-bottom: 12px;
+}
+
 /* Tools & Welcome */
 .welcome-card {
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
@@ -294,14 +463,44 @@ body.modal-open { overflow: hidden; }
 .tool-icon.unicode { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
 .tool-icon.panchang { background: linear-gradient(135deg, #64748b, #475569); }
 
-.ipo-banner { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border-radius: 16px; padding: 16px; margin-bottom: 16px; display: flex; align-items: center; gap: 14px; cursor: pointer; transition: transform 0.15s, box-shadow 0.2s; box-shadow: var(--shadow-md); text-decoration: none; }
-.ipo-banner:active { transform: scale(0.98); }
-.ipo-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
-.ipo-content { flex: 1; min-width: 0; }
-.ipo-title { font-size: 1rem; font-weight: 700; margin: 0 0 2px; color: white; }
-.ipo-subtitle { font-size: 0.75rem; opacity: 0.9; margin: 0; }
-.ipo-arrow { font-size: 1.2rem; flex-shrink: 0; transition: transform 0.2s; }
-.ipo-banner:hover .ipo-arrow { transform: translateX(4px); }
+/* Share Buttons - UPDATED COLORS */
+.share-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.share-btn {
+  color: white; border-radius: 16px;
+  padding: 16px;
+  display: flex; align-items: center; gap: 14px;
+  cursor: pointer; transition: transform 0.15s, box-shadow 0.2s;
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+.share-btn:active { transform: scale(0.98); }
+/* Existing Issues - Light Orange */
+.share-btn.orange {
+  background: linear-gradient(135deg, #fb923c, #f97316);
+}
+.share-btn.orange:hover { box-shadow: 0 8px 20px rgba(251, 146, 60, 0.3); }
+/* IPO Result - Light Purple */
+.share-btn.purple {
+  background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+}
+.share-btn.purple:hover { box-shadow: 0 8px 20px rgba(167, 139, 250, 0.3); }
+
+.share-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: rgba(255,255,255,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem; flex-shrink: 0;
+}
+.share-content { flex: 1; min-width: 0; }
+.share-title { font-size: 0.95rem; font-weight: 700; margin: 0 0 2px; color: white; }
+.share-subtitle { font-size: 0.7rem; opacity: 0.9; margin: 0; }
+.share-arrow { font-size: 1.2rem; flex-shrink: 0; transition: transform 0.2s; }
+.share-btn:hover .share-arrow { transform: translateX(4px); }
 
 /* Directory */
 .search-wrap { position: sticky; top: 0; background: var(--bg-body); padding-bottom: 12px; z-index: 5; }
@@ -370,8 +569,8 @@ body.modal-open { overflow: hidden; }
 .form-body { padding: 20px; }
 .form-group { margin-bottom: 14px; }
 .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-primary); margin-bottom: 6px; }
-.form-group input, .form-group textarea { width: 100%; padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.9rem; font-family: inherit; background: var(--bg-body); color: var(--text-primary); outline: none; transition: border-color 0.2s; }
-.form-group input:focus, .form-group textarea:focus { border-color: var(--primary); }
+.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px 12px; border: 1.5px solid var(--border); border-radius: 10px; font-size: 0.9rem; font-family: inherit; background: var(--bg-body); color: var(--text-primary); outline: none; transition: border-color 0.2s; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--primary); }
 .form-group textarea { resize: vertical; min-height: 70px; }
 .form-group input::placeholder, .form-group textarea::placeholder { color: var(--text-tertiary); }
 .form-footer { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 10px; justify-content: flex-end; }
@@ -380,6 +579,52 @@ body.modal-open { overflow: hidden; }
 .btn-form.save { background: var(--primary); color: white; }
 .btn-form.save:disabled { opacity: 0.6; cursor: not-allowed; }
 .sheet-close { width: 32px; height: 32px; border-radius: 50%; background: var(--border); border: none; color: var(--text-primary); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.1rem; }
+
+/* Video Modal - FIXED for YouTube */
+.video-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.95);
+  z-index: 10000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.video-modal-overlay.active { display: flex; }
+.video-modal-container {
+  width: 100%;
+  max-width: 900px;
+  position: relative;
+}
+.video-modal-close {
+  position: absolute;
+  top: -40px;
+  right: 0;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 10001;
+}
+.video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #000;
+}
+.video-wrapper iframe,
+.video-wrapper video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
 
 @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
 .pulse { animation: pulse 2s infinite ease-in-out; }
@@ -426,23 +671,33 @@ body.modal-open { overflow: hidden; }
         </div>
       </div>
 
-      <!-- Existing Issues Banner -->
-      <a href="https://www.sharesansar.com/existing-issues" target="_blank" rel="noopener" class="ipo-banner">
-        <div class="ipo-icon"><i class="bi bi-graph-up-arrow"></i></div>
-        <div class="ipo-content">
-          <h3 class="ipo-title">Existing Issues</h3>
-          <p class="ipo-subtitle">View IPO/FPO issued details</p>
-        </div>
-        <i class="bi bi-arrow-right ipo-arrow"></i>
-      </a>
-      
+      <!-- Share Section - UPDATED COLORS -->
+      <div class="section-title">Share</div>
+      <div class="share-buttons">
+        <a href="https://www.sharesansar.com/existing-issues" target="_blank" rel="noopener" class="share-btn orange">
+          <div class="share-icon"><i class="bi bi-graph-up-arrow"></i></div>
+          <div class="share-content">
+            <h3 class="share-title">Existing Issues</h3>
+            <p class="share-subtitle">View IPO/FPO results</p>
+          </div>
+          <i class="bi bi-arrow-right share-arrow"></i>
+        </a>
+        <a href="https://iporesult.cdsc.com.np/" target="_blank" rel="noopener" class="share-btn purple">
+          <div class="share-icon"><i class="bi bi-clipboard-check"></i></div>
+          <div class="share-content">
+            <h3 class="share-title">IPO Allotment</h3>
+            <p class="share-subtitle">Check application status</p>
+          </div>
+          <i class="bi bi-arrow-right share-arrow"></i>
+        </a>
+      </div>
 
       <div class="section-title">Live Rates</div>
       <div class="tools-grid">
         <div class="tool-card" data-tool="gold"><div class="tool-icon gold"><i class="bi bi-coin"></i></div><div><h3>Gold & Silver</h3><p>Today's rates</p></div></div>
         <div class="tool-card" data-tool="forex"><div class="tool-icon forex"><i class="bi bi-currency-exchange"></i></div><div><h3>Forex Rates</h3><p>Currency exchange</p></div></div>
         <div class="tool-card" data-tool="fuel"><div class="tool-icon fuel"><i class="bi bi-fuel-pump"></i></div><div><h3>Fuel Rates</h3><p>Petrol, diesel</p></div></div>
-        <div class="tool-card" data-tool="veg"><div class="tool-icon veg"><i class="bi bi-basket3"></i></div><div><h3>Kalbazar</h3><p>Fruits & veggies</p></div></div>
+        <div class="tool-card" data-tool="veg"><div class="tool-icon veg"><i class="bi bi-basket3"></i></div><div><h3>Falfulbazar</h3><p>Fruits & veggies</p></div></div>
       </div>
       <div class="section-title">Utilities</div>
       <div class="tools-grid">
@@ -480,7 +735,7 @@ body.modal-open { overflow: hidden; }
       <div id="resultsContainer"></div>
     </section>
 
-    <!-- Documents Screen -->
+    <!-- Documents Screen - RESTORED to v12.0.0 -->
     <section class="screen" id="screen-documents">
       <div class="docs-header-bar">
         <div class="section-title" style="margin:0">DOCUMENTS</div>
@@ -491,7 +746,7 @@ body.modal-open { overflow: hidden; }
       <div class="doc-search-wrap">
         <i class="bi bi-search"></i>
         <input type="text" id="docSearchInput" placeholder="Search documents..." autocomplete="off">
-        <button class="clear-btn" id="docClearBtn" style="display:none;"><i class="bi bi-x-circle-fill"></i></button>
+        <button class="doc-clear" id="docClearBtn" style="display:none;"><i class="bi bi-x-circle-fill"></i></button>
       </div>
       <div class="doc-actions" id="docChips"></div>
       <div id="docLoadingState" class="state-msg d-none"><i class="bi bi-arrow-repeat spin"></i><h4>Loading...</h4><p>Fetching documents</p></div>
@@ -502,10 +757,10 @@ body.modal-open { overflow: hidden; }
       </div>
       <div class="doc-count d-none" id="docCount"></div>
       <div id="docEmpty" class="state-msg d-none"><i class="bi bi-emoji-frown"></i><h4>No Documents</h4><p>Try a different search or category</p></div>
-      <div class="tools-grid" id="docGrid"></div>
+      <div class="doc-grid" id="docGrid"></div>
     </section>
 
-    <!-- Links Screen (UPDATED) -->
+    <!-- Links Screen -->
     <section class="screen" id="screen-links">
       <div class="docs-header-bar">
         <div class="section-title" style="margin:0">LINKS</div>
@@ -537,7 +792,7 @@ body.modal-open { overflow: hidden; }
         </div>
         <h3>Mero App</h3>
         <p>Tools, Directory, Documents & Links</p>
-        <span class="settings-version-badge">v14.0.0</span>
+        <span class="settings-version-badge">v17.0.0</span>
       </div>
       <div class="section-title">Preferences</div>
       <div class="settings-item">
@@ -562,7 +817,7 @@ body.modal-open { overflow: hidden; }
         <div class="settings-icon-box blue"><i class="bi bi-info-circle-fill"></i></div>
         <div class="settings-item-content">
           <h4>Version</h4>
-          <p>14.0.0 • July 2026</p>
+          <p>17.0.0 • July 2026</p>
         </div>
       </div>
       <div class="settings-item">
@@ -593,6 +848,32 @@ body.modal-open { overflow: hidden; }
       <button id="toolModalClose" class="sheet-close"><i class="bi bi-x"></i></button>
     </div>
     <div id="toolModalBody" style="flex:1; overflow:auto; padding:16px; background:var(--bg-body);"></div>
+  </div>
+</div>
+
+<!-- Document Modal - RESTORED to v12.0.0 -->
+<div class="doc-modal-overlay" id="docModalOverlay">
+  <div class="doc-modal">
+    <div class="doc-modal-header">
+      <div>
+        <div class="eyebrow">Document Preview</div>
+        <h3 id="docModalTitle">Document</h3>
+      </div>
+      <button class="sheet-close" id="docModalClose"><i class="bi bi-x"></i></button>
+    </div>
+    <div class="doc-modal-body"><img id="docModalImg" src="" alt=""></div>
+    <div class="doc-modal-footer">
+      <p class="doc-modal-desc" id="docModalDesc"></p>
+      <a class="doc-download-btn" id="docModalDownload" href="#" download><i class="bi bi-download"></i> Download</a>
+    </div>
+  </div>
+</div>
+
+<!-- Video Modal - FIXED for YouTube -->
+<div class="video-modal-overlay" id="videoModalOverlay">
+  <div class="video-modal-container">
+    <button class="video-modal-close" id="videoModalClose">&times;</button>
+    <div class="video-wrapper" id="videoWrapper"></div>
   </div>
 </div>
 
@@ -673,12 +954,24 @@ body.modal-open { overflow: hidden; }
       <form id="linkForm" onsubmit="return false;">
         <input type="hidden" id="linkId">
         <div class="form-group">
+          <label>Type *</label>
+          <select id="linkType" required>
+            <option value="link">Regular Link</option>
+            <option value="video">Video</option>
+            <option value="note">Sticky Note</option>
+          </select>
+        </div>
+        <div class="form-group">
           <label>Title *</label>
           <input type="text" id="linkTitle" required placeholder="e.g., Google">
         </div>
-        <div class="form-group">
+        <div class="form-group" id="urlGroup">
           <label>URL *</label>
-          <input type="url" id="linkUrl" required placeholder="https://example.com">
+          <input type="url" id="linkUrl" placeholder="https://example.com or YouTube URL">
+        </div>
+        <div class="form-group" id="noteGroup" style="display:none;">
+          <label>Note Content *</label>
+          <textarea id="linkNote" placeholder="Enter your note here..." style="min-height: 120px;"></textarea>
         </div>
         <div class="form-group">
           <label>Description</label>
@@ -709,12 +1002,14 @@ const LINKS_API_URL = 'https://script.google.com/macros/s/AKfycbyLv0VT5o2ORuS_zX
 // ========== THEME ==========
 const htmlEl = document.getElementById('htmlRoot');
 const themeToggle = document.getElementById('themeToggle');
-const savedTheme = localStorage.getItem('theme') || 'dark'; // Default to dark
+const themeColorMeta = document.getElementById('themeColorMeta');
+const savedTheme = localStorage.getItem('theme') || 'dark';
 applyTheme(savedTheme);
 
 function applyTheme(theme) {
   htmlEl.setAttribute('data-theme', theme);
   themeToggle.classList.toggle('on', theme === 'dark');
+  themeColorMeta.content = theme === 'dark' ? '#0a0e1a' : '#0077e5';
   localStorage.setItem('theme', theme);
 }
 
@@ -804,7 +1099,7 @@ function decodeWeather(code, isDay) {
     0: { icon: isDay ? '☀️' : '🌙', desc: 'Clear' },
     1: { icon: isDay ? '🌤️' : '🌙', desc: 'Mainly clear' },
     2: { icon: isDay ? '⛅' : '☁️', desc: 'Partly cloudy' },
-    3: { icon: '️', desc: 'Overcast' },
+    3: { icon: '☁️', desc: 'Overcast' },
     45: { icon: '🌫️', desc: 'Foggy' },
     48: { icon: '🌫️', desc: 'Rime fog' },
     51: { icon: '🌦️', desc: 'Light drizzle' },
@@ -880,7 +1175,7 @@ const toolData = {
   gold: { title: 'Gold & Silver Price', iframe: 'https://www.ashesh.com.np/gold/widget.php?api=621113p553&header_color=0077e5', height: 265 },
   forex: { title: 'Foreign Exchange Rates', iframe: 'https://www.ashesh.com.np/forex/widget2.php?api=621117p597&header_color=38b45e&background_color=faf8ee&header_title=Nepal%20Exchange%20Rates', height: 383 },
   fuel: { title: 'Fuel Rates', iframe: 'https://www.ashesh.com.np/fuel/widget.php?api=641110p120&title=Nepal%20Fuel%20Rates&header_color=dedede&header_text_color=303030', height: 275 },
-  veg: { title: 'Fruits & Vegetables', iframe: 'https://www.ashesh.com.np/vegetable/widget.php?api=641115p195&header_color=519122', height: 265 },
+  veg: { title: 'Falfulbazar', iframe: 'https://www.ashesh.com.np/vegetable/widget.php?api=641115p195&header_color=519122', height: 265 },
   date: { title: 'Date Converter (BS ↔ AD)', iframe: 'https://www.ashesh.com.np/linkdate-converter.php?h_color=21ADE2&b_color=CFE4B1&api=641117p214', height: 186 },
   weather: { title: 'Nepal Weather', iframe: 'https://www.ashesh.com.np/weather/widget.php?title=Nepal%20Weather%20Observation&header_color=00a2e2&api=641112p367', height: 383 },
   unicode: { title: 'Nepali Unicode', iframe: 'https://www.ashesh.com.np/linknepali-unicode3.php?api=641111p353', height: 400 },
@@ -1109,7 +1404,7 @@ contactFormSave.addEventListener('click', async () => {
   finally { contactFormSave.disabled = false; contactFormSave.textContent = 'Save'; }
 });
 
-// ========== DOCUMENTS ==========
+// ========== DOCUMENTS - RESTORED to v12.0.0 ==========
 let docData = [];
 let editingDocId = null;
 const docGrid = document.getElementById('docGrid');
@@ -1172,10 +1467,42 @@ function renderDocs(items, term = '') {
   docCount.classList.remove('d-none');
   docCount.innerHTML = term ? `<span>${items.length}</span> result${items.length !== 1 ? 's' : ''} for "${escapeHtml(term)}"` : `Showing <span>${items.length}</span> documents in ${escapeHtml(currentDocCat)}`;
   items.forEach(doc => {
-    const card = document.createElement('div'); card.className = 'tool-card'; // Reusing tool-card style for 2-col grid
-    card.innerHTML = `<div class="doc-card-img" style="background-image:url('${doc.url}'); height:100px; border-radius:8px; margin-bottom:8px;"><span class="doc-card-tag">${escapeHtml(doc.category || getDocTag(doc.name))}</span></div><h4 style="font-size:0.9rem; margin:0 0 4px; color:var(--text-primary); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(doc.name)}</h4><p style="font-size:0.75rem; color:var(--text-secondary); margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${escapeHtml(doc.description || '')}</p>`;
-    card.addEventListener('click', (e) => { if (e.target.closest('.doc-action-btn')) return; openDocModal(doc); });
+    const card = document.createElement('div');
+    card.className = 'doc-card';
+    card.innerHTML = `
+      <div class="doc-card-img" style="background-image:url('${doc.url}')">
+        <span class="doc-card-tag">${escapeHtml(doc.category || getDocTag(doc.name))}</span>
+        <div class="doc-card-actions">
+          <button type="button" class="doc-action-btn edit" data-action="edit-doc" data-id="${doc.id}" title="Edit"><i class="bi bi-pencil"></i></button>
+          <button type="button" class="doc-action-btn delete" data-action="delete-doc" data-id="${doc.id}" title="Delete"><i class="bi bi-trash"></i></button>
+        </div>
+      </div>
+      <div class="doc-card-body">
+        <h4>${escapeHtml(doc.name)}</h4>
+        <p>${escapeHtml(doc.description || '')}</p>
+      </div>
+    `;
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.doc-action-btn')) return;
+      openDocModal(doc);
+    });
     docGrid.appendChild(card);
+  });
+  
+  docGrid.querySelectorAll('.doc-action-btn.edit').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const id = parseInt(btn.dataset.id);
+      editDoc(id);
+    });
+  });
+  
+  docGrid.querySelectorAll('.doc-action-btn.delete').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const id = parseInt(btn.dataset.id);
+      deleteDoc(id);
+    });
   });
 }
 
@@ -1231,13 +1558,46 @@ docFormSave.addEventListener('click', async () => {
   finally { docFormSave.disabled = false; docFormSave.textContent = 'Save'; }
 });
 
-const docModalOverlay = document.createElement('div'); // Simplified doc modal for brevity
+// Document Modal - RESTORED to v12.0.0
+const docModalOverlay = document.getElementById('docModalOverlay');
+const docModalTitle = document.getElementById('docModalTitle');
+const docModalImg = document.getElementById('docModalImg');
+const docModalDesc = document.getElementById('docModalDesc');
+const docModalDownload = document.getElementById('docModalDownload');
+const docModalClose = document.getElementById('docModalClose');
+
 function openDocModal(doc) {
-  const win = window.open(doc.url, '_blank');
-  if (!win) showToast('Please allow popups', 'error');
+  docModalTitle.textContent = doc.name;
+  docModalImg.src = doc.url;
+  docModalDesc.textContent = doc.description;
+  docModalDownload.href = doc.url;
+  docModalDownload.download = doc.url.split('/').pop().split('?')[0] || doc.name.replace(/\s+/g, '-') + '.jpg';
+  docModalOverlay.classList.add('show');
+  document.body.classList.add('modal-open');
 }
 
-// ========== LINKS (UPDATED WITH CATEGORIES) ==========
+function closeDocModal() {
+  docModalOverlay.classList.remove('show');
+  document.body.classList.remove('modal-open');
+}
+
+docModalClose.addEventListener('click', closeDocModal);
+docModalOverlay.addEventListener('click', (e) => { if (e.target === docModalOverlay) closeDocModal(); });
+
+function editDoc(id) {
+  const doc = docData.find(d => d.id == id);
+  if (doc) openDocForm(doc); else showToast('Document not found', 'error');
+}
+
+async function deleteDoc(id) {
+  if (!confirm('Delete this document?')) return;
+  try {
+    await fetch(DOCUMENTS_API_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action: 'delete', id: id }) });
+    showToast('Deleted!', 'success'); setTimeout(loadDocuments, 800);
+  } catch (error) { showToast('Error deleting', 'error'); loadDocuments(); }
+}
+
+// ========== LINKS (with Video & Notes) ==========
 let allLinks = [];
 let editingLinkId = null;
 let currentLinkCategory = 'all';
@@ -1251,9 +1611,53 @@ const linkCategoryFilters = document.getElementById('linkCategoryFilters');
 const linkFormOverlay = document.getElementById('linkFormOverlay');
 const linkFormTitle = document.getElementById('linkFormTitle');
 const linkFormSave = document.getElementById('linkFormSave');
+const linkType = document.getElementById('linkType');
+const urlGroup = document.getElementById('urlGroup');
+const noteGroup = document.getElementById('noteGroup');
+const videoModalOverlay = document.getElementById('videoModalOverlay');
+const videoModalClose = document.getElementById('videoModalClose');
+const videoWrapper = document.getElementById('videoWrapper');
+
+// Show/hide fields based on type
+linkType.addEventListener('change', () => {
+  const type = linkType.value;
+  if (type === 'video') {
+    urlGroup.style.display = 'block';
+    noteGroup.style.display = 'none';
+    document.getElementById('linkUrl').required = true;
+    document.getElementById('linkNote').required = false;
+  } else if (type === 'note') {
+    urlGroup.style.display = 'none';
+    noteGroup.style.display = 'block';
+    document.getElementById('linkUrl').required = false;
+    document.getElementById('linkNote').required = true;
+  } else {
+    urlGroup.style.display = 'block';
+    noteGroup.style.display = 'none';
+    document.getElementById('linkUrl').required = true;
+    document.getElementById('linkNote').required = false;
+  }
+});
 
 function getDomain(url) { try { return new URL(url).hostname; } catch (e) { return ''; } }
 function getThumbnailUrl(url) { const domain = getDomain(url); if (!domain) return ''; return `https://www.google.com/s2/favicons?domain=${domain}&sz=128`; }
+
+// Get YouTube thumbnail
+function getYouTubeThumbnail(url) {
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  if (match && match[2].length === 11) {
+    return `https://img.youtube.com/vi/${match[2]}/maxresdefault.jpg`;
+  }
+  return '';
+}
+
+// Extract YouTube video ID
+function getYouTubeVideoId(url) {
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+  const match = url.match(regExp);
+  return (match && match[2].length === 11) ? match[2] : null;
+}
 
 async function fetchLinks() {
   linkLoader.classList.remove('d-none'); linksGrid.innerHTML = ''; linkEmptyState.classList.add('d-none');
@@ -1323,30 +1727,75 @@ function renderLinks(links) {
     return;
   }
   linkEmptyState.classList.add('d-none');
+  
   linksGrid.innerHTML = links.map(link => {
-    const thumbUrl = getThumbnailUrl(link.url);
-    const fallbackIcon = 'https://via.placeholder.com/36/1e293b/64748b?text=';
-    return `
-      <div class="link-card">
-        <div class="link-card-header">
-          <div class="link-title-wrapper">
-            <img src="${thumbUrl}" class="site-thumbnail" onerror="this.src='${fallbackIcon}'" alt="icon">
-            <h3 class="link-card-title">${escapeHtml(link.title || 'Untitled')}</h3>
-          </div>
-          <div class="link-card-actions">
-            <button type="button" class="link-icon-btn" data-action="edit-link" data-id="${link.id}" title="Edit"><i class="bi bi-pencil"></i></button>
-            <button type="button" class="link-icon-btn delete" data-action="delete-link" data-id="${link.id}" title="Delete"><i class="bi bi-trash"></i></button>
+    const type = link.type || 'link';
+    
+    if (type === 'video') {
+      const thumbUrl = getYouTubeThumbnail(link.url) || getThumbnailUrl(link.url);
+      return `
+        <div class="link-card video-card" data-video-url="${escapeHtml(link.url)}">
+          <img src="${thumbUrl}" class="video-thumbnail" onerror="this.src='https://via.placeholder.com/400x225?text=Video'">
+          <div class="play-button"><i class="bi bi-play-fill"></i></div>
+          <h3 class="link-card-title">${escapeHtml(link.title || 'Video')}</h3>
+          ${link.description ? `<p class="link-card-desc">${escapeHtml(link.description)}</p>` : ''}
+          <div class="link-card-footer">
+            ${link.category ? `<span class="link-badge">${escapeHtml(link.category)}</span>` : '<span></span>'}
+            <div class="link-card-actions">
+              <button type="button" class="link-icon-btn" data-action="edit-link" data-id="${link.id}"><i class="bi bi-pencil"></i></button>
+              <button type="button" class="link-icon-btn delete" data-action="delete-link" data-id="${link.id}"><i class="bi bi-trash"></i></button>
+            </div>
           </div>
         </div>
-        <a href="${escapeHtml(link.url)}" target="_blank" rel="noopener" class="link-card-url">${escapeHtml(link.url)}</a>
-        ${link.description ? `<p class="link-card-desc">${escapeHtml(link.description)}</p>` : ''}
-        <div class="link-card-footer">
-          ${link.category ? `<span class="link-badge">${escapeHtml(link.category)}</span>` : '<span></span>'}
-          <a href="${escapeHtml(link.url)}" target="_blank" rel="noopener" class="link-visit-btn">Visit <i class="bi bi-arrow-up-right"></i></a>
+      `;
+    } else if (type === 'note') {
+      return `
+        <div class="link-card note-card">
+          <h3 class="link-card-title">${escapeHtml(link.title || 'Note')}</h3>
+          <div class="note-content">${escapeHtml(link.note || link.description || '')}</div>
+          <div class="link-card-footer">
+            <span class="link-badge">📝 Note</span>
+            <div class="link-card-actions">
+              <button type="button" class="link-icon-btn" data-action="edit-link" data-id="${link.id}"><i class="bi bi-pencil"></i></button>
+              <button type="button" class="link-icon-btn delete" data-action="delete-link" data-id="${link.id}"><i class="bi bi-trash"></i></button>
+            </div>
+          </div>
         </div>
-      </div>
-    `;
+      `;
+    } else {
+      const thumbUrl = getThumbnailUrl(link.url);
+      const fallbackIcon = 'https://via.placeholder.com/36/1e293b/64748b?text=';
+      return `
+        <div class="link-card">
+          <div class="link-card-header">
+            <div class="link-title-wrapper">
+              <img src="${thumbUrl}" class="site-thumbnail" onerror="this.src='${fallbackIcon}'" alt="icon">
+              <h3 class="link-card-title">${escapeHtml(link.title || 'Untitled')}</h3>
+            </div>
+            <div class="link-card-actions">
+              <button type="button" class="link-icon-btn" data-action="edit-link" data-id="${link.id}"><i class="bi bi-pencil"></i></button>
+              <button type="button" class="link-icon-btn delete" data-action="delete-link" data-id="${link.id}"><i class="bi bi-trash"></i></button>
+            </div>
+          </div>
+          <a href="${escapeHtml(link.url)}" target="_blank" rel="noopener" class="link-card-url">${escapeHtml(link.url)}</a>
+          ${link.description ? `<p class="link-card-desc">${escapeHtml(link.description)}</p>` : ''}
+          <div class="link-card-footer">
+            ${link.category ? `<span class="link-badge">${escapeHtml(link.category)}</span>` : '<span></span>'}
+            <a href="${escapeHtml(link.url)}" target="_blank" rel="noopener" class="link-visit-btn">Visit <i class="bi bi-arrow-up-right"></i></a>
+          </div>
+        </div>
+      `;
+    }
   }).join('');
+  
+  // Video click handler - FIXED: Open in embedded modal
+  linksGrid.querySelectorAll('.video-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('.link-icon-btn')) return;
+      const url = card.dataset.videoUrl;
+      openVideoModal(url);
+    });
+  });
   
   linksGrid.querySelectorAll('[data-action="edit-link"]').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -1360,14 +1809,45 @@ function renderLinks(links) {
   });
 }
 
+// FIXED: Open video in embedded iframe modal
+function openVideoModal(url) {
+  const videoId = getYouTubeVideoId(url);
+  if (videoId) {
+    // Use YouTube embed URL with proper parameters
+    videoWrapper.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1" allowfullscreen allow="autoplay; encrypted-media; picture-in-picture"></iframe>`;
+  } else {
+    // For non-YouTube videos, use HTML5 video
+    videoWrapper.innerHTML = `<video controls autoplay playsinline><source src="${escapeHtml(url)}" type="video/mp4">Your browser does not support the video tag.</video>`;
+  }
+  videoModalOverlay.classList.add('active');
+  document.body.classList.add('modal-open');
+}
+
+function closeVideoModal() {
+  videoModalOverlay.classList.remove('active');
+  document.body.classList.remove('modal-open');
+  videoWrapper.innerHTML = '';
+}
+
+videoModalClose.addEventListener('click', closeVideoModal);
+videoModalOverlay.addEventListener('click', (e) => {
+  if (e.target === videoModalOverlay) closeVideoModal();
+});
+
 function openLinkForm(link = null) {
   editingLinkId = link ? link.id : null;
   linkFormTitle.textContent = link ? 'Edit Link' : 'Add Link';
   document.getElementById('linkId').value = link ? link.id : '';
+  document.getElementById('linkType').value = link ? (link.type || 'link') : 'link';
   document.getElementById('linkTitle').value = link ? (link.title || '') : '';
   document.getElementById('linkUrl').value = link ? (link.url || '') : '';
+  document.getElementById('linkNote').value = link ? (link.note || '') : '';
   document.getElementById('linkDescription').value = link ? (link.description || '') : '';
   document.getElementById('linkCategory').value = link ? (link.category || '') : '';
+  
+  // Trigger change to show/hide fields
+  linkType.dispatchEvent(new Event('change'));
+  
   linkFormOverlay.classList.add('active'); document.body.classList.add('modal-open');
   setTimeout(() => document.getElementById('linkTitle').focus(), 100);
 }
@@ -1380,16 +1860,25 @@ linkFormOverlay.addEventListener('click', (e) => { if (e.target === linkFormOver
 linkSearchInput.addEventListener('input', debounce(filterLinks, 300));
 
 linkFormSave.addEventListener('click', async () => {
+  const type = document.getElementById('linkType').value;
   const title = document.getElementById('linkTitle').value.trim();
   const url = document.getElementById('linkUrl').value.trim();
+  const note = document.getElementById('linkNote').value.trim();
   const description = document.getElementById('linkDescription').value.trim();
   const category = document.getElementById('linkCategory').value.trim();
-  if (!title || !url) { showToast('Title and URL required', 'error'); return; }
+  
+  if (!title) { showToast('Title required', 'error'); return; }
+  if (type === 'video' && !url) { showToast('Video URL required', 'error'); return; }
+  if (type === 'note' && !note) { showToast('Note content required', 'error'); return; }
+  if (type === 'link' && !url) { showToast('URL required', 'error'); return; }
+  
   const action = editingLinkId ? 'update' : 'add';
-  const payload = { action, title, url, description, category };
+  const payload = { action, type, title, url, note, description, category };
   if (editingLinkId) payload.id = editingLinkId;
+  
   linkFormSave.disabled = true; linkFormSave.textContent = 'Saving...'; closeLinkForm();
   showToast(action === 'add' ? 'Adding...' : 'Saving...', 'success');
+  
   try {
     await fetch(LINKS_API_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) });
     showToast(editingLinkId ? 'Updated!' : 'Added!', 'success'); setTimeout(fetchLinks, 800);
