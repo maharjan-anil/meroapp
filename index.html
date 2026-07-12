@@ -68,7 +68,6 @@ body.modal-open { overflow: hidden; }
   max-width: 500px; margin: 0 auto;
   position: relative; background: var(--bg-body);
 }
-/* HEADER REMOVED - No title bar */
 .screens { flex: 1; overflow: hidden; position: relative; }
 .screen {
   position: absolute; inset: 0;
@@ -327,7 +326,7 @@ body.modal-open { overflow: hidden; }
 .settings-toggle.on::after { transform: translateX(22px); }
 .settings-chevron { color: var(--text-tertiary); font-size: 0.9rem; flex-shrink: 0; }
 
-/* ========== LINKS TAB (FIXED) ========== */
+/* ========== LINKS TAB ========== */
 .links-header-card {
   background: linear-gradient(135deg, #3b82f6, #2563eb);
   color: white; border-radius: 20px;
@@ -472,7 +471,7 @@ body.modal-open { overflow: hidden; }
 .links-loader { text-align: center; padding: 40px 20px; }
 .links-loader i { font-size: 2rem; color: var(--text-tertiary); animation: spin 1s linear infinite; display: block; margin-bottom: 10px; }
 
-/* ========== LINK FORM MODAL (FIXED FOR APP) ========== */
+/* ========== LINK FORM MODAL ========== */
 .link-form-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -623,8 +622,6 @@ body.modal-open { overflow: hidden; }
 </head>
 <body>
 <div class="app">
-  <!-- HEADER REMOVED -->
-
   <main class="screens">
     <!-- Tools Screen -->
     <section class="screen active" id="screen-tools">
@@ -720,7 +717,7 @@ body.modal-open { overflow: hidden; }
       <div class="doc-grid" id="docGrid"></div>
     </section>
 
-    <!-- ========== LINKS SCREEN (FIXED) ========== -->
+    <!-- Links Screen -->
     <section class="screen" id="screen-links">
       <div class="links-header-card">
         <h2><i class="bi bi-link-45deg"></i> Link Directory</h2>
@@ -757,7 +754,7 @@ body.modal-open { overflow: hidden; }
         </div>
         <h3>Mero App</h3>
         <p>Tools, Directory, Documents & Links</p>
-        <span class="settings-version-badge">v4.0.1</span>
+        <span class="settings-version-badge">v5.0.0</span>
       </div>
 
       <div class="section-title">Preferences</div>
@@ -785,7 +782,7 @@ body.modal-open { overflow: hidden; }
         <div class="settings-icon-box blue"><i class="bi bi-info-circle-fill"></i></div>
         <div class="settings-item-content">
           <h4>Version</h4>
-          <p>4.0.1 • July 2026</p>
+          <p>5.0.0 • July 2026</p>
         </div>
       </div>
       <div class="settings-item">
@@ -837,7 +834,7 @@ body.modal-open { overflow: hidden; }
   </div>
 </div>
 
-<!-- Link Form Modal (FIXED) -->
+<!-- Link Form Modal -->
 <div class="link-form-overlay" id="linkFormOverlay">
   <div class="link-form-box">
     <div class="link-form-header">
@@ -921,7 +918,7 @@ const nepaliDateText = document.getElementById('nepaliDateText');
 
 const nepaliMonthsDev = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मंसिर', 'पौष', 'माघ', 'फागुन', 'चैत'];
 const nepaliDaysDev = ['आइतबार', 'सोमबार', 'मङ्गलबार', 'बुधबार', 'बिहीबार', 'शुक्रबार', 'शनिबार'];
-const engToNepaliNum = { '0': '०', '1': '१', '2': '२', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '९' };
+const engToNepaliNum = { '0': '०', '1': '१', '2': '२', '3': '३', '4': '४', '5': '', '6': '६', '7': '७', '8': '८', '9': '९' };
 
 function toNepaliNumber(num) {
   return num.toString().split('').map(d => engToNepaliNum[d] || d).join('');
@@ -951,7 +948,7 @@ function updateDateTime() {
   const hour = nepalNow.getHours();
   let greeting, emoji;
   if (hour >= 5 && hour < 12) { greeting = 'Good morning'; emoji = '🌅'; }
-  else if (hour >= 12 && hour < 17) { greeting = 'Good afternoon'; emoji = '️'; }
+  else if (hour >= 12 && hour < 17) { greeting = 'Good afternoon'; emoji = '☀️'; }
   else if (hour >= 17 && hour < 21) { greeting = 'Good evening'; emoji = '🌇'; }
   else { greeting = 'Good night'; emoji = '🌙'; }
   greetingText.textContent = greeting;
@@ -974,9 +971,9 @@ const KATHMANDU = { lat: 27.7172, lon: 85.3240, name: 'Kathmandu' };
 
 function decodeWeather(code, isDay) {
   const map = {
-    0:  { icon: isDay ? '️' : '🌙', desc: 'Clear' },
+    0:  { icon: isDay ? '☀️' : '🌙', desc: 'Clear' },
     1:  { icon: isDay ? '🌤️' : '', desc: 'Mainly clear' },
-    2:  { icon: isDay ? '⛅' : '☁️', desc: 'Partly cloudy' },
+    2:  { icon: isDay ? '' : '☁️', desc: 'Partly cloudy' },
     3:  { icon: '☁️', desc: 'Overcast' },
     45: { icon: '🌫️', desc: 'Foggy' },
     48: { icon: '🌫️', desc: 'Rime fog' },
@@ -984,11 +981,11 @@ function decodeWeather(code, isDay) {
     53: { icon: '🌦️', desc: 'Drizzle' },
     55: { icon: '🌧️', desc: 'Dense drizzle' },
     61: { icon: '🌧️', desc: 'Light rain' },
-    63: { icon: '️', desc: 'Rain' },
+    63: { icon: '🌧️', desc: 'Rain' },
     65: { icon: '🌧️', desc: 'Heavy rain' },
     71: { icon: '🌨️', desc: 'Light snow' },
     73: { icon: '🌨️', desc: 'Snow' },
-    75: { icon: '️', desc: 'Heavy snow' },
+    75: { icon: '❄️', desc: 'Heavy snow' },
     80: { icon: '🌦️', desc: 'Rain showers' },
     81: { icon: '🌧️', desc: 'Heavy showers' },
     82: { icon: '⛈️', desc: 'Violent showers' },
@@ -996,7 +993,7 @@ function decodeWeather(code, isDay) {
     96: { icon: '⛈️', desc: 'Thunder + hail' },
     99: { icon: '⛈️', desc: 'Severe storm' }
   };
-  return map[code] || { icon: '️', desc: 'Unknown' };
+  return map[code] || { icon: '🌡️', desc: 'Unknown' };
 }
 
 async function fetchWeather() {
@@ -1103,7 +1100,7 @@ toolModalOverlay.addEventListener('click', (e) => {
 });
 
 // ========== DIRECTORY ==========
-const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQKEYgGIjZW1WSpslqWWEVvgwNqPElh-f-VIfZWi5J0j80Oyn8cVnZ45epbXJxdwZE9IzsLISynIfR4/pub?output=csv';
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTENWe1Qp3ojkeAr_bBwdujlOdFPVtNsaNYB8cQ7INXBr3kg5LuN5MkSwPuJspOmWRjy9yP3Fu22yK0/pub?output=csv';
 let directoryData = [];
 let currentFilter = 'all';
 const searchInput = document.getElementById('searchInput');
@@ -1298,7 +1295,7 @@ function closeDocModal() { docModalOverlay.classList.remove('show'); }
 docModalClose.addEventListener('click', closeDocModal);
 docModalOverlay.addEventListener('click', (e) => { if (e.target === docModalOverlay) closeDocModal(); });
 
-// ========== LINK DIRECTORY (FIXED FOR APP) ==========
+// ========== LINK DIRECTORY ==========
 const LINK_API_URL = 'https://script.google.com/macros/s/AKfycbyLv0VT5o2ORuS_zXFIqN5m8egOAyNcKUg1QSfgasIk9oPQZKHDcv_UysPpDvZd3i0MBw/exec';
 let allLinks = [];
 let editingLinkId = null;
@@ -1440,13 +1437,10 @@ function openLinkForm(link = null) {
   document.getElementById('linkDescription').value = link ? link.description : '';
   document.getElementById('linkCategory').value = link ? link.category : '';
   
-  // CRITICAL FIX: Force display using class AND inline style
+  // CRITICAL FIX: Force modal to show
   linkFormOverlay.classList.add('active');
   linkFormOverlay.style.display = 'flex';
   document.body.classList.add('modal-open');
-  
-  console.log('Modal opened - display:', linkFormOverlay.style.display);
-  console.log('Modal classList:', linkFormOverlay.classList);
   
   setTimeout(() => {
     document.getElementById('linkTitle').focus();
@@ -1454,14 +1448,13 @@ function openLinkForm(link = null) {
 }
 
 function closeLinkForm() {
-  console.log('Closing modal...');
   linkFormOverlay.classList.remove('active');
   linkFormOverlay.style.display = 'none';
   document.body.classList.remove('modal-open');
   editingLinkId = null;
 }
 
-// FIXED: Add Link Button Event
+// Event Listeners
 document.getElementById('addLinkBtn').addEventListener('click', () => {
   console.log('Add Link button clicked');
   openLinkForm();
@@ -1472,7 +1465,6 @@ document.getElementById('linkFormCancel').addEventListener('click', closeLinkFor
 
 linkFormOverlay.addEventListener('click', (e) => {
   if (e.target === linkFormOverlay) {
-    console.log('Overlay clicked');
     closeLinkForm();
   }
 });
@@ -1556,6 +1548,13 @@ async function saveLink() {
     linkFormSave.textContent = 'Save';
   }
 }
+
+// CRITICAL: Attach saveLink to the save button
+document.getElementById('linkFormSave').addEventListener('click', (e) => {
+  e.preventDefault();
+  console.log('Save button clicked');
+  saveLink();
+});
 
 async function deleteLink(id) {
   if (!confirm('Delete this link?')) return;
