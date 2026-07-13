@@ -112,6 +112,96 @@ body.modal-open { overflow: hidden; }
 }
 .nav-btn.active::before { transform: translateX(-50%) scaleX(1); }
 
+/* Global Search Bar - NEW */
+.global-search-container {
+  margin-bottom: 16px;
+  position: relative;
+}
+.global-search-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s;
+}
+.global-search-box:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 119, 229, 0.1);
+}
+.global-search-box i {
+  color: var(--text-tertiary);
+  font-size: 1.1rem;
+}
+.global-search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 12px 10px;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+.global-search-box input::placeholder {
+  color: var(--text-tertiary);
+}
+.global-search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-top: 8px;
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: var(--shadow-md);
+  display: none;
+}
+.global-search-results.show {
+  display: block;
+}
+.search-result-item {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.search-result-item:last-child {
+  border-bottom: none;
+}
+.search-result-item:hover {
+  background: var(--bg-card);
+}
+.search-result-item .result-type {
+  font-size: 0.7rem;
+  color: var(--primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.search-result-item .result-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+.search-result-item .result-desc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+.search-no-results {
+  padding: 20px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
 /* Common Header & Controls */
 .docs-header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
 .docs-header-bar .section-title { margin: 0; }
@@ -407,6 +497,15 @@ body.modal-open { overflow: hidden; }
   <main class="screens">
     <!-- Tools Screen -->
     <section class="screen active" id="screen-tools">
+      <!-- Global Search Bar - NEW -->
+      <div class="global-search-container">
+        <div class="global-search-box">
+          <i class="bi bi-search"></i>
+          <input type="text" id="globalSearchInput" placeholder="Search tools, contacts, documents, links...">
+        </div>
+        <div id="globalSearchResults" class="global-search-results"></div>
+      </div>
+
       <div class="welcome-card">
         <div class="greeting-wrap">
           <p class="greeting-text" id="greetingText">Hello</p>
@@ -525,7 +624,7 @@ body.modal-open { overflow: hidden; }
         </div>
         <h3>Mero App</h3>
         <p>Tools, Directory, Documents & Links</p>
-        <span class="settings-version-badge">v18.0.0</span>
+        <span class="settings-version-badge">v19.0.0</span>
       </div>
       <div class="section-title">Preferences</div>
       <div class="settings-item">
@@ -542,7 +641,7 @@ body.modal-open { overflow: hidden; }
       <div class="section-title">About</div>
       <div class="settings-item">
         <div class="settings-icon-box blue"><i class="bi bi-info-circle-fill"></i></div>
-        <div class="settings-item-content"><h4>Version</h4><p>18.0.0 • July 2026</p></div>
+        <div class="settings-item-content"><h4>Version</h4><p>19.0.0 • July 2026</p></div>
       </div>
       <div class="settings-item">
         <div class="settings-icon-box pink"><i class="bi bi-heart-fill"></i></div>
@@ -662,7 +761,6 @@ const CONTACTS_API_URL = 'https://script.google.com/macros/s/AKfycbw5pbk2gsqeVgE
 const DOCUMENTS_API_URL = 'https://script.google.com/macros/s/AKfycbz_q_VD_wSqzT9QScNIwbwDFQkEfbjpiRQwC8-NB_XBkvxOJTr5oNNuizuYt6E5f_Dtng/exec';
 const LINKS_API_URL = 'https://script.google.com/macros/s/AKfycbyLv0VT5o2ORuS_zXFIqN5m8egOAyNcKUg1QSfgasIk9oPQZKHDcv_UysPpDvZd3i0MBw/exec';
 
-
 // ========== THEME ==========
 const htmlEl = document.getElementById('htmlRoot');
 const themeToggle = document.getElementById('themeToggle');
@@ -695,6 +793,143 @@ navBtns.forEach(btn => {
   });
 });
 
+// ========== GLOBAL SEARCH - NEW ==========
+const globalSearchInput = document.getElementById('globalSearchInput');
+const globalSearchResults = document.getElementById('globalSearchResults');
+
+globalSearchInput.addEventListener('input', debounce(handleGlobalSearch, 300));
+globalSearchInput.addEventListener('focus', () => {
+  if (globalSearchInput.value.trim()) {
+    handleGlobalSearch();
+  }
+});
+document.addEventListener('click', (e) => {
+  if (!globalSearchInput.contains(e.target) && !globalSearchResults.contains(e.target)) {
+    globalSearchResults.classList.remove('show');
+  }
+});
+
+function handleGlobalSearch() {
+  const query = globalSearchInput.value.toLowerCase().trim();
+  if (!query) {
+    globalSearchResults.classList.remove('show');
+    return;
+  }
+  
+  const results = [];
+  
+  // Search in Tools
+  const tools = [
+    { name: 'Gold & Silver', type: 'Tool', desc: 'Today\'s gold and silver rates', screen: 'tools' },
+    { name: 'Forex Rates', type: 'Tool', desc: 'Currency exchange rates', screen: 'tools' },
+    { name: 'Fuel Rates', type: 'Tool', desc: 'Petrol and diesel prices', screen: 'tools' },
+    { name: 'Falfulbazar', type: 'Tool', desc: 'Fruits and vegetables prices', screen: 'tools' },
+    { name: 'Date Converter', type: 'Tool', desc: 'Convert between BS and AD dates', screen: 'tools' },
+    { name: 'Weather', type: 'Tool', desc: 'Nepal weather forecast', screen: 'tools' },
+    { name: 'Unicode', type: 'Tool', desc: 'Nepali Unicode typing', screen: 'tools' },
+    { name: 'Panchang', type: 'Tool', desc: 'Hindu calendar', screen: 'tools' }
+  ];
+  tools.forEach(tool => {
+    if (tool.name.toLowerCase().includes(query) || tool.desc.toLowerCase().includes(query)) {
+      results.push({ ...tool, action: () => {
+        document.querySelector('[data-screen="tools"]').click();
+        globalSearchInput.value = '';
+        globalSearchResults.classList.remove('show');
+      }});
+    }
+  });
+  
+  // Search in Contacts
+  if (directoryData.length > 0) {
+    directoryData.forEach(contact => {
+      const name = String(contact.Name || '');
+      const phone = String(contact.Phone || '');
+      const relation = String(contact.Relation || '');
+      if (name.toLowerCase().includes(query) || phone.includes(query) || relation.toLowerCase().includes(query)) {
+        results.push({
+          name: name || 'Unknown',
+          type: 'Contact',
+          desc: `${phone} • ${relation || 'N/A'}`,
+          action: () => {
+            document.querySelector('[data-screen="directory"]').click();
+            document.getElementById('searchInput').value = query;
+            globalSearchInput.value = '';
+            globalSearchResults.classList.remove('show');
+            handleSearch();
+          }
+        });
+      }
+    });
+  }
+  
+  // Search in Documents
+  if (docData.length > 0) {
+    docData.forEach(doc => {
+      const docName = String(doc.name || '');
+      const docDesc = String(doc.description || '');
+      const docCat = String(doc.category || getDocTag(doc.name));
+      if (docName.toLowerCase().includes(query) || docDesc.toLowerCase().includes(query) || docCat.toLowerCase().includes(query)) {
+        results.push({
+          name: docName,
+          type: 'Document',
+          desc: docDesc || docCat,
+          action: () => {
+            document.querySelector('[data-screen="documents"]').click();
+            document.getElementById('docSearchInput').value = query;
+            globalSearchInput.value = '';
+            globalSearchResults.classList.remove('show');
+            filterDocs();
+          }
+        });
+      }
+    });
+  }
+  
+  // Search in Links
+  if (allLinks.length > 0) {
+    allLinks.forEach(link => {
+      const linkTitle = String(link.title || '');
+      const linkDesc = String(link.description || '');
+      const linkCat = String(link.category || '');
+      const linkUrl = String(link.url || '');
+      if (linkTitle.toLowerCase().includes(query) || linkDesc.toLowerCase().includes(query) || linkCat.toLowerCase().includes(query) || linkUrl.toLowerCase().includes(query)) {
+        results.push({
+          name: linkTitle || 'Untitled',
+          type: 'Link',
+          desc: linkDesc || linkUrl,
+          action: () => {
+            document.querySelector('[data-screen="links"]').click();
+            document.getElementById('linkSearchInput').value = query;
+            globalSearchInput.value = '';
+            globalSearchResults.classList.remove('show');
+            filterLinks();
+          }
+        });
+      }
+    });
+  }
+  
+  // Display results
+  if (results.length === 0) {
+    globalSearchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+  } else {
+    globalSearchResults.innerHTML = results.slice(0, 10).map(result => `
+      <div class="search-result-item" onclick="handleSearchResultClick(${JSON.stringify(result).replace(/"/g, '&quot;')})">
+        <div class="result-type">${result.type}</div>
+        <div class="result-title">${result.name}</div>
+        <div class="result-desc">${result.desc}</div>
+      </div>
+    `).join('');
+  }
+  globalSearchResults.classList.add('show');
+}
+
+function handleSearchResultClick(result) {
+  if (result.action) {
+    result.action();
+  }
+}
+
 // ========== GREETING + TIME + NEPALI DATE ==========
 const greetingText = document.getElementById('greetingText');
 const greetingEmoji = document.getElementById('greetingEmoji');
@@ -717,7 +952,6 @@ function convertToNepaliDate(date) {
 function getNepalTime() { return new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kathmandu' })); }
 function updateDateTime() {
   const nepalNow = getNepalTime(); const hour = nepalNow.getHours(); let greeting, emoji;
-  // ✅ FIXED: Capital first letter + comma after greeting word
   if (hour >= 5 && hour < 12) { greeting = 'Good Morning,'; emoji = '🌅'; }
   else if (hour >= 12 && hour < 17) { greeting = 'Good Afternoon,'; emoji = '☀️'; }
   else if (hour >= 17 && hour < 21) { greeting = 'Good Evening,'; emoji = '🌇'; }
@@ -735,7 +969,7 @@ updateDateTime(); setInterval(updateDateTime, 30000);
 const weatherContainer = document.getElementById('weatherContainer');
 const KATHMANDU = { lat: 27.7172, lon: 85.3240, name: 'Kathmandu' };
 function decodeWeather(code, isDay) {
-  const map = { 0: { icon: isDay ? '☀️' : '🌙', desc: 'Clear' }, 1: { icon: isDay ? '🌤️' : '🌙', desc: 'Mainly clear' }, 2: { icon: isDay ? '' : '☁️', desc: 'Partly cloudy' }, 3: { icon: '️', desc: 'Overcast' }, 45: { icon: '🌫️', desc: 'Foggy' }, 48: { icon: '🌫️', desc: 'Rime fog' }, 51: { icon: '🌦️', desc: 'Light drizzle' }, 53: { icon: '️', desc: 'Drizzle' }, 55: { icon: '🌧️', desc: 'Dense drizzle' }, 61: { icon: '🌧️', desc: 'Light rain' }, 63: { icon: '🌧️', desc: 'Rain' }, 65: { icon: '️', desc: 'Heavy rain' }, 71: { icon: '🌨️', desc: 'Light snow' }, 73: { icon: '🌨️', desc: 'Snow' }, 75: { icon: '️', desc: 'Heavy snow' }, 80: { icon: '🌦️', desc: 'Rain showers' }, 81: { icon: '🌧️', desc: 'Heavy showers' }, 82: { icon: '️', desc: 'Violent showers' }, 95: { icon: '⛈️', desc: 'Thunderstorm' }, 96: { icon: '⛈️', desc: 'Thunder + hail' }, 99: { icon: '⛈️', desc: 'Severe storm' } };
+  const map = { 0: { icon: isDay ? '☀️' : '🌙', desc: 'Clear' }, 1: { icon: isDay ? '🌤️' : '🌙', desc: 'Mainly clear' }, 2: { icon: isDay ? '⛅' : '☁️', desc: 'Partly cloudy' }, 3: { icon: '☁️', desc: 'Overcast' }, 45: { icon: '🌫️', desc: 'Foggy' }, 48: { icon: '🌫️', desc: 'Rime fog' }, 51: { icon: '️', desc: 'Light drizzle' }, 53: { icon: '🌦️', desc: 'Drizzle' }, 55: { icon: '🌧️', desc: 'Dense drizzle' }, 61: { icon: '🌧️', desc: 'Light rain' }, 63: { icon: '️', desc: 'Rain' }, 65: { icon: '🌧️', desc: 'Heavy rain' }, 71: { icon: '🌨️', desc: 'Light snow' }, 73: { icon: '🌨️', desc: 'Snow' }, 75: { icon: '❄️', desc: 'Heavy snow' }, 80: { icon: '🌦️', desc: 'Rain showers' }, 81: { icon: '🌧️', desc: 'Heavy showers' }, 82: { icon: '⛈️', desc: 'Violent showers' }, 95: { icon: '⛈️', desc: 'Thunderstorm' }, 96: { icon: '️', desc: 'Thunder + hail' }, 99: { icon: '⛈️', desc: 'Severe storm' } };
   return map[code] || { icon: '🌡️', desc: 'Unknown' };
 }
 async function fetchWeather() {
@@ -993,7 +1227,6 @@ async function fetchLinks() {
   linkLoader.classList.remove('d-none'); linksGrid.innerHTML = ''; linkEmptyState.classList.add('d-none');
   try {
     const response = await fetch(`${LINKS_API_URL}?t=${Date.now()}`);
-    // ✅ FIXED: Handle non-JSON responses gracefully
     const contentType = response.headers.get('content-type');
     let result;
     if (contentType && contentType.includes('application/json')) {
