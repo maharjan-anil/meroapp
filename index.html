@@ -112,94 +112,155 @@ body.modal-open { overflow: hidden; }
 }
 .nav-btn.active::before { transform: translateX(-50%) scaleX(1); }
 
-/* Global Search Bar - NEW */
-.global-search-container {
-  margin-bottom: 16px;
-  position: relative;
+/* Floating Action Button (FAB) - Search */
+.fab-search {
+  position: fixed;
+  bottom: calc(var(--nav-height) + var(--safe-bottom) + 16px);
+  right: 16px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: none;
+  box-shadow: 0 4px 16px rgba(0, 119, 229, 0.4);
+  cursor: pointer;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
-.global-search-box {
+.fab-search:active {
+  transform: scale(0.92);
+  box-shadow: 0 2px 8px rgba(0, 119, 229, 0.4);
+}
+.fab-search i {
+  transition: transform 0.2s;
+}
+
+/* Search Overlay */
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-body);
+  z-index: 1000;
+  display: none;
+  flex-direction: column;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+.search-overlay.show {
+  display: flex;
+  opacity: 1;
+}
+.search-overlay-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-elevated);
+}
+.search-overlay-input {
+  flex: 1;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 12px;
+  padding: 12px 16px;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+}
+.search-overlay-input:focus {
+  border-color: var(--primary);
+}
+.search-overlay-close {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  cursor: pointer;
   display: flex;
   align-items: center;
-  padding: 0 14px;
-  box-shadow: var(--shadow-sm);
-  transition: all 0.2s;
+  justify-content: center;
+  flex-shrink: 0;
 }
-.global-search-box:focus-within {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(0, 119, 229, 0.1);
-}
-.global-search-box i {
-  color: var(--text-tertiary);
-  font-size: 1.1rem;
-}
-.global-search-box input {
+.search-overlay-results {
   flex: 1;
-  border: none;
-  outline: none;
-  padding: 12px 10px;
-  background: transparent;
-  color: var(--text-primary);
-  font-size: 0.95rem;
-  font-family: inherit;
-}
-.global-search-box input::placeholder {
-  color: var(--text-tertiary);
-}
-.global-search-results {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: var(--bg-elevated);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  margin-top: 8px;
-  max-height: 400px;
   overflow-y: auto;
-  z-index: 1000;
-  box-shadow: var(--shadow-md);
-  display: none;
-}
-.global-search-results.show {
-  display: block;
+  padding: 8px 0;
 }
 .search-result-item {
-  padding: 12px 14px;
+  padding: 14px 16px;
   border-bottom: 1px solid var(--border);
   cursor: pointer;
   transition: background 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
-.search-result-item:last-child {
-  border-bottom: none;
-}
-.search-result-item:hover {
+.search-result-item:hover,
+.search-result-item:active {
   background: var(--bg-card);
 }
-.search-result-item .result-type {
+.search-result-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  color: white;
+}
+.search-result-icon.tool { background: linear-gradient(135deg, #0077e5, #005bb5); }
+.search-result-icon.contact { background: linear-gradient(135deg, #10b981, #059669); }
+.search-result-icon.document { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.search-result-icon.link { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+.search-result-content {
+  flex: 1;
+  min-width: 0;
+}
+.search-result-type {
   font-size: 0.7rem;
-  color: var(--primary);
+  color: var(--text-tertiary);
   font-weight: 600;
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
-.search-result-item .result-title {
-  font-size: 0.9rem;
+.search-result-title {
+  font-size: 0.95rem;
   font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.search-result-item .result-desc {
-  font-size: 0.75rem;
+.search-result-desc {
+  font-size: 0.8rem;
   color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .search-no-results {
-  padding: 20px;
+  padding: 60px 20px;
   text-align: center;
   color: var(--text-secondary);
-  font-size: 0.9rem;
+}
+.search-no-results i {
+  font-size: 3rem;
+  opacity: 0.3;
+  margin-bottom: 12px;
+  display: block;
 }
 
 /* Common Header & Controls */
@@ -239,7 +300,7 @@ body.modal-open { overflow: hidden; }
 .doc-count { font-size: 0.75rem; color: var(--text-secondary); margin: 0 4px 12px; letter-spacing: 0.05em; }
 .doc-count span { color: var(--primary); font-weight: 700; }
 
-/* Documents Grid (2 columns) */
+/* Documents Grid */
 .doc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
 .doc-card {
   background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px;
@@ -288,7 +349,7 @@ body.modal-open { overflow: hidden; }
   font-weight: 700; font-size: 0.8rem; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-family: inherit;
 }
 
-/* Links Grid (Fixed Right Cutoff) */
+/* Links Grid */
 .links-grid { display: grid; grid-template-columns: 1fr; gap: 12px; width: 100%; }
 .link-card {
   background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 14px;
@@ -497,15 +558,6 @@ body.modal-open { overflow: hidden; }
   <main class="screens">
     <!-- Tools Screen -->
     <section class="screen active" id="screen-tools">
-      <!-- Global Search Bar - NEW -->
-      <div class="global-search-container">
-        <div class="global-search-box">
-          <i class="bi bi-search"></i>
-          <input type="text" id="globalSearchInput" placeholder="Search tools, contacts, documents, links...">
-        </div>
-        <div id="globalSearchResults" class="global-search-results"></div>
-      </div>
-
       <div class="welcome-card">
         <div class="greeting-wrap">
           <p class="greeting-text" id="greetingText">Hello</p>
@@ -624,7 +676,7 @@ body.modal-open { overflow: hidden; }
         </div>
         <h3>Mero App</h3>
         <p>Tools, Directory, Documents & Links</p>
-        <span class="settings-version-badge">v19.0.0</span>
+        <span class="settings-version-badge">v20.0.0</span>
       </div>
       <div class="section-title">Preferences</div>
       <div class="settings-item">
@@ -641,7 +693,7 @@ body.modal-open { overflow: hidden; }
       <div class="section-title">About</div>
       <div class="settings-item">
         <div class="settings-icon-box blue"><i class="bi bi-info-circle-fill"></i></div>
-        <div class="settings-item-content"><h4>Version</h4><p>19.0.0 • July 2026</p></div>
+        <div class="settings-item-content"><h4>Version</h4><p>20.0.0 • July 2026</p></div>
       </div>
       <div class="settings-item">
         <div class="settings-icon-box pink"><i class="bi bi-heart-fill"></i></div>
@@ -657,6 +709,27 @@ body.modal-open { overflow: hidden; }
     <button class="nav-btn" data-screen="links"><i class="bi bi-link-45deg"></i><span>Links</span></button>
     <button class="nav-btn" data-screen="settings"><i class="bi bi-gear-fill"></i><span>Settings</span></button>
   </nav>
+</div>
+
+<!-- Floating Action Button (FAB) - Search -->
+<button class="fab-search" id="fabSearch" aria-label="Search">
+  <i class="bi bi-search"></i>
+</button>
+
+<!-- Search Overlay -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-overlay-header">
+    <input type="text" class="search-overlay-input" id="searchOverlayInput" placeholder="Search tools, contacts, documents, links...">
+    <button class="search-overlay-close" id="searchOverlayClose" aria-label="Close">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+  <div class="search-overlay-results" id="searchOverlayResults">
+    <div class="search-no-results">
+      <i class="bi bi-search"></i>
+      <p>Start typing to search</p>
+    </div>
+  </div>
 </div>
 
 <!-- Tool Modal -->
@@ -793,49 +866,97 @@ navBtns.forEach(btn => {
   });
 });
 
-// ========== GLOBAL SEARCH - NEW ==========
-const globalSearchInput = document.getElementById('globalSearchInput');
-const globalSearchResults = document.getElementById('globalSearchResults');
+// ========== FLOATING SEARCH (FAB) ==========
+const fabSearch = document.getElementById('fabSearch');
+const searchOverlay = document.getElementById('searchOverlay');
+const searchOverlayInput = document.getElementById('searchOverlayInput');
+const searchOverlayResults = document.getElementById('searchOverlayResults');
+const searchOverlayClose = document.getElementById('searchOverlayClose');
+let currentSearchResults = [];
 
-globalSearchInput.addEventListener('input', debounce(handleGlobalSearch, 300));
-globalSearchInput.addEventListener('focus', () => {
-  if (globalSearchInput.value.trim()) {
-    handleGlobalSearch();
+// Open search overlay
+fabSearch.addEventListener('click', () => {
+  searchOverlay.classList.add('show');
+  setTimeout(() => searchOverlayInput.focus(), 100);
+});
+
+// Close search overlay
+searchOverlayClose.addEventListener('click', () => {
+  searchOverlay.classList.remove('show');
+  searchOverlayInput.value = '';
+  searchOverlayResults.innerHTML = `
+    <div class="search-no-results">
+      <i class="bi bi-search"></i>
+      <p>Start typing to search</p>
+    </div>
+  `;
+});
+
+// Close on Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && searchOverlay.classList.contains('show')) {
+    searchOverlay.classList.remove('show');
+    searchOverlayInput.value = '';
   }
 });
-document.addEventListener('click', (e) => {
-  if (!globalSearchInput.contains(e.target) && !globalSearchResults.contains(e.target)) {
-    globalSearchResults.classList.remove('show');
+
+// Event delegation for result clicks
+searchOverlayResults.addEventListener('click', (e) => {
+  const item = e.target.closest('.search-result-item');
+  if (!item) return;
+  const index = parseInt(item.dataset.index);
+  if (!isNaN(index) && currentSearchResults[index] && currentSearchResults[index].action) {
+    currentSearchResults[index].action();
   }
 });
+
+// Search input handler
+searchOverlayInput.addEventListener('input', debounce(handleGlobalSearch, 250));
 
 function handleGlobalSearch() {
-  const query = globalSearchInput.value.toLowerCase().trim();
+  const query = searchOverlayInput.value.toLowerCase().trim();
   if (!query) {
-    globalSearchResults.classList.remove('show');
+    currentSearchResults = [];
+    searchOverlayResults.innerHTML = `
+      <div class="search-no-results">
+        <i class="bi bi-search"></i>
+        <p>Start typing to search</p>
+      </div>
+    `;
     return;
   }
   
-  const results = [];
+  currentSearchResults = [];
   
-  // Search in Tools
+  // Search in Tools (including Existing Issues & IPO Allotment)
   const tools = [
-    { name: 'Gold & Silver', type: 'Tool', desc: 'Today\'s gold and silver rates', screen: 'tools' },
-    { name: 'Forex Rates', type: 'Tool', desc: 'Currency exchange rates', screen: 'tools' },
-    { name: 'Fuel Rates', type: 'Tool', desc: 'Petrol and diesel prices', screen: 'tools' },
-    { name: 'Falfulbazar', type: 'Tool', desc: 'Fruits and vegetables prices', screen: 'tools' },
-    { name: 'Date Converter', type: 'Tool', desc: 'Convert between BS and AD dates', screen: 'tools' },
-    { name: 'Weather', type: 'Tool', desc: 'Nepal weather forecast', screen: 'tools' },
-    { name: 'Unicode', type: 'Tool', desc: 'Nepali Unicode typing', screen: 'tools' },
-    { name: 'Panchang', type: 'Tool', desc: 'Hindu calendar', screen: 'tools' }
+    { name: 'Existing Issues', type: 'Tool', desc: 'View IPO/FPO existing issues on ShareSansar', screen: 'tools', icon: 'bi-graph-up-arrow', color: 'orange' },
+    { name: 'IPO Allotment', type: 'Tool', desc: 'Check IPO application status on CDSC', screen: 'tools', icon: 'bi-clipboard-check', color: 'purple' },
+    { name: 'Gold & Silver', type: 'Tool', desc: "Today's gold and silver rates", screen: 'tools', icon: 'bi-coin', color: 'gold' },
+    { name: 'Forex Rates', type: 'Tool', desc: 'Currency exchange rates', screen: 'tools', icon: 'bi-currency-exchange', color: 'green' },
+    { name: 'Fuel Rates', type: 'Tool', desc: 'Petrol and diesel prices', screen: 'tools', icon: 'bi-fuel-pump', color: 'gray' },
+    { name: 'Falfulbazar', type: 'Tool', desc: 'Fruits and vegetables prices', screen: 'tools', icon: 'bi-basket3', color: 'green' },
+    { name: 'Date Converter', type: 'Tool', desc: 'Convert between BS and AD dates', screen: 'tools', icon: 'bi-calendar3', color: 'blue' },
+    { name: 'Weather', type: 'Tool', desc: 'Nepal weather forecast', screen: 'tools', icon: 'bi-cloud-sun', color: 'blue' },
+    { name: 'Unicode', type: 'Tool', desc: 'Nepali Unicode typing', screen: 'tools', icon: 'bi-fonts', color: 'purple' },
+    { name: 'Panchang', type: 'Tool', desc: 'Hindu calendar', screen: 'tools', icon: 'bi-moon-stars', color: 'gray' }
   ];
   tools.forEach(tool => {
     if (tool.name.toLowerCase().includes(query) || tool.desc.toLowerCase().includes(query)) {
-      results.push({ ...tool, action: () => {
-        document.querySelector('[data-screen="tools"]').click();
-        globalSearchInput.value = '';
-        globalSearchResults.classList.remove('show');
-      }});
+      currentSearchResults.push({
+        ...tool,
+        action: () => {
+          // Navigate to tools tab
+          document.querySelector('[data-screen="tools"]').click();
+          // Handle special tools
+          if (tool.name === 'Existing Issues') {
+            window.open('https://www.sharesansar.com/existing-issues', '_blank');
+          } else if (tool.name === 'IPO Allotment') {
+            window.open('https://iporesult.cdsc.com.np/', '_blank');
+          }
+          closeSearchOverlay();
+        }
+      });
     }
   });
   
@@ -846,16 +967,19 @@ function handleGlobalSearch() {
       const phone = String(contact.Phone || '');
       const relation = String(contact.Relation || '');
       if (name.toLowerCase().includes(query) || phone.includes(query) || relation.toLowerCase().includes(query)) {
-        results.push({
+        currentSearchResults.push({
           name: name || 'Unknown',
           type: 'Contact',
           desc: `${phone} • ${relation || 'N/A'}`,
+          icon: 'bi-person',
+          color: 'contact',
           action: () => {
             document.querySelector('[data-screen="directory"]').click();
-            document.getElementById('searchInput').value = query;
-            globalSearchInput.value = '';
-            globalSearchResults.classList.remove('show');
-            handleSearch();
+            setTimeout(() => {
+              document.getElementById('searchInput').value = query;
+              handleSearch();
+            }, 150);
+            closeSearchOverlay();
           }
         });
       }
@@ -869,16 +993,19 @@ function handleGlobalSearch() {
       const docDesc = String(doc.description || '');
       const docCat = String(doc.category || getDocTag(doc.name));
       if (docName.toLowerCase().includes(query) || docDesc.toLowerCase().includes(query) || docCat.toLowerCase().includes(query)) {
-        results.push({
+        currentSearchResults.push({
           name: docName,
           type: 'Document',
           desc: docDesc || docCat,
+          icon: 'bi-file-earmark',
+          color: 'document',
           action: () => {
             document.querySelector('[data-screen="documents"]').click();
-            document.getElementById('docSearchInput').value = query;
-            globalSearchInput.value = '';
-            globalSearchResults.classList.remove('show');
-            filterDocs();
+            setTimeout(() => {
+              document.getElementById('docSearchInput').value = query;
+              filterDocs();
+            }, 150);
+            closeSearchOverlay();
           }
         });
       }
@@ -893,16 +1020,19 @@ function handleGlobalSearch() {
       const linkCat = String(link.category || '');
       const linkUrl = String(link.url || '');
       if (linkTitle.toLowerCase().includes(query) || linkDesc.toLowerCase().includes(query) || linkCat.toLowerCase().includes(query) || linkUrl.toLowerCase().includes(query)) {
-        results.push({
+        currentSearchResults.push({
           name: linkTitle || 'Untitled',
           type: 'Link',
           desc: linkDesc || linkUrl,
+          icon: 'bi-link-45deg',
+          color: 'link',
           action: () => {
             document.querySelector('[data-screen="links"]').click();
-            document.getElementById('linkSearchInput').value = query;
-            globalSearchInput.value = '';
-            globalSearchResults.classList.remove('show');
-            filterLinks();
+            setTimeout(() => {
+              document.getElementById('linkSearchInput').value = query;
+              filterLinks();
+            }, 150);
+            closeSearchOverlay();
           }
         });
       }
@@ -910,24 +1040,38 @@ function handleGlobalSearch() {
   }
   
   // Display results
-  if (results.length === 0) {
-    globalSearchResults.innerHTML = '<div class="search-no-results">No results found</div>';
+  if (currentSearchResults.length === 0) {
+    searchOverlayResults.innerHTML = `
+      <div class="search-no-results">
+        <i class="bi bi-emoji-frown"></i>
+        <p>No results found for "${escapeHtml(query)}"</p>
+      </div>
+    `;
   } else {
-    globalSearchResults.innerHTML = results.slice(0, 10).map(result => `
-      <div class="search-result-item" onclick="handleSearchResultClick(${JSON.stringify(result).replace(/"/g, '&quot;')})">
-        <div class="result-type">${result.type}</div>
-        <div class="result-title">${result.name}</div>
-        <div class="result-desc">${result.desc}</div>
+    searchOverlayResults.innerHTML = currentSearchResults.slice(0, 15).map((result, index) => `
+      <div class="search-result-item" data-index="${index}">
+        <div class="search-result-icon ${result.color}">
+          <i class="bi ${result.icon}"></i>
+        </div>
+        <div class="search-result-content">
+          <div class="search-result-type">${result.type}</div>
+          <div class="search-result-title">${escapeHtml(result.name)}</div>
+          <div class="search-result-desc">${escapeHtml(result.desc)}</div>
+        </div>
       </div>
     `).join('');
   }
-  globalSearchResults.classList.add('show');
 }
 
-function handleSearchResultClick(result) {
-  if (result.action) {
-    result.action();
-  }
+function closeSearchOverlay() {
+  searchOverlay.classList.remove('show');
+  searchOverlayInput.value = '';
+  searchOverlayResults.innerHTML = `
+    <div class="search-no-results">
+      <i class="bi bi-search"></i>
+      <p>Start typing to search</p>
+    </div>
+  `;
 }
 
 // ========== GREETING + TIME + NEPALI DATE ==========
@@ -938,7 +1082,7 @@ const timeTextEl = document.getElementById('timeText');
 const nepaliDateText = document.getElementById('nepaliDateText');
 const nepaliMonthsDev = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मंसिर', 'पौष', 'माघ', 'फागुन', 'चैत'];
 const nepaliDaysDev = ['आइतबार', 'सोमबार', 'मङ्गलबार', 'बुधबार', 'बिहीबार', 'शुक्रबार', 'शनिबार'];
-const engToNepaliNum = { '0': '०', '1': '१', '2': '२', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '९' };
+const engToNepaliNum = { '0': '०', '1': '१', '2': '२', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '' };
 function toNepaliNumber(num) { return num.toString().split('').map(d => engToNepaliNum[d] || d).join(''); }
 function convertToNepaliDate(date) {
   const year = date.getFullYear(); const month = date.getMonth(); const day = date.getDate();
@@ -969,8 +1113,8 @@ updateDateTime(); setInterval(updateDateTime, 30000);
 const weatherContainer = document.getElementById('weatherContainer');
 const KATHMANDU = { lat: 27.7172, lon: 85.3240, name: 'Kathmandu' };
 function decodeWeather(code, isDay) {
-  const map = { 0: { icon: isDay ? '☀️' : '🌙', desc: 'Clear' }, 1: { icon: isDay ? '🌤️' : '🌙', desc: 'Mainly clear' }, 2: { icon: isDay ? '⛅' : '☁️', desc: 'Partly cloudy' }, 3: { icon: '☁️', desc: 'Overcast' }, 45: { icon: '🌫️', desc: 'Foggy' }, 48: { icon: '🌫️', desc: 'Rime fog' }, 51: { icon: '️', desc: 'Light drizzle' }, 53: { icon: '🌦️', desc: 'Drizzle' }, 55: { icon: '🌧️', desc: 'Dense drizzle' }, 61: { icon: '🌧️', desc: 'Light rain' }, 63: { icon: '️', desc: 'Rain' }, 65: { icon: '🌧️', desc: 'Heavy rain' }, 71: { icon: '🌨️', desc: 'Light snow' }, 73: { icon: '🌨️', desc: 'Snow' }, 75: { icon: '❄️', desc: 'Heavy snow' }, 80: { icon: '🌦️', desc: 'Rain showers' }, 81: { icon: '🌧️', desc: 'Heavy showers' }, 82: { icon: '⛈️', desc: 'Violent showers' }, 95: { icon: '⛈️', desc: 'Thunderstorm' }, 96: { icon: '️', desc: 'Thunder + hail' }, 99: { icon: '⛈️', desc: 'Severe storm' } };
-  return map[code] || { icon: '🌡️', desc: 'Unknown' };
+  const map = { 0: { icon: isDay ? '☀️' : '', desc: 'Clear' }, 1: { icon: isDay ? '🌤️' : '🌙', desc: 'Mainly clear' }, 2: { icon: isDay ? '⛅' : '☁️', desc: 'Partly cloudy' }, 3: { icon: '☁️', desc: 'Overcast' }, 45: { icon: '🌫️', desc: 'Foggy' }, 48: { icon: '🌫️', desc: 'Rime fog' }, 51: { icon: '🌦️', desc: 'Light drizzle' }, 53: { icon: '🌦️', desc: 'Drizzle' }, 55: { icon: '🌧️', desc: 'Dense drizzle' }, 61: { icon: '🌧️', desc: 'Light rain' }, 63: { icon: '🌧️', desc: 'Rain' }, 65: { icon: '️', desc: 'Heavy rain' }, 71: { icon: '🌨️', desc: 'Light snow' }, 73: { icon: '🌨️', desc: 'Snow' }, 75: { icon: '❄️', desc: 'Heavy snow' }, 80: { icon: '🌦️', desc: 'Rain showers' }, 81: { icon: '🌧️', desc: 'Heavy showers' }, 82: { icon: '⛈️', desc: 'Violent showers' }, 95: { icon: '⛈️', desc: 'Thunderstorm' }, 96: { icon: '⛈️', desc: 'Thunder + hail' }, 99: { icon: '️', desc: 'Severe storm' } };
+  return map[code] || { icon: '️', desc: 'Unknown' };
 }
 async function fetchWeather() {
   const mini = weatherContainer.querySelector('.weather-mini'); if (mini) mini.classList.add('weather-refreshing');
