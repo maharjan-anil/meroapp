@@ -177,6 +177,7 @@ body.modal-open { overflow: hidden; }
 }
 .search-overlay-input:focus {
   border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 119, 229, 0.1);
 }
 .search-overlay-close {
   width: 40px;
@@ -288,7 +289,7 @@ body.modal-open { overflow: hidden; }
 .nepali-date i { font-size: 0.65rem; }
 
 .weather-mini { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-end; text-align: right; min-width: 110px; }
-.weather-mini-icon { font-size: 2rem; line-height: 1; margin-bottom: 2px; }
+.weather-mini-icon { font-size: 2rem; line-height: 1; margin-bottom: 2px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15)); }
 .weather-mini-temp { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1; margin-bottom: 2px; }
 .weather-mini-desc { font-size: 0.65rem; font-weight: 600; opacity: 0.9; margin-bottom: 3px; white-space: nowrap; }
 .weather-mini-details { display: flex; gap: 6px; font-size: 0.6rem; opacity: 0.8; flex-wrap: wrap; justify-content: flex-end; }
@@ -316,14 +317,11 @@ body.modal-open { overflow: hidden; }
 .tool-icon.unicode { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
 .tool-icon.panchang { background: linear-gradient(135deg, #64748b, #475569); }
 
-/* Share Buttons */
 .share-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
 .share-btn { color: white; border-radius: 16px; padding: 16px; display: flex; align-items: center; gap: 14px; cursor: pointer; transition: transform 0.15s, box-shadow 0.2s; box-shadow: var(--shadow-md); text-decoration: none; }
 .share-btn:active { transform: scale(0.98); }
 .share-btn.orange { background: linear-gradient(135deg, #fb923c, #f97316); }
-.share-btn.orange:hover { box-shadow: 0 8px 20px rgba(251, 146, 60, 0.3); }
 .share-btn.purple { background: linear-gradient(135deg, #a78bfa, #8b5cf6); }
-.share-btn.purple:hover { box-shadow: 0 8px 20px rgba(167, 139, 250, 0.3); }
 .share-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
 .share-content { flex: 1; min-width: 0; }
 .share-title { font-size: 0.95rem; font-weight: 700; margin: 0 0 2px; color: white; }
@@ -465,7 +463,7 @@ body.modal-open { overflow: hidden; }
   background: transparent; border: 1px solid var(--border); color: var(--text-primary); padding: 5px 12px; border-radius: 8px;
   font-size: 0.8rem; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; font-weight: 500; font-family: inherit; white-space: nowrap;
 }
-.link-visit-btn:active { background: var(--text-primary); color: var(--bg-body); }
+.link-visit-btn:active { background: var(--text-primary); color: var(--bg-body); border-color: var(--text-primary); }
 
 .video-card { position: relative; cursor: pointer; }
 .video-thumbnail { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; display: block; }
@@ -545,12 +543,8 @@ body.modal-open { overflow: hidden; }
 .toast-msg.success { background: var(--success); color: white; }
 .toast-msg.error { background: var(--danger); color: white; }
 
-/* ========== LEARNING TAB STYLES ========== */
-.learning-screen {
-  background: var(--bg-body);
-  color: var(--text-primary);
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-}
+/* Learning Tab Styles */
+.learning-screen { background: var(--bg-body); color: var(--text-primary); font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
 .learning-header {
   background: var(--bg-elevated);
   border-bottom: 1px solid var(--border);
@@ -576,10 +570,6 @@ body.modal-open { overflow: hidden; }
   text-align: center;
   letter-spacing: -0.5px;
   transition: all 0.4s;
-  position: relative;
-}
-.learning-header h1:hover {
-  transform: scale(1.02);
 }
 .learning-header h1 i {
   margin-right: 0.5rem;
@@ -587,948 +577,268 @@ body.modal-open { overflow: hidden; }
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-.learning-admin-controls {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
+.learning-admin-controls { display: flex; gap: 8px; align-items: center; }
 .learning-admin-btn {
-  background: transparent;
-  color: var(--text-primary);
-  border: 1px solid var(--border);
-  padding: 6px 12px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 0.8rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.3s;
-  font-family: 'Space Grotesk', sans-serif;
+  background: transparent; color: var(--text-primary); border: 1px solid var(--border);
+  padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 0.8rem;
+  font-weight: 600; display: flex; align-items: center; gap: 6px;
+  transition: all 0.3s; font-family: 'Space Grotesk', sans-serif;
 }
-.learning-admin-btn:hover {
-  background: var(--bg-card);
-  border-color: var(--primary);
-  transform: translateY(-2px);
-}
-.learning-admin-btn.logout {
-  border-color: var(--danger);
-  color: var(--danger);
-}
-.learning-admin-btn.logout:hover {
-  background: var(--danger);
-  color: white;
-}
+.learning-admin-btn:hover { background: var(--bg-card); border-color: var(--primary); }
+.learning-admin-btn.logout { border-color: var(--danger); color: var(--danger); }
 .learning-user-info {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  background: var(--bg-card);
-  padding: 4px 10px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
+  display: flex; align-items: center; gap: 6px; font-size: 0.75rem;
+  color: var(--text-secondary); background: var(--bg-card);
+  padding: 4px 10px; border-radius: 8px; border: 1px solid var(--border);
   font-family: 'Space Grotesk', sans-serif;
 }
-.learning-user-info i {
-  color: var(--primary);
-  font-size: 0.9rem;
-}
-/* Learning Filters */
+.learning-user-info i { color: var(--primary); font-size: 0.9rem; }
 .learning-filters {
-  padding: 12px 16px;
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  align-items: center;
-  background: var(--bg-elevated);
-  border-bottom: 1px solid var(--border);
-  position: sticky;
-  top: 60px;
-  z-index: 999;
-  box-shadow: var(--shadow-sm);
+  padding: 12px 16px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+  background: var(--bg-elevated); border-bottom: 1px solid var(--border);
+  position: sticky; top: 60px; z-index: 999; box-shadow: var(--shadow-sm);
 }
 .learning-filters select, .learning-filters input {
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--bg-card);
-  color: var(--text-primary);
-  font-size: 0.85rem;
-  font-weight: 500;
-  min-width: 120px;
-  transition: all 0.3s;
-  outline: none;
+  padding: 8px 12px; border-radius: 8px; border: 1px solid var(--border);
+  background: var(--bg-card); color: var(--text-primary); font-size: 0.85rem;
+  font-weight: 500; min-width: 120px; transition: all 0.3s; outline: none;
   font-family: 'Inter', sans-serif;
 }
 .learning-filters select:focus, .learning-filters input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(0, 119, 229, 0.1);
+  border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 119, 229, 0.1);
 }
-.learning-filters input::placeholder {
-  color: var(--text-tertiary);
-}
-.learning-filters input {
-  flex: 1;
-  max-width: 200px;
-}
+.learning-filters input::placeholder { color: var(--text-tertiary); }
+.learning-filters input { flex: 1; max-width: 200px; }
 .learning-filters select {
-  cursor: pointer;
-  appearance: none;
+  cursor: pointer; appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  padding-right: 30px;
+  background-repeat: no-repeat; background-position: right 10px center; padding-right: 30px;
 }
-/* Video Grid */
-.learning-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 12px;
-  padding: 16px;
-  position: relative;
-}
-/* Video Card */
+.learning-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; padding: 16px; }
 .learning-card {
-  background: var(--bg-card);
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  transition: all 0.3s;
-  cursor: pointer;
-  position: relative;
+  background: var(--bg-card); border-radius: 12px; overflow: hidden;
+  border: 1px solid var(--border); transition: all 0.3s; cursor: pointer; position: relative;
 }
-.learning-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--primary);
-}
-/* Card Thumbnail */
+.learning-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: var(--primary); }
 .learning-thumb {
-  width: 100%;
-  height: 100px;
-  background: var(--bg-body);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  overflow: hidden;
+  width: 100%; height: 120px; background: var(--bg-body);
+  display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
 }
 .learning-thumb::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.4) 100%);
-  z-index: 2;
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.6) 100%); z-index: 2;
 }
 .learning-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: none;
-  transition: transform 0.4s;
+  width: 100%; height: 100%; object-fit: cover; display: none; transition: transform 0.4s;
 }
-.learning-card:hover .learning-thumb img.loaded {
-  transform: scale(1.1);
-}
-.learning-thumb img.loaded {
-  display: block;
-}
+.learning-card:hover .learning-thumb img.loaded { transform: scale(1.1); }
+.learning-thumb img.loaded { display: block; }
 .learning-thumb .placeholder {
-  color: var(--text-tertiary);
-  font-size: 2rem;
-  z-index: 3;
-  transition: all 0.4s;
-  position: relative;
+  color: var(--text-tertiary); font-size: 3rem; z-index: 3; transition: all 0.4s; position: relative;
 }
-.learning-card:hover .learning-thumb .placeholder {
-  transform: scale(1.15) rotate(5deg);
-  color: var(--primary);
-}
-/* Type Badge */
+.learning-card:hover .learning-thumb .placeholder { transform: scale(1.15) rotate(5deg); color: var(--primary); }
 .learning-type-badge {
-  position: absolute;
-  bottom: 6px;
-  left: 6px;
-  padding: 3px 8px;
-  border-radius: 20px;
-  font-size: 0.6rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  z-index: 5;
-  backdrop-filter: blur(10px);
-  font-family: 'Space Grotesk', sans-serif;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: all 0.3s;
-  pointer-events: none;
+  position: absolute; bottom: 8px; left: 8px; padding: 0.3rem 0.75rem;
+  border-radius: 50px; font-size: 0.65rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.5px; z-index: 5; backdrop-filter: blur(10px);
+  font-family: 'Space Grotesk', sans-serif; opacity: 0; transform: translateY(10px);
+  transition: all 0.4s; pointer-events: none;
 }
-.learning-card:hover .learning-type-badge {
-  opacity: 1;
-  transform: translateY(0);
-}
+.learning-card:hover .learning-type-badge { opacity: 1; transform: translateY(0); }
 .type-youtube { background: linear-gradient(135deg, rgba(239, 68, 68, 0.95) 0%, rgba(220, 38, 38, 0.95) 100%); }
 .type-drive { background: linear-gradient(135deg, rgba(59, 130, 246, 0.95) 0%, rgba(37, 99, 235, 0.95) 100%); }
 .type-pdf { background: linear-gradient(135deg, rgba(234, 88, 12, 0.95) 0%, rgba(194, 65, 12, 0.95) 100%); }
 .type-playlist { background: linear-gradient(135deg, rgba(124, 58, 237, 0.95) 0%, rgba(99, 102, 241, 0.95) 100%); }
-/* Protected Badge */
 .learning-protected-badge {
-  position: absolute;
-  top: 6px;
-  right: 6px;
+  position: absolute; top: 8px; right: 8px;
   background: linear-gradient(135deg, rgba(245, 158, 11, 0.9) 0%, rgba(234, 88, 12, 0.9) 100%);
-  backdrop-filter: blur(10px);
-  color: white;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.65rem;
-  z-index: 10;
-  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s;
+  backdrop-filter: blur(10px); color: white; width: 28px; height: 28px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; z-index: 10; box-shadow: 0 4px 16px rgba(245, 158, 11, 0.4);
+  border: 2px solid rgba(255, 255, 255, 0.1); transition: all 0.4s;
 }
-.learning-card:hover .learning-protected-badge {
-  transform: scale(1.1) rotate(10deg);
-}
-/* Admin Actions */
+.learning-card:hover .learning-protected-badge { transform: scale(1.1) rotate(10deg); }
 .learning-admin-actions {
-  position: absolute;
-  top: 6px;
-  left: 6px;
-  display: flex;
-  gap: 4px;
-  z-index: 10;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: all 0.3s;
+  position: absolute; top: 8px; left: 8px; display: flex; gap: 6px;
+  z-index: 10; opacity: 0; transform: translateY(-15px); transition: all 0.4s;
 }
-.learning-card:hover .learning-admin-actions {
-  opacity: 1;
-  transform: translateY(0);
-}
+.learning-card:hover .learning-admin-actions { opacity: 1; transform: translateY(0); }
 .learning-admin-action-btn {
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.7rem;
-  color: white;
-  transition: all 0.3s;
-  backdrop-filter: blur(10px);
-  box-shadow: var(--shadow-sm);
+  width: 28px; height: 28px; border-radius: 6px; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; font-size: 0.75rem;
+  color: white; transition: all 0.3s; backdrop-filter: blur(10px); box-shadow: var(--shadow-md);
 }
-.learning-admin-action-btn:hover {
-  transform: scale(1.15);
-}
-.learning-notes-btn {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-}
-.learning-edit-btn {
-  background: linear-gradient(135deg, rgba(124, 58, 237, 0.9) 0%, rgba(59, 130, 246, 0.9) 100%);
-}
-.learning-delete-btn {
-  background: linear-gradient(135deg, rgba(239, 68, 68, 0.9) 0%, rgba(220, 38, 38, 0.9) 100%);
-}
-/* Card Content */
-.learning-content {
-  padding: 10px;
-  position: relative;
-  z-index: 2;
-}
+.learning-admin-action-btn:hover { transform: scale(1.2) rotate(5deg); }
+.learning-notes-btn { background: linear-gradient(135deg, #10b981 0%, #059669 100%); }
+.learning-edit-btn { background: linear-gradient(135deg, rgba(124, 58, 237, 0.9) 0%, rgba(59, 130, 246, 0.9) 100%); }
+.learning-delete-btn { background: linear-gradient(135deg, rgba(239, 68, 68, 0.9) 0%, rgba(220, 38, 38, 0.9) 100%); }
+.learning-content { padding: 0.875rem; position: relative; z-index: 2; }
 .learning-card-title {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-bottom: 4px;
-  color: var(--text-primary);
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
-  line-height: 1.3;
-  transition: color 0.3s;
+  font-family: 'Space Grotesk', sans-serif; font-size: 0.875rem; font-weight: 600;
+  margin-bottom: 0.4rem; color: var(--text-primary); overflow: hidden;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  text-overflow: ellipsis; line-height: 1.3; transition: color 0.3s;
 }
-.learning-card:hover .learning-card-title {
-  color: var(--primary);
-}
+.learning-card:hover .learning-card-title { color: var(--primary); }
 .learning-card-meta {
-  font-size: 0.7rem;
-  color: var(--text-secondary);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 4px;
+  font-size: 0.7rem; color: var(--text-secondary); overflow: hidden;
+  text-overflow: ellipsis; white-space: nowrap; font-weight: 500;
+  display: flex; align-items: center; gap: 0.4rem;
 }
 .learning-card-meta::before {
-  content: '';
-  width: 4px;
-  height: 4px;
-  background: var(--primary);
-  border-radius: 50%;
-  flex-shrink: 0;
+  content: ''; width: 5px; height: 5px; background: var(--primary);
+  border-radius: 50%; flex-shrink: 0;
 }
-/* Pagination */
-.learning-pagination {
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
+.learning-pagination { padding: 20px; display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
 .learning-pagination button {
-  padding: 8px 14px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  font-family: 'Space Grotesk', sans-serif;
-  transition: all 0.3s;
+  padding: 8px 14px; background: var(--bg-card); border: 1px solid var(--border);
+  color: var(--text-secondary); border-radius: 8px; cursor: pointer;
+  font-weight: 600; font-family: 'Space Grotesk', sans-serif; transition: all 0.3s;
 }
-.learning-pagination button:hover:not(:disabled) {
-  background: var(--primary);
-  color: white;
-  border-color: var(--primary);
-  transform: translateY(-2px);
-}
-.learning-pagination button.active {
-  background: var(--primary);
-  color: white;
-  border-color: var(--primary);
-}
-.learning-pagination button:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-/* Video Popup Modal */
+.learning-pagination button:hover:not(:disabled) { background: var(--primary); color: white; border-color: var(--primary); }
+.learning-pagination button.active { background: var(--primary); color: white; border-color: var(--primary); }
+.learning-pagination button:disabled { opacity: 0.3; cursor: not-allowed; }
 .learning-popup-modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.97);
-  backdrop-filter: blur(15px);
-  z-index: 3000;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 16px;
-  box-sizing: border-box;
+  display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.97); backdrop-filter: blur(15px); z-index: 3000;
+  justify-content: center; align-items: center; flex-direction: column; padding: 16px;
   animation: fadeIn 0.4s;
 }
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 .learning-popup-controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 90%;
-  max-width: 900px;
-  margin-bottom: 16px;
-  opacity: 0;
-  transition: opacity 0.4s;
+  display: flex; align-items: center; justify-content: space-between;
+  width: 90%; max-width: 900px; margin-bottom: 16px; opacity: 0; transition: opacity 0.4s;
 }
-.learning-popup-modal:hover .learning-popup-controls {
-  opacity: 1;
-}
+.learning-popup-modal:hover .learning-popup-controls { opacity: 1; }
 .learning-popup-title {
-  font-family: 'Space Grotesk', sans-serif;
-  color: var(--text-primary);
-  font-size: 1.1rem;
-  font-weight: 600;
-  text-align: center;
-  flex: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding: 0 16px;
+  font-family: 'Space Grotesk', sans-serif; color: var(--text-primary);
+  font-size: 1.1rem; font-weight: 600; text-align: center; flex: 1;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 16px;
   background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 50%, #06b6d4 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
 .learning-back-btn, .learning-close-popup-btn {
-  background: var(--bg-card);
-  color: var(--text-primary);
-  border: 1px solid var(--border);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s;
-  backdrop-filter: blur(10px);
-  font-size: 1rem;
+  background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border);
+  width: 40px; height: 40px; border-radius: 50%; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: all 0.3s;
+  backdrop-filter: blur(10px); font-size: 1rem;
 }
 .learning-back-btn:hover, .learning-close-popup-btn:hover {
-  background: var(--primary);
-  color: white;
-  border-color: var(--primary);
-  transform: scale(1.1);
+  background: var(--primary); color: white; border-color: var(--primary); transform: scale(1.1);
 }
 .learning-popup-frame {
-  width: 90%;
-  max-width: 900px;
-  height: 56.25vw;
-  max-height: 60vh;
-  border: none;
-  border-radius: 16px;
-  box-shadow: var(--shadow-md);
+  width: 90%; max-width: 900px; height: 56.25vw; max-height: 60vh;
+  border: none; border-radius: 16px; box-shadow: var(--shadow-md);
 }
-/* Password Modal */
 .learning-password-modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(12px);
-  z-index: 2000;
-  justify-content: center;
-  align-items: center;
-  animation: fadeIn 0.4s;
+  display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(12px); z-index: 2000;
+  justify-content: center; align-items: center; animation: fadeIn 0.4s;
 }
 .learning-password-modal .modal-content {
-  background: var(--bg-elevated);
-  padding: 24px;
-  border-radius: 16px;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
-  animation: slideUp 0.4s;
-  position: relative;
-  overflow: hidden;
+  background: var(--bg-elevated); padding: 24px; border-radius: 16px;
+  width: 90%; max-width: 400px; box-shadow: var(--shadow-md);
+  border: 1px solid var(--border); color: var(--text-primary); animation: slideUp 0.4s;
 }
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px) scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
+@keyframes slideUp { from { opacity: 0; transform: translateY(40px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
 .learning-password-modal h5 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  margin-bottom: 16px;
-  color: var(--text-primary);
-  font-size: 1.2rem;
-  text-align: center;
-  position: relative;
-  z-index: 1;
+  font-family: 'Space Grotesk', sans-serif; font-weight: 600; margin-bottom: 16px;
+  color: var(--text-primary); font-size: 1.2rem; text-align: center;
 }
 .learning-password-modal .form-control {
-  background: var(--bg-body);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
-  padding: 10px 14px;
-  border-radius: 10px;
-  font-size: 0.95rem;
-  transition: all 0.3s;
-  font-family: 'Inter', sans-serif;
-  position: relative;
-  z-index: 1;
-  width: 100%;
+  background: var(--bg-body); border: 1px solid var(--border); color: var(--text-primary);
+  padding: 10px 14px; border-radius: 10px; font-size: 0.95rem; transition: all 0.3s;
+  font-family: 'Inter', sans-serif; width: 100%;
 }
 .learning-password-modal .form-control:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(0, 119, 229, 0.1);
-  color: var(--text-primary);
+  border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 119, 229, 0.1);
 }
 .learning-password-error {
-  display: none;
-  color: var(--danger);
-  font-size: 0.85rem;
-  margin-top: 12px;
-  padding: 10px;
-  background: rgba(239, 68, 68, 0.1);
-  border-radius: 10px;
-  border: 1px solid rgba(239, 68, 68, 0.2);
-  text-align: center;
-  position: relative;
-  z-index: 1;
+  display: none; color: var(--danger); font-size: 0.85rem; margin-top: 12px;
+  padding: 10px; background: rgba(239, 68, 68, 0.1); border-radius: 10px;
+  border: 1px solid rgba(239, 68, 68, 0.2); text-align: center;
 }
-.learning-password-actions {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 16px;
-  gap: 8px;
-}
+.learning-password-actions { display: flex; justify-content: space-between; margin-top: 16px; gap: 8px; }
 .learning-password-actions button {
-  flex: 1;
-  padding: 10px;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  font-family: 'Space Grotesk', sans-serif;
-  transition: all 0.3s;
+  flex: 1; padding: 10px; border-radius: 10px; font-weight: 600;
+  cursor: pointer; border: none; font-family: 'Space Grotesk', sans-serif; transition: all 0.3s;
 }
-.learning-password-actions .btn-secondary {
-  background: var(--bg-body);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
+.learning-password-actions .btn-secondary { background: var(--bg-body); border: 1px solid var(--border); color: var(--text-primary); }
+.learning-password-actions .btn-primary { background: var(--primary); color: white; }
+.learning-video-modal, .learning-notes-modal, .learning-settings-modal, .learning-auth-modal {
+  display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.9); backdrop-filter: blur(12px); z-index: 4000;
+  justify-content: center; align-items: center; animation: fadeIn 0.4s;
 }
-.learning-password-actions .btn-secondary:hover {
-  background: var(--border);
+.learning-video-modal .modal-content, .learning-notes-modal .modal-content,
+.learning-settings-modal .modal-content, .learning-auth-modal .modal-content {
+  background: var(--bg-elevated); padding: 24px; border-radius: 16px;
+  width: 90%; max-width: 500px; box-shadow: var(--shadow-md);
+  border: 1px solid var(--border); color: var(--text-primary);
+  max-height: 90vh; overflow-y: auto; animation: slideUp 0.4s;
 }
-.learning-password-actions .btn-primary {
-  background: var(--primary);
-  color: white;
+.learning-notes-modal .modal-content { max-width: 600px; }
+.modal-content h5 {
+  font-family: 'Space Grotesk', sans-serif; font-weight: 600; margin-bottom: 20px;
+  font-size: 1.3rem; background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 50%, #06b6d4 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center;
 }
-.learning-password-actions .btn-primary:hover {
-  background: var(--primary-dark);
+.modal-content .form-label { color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; margin-bottom: 0.75rem; font-family: 'Space Grotesk', sans-serif; }
+.modal-content .form-control, .modal-content .form-select {
+  background: var(--bg-body); border: 1px solid var(--border); color: var(--text-primary);
+  padding: 10px 14px; border-radius: 10px; font-size: 0.95rem; transition: all 0.3s;
+  margin-bottom: 0.5rem; font-family: 'Inter', sans-serif; width: 100%;
 }
-/* Add/Edit Video Modal */
-.learning-video-modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.9);
-  backdrop-filter: blur(12px);
-  z-index: 4000;
-  justify-content: center;
-  align-items: center;
-  animation: fadeIn 0.4s;
+.modal-content .form-control:focus, .modal-content .form-select:focus {
+  border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 119, 229, 0.1);
 }
-.learning-video-modal .modal-content {
-  background: var(--bg-elevated);
-  padding: 24px;
-  border-radius: 16px;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
-  max-height: 90vh;
-  overflow-y: auto;
-  animation: slideUp 0.4s;
-  position: relative;
+.modal-content .form-select {
+  cursor: pointer; appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 14px center; padding-right: 40px;
 }
-.learning-video-modal .modal-content h5 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  margin-bottom: 20px;
-  font-size: 1.3rem;
-  background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 50%, #06b6d4 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-align: center;
+.modal-content .form-check {
+  padding: 12px; background: var(--bg-body); border-radius: 10px;
+  border: 1px solid var(--border); margin-top: 8px; transition: all 0.3s;
 }
-.learning-video-modal .form-label {
-  color: var(--text-secondary);
-  font-size: 0.85rem;
-  font-weight: 500;
-  margin-bottom: 6px;
+.modal-content .form-check:hover { border-color: var(--primary); }
+.modal-content .form-check-input { width: 1.2rem; height: 1.2rem; background-color: var(--bg-body); border: 1px solid var(--border); cursor: pointer; }
+.modal-content .form-check-input:checked { background-color: var(--primary); border-color: var(--primary); }
+.modal-content .form-check-label { color: var(--text-secondary); margin-left: 8px; font-weight: 500; cursor: pointer; font-family: 'Space Grotesk', sans-serif; }
+.status-success { color: var(--success); background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); padding: 10px; border-radius: 10px; text-align: center; margin-top: 16px; }
+.status-error { color: var(--danger); background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); padding: 10px; border-radius: 10px; text-align: center; margin-top: 16px; }
+.modal-content .btn {
+  padding: 10px 20px; border-radius: 10px; font-weight: 600; transition: all 0.3s;
   font-family: 'Space Grotesk', sans-serif;
 }
-.learning-video-modal .form-control,
-.learning-video-modal .form-select {
-  background: var(--bg-body);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
-  padding: 10px 14px;
-  border-radius: 10px;
-  font-size: 0.9rem;
-  transition: all 0.3s;
-  margin-bottom: 12px;
-  font-family: 'Inter', sans-serif;
-  width: 100%;
+.modal-content .btn-primary { background: var(--primary); border: none; color: white; }
+.modal-content .btn-primary:hover { transform: translateY(-2px); }
+.modal-content .btn-secondary { background: var(--bg-body); border: 1px solid var(--border); color: var(--text-primary); }
+.modal-content .btn-secondary:hover { background: var(--border); }
+.notes-container { margin-top: 16px; }
+.notes-list { max-height: 300px; overflow-y: auto; margin-bottom: 16px; }
+.note-item {
+  background: var(--bg-body); border: 1px solid var(--border); border-radius: 10px;
+  padding: 12px; margin-bottom: 10px;
 }
-.learning-video-modal .form-control:focus,
-.learning-video-modal .form-select:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(0, 119, 229, 0.1);
-  color: var(--text-primary);
+.note-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.note-date { font-size: 0.75rem; color: var(--text-tertiary); }
+.note-actions { display: flex; gap: 6px; }
+.note-actions button {
+  width: 28px; height: 28px; border-radius: 6px; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem;
 }
-.learning-video-modal .form-check {
-  padding: 12px;
-  background: var(--bg-body);
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  margin-top: 8px;
-  transition: all 0.3s;
+.note-edit-btn { background: linear-gradient(135deg, rgba(59, 130, 246, 0.9) 0%, rgba(37, 99, 235, 0.9) 100%); }
+.note-delete-btn { background: linear-gradient(135deg, rgba(239, 68, 68, 0.9) 0%, rgba(220, 38, 38, 0.9) 100%); }
+.note-content-text { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; white-space: pre-wrap; }
+.note-textarea {
+  width: 100%; min-height: 120px; background: var(--bg-body);
+  border: 1px solid var(--border); border-radius: 10px; color: var(--text-primary);
+  padding: 12px; font-size: 0.95rem; resize: vertical;
 }
-.learning-video-modal .form-check:hover {
-  border-color: var(--primary);
-}
-.learning-video-modal .form-check-input {
-  width: 1.2rem;
-  height: 1.2rem;
-  background-color: var(--bg-body);
-  border: 1px solid var(--border);
-  cursor: pointer;
-}
-.learning-video-modal .form-check-input:checked {
-  background-color: var(--primary);
-  border-color: var(--primary);
-}
-.learning-video-modal .form-check-label {
-  color: var(--text-secondary);
-  margin-left: 8px;
-  font-weight: 500;
-  cursor: pointer;
-  font-family: 'Space Grotesk', sans-serif;
-}
-.learning-video-status {
-  margin-top: 16px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  padding: 10px;
-  border-radius: 10px;
-  text-align: center;
-  font-family: 'Space Grotesk', sans-serif;
-}
-.status-success {
-  color: var(--success);
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.2);
-}
-.status-error {
-  color: var(--danger);
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.2);
-}
-.learning-video-modal .btn {
-  padding: 10px 20px;
-  border-radius: 10px;
-  font-weight: 600;
-  transition: all 0.3s;
-  font-family: 'Space Grotesk', sans-serif;
-}
-.learning-video-modal .btn-primary {
-  background: var(--primary);
-  border: none;
-  color: white;
-}
-.learning-video-modal .btn-primary:hover {
-  background: var(--primary-dark);
-  transform: translateY(-2px);
-}
-.learning-video-modal .btn-secondary {
-  background: var(--bg-body);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
-}
-.learning-video-modal .btn-secondary:hover {
-  background: var(--border);
-}
-/* Notes Modal */
-.learning-notes-modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.9);
-  backdrop-filter: blur(12px);
-  z-index: 4000;
-  justify-content: center;
-  align-items: center;
-  animation: fadeIn 0.4s;
-}
-.learning-notes-modal .modal-content {
-  background: var(--bg-elevated);
-  padding: 24px;
-  border-radius: 16px;
-  width: 90%;
-  max-width: 500px;
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
-  max-height: 90vh;
-  overflow-y: auto;
-  animation: slideUp 0.4s;
-  position: relative;
-}
-.learning-notes-modal .modal-content h5 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  margin-bottom: 16px;
-  font-size: 1.3rem;
-  background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 50%, #06b6d4 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-align: center;
-}
-.learning-notes-video-title {
-  text-align: center;
-  color: var(--text-secondary);
-  margin-bottom: 16px;
-  font-size: 0.9rem;
-}
-.learning-notes-container { margin-top: 16px; }
-.learning-notes-list {
-  max-height: 250px;
-  overflow-y: auto;
-  margin-bottom: 16px;
-}
-.learning-note-item {
-  background: var(--bg-body);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 12px;
-  margin-bottom: 10px;
-}
-.learning-note-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-}
-.learning-note-date {
-  font-size: 0.7rem;
-  color: var(--text-tertiary);
-}
-.learning-note-actions { display: flex; gap: 6px; }
-.learning-note-actions button {
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
-  border: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 0.7rem;
-}
-.learning-note-edit-btn { background: linear-gradient(135deg, rgba(59, 130, 246, 0.9) 0%, rgba(37, 99, 235, 0.9) 100%); }
-.learning-note-delete-btn { background: linear-gradient(135deg, rgba(239, 68, 68, 0.9) 0%, rgba(220, 38, 38, 0.9) 100%); }
-.learning-note-content {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
-  white-space: pre-wrap;
-}
-.learning-note-textarea {
-  width: 100%;
-  min-height: 100px;
-  background: var(--bg-body);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  color: var(--text-primary);
-  padding: 10px;
-  font-size: 0.9rem;
-  resize: vertical;
-}
-.learning-note-textarea:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(0, 119, 229, 0.1);
-}
-.learning-empty-notes {
-  text-align: center;
-  padding: 20px;
-  color: var(--text-tertiary);
-}
-.learning-empty-notes i {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-  opacity: 0.3;
-}
-.learning-notes-status {
-  margin-top: 12px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  padding: 8px;
-  border-radius: 8px;
-  text-align: center;
-}
-/* Settings Modal */
-.learning-settings-modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.9);
-  backdrop-filter: blur(12px);
-  z-index: 4000;
-  justify-content: center;
-  align-items: center;
-  animation: fadeIn 0.4s;
-}
-.learning-settings-modal .modal-content {
-  background: var(--bg-elevated);
-  padding: 24px;
-  border-radius: 16px;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
-  animation: slideUp 0.4s;
-  position: relative;
-}
-.learning-settings-modal .modal-content h5 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  margin-bottom: 20px;
-  font-size: 1.3rem;
-  background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 50%, #06b6d4 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-align: center;
-}
-.learning-settings-status {
-  margin-top: 16px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  padding: 10px;
-  border-radius: 10px;
-  text-align: center;
-}
-/* Auth Modal */
-.learning-auth-modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.9);
-  backdrop-filter: blur(12px);
-  z-index: 4000;
-  justify-content: center;
-  align-items: center;
-  animation: fadeIn 0.4s;
-}
-.learning-auth-modal .modal-content {
-  background: var(--bg-elevated);
-  padding: 24px;
-  border-radius: 16px;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: var(--shadow-md);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
-  animation: slideUp 0.4s;
-  position: relative;
-}
-.learning-auth-modal .modal-content h5 {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 600;
-  margin-bottom: 20px;
-  font-size: 1.3rem;
-  background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 50%, #06b6d4 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-align: center;
-}
-.learning-auth-error {
-  display: none;
-  color: var(--danger);
-  font-size: 0.85rem;
-  margin-top: 12px;
-  padding: 10px;
-  background: rgba(239, 68, 68, 0.1);
-  border-radius: 10px;
-  border: 1px solid rgba(239, 68, 68, 0.2);
-  text-align: center;
-}
-/* Responsive */
-@media (max-width: 768px) {
-  .learning-filters {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 12px;
-    top: 60px;
-  }
-  .learning-filters select, .learning-filters input {
-    min-width: auto;
-    width: 100%;
-  }
-  .learning-grid {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    padding: 12px;
-    gap: 10px;
-  }
-  .learning-popup-frame {
-    height: 45vh;
-  }
-}
-/* Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-body);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 4px;
-  transition: background 0.3s;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--primary);
-}
-/* Loading Animation */
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
-}
-.learning-loading {
-  animation: pulse 2s infinite;
-}
-/* Empty State */
-.learning-empty-state {
-  text-align: center;
-  padding: 40px 20px;
-  color: var(--text-tertiary);
-}
-.learning-empty-state i {
-  font-size: 3rem;
-  margin-bottom: 12px;
-  opacity: 0.3;
-  background: linear-gradient(135deg, #7c3aed 0%, #3b82f6 50%, #06b6d4 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.learning-empty-state p {
-  font-size: 1rem;
-  font-family: 'Space Grotesk', sans-serif;
-}
+.note-textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 119, 229, 0.1); }
+.empty-notes { text-align: center; padding: 20px; color: var(--text-tertiary); }
+.empty-notes i { font-size: 3rem; margin-bottom: 10px; opacity: 0.3; }
 </style>
 </head>
 <body>
@@ -1553,7 +863,6 @@ body.modal-open { overflow: hidden; }
           <div class="weather-loading"><i class="bi bi-arrow-repeat spin"></i><span>Loading...</span></div>
         </div>
       </div>
-
       <div class="section-title">Share</div>
       <div class="share-buttons">
         <a href="https://www.sharesansar.com/existing-issues" target="_blank" rel="noopener" class="share-btn orange">
@@ -1567,7 +876,6 @@ body.modal-open { overflow: hidden; }
           <i class="bi bi-arrow-right share-arrow"></i>
         </a>
       </div>
-
       <div class="section-title">Live Rates</div>
       <div class="tools-grid">
         <div class="tool-card" data-tool="gold"><div class="tool-icon gold"><i class="bi bi-coin"></i></div><div><h3>Gold & Silver</h3><p>Today's rates</p></div></div>
@@ -1649,15 +957,9 @@ body.modal-open { overflow: hidden; }
     <section class="screen learning-screen" id="screen-learning">
       <div class="learning-header">
         <div class="learning-admin-controls">
-          <button id="learningAddVideoBtn" class="learning-admin-btn" style="display: none;">
-            <i class="fas fa-plus"></i> Add
-          </button>
-          <button id="learningSettingsBtn" class="learning-admin-btn" style="display: none;">
-            <i class="fas fa-cog"></i>
-          </button>
-          <button id="learningAuthBtn" class="learning-admin-btn">
-            <i class="fas fa-sign-in-alt"></i> Login
-          </button>
+          <button id="learningAddVideoBtn" class="learning-admin-btn" style="display: none;"><i class="fas fa-plus"></i> Add</button>
+          <button id="learningSettingsBtn" class="learning-admin-btn" style="display: none;"><i class="fas fa-cog"></i></button>
+          <button id="learningAuthBtn" class="learning-admin-btn"><i class="fas fa-sign-in-alt"></i> Login</button>
         </div>
         <h1 id="learningHeaderTitle"><i class="fa-solid fa-video"></i>NEXUS</h1>
         <div class="learning-user-info" id="learningUserInfo" style="display: none;">
@@ -1672,10 +974,7 @@ body.modal-open { overflow: hidden; }
         <input type="text" id="learningSearchBox" placeholder="Search videos..." autocomplete="off">
       </div>
       <div class="learning-grid" id="learningVideoGrid">
-        <div class="learning-empty-state">
-          <i class="fas fa-spinner fa-spin"></i>
-          <p>Loading library...</p>
-        </div>
+        <div class="state-msg"><i class="fas fa-spinner fa-spin"></i><p>Loading library...</p></div>
       </div>
       <div class="learning-pagination" id="learningPagination"></div>
     </section>
@@ -1689,7 +988,7 @@ body.modal-open { overflow: hidden; }
         </div>
         <h3>Mero App</h3>
         <p>Tools, Directory, Documents, Links & Learning</p>
-        <span class="settings-version-badge">v22.1.0</span>
+        <span class="settings-version-badge">v22.2.0</span>
       </div>
       <div class="section-title">Preferences</div>
       <div class="settings-item">
@@ -1706,7 +1005,7 @@ body.modal-open { overflow: hidden; }
       <div class="section-title">About</div>
       <div class="settings-item">
         <div class="settings-icon-box blue"><i class="bi bi-info-circle-fill"></i></div>
-        <div class="settings-item-content"><h4>Version</h4><p>22.1.0 • July 2026</p></div>
+        <div class="settings-item-content"><h4>Version</h4><p>22.2.0 • July 2026</p></div>
       </div>
       <div class="settings-item">
         <div class="settings-icon-box pink"><i class="bi bi-heart-fill"></i></div>
@@ -1761,7 +1060,7 @@ body.modal-open { overflow: hidden; }
   <div class="modal-content">
     <h5><i class="fas fa-lock me-2"></i>Secure Access</h5>
     <input type="password" id="learningVideoPassword" class="form-control" placeholder="Enter access code" autocomplete="off">
-    <p class="learning-password-error" id="learningPasswordError"><i class="fas fa-exclamation-triangle me-2"></i>Incorrect password. Please try again.</p>
+    <p id="learningPasswordError" class="learning-password-error"><i class="fas fa-exclamation-triangle me-2"></i>Incorrect password. Please try again.</p>
     <div class="learning-password-actions">
       <button class="btn-secondary" id="learningCancelPassword">Cancel</button>
       <button class="btn-primary" id="learningSubmitPassword">Unlock</button>
@@ -1769,7 +1068,7 @@ body.modal-open { overflow: hidden; }
   </div>
 </div>
 
-<!-- Learning Add/Edit Video Modal -->
+<!-- Learning Add Video Modal -->
 <div class="learning-video-modal" id="learningAddVideoModal">
   <div class="modal-content">
     <h5><i class="fas fa-upload me-2"></i>Add New Video</h5>
@@ -1792,7 +1091,7 @@ body.modal-open { overflow: hidden; }
       <div class="mb-3"><label class="form-label">Subcategory</label><input type="text" id="learningNewSubcategory" class="form-control" list="learningSubcategoryList" placeholder="Enter subcategory"><datalist id="learningSubcategoryList"></datalist></div>
       <div class="mb-3"><label class="form-label">Topic</label><input type="text" id="learningNewTopic" class="form-control" list="learningTopicList" placeholder="Enter topic"><datalist id="learningTopicList"></datalist></div>
       <div class="mb-3 form-check"><input type="checkbox" class="form-check-input" id="learningNewProtected"><label class="form-check-label" for="learningNewProtected"><i class="fas fa-lock me-2"></i>Password Protected</label></div>
-      <div id="learningAddVideoStatus" class="learning-video-status" style="display:none;"></div>
+      <div id="learningAddVideoStatus"></div>
       <div class="d-flex justify-content-between mt-4">
         <button type="button" id="learningCancelAddVideo" class="btn btn-secondary">Cancel</button>
         <button type="submit" class="btn btn-primary">Save Video</button>
@@ -1825,7 +1124,7 @@ body.modal-open { overflow: hidden; }
       <div class="mb-3"><label class="form-label">Subcategory</label><input type="text" id="learningEditSubcategory" class="form-control" list="learningSubcategoryList"></div>
       <div class="mb-3"><label class="form-label">Topic</label><input type="text" id="learningEditTopic" class="form-control" list="learningTopicList"></div>
       <div class="mb-3 form-check"><input type="checkbox" class="form-check-input" id="learningEditProtected"><label class="form-check-label" for="learningEditProtected"><i class="fas fa-lock me-2"></i>Password Protected</label></div>
-      <div id="learningEditVideoStatus" class="learning-video-status" style="display:none;"></div>
+      <div id="learningEditVideoStatus"></div>
       <div class="d-flex justify-content-between mt-4">
         <button type="button" id="learningCancelEditVideo" class="btn btn-secondary">Cancel</button>
         <button type="submit" class="btn btn-primary">Update Video</button>
@@ -1841,7 +1140,7 @@ body.modal-open { overflow: hidden; }
     <form id="learningSettingsForm">
       <div class="mb-3"><label class="form-label">New Video Password</label><input type="text" id="learningNewVideoPassword" class="form-control" required></div>
       <div class="mb-3"><label class="form-label">Confirm Password</label><input type="text" id="learningConfirmVideoPassword" class="form-control" required></div>
-      <div id="learningSettingsStatus" class="learning-settings-status" style="display:none;"></div>
+      <div id="learningSettingsStatus"></div>
       <div class="d-flex justify-content-between mt-4">
         <button type="button" id="learningCancelSettings" class="btn btn-secondary">Cancel</button>
         <button type="submit" class="btn btn-primary">Update Password</button>
@@ -1857,7 +1156,7 @@ body.modal-open { overflow: hidden; }
     <form id="learningAuthForm">
       <div class="mb-3"><label class="form-label">Email</label><input type="email" id="learningAuthEmail" class="form-control" required></div>
       <div class="mb-3"><label class="form-label">Password</label><input type="password" id="learningAuthPassword" class="form-control" required></div>
-      <p id="learningAuthError" class="learning-auth-error"></p>
+      <p id="learningAuthError" class="status-error"></p>
       <div class="d-flex justify-content-between mt-4">
         <button type="button" id="learningCancelAuth" class="btn btn-secondary">Cancel</button>
         <button type="submit" class="btn btn-primary">Login</button>
@@ -1870,16 +1169,16 @@ body.modal-open { overflow: hidden; }
 <div class="learning-notes-modal" id="learningNotesModal">
   <div class="modal-content">
     <h5><i class="fas fa-sticky-note me-2"></i>Video Notes</h5>
-    <div id="learningNotesVideoTitle" class="learning-notes-video-title"></div>
-    <div class="learning-notes-container">
-      <div class="learning-notes-list" id="learningNotesList">
-        <div class="learning-empty-notes"><i class="fas fa-clipboard"></i><p>No notes yet. Add your first note!</p></div>
+    <div id="learningNotesVideoTitle" style="text-align: center; color: var(--text-secondary); margin-bottom: 16px;"></div>
+    <div class="notes-container">
+      <div class="notes-list" id="learningNotesList">
+        <div class="empty-notes"><i class="fas fa-clipboard"></i><p>No notes yet. Add your first note!</p></div>
       </div>
       <div class="mb-3">
         <label class="form-label"><i class="fas fa-pen me-2"></i>Add/Edit Note</label>
-        <textarea id="learningNoteTextarea" class="learning-note-textarea" placeholder="Write your notes here..."></textarea>
+        <textarea id="learningNoteTextarea" class="note-textarea" placeholder="Write your notes here..."></textarea>
       </div>
-      <div id="learningNotesStatus" class="learning-notes-status" style="display:none;"></div>
+      <div id="learningNotesStatus"></div>
       <div class="d-flex justify-content-between mt-4">
         <button id="learningCancelNotes" class="btn btn-secondary">Close</button>
         <button id="learningSaveNote" class="btn btn-primary"><i class="fas fa-save me-2"></i>Save Note</button>
@@ -1985,653 +1284,6 @@ body.modal-open { overflow: hidden; }
 <div class="toast-msg" id="toastMsg"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc, updateDoc, serverTimestamp, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyB82MwSrGp35eS2ZXBsBlhie6EL6s-5HK0",
-  authDomain: "videolibrary-4709d.firebaseapp.com",
-  projectId: "videolibrary-4709d",
-  storageBucket: "videolibrary-4709d.firebasestorage.app",
-  messagingSenderId: "752788156798",
-  appId: "1:752788156798:web:df6dc050abc7de4150432f"
-};
-
-let learningDb, learningAuth;
-let learningAllVideos = [];
-let learningFilteredVideos = [];
-let learningCurrentPage = 1;
-let learningVideoPassword = "Animator";
-let learningCurrentUser = null;
-let learningCurrentVideo = null;
-let learningVideosLoaded = false;
-const LEARNING_VIDEOS_PER_PAGE = 100;
-
-// Initialize Firebase for Learning
-try {
-  const app = initializeApp(firebaseConfig);
-  learningDb = getFirestore(app);
-  learningAuth = getAuth(app);
-  console.log("✅ Learning Firebase initialized");
-  
-  // Setup auth state listener
-  onAuthStateChanged(learningAuth, (user) => {
-    learningCurrentUser = user;
-    updateLearningAdminUI();
-    if (learningVideosLoaded) renderLearningVideos();
-  });
-  
-  // Load videos
-  onSnapshot(query(collection(learningDb, "videos"), orderBy("createdAt", "desc")),
-    (snapshot) => {
-      console.log("📹 Learning snapshot:", snapshot.size, "videos");
-      learningAllVideos = snapshot.docs.map(d => ({ firestoreId: d.id, ...d.data() }));
-      learningVideosLoaded = true;
-      populateLearningFilters();
-      applyLearningFilters();
-    },
-    (error) => {
-      console.error("❌ Learning error:", error);
-      document.getElementById('learningVideoGrid').innerHTML = `
-        <div class="learning-empty-state">
-          <i class="fas fa-exclamation-triangle"></i>
-          <p>Error loading videos</p>
-          <p style="font-size:0.75rem; margin-top:8px;">Check Firebase console & security rules</p>
-        </div>`;
-    }
-  );
-  
-  // Load password
-  onSnapshot(doc(learningDb, "settings", "videoPassword"), (docSnap) => {
-    if (docSnap.exists()) {
-      learningVideoPassword = docSnap.data().password || "Animator";
-      console.log("🔐 Video password loaded");
-    } else {
-      setDoc(doc(learningDb, "settings", "videoPassword"), { password: "Animator", updatedAt: serverTimestamp() });
-    }
-  });
-  
-} catch (error) {
-  console.error("Firebase init error:", error);
-}
-
-// Update Admin UI based on auth state
-function updateLearningAdminUI() {
-  const addBtn = document.getElementById('learningAddVideoBtn');
-  const settingsBtn = document.getElementById('learningSettingsBtn');
-  const authBtn = document.getElementById('learningAuthBtn');
-  const userInfo = document.getElementById('learningUserInfo');
-  const userEmail = document.getElementById('learningUserEmail');
-  
-  if (learningCurrentUser) {
-    addBtn.style.display = 'flex';
-    settingsBtn.style.display = 'flex';
-    authBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> Logout';
-    authBtn.classList.add('logout');
-    userInfo.style.display = 'flex';
-    userEmail.textContent = learningCurrentUser.email;
-  } else {
-    addBtn.style.display = 'none';
-    settingsBtn.style.display = 'none';
-    authBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
-    authBtn.classList.remove('logout');
-    userInfo.style.display = 'none';
-  }
-}
-
-// Learning Helper Functions
-function getLearningYouTubeId(url) {
-  if (!url) return null;
-  const match = url.trim().match(/^.*(youtu\.be\/|v\/|embed\/|watch\?v=)([^#&?]*).*/);
-  return (match && match[2].length === 11) ? match[2] : null;
-}
-
-function getLearningThumbnailUrl(item) {
-  if (item.type === "youtube") {
-    const id = getLearningYouTubeId(item.url || item.id);
-    return id ? `https://img.youtube.com/vi/${id}/mqdefault.jpg` : null;
-  } else if (item.type === "youtube-playlist") {
-    return item.firstVideoId ? `https://img.youtube.com/vi/${item.firstVideoId}/mqdefault.jpg` : null;
-  } else if ((item.type === "drive" || item.type === "pdf") && item.id) {
-    return `https://drive.google.com/thumbnail?id=${item.id}&sz=w640`;
-  }
-  return null;
-}
-
-function getLearningEmbedUrl(item) {
-  if (item.type === "youtube") {
-    const id = getLearningYouTubeId(item.url || item.id);
-    return id ? `https://www.youtube.com/embed/${id}?autoplay=1` : null;
-  } else if (item.type === "youtube-playlist") {
-    return `https://www.youtube.com/embed/videoseries?list=${item.id}&autoplay=1`;
-  } else if ((item.type === "drive" || item.type === "pdf") && item.id) {
-    return `https://drive.google.com/file/d/${item.id}/preview`;
-  }
-  return null;
-}
-
-function getLearningTypeBadge(type) {
-  return { 'youtube': 'YouTube', 'drive': 'Drive', 'pdf': 'PDF', 'youtube-playlist': 'Playlist' }[type] || 'Video';
-}
-
-function getLearningTypeClass(type) {
-  return { 'youtube': 'type-youtube', 'drive': 'type-drive', 'pdf': 'type-pdf', 'youtube-playlist': 'type-playlist' }[type] || '';
-}
-
-function getLearningTypeIcon(type) {
-  return { 'youtube': 'fa-youtube', 'drive': 'fa-google-drive', 'pdf': 'fa-file-pdf', 'youtube-playlist': 'fa-list' }[type] || 'fa-video';
-}
-
-// Learning Filters
-const learningCategoryFilter = document.getElementById('learningCategoryFilter');
-const learningSubcategoryFilter = document.getElementById('learningSubcategoryFilter');
-const learningTopicFilter = document.getElementById('learningTopicFilter');
-const learningSearchBox = document.getElementById('learningSearchBox');
-const learningVideoGrid = document.getElementById('learningVideoGrid');
-const learningPaginationEl = document.getElementById('learningPagination');
-
-function populateLearningFilters() {
-  const cats = [...new Set(learningAllVideos.map(v => (v.category || "Uncategorized").trim()))].sort();
-  learningCategoryFilter.innerHTML = '<option value="">All Categories</option>';
-  cats.forEach(cat => {
-    const opt = document.createElement('option');
-    opt.value = cat;
-    opt.textContent = cat;
-    learningCategoryFilter.appendChild(opt);
-  });
-  updateLearningSubcategories();
-}
-
-function updateLearningSubcategories() {
-  const cat = learningCategoryFilter.value.trim();
-  learningSubcategoryFilter.innerHTML = '<option value="">All Subcategories</option>';
-  learningTopicFilter.innerHTML = '<option value="">All Topics</option>';
-  if (!cat) return;
-  const subs = [...new Set(learningAllVideos.filter(v => v.category === cat).map(v => v.subcategory).filter(Boolean))].sort();
-  subs.forEach(sub => {
-    const opt = document.createElement('option');
-    opt.value = sub;
-    opt.textContent = sub;
-    learningSubcategoryFilter.appendChild(opt);
-  });
-  updateLearningTopics();
-}
-
-function updateLearningTopics() {
-  const cat = learningCategoryFilter.value.trim();
-  const sub = learningSubcategoryFilter.value.trim();
-  learningTopicFilter.innerHTML = '<option value="">All Topics</option>';
-  if (!cat || !sub) return;
-  const topics = [...new Set(learningAllVideos.filter(v => v.category === cat && v.subcategory === sub).map(v => v.topic).filter(Boolean))].sort();
-  topics.forEach(top => {
-    const opt = document.createElement('option');
-    opt.value = top;
-    opt.textContent = top;
-    learningTopicFilter.appendChild(opt);
-  });
-}
-
-// Create Learning Video Card
-function createLearningVideoCard(video) {
-  const card = document.createElement('div');
-  card.className = 'learning-card';
-  const thumbUrl = getLearningThumbnailUrl(video);
-  const meta = [video.category, video.subcategory, video.topic].filter(Boolean).join(' • ');
-  let thumbHtml = thumbUrl ? `<img src="${thumbUrl}" class="loaded">` : `<div class="placeholder"><i class="fas ${getLearningTypeIcon(video.type)}"></i></div>`;
-  const typeBadge = `<div class="learning-type-badge ${getLearningTypeClass(video.type)}"><i class="fas ${getLearningTypeIcon(video.type)} me-1"></i>${getLearningTypeBadge(video.type)}</div>`;
-  const adminActionsHtml = learningCurrentUser ? `
-    <div class="learning-admin-actions">
-      <button class="learning-admin-action-btn learning-notes-btn" title="Notes"><i class="fas fa-sticky-note"></i></button>
-      <button class="learning-admin-action-btn learning-edit-btn" title="Edit"><i class="fas fa-edit"></i></button>
-      <button class="learning-admin-action-btn learning-delete-btn" title="Delete"><i class="fas fa-trash"></i></button>
-    </div>` : '';
-  
-  card.innerHTML = `
-    <div class="learning-thumb">
-      ${thumbHtml}
-      ${typeBadge}
-      ${video.protected ? `<div class="learning-protected-badge"><i class="fas fa-lock"></i></div>` : ''}
-      ${adminActionsHtml}
-    </div>
-    <div class="learning-content">
-      <div class="learning-card-title">${video.title}</div>
-      <div class="learning-card-meta">${meta}</div>
-    </div>`;
-  
-  if (learningCurrentUser) {
-    card.querySelector('.learning-notes-btn')?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      openLearningNotesModal(video);
-    });
-    card.querySelector('.learning-edit-btn')?.addEventListener('click', (e) => {
-      e.stopPropagation();
-      openLearningEditModal(video);
-    });
-    card.querySelector('.learning-delete-btn')?.addEventListener('click', async (e) => {
-      e.stopPropagation();
-      if (confirm(`Delete "${video.title}"?`)) {
-        await deleteDoc(doc(learningDb, "videos", video.firestoreId));
-      }
-    });
-  }
-  
-  if (thumbUrl) {
-    const img = card.querySelector('img');
-    img.onerror = () => { img.style.display = 'none'; card.querySelector('.placeholder').style.display = 'flex'; };
-  }
-  
-  card.addEventListener('click', () => openLearningVideo(video));
-  return card;
-}
-
-// NOTES FUNCTIONS
-let learningCurrentNotesVideoId = null;
-let learningCurrentNoteId = null;
-let learningNotesUnsubscribe = null;
-
-function openLearningNotesModal(video) {
-  learningCurrentNotesVideoId = video.firestoreId;
-  document.getElementById('learningNotesVideoTitle').textContent = `📹 ${video.title}`;
-  document.getElementById('learningNoteTextarea').value = '';
-  learningCurrentNoteId = null;
-  document.getElementById('learningNotesStatus').style.display = 'none';
-  document.getElementById('learningNotesModal').style.display = 'flex';
-  loadLearningNotesForVideo(video.firestoreId);
-}
-
-function loadLearningNotesForVideo(videoId) {
-  if (!learningDb) {
-    document.getElementById('learningNotesList').innerHTML = `<div class="learning-empty-notes"><i class="fas fa-exclamation-triangle"></i><p>Database not connected</p></div>`;
-    return;
-  }
-  if (!learningCurrentUser) {
-    document.getElementById('learningNotesList').innerHTML = `<div class="learning-empty-notes"><i class="fas fa-lock"></i><p>Please login to view notes</p></div>`;
-    return;
-  }
-  if (learningNotesUnsubscribe) {
-    learningNotesUnsubscribe();
-    learningNotesUnsubscribe = null;
-  }
-  learningNotesUnsubscribe = onSnapshot(query(collection(learningDb, "notes"), orderBy("createdAt", "desc")), (snapshot) => {
-    const allNotes = snapshot.docs.map(doc => ({ noteId: doc.id, ...doc.data() }));
-    const videoNotes = allNotes.filter(note => note.videoId === videoId && note.userId === learningCurrentUser.uid);
-    if (videoNotes.length === 0) {
-      document.getElementById('learningNotesList').innerHTML = `<div class="learning-empty-notes"><i class="fas fa-clipboard"></i><p>No notes yet. Add your first note!</p></div>`;
-    } else {
-      document.getElementById('learningNotesList').innerHTML = videoNotes.map(note => `
-        <div class="learning-note-item" data-note-id="${note.noteId}">
-          <div class="learning-note-header">
-            <span class="learning-note-date"><i class="fas fa-clock me-1"></i>${formatLearningDate(note.createdAt)}</span>
-            <div class="learning-note-actions">
-              <button class="learning-note-edit-btn" title="Edit"><i class="fas fa-edit"></i></button>
-              <button class="learning-note-delete-btn" title="Delete"><i class="fas fa-trash"></i></button>
-            </div>
-          </div>
-          <div class="learning-note-content">${escapeHtmlLearning(note.content)}</div>
-        </div>`).join('');
-      document.querySelectorAll('.learning-note-edit-btn').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const noteItem = e.target.closest('.learning-note-item');
-          learningCurrentNoteId = noteItem.getAttribute('data-note-id');
-          document.getElementById('learningNoteTextarea').value = noteItem.querySelector('.learning-note-content').textContent;
-          const status = document.getElementById('learningNotesStatus');
-          status.textContent = '✏️ Editing note...';
-          status.className = 'learning-notes-status status-success';
-          status.style.display = 'block';
-        });
-      });
-      document.querySelectorAll('.learning-note-delete-btn').forEach(btn => {
-        btn.addEventListener('click', async (e) => {
-          const noteItem = e.target.closest('.learning-note-item');
-          if (confirm('Delete this note?')) {
-            await deleteDoc(doc(learningDb, "notes", noteItem.getAttribute('data-note-id')));
-          }
-        });
-      });
-    }
-  }, (error) => {
-    console.error("Error loading notes:", error);
-    document.getElementById('learningNotesList').innerHTML = `<div class="learning-empty-notes"><i class="fas fa-exclamation-triangle"></i><p>Error loading notes</p></div>`;
-  });
-}
-
-function formatLearningDate(timestamp) {
-  if (!timestamp) return 'Unknown';
-  try {
-    return timestamp.toDate().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-  } catch (e) {
-    return 'Unknown';
-  }
-}
-
-function escapeHtmlLearning(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
-
-document.getElementById('learningSaveNote').addEventListener('click', async () => {
-  if (!learningCurrentUser) {
-    const status = document.getElementById('learningNotesStatus');
-    status.textContent = '❌ Please login';
-    status.className = 'learning-notes-status status-error';
-    status.style.display = 'block';
-    return;
-  }
-  const content = document.getElementById('learningNoteTextarea').value.trim();
-  if (!content) {
-    const status = document.getElementById('learningNotesStatus');
-    status.textContent = '❌ Note cannot be empty';
-    status.className = 'learning-notes-status status-error';
-    status.style.display = 'block';
-    return;
-  }
-  try {
-    if (learningCurrentNoteId) {
-      await updateDoc(doc(learningDb, "notes", learningCurrentNoteId), { content, updatedAt: serverTimestamp() });
-      const status = document.getElementById('learningNotesStatus');
-      status.textContent = '✅ Note updated!';
-      status.className = 'learning-notes-status status-success';
-      status.style.display = 'block';
-    } else {
-      await addDoc(collection(learningDb, "notes"), {
-        videoId: learningCurrentNotesVideoId,
-        userId: learningCurrentUser.uid,
-        userEmail: learningCurrentUser.email,
-        content,
-        createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp()
-      });
-      const status = document.getElementById('learningNotesStatus');
-      status.textContent = '✅ Note saved!';
-      status.className = 'learning-notes-status status-success';
-      status.style.display = 'block';
-    }
-    document.getElementById('learningNoteTextarea').value = '';
-    learningCurrentNoteId = null;
-    setTimeout(() => { document.getElementById('learningNotesStatus').style.display = 'none'; }, 2000);
-  } catch (error) {
-    const status = document.getElementById('learningNotesStatus');
-    status.textContent = `❌ Failed: ${error.message}`;
-    status.className = 'learning-notes-status status-error';
-    status.style.display = 'block';
-  }
-});
-
-document.getElementById('learningCancelNotes').addEventListener('click', () => {
-  if (learningNotesUnsubscribe) { learningNotesUnsubscribe(); learningNotesUnsubscribe = null; }
-  document.getElementById('learningNotesModal').style.display = 'none';
-  learningCurrentNotesVideoId = null;
-  learningCurrentNoteId = null;
-});
-
-// Filtering & Rendering
-function applyLearningFilters() {
-  let list = [...learningAllVideos];
-  const cat = learningCategoryFilter.value.trim();
-  const sub = learningSubcategoryFilter.value.trim();
-  const top = learningTopicFilter.value.trim();
-  const qry = learningSearchBox.value.trim().toLowerCase();
-  if (cat) list = list.filter(v => v.category === cat);
-  if (sub) list = list.filter(v => v.subcategory === sub);
-  if (top) list = list.filter(v => v.topic === top);
-  if (qry) {
-    list = list.filter(v => v.title.toLowerCase().includes(qry) || v.category?.toLowerCase().includes(qry));
-  }
-  learningFilteredVideos = list;
-  learningCurrentPage = 1;
-  renderLearningVideos();
-}
-
-function renderLearningVideos() {
-  if (!learningAllVideos.length) {
-    learningVideoGrid.innerHTML = `<div class="learning-empty-state"><i class="fas fa-inbox"></i><p>No videos found</p></div>`;
-    learningPaginationEl.innerHTML = '';
-    return;
-  }
-  const totalPages = Math.max(1, Math.ceil(learningFilteredVideos.length / LEARNING_VIDEOS_PER_PAGE));
-  learningCurrentPage = Math.min(learningCurrentPage, totalPages);
-  const pageVideos = learningFilteredVideos.slice((learningCurrentPage - 1) * LEARNING_VIDEOS_PER_PAGE, learningCurrentPage * LEARNING_VIDEOS_PER_PAGE);
-  learningVideoGrid.innerHTML = '';
-  pageVideos.forEach(v => learningVideoGrid.appendChild(createLearningVideoCard(v)));
-  renderLearningPagination(totalPages);
-}
-
-function renderLearningPagination(totalPages) {
-  learningPaginationEl.innerHTML = '';
-  if (totalPages <= 1) return;
-  for (let i = 1; i <= totalPages; i++) {
-    const btn = document.createElement('button');
-    btn.textContent = i;
-    if (i === learningCurrentPage) btn.classList.add('active');
-    btn.onclick = () => { learningCurrentPage = i; renderLearningVideos(); };
-    learningPaginationEl.appendChild(btn);
-  }
-}
-
-// Video Playback - Admin Bypass
-function openLearningVideo(video) {
-  if (video.protected && !learningCurrentUser) {
-    learningCurrentVideo = video;
-    document.getElementById('learningPasswordModal').style.display = 'flex';
-    document.getElementById('learningVideoPassword').value = '';
-    document.getElementById('learningPasswordError').style.display = 'none';
-  } else {
-    playLearningInPopup(video);
-  }
-}
-
-function playLearningInPopup(video) {
-  const url = getLearningEmbedUrl(video);
-  if (!url) { alert("Content not available"); return; }
-  document.getElementById('learningPopupTitle').textContent = video.title;
-  document.getElementById('learningPopupFrame').src = url;
-  document.getElementById('learningPopupModal').style.display = 'flex';
-}
-
-function validateLearningPassword() {
-  if (document.getElementById('learningVideoPassword').value === learningVideoPassword) {
-    document.getElementById('learningPasswordModal').style.display = 'none';
-    if (learningCurrentVideo) { playLearningInPopup(learningCurrentVideo); learningCurrentVideo = null; }
-  } else {
-    document.getElementById('learningPasswordError').style.display = 'block';
-  }
-}
-
-// Auth
-document.getElementById('learningAuthBtn').addEventListener('click', () => {
-  if (learningCurrentUser) { 
-    signOut(learningAuth); 
-  } else { 
-    document.getElementById('learningAuthModal').style.display = 'flex'; 
-  }
-});
-
-document.getElementById('learningAuthForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  try {
-    await signInWithEmailAndPassword(learningAuth, document.getElementById('learningAuthEmail').value, document.getElementById('learningAuthPassword').value);
-    document.getElementById('learningAuthModal').style.display = 'none';
-  } catch (error) {
-    document.getElementById('learningAuthError').textContent = error.message;
-    document.getElementById('learningAuthError').style.display = 'block';
-  }
-});
-
-// Add Video
-document.getElementById('learningAddVideoBtn').addEventListener('click', () => {
-  if (learningCurrentUser) {
-    document.getElementById('learningAddVideoModal').style.display = 'flex';
-    toggleLearningFirstVideoIdField(document.getElementById('learningNewType').value, 'new');
-  }
-});
-
-document.getElementById('learningCancelAddVideo').addEventListener('click', () => {
-  document.getElementById('learningAddVideoModal').style.display = 'none';
-  document.getElementById('learningAddVideoForm').reset();
-});
-
-document.getElementById('learningNewType').addEventListener('change', () => toggleLearningFirstVideoIdField(document.getElementById('learningNewType').value, 'new'));
-document.getElementById('learningEditType').addEventListener('change', () => toggleLearningFirstVideoIdField(document.getElementById('learningEditType').value, 'edit'));
-
-function toggleLearningFirstVideoIdField(type, prefix) {
-  const group = prefix === 'new' ? document.getElementById('learningNewFirstVideoIdGroup') : document.getElementById('learningEditFirstVideoIdGroup');
-  group.style.display = type === 'youtube-playlist' ? 'block' : 'none';
-}
-
-document.getElementById('learningAddVideoForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const newVideo = {
-    title: document.getElementById('learningNewTitle').value,
-    type: document.getElementById('learningNewType').value,
-    id: document.getElementById('learningNewId').value,
-    url: document.getElementById('learningNewId').value,
-    firstVideoId: document.getElementById('learningNewFirstVideoId').value.trim(),
-    category: document.getElementById('learningNewCategory').value,
-    subcategory: document.getElementById('learningNewSubcategory').value,
-    topic: document.getElementById('learningNewTopic').value,
-    protected: document.getElementById('learningNewProtected').checked,
-    createdAt: serverTimestamp(),
-    addedBy: learningCurrentUser.email
-  };
-  await addDoc(collection(learningDb, "videos"), newVideo);
-  const status = document.getElementById('learningAddVideoStatus');
-  status.textContent = '✅ Added!';
-  status.className = 'learning-video-status status-success';
-  status.style.display = 'block';
-  setTimeout(() => { 
-    document.getElementById('learningAddVideoModal').style.display = 'none';
-    document.getElementById('learningAddVideoForm').reset();
-    status.style.display = 'none';
-  }, 1500);
-});
-
-// Edit Video
-function openLearningEditModal(video) {
-  document.getElementById('learningEditVideoId').value = video.firestoreId;
-  document.getElementById('learningEditTitle').value = video.title;
-  document.getElementById('learningEditType').value = video.type;
-  document.getElementById('learningEditId').value = video.id || video.url;
-  document.getElementById('learningEditFirstVideoId').value = video.firstVideoId || '';
-  document.getElementById('learningEditCategory').value = video.category || '';
-  document.getElementById('learningEditSubcategory').value = video.subcategory || '';
-  document.getElementById('learningEditTopic').value = video.topic || '';
-  document.getElementById('learningEditProtected').checked = video.protected || false;
-  toggleLearningFirstVideoIdField(video.type, 'edit');
-  document.getElementById('learningEditVideoModal').style.display = 'flex';
-}
-
-document.getElementById('learningCancelEditVideo').addEventListener('click', () => { 
-  document.getElementById('learningEditVideoModal').style.display = 'none'; 
-});
-
-document.getElementById('learningEditVideoForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  await updateDoc(doc(learningDb, "videos", document.getElementById('learningEditVideoId').value), {
-    title: document.getElementById('learningEditTitle').value,
-    type: document.getElementById('learningEditType').value,
-    id: document.getElementById('learningEditId').value,
-    url: document.getElementById('learningEditId').value,
-    firstVideoId: document.getElementById('learningEditFirstVideoId').value.trim(),
-    category: document.getElementById('learningEditCategory').value,
-    subcategory: document.getElementById('learningEditSubcategory').value,
-    topic: document.getElementById('learningEditTopic').value,
-    protected: document.getElementById('learningEditProtected').checked,
-    updatedAt: serverTimestamp()
-  });
-  const status = document.getElementById('learningEditVideoStatus');
-  status.textContent = '✅ Updated!';
-  status.className = 'learning-video-status status-success';
-  status.style.display = 'block';
-  setTimeout(() => { 
-    document.getElementById('learningEditVideoModal').style.display = 'none';
-    status.style.display = 'none';
-  }, 1500);
-});
-
-// Settings
-document.getElementById('learningSettingsBtn').addEventListener('click', () => { 
-  if (learningCurrentUser) document.getElementById('learningSettingsModal').style.display = 'flex'; 
-});
-
-document.getElementById('learningCancelSettings').addEventListener('click', () => { 
-  document.getElementById('learningSettingsModal').style.display = 'none'; 
-});
-
-document.getElementById('learningSettingsForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const newPass = document.getElementById('learningNewVideoPassword').value;
-  const confirmPass = document.getElementById('learningConfirmVideoPassword').value;
-  if (newPass !== confirmPass) {
-    const status = document.getElementById('learningSettingsStatus');
-    status.textContent = '❌ Passwords do not match';
-    status.className = 'learning-settings-status status-error';
-    status.style.display = 'block';
-    return;
-  }
-  await setDoc(doc(learningDb, "settings", "videoPassword"), { password: newPass, updatedAt: serverTimestamp() });
-  learningVideoPassword = newPass;
-  const status = document.getElementById('learningSettingsStatus');
-  status.textContent = '✅ Password updated!';
-  status.className = 'learning-settings-status status-success';
-  status.style.display = 'block';
-  setTimeout(() => { 
-    document.getElementById('learningSettingsModal').style.display = 'none';
-    document.getElementById('learningSettingsForm').reset();
-    status.style.display = 'none';
-  }, 1500);
-});
-
-// Event Listeners
-learningCategoryFilter.addEventListener('change', () => { updateLearningSubcategories(); updateLearningTopics(); applyLearningFilters(); });
-learningSubcategoryFilter.addEventListener('change', () => { updateLearningTopics(); applyLearningFilters(); });
-learningTopicFilter.addEventListener('change', () => { applyLearningFilters(); });
-learningSearchBox.addEventListener('input', () => { applyLearningFilters(); });
-document.getElementById('learningHeaderTitle').addEventListener('click', () => { 
-  learningCategoryFilter.value = ''; 
-  learningSubcategoryFilter.value = ''; 
-  learningTopicFilter.value = ''; 
-  learningSearchBox.value = ''; 
-  updateLearningSubcategories(); 
-  updateLearningTopics(); 
-  applyLearningFilters(); 
-});
-document.getElementById('learningClosePopup').addEventListener('click', () => { 
-  document.getElementById('learningPopupModal').style.display = 'none'; 
-  document.getElementById('learningPopupFrame').src = ''; 
-});
-document.getElementById('learningBackBtn').addEventListener('click', () => { 
-  document.getElementById('learningPopupModal').style.display = 'none'; 
-  document.getElementById('learningPopupFrame').src = ''; 
-});
-document.getElementById('learningSubmitPassword').addEventListener('click', validateLearningPassword);
-document.getElementById('learningVideoPassword').addEventListener('keypress', (e) => { 
-  if (e.key === 'Enter') validateLearningPassword(); 
-});
-document.getElementById('learningCancelPassword').addEventListener('click', () => { 
-  document.getElementById('learningPasswordModal').style.display = 'none'; 
-  learningCurrentVideo = null; 
-});
-document.getElementById('learningCancelAuth').addEventListener('click', () => { 
-  document.getElementById('learningAuthModal').style.display = 'none'; 
-});
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    document.getElementById('learningPasswordModal').style.display = 'none';
-    document.getElementById('learningPopupModal').style.display = 'none'; 
-    document.getElementById('learningPopupFrame').src = '';
-    document.getElementById('learningAddVideoModal').style.display = 'none';
-    document.getElementById('learningEditVideoModal').style.display = 'none';
-    document.getElementById('learningSettingsModal').style.display = 'none';
-    if (learningNotesUnsubscribe) { learningNotesUnsubscribe(); learningNotesUnsubscribe = null; }
-    document.getElementById('learningNotesModal').style.display = 'none';
-    document.getElementById('learningAuthModal').style.display = 'none';
-  }
-});
-</script>
-
 <script>
 // ========== CONFIGURATION ==========
 const CONTACTS_API_URL = 'https://script.google.com/macros/s/AKfycbw5pbk2gsqeVgEQDQ3vXa1XO__fa2OGZeKKViQ2nHO_TNdje6UFfsjzGoO6uEW3kE_T/exec';
@@ -2668,7 +1320,7 @@ navBtns.forEach(btn => {
 
 // ========== AUTO-FETCH ALL DATA ON APP LOAD ==========
 document.addEventListener('DOMContentLoaded', () => {
-  console.log(' App initialized - fetching all data...');
+  console.log('🚀 App initialized - fetching all data...');
   loadDirectory();
   loadDocuments();
   fetchLinks();
@@ -2840,6 +1492,37 @@ function handleGlobalSearch() {
     });
   }
   
+  // Search in Learning Videos (NEW)
+  if (typeof window.learningAllVideos !== 'undefined' && window.learningAllVideos.length > 0) {
+    window.learningAllVideos.forEach(video => {
+      const title = String(video.title || '');
+      const category = String(video.category || '');
+      const subcategory = String(video.subcategory || '');
+      const topic = String(video.topic || '');
+      const meta = [category, subcategory, topic].filter(Boolean).join(' ');
+      if (title.toLowerCase().includes(query) || category.toLowerCase().includes(query) || 
+          subcategory.toLowerCase().includes(query) || topic.toLowerCase().includes(query)) {
+        currentSearchResults.push({
+          name: title,
+          type: 'Learning',
+          desc: meta || 'Video',
+          icon: 'fa-video',
+          color: 'learning',
+          videoData: video,
+          action: () => {
+            document.querySelector('[data-screen="learning"]').click();
+            setTimeout(() => {
+              if (typeof window.playLearningVideo === 'function') {
+                window.playLearningVideo(video);
+              }
+            }, 300);
+            closeSearchOverlay();
+          }
+        });
+      }
+    });
+  }
+  
   // Display results
   if (currentSearchResults.length === 0) {
     searchOverlayResults.innerHTML = `
@@ -2849,18 +1532,23 @@ function handleGlobalSearch() {
       </div>
     `;
   } else {
-    searchOverlayResults.innerHTML = currentSearchResults.slice(0, 15).map((result, index) => `
-      <div class="search-result-item" data-index="${index}">
-        <div class="search-result-icon ${result.color}">
-          <i class="bi ${result.icon}"></i>
+    searchOverlayResults.innerHTML = currentSearchResults.slice(0, 15).map((result, index) => {
+      const iconHtml = result.icon.startsWith('fa-') 
+        ? `<i class="fas ${result.icon}"></i>` 
+        : `<i class="bi ${result.icon}"></i>`;
+      return `
+        <div class="search-result-item" data-index="${index}">
+          <div class="search-result-icon ${result.color}">
+            ${iconHtml}
+          </div>
+          <div class="search-result-content">
+            <div class="search-result-type">${result.type}</div>
+            <div class="search-result-title">${escapeHtml(result.name)}</div>
+            <div class="search-result-desc">${escapeHtml(result.desc)}</div>
+          </div>
         </div>
-        <div class="search-result-content">
-          <div class="search-result-type">${result.type}</div>
-          <div class="search-result-title">${escapeHtml(result.name)}</div>
-          <div class="search-result-desc">${escapeHtml(result.desc)}</div>
-        </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
   }
 }
 
@@ -2883,7 +1571,7 @@ const timeTextEl = document.getElementById('timeText');
 const nepaliDateText = document.getElementById('nepaliDateText');
 const nepaliMonthsDev = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मंसिर', 'पौष', 'माघ', 'फागुन', 'चैत'];
 const nepaliDaysDev = ['आइतबार', 'सोमबार', 'मङ्गलबार', 'बुधबार', 'बिहीबार', 'शुक्रबार', 'शनिबार'];
-const engToNepaliNum = { '0': '०', '1': '', '2': '२', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '९' };
+const engToNepaliNum = { '0': '०', '1': '१', '2': '२', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '' };
 function toNepaliNumber(num) { return num.toString().split('').map(d => engToNepaliNum[d] || d).join(''); }
 function convertToNepaliDate(date) {
   const year = date.getFullYear(); const month = date.getMonth(); const day = date.getDate();
@@ -2898,7 +1586,7 @@ function getNepalTime() { return new Date(new Date().toLocaleString('en-US', { t
 function updateDateTime() {
   const nepalNow = getNepalTime(); const hour = nepalNow.getHours(); let greeting, emoji;
   if (hour >= 5 && hour < 12) { greeting = 'Good Morning,'; emoji = '🌅'; }
-  else if (hour >= 12 && hour < 17) { greeting = 'Good Afternoon,'; emoji = '☀️'; }
+  else if (hour >= 12 && hour < 17) { greeting = 'Good Afternoon,'; emoji = '️'; }
   else if (hour >= 17 && hour < 21) { greeting = 'Good Evening,'; emoji = '🌇'; }
   else { greeting = 'Good Night,'; emoji = '🌙'; }
   greetingText.textContent = greeting; greetingEmoji.textContent = emoji;
@@ -2914,7 +1602,7 @@ updateDateTime(); setInterval(updateDateTime, 30000);
 const weatherContainer = document.getElementById('weatherContainer');
 const KATHMANDU = { lat: 27.7172, lon: 85.3240, name: 'Kathmandu' };
 function decodeWeather(code, isDay) {
-  const map = { 0: { icon: isDay ? '☀️' : '🌙', desc: 'Clear' }, 1: { icon: isDay ? '🌤️' : '🌙', desc: 'Mainly clear' }, 2: { icon: isDay ? '⛅' : '☁️', desc: 'Partly cloudy' }, 3: { icon: '☁️', desc: 'Overcast' }, 45: { icon: '️', desc: 'Foggy' }, 48: { icon: '🌫️', desc: 'Rime fog' }, 51: { icon: '🌦️', desc: 'Light drizzle' }, 53: { icon: '🌦️', desc: 'Drizzle' }, 55: { icon: '️', desc: 'Dense drizzle' }, 61: { icon: '🌧️', desc: 'Light rain' }, 63: { icon: '🌧️', desc: 'Rain' }, 65: { icon: '🌧️', desc: 'Heavy rain' }, 71: { icon: '️', desc: 'Light snow' }, 73: { icon: '🌨️', desc: 'Snow' }, 75: { icon: '❄️', desc: 'Heavy snow' }, 80: { icon: '️', desc: 'Rain showers' }, 81: { icon: '🌧️', desc: 'Heavy showers' }, 82: { icon: '⛈️', desc: 'Violent showers' }, 95: { icon: '⛈️', desc: 'Thunderstorm' }, 96: { icon: '⛈️', desc: 'Thunder + hail' }, 99: { icon: '⛈️', desc: 'Severe storm' } };
+  const map = { 0: { icon: isDay ? '☀️' : '🌙', desc: 'Clear' }, 1: { icon: isDay ? '🌤️' : '', desc: 'Mainly clear' }, 2: { icon: isDay ? '⛅' : '☁️', desc: 'Partly cloudy' }, 3: { icon: '☁️', desc: 'Overcast' }, 45: { icon: '🌫️', desc: 'Foggy' }, 48: { icon: '🌫️', desc: 'Rime fog' }, 51: { icon: '🌦️', desc: 'Light drizzle' }, 53: { icon: '🌦️', desc: 'Drizzle' }, 55: { icon: '🌧️', desc: 'Dense drizzle' }, 61: { icon: '🌧️', desc: 'Light rain' }, 63: { icon: '️', desc: 'Rain' }, 65: { icon: '🌧️', desc: 'Heavy rain' }, 71: { icon: '🌨️', desc: 'Light snow' }, 73: { icon: '️', desc: 'Snow' }, 75: { icon: '❄️', desc: 'Heavy snow' }, 80: { icon: '🌦️', desc: 'Rain showers' }, 81: { icon: '🌧️', desc: 'Heavy showers' }, 82: { icon: '⛈️', desc: 'Violent showers' }, 95: { icon: '⛈️', desc: 'Thunderstorm' }, 96: { icon: '⛈️', desc: 'Thunder + hail' }, 99: { icon: '⛈️', desc: 'Severe storm' } };
   return map[code] || { icon: '🌡️', desc: 'Unknown' };
 }
 async function fetchWeather() {
@@ -3301,6 +1989,482 @@ function escapeHtml(text) { if (!text) return ''; return String(text).replace(/[
 function showToast(msg, type = 'success') { const toast = document.getElementById('toastMsg'); toast.textContent = msg; toast.className = `toast-msg show ${type}`; setTimeout(() => toast.classList.remove('show'), 2500); }
 
 if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').then(reg => console.log('✅ SW:', reg.scope)).catch(err => console.log('❌ SW:', err)); }); }
+</script>
+
+<!-- Firebase SDKs for Learning Tab -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc, updateDoc, serverTimestamp, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyB82MwSrGp35eS2ZXBsBlhie6EL6s-5HK0",
+  authDomain: "videolibrary-4709d.firebaseapp.com",
+  projectId: "videolibrary-4709d",
+  storageBucket: "videolibrary-4709d.firebasestorage.app",
+  messagingSenderId: "752788156798",
+  appId: "1:752788156798:web:df6dc050abc7de4150432f"
+};
+
+let learningDb, learningAuth;
+let learningAllVideos = [];
+let learningFilteredVideos = [];
+let learningCurrentPage = 1;
+let learningVideoPassword = "Animator";
+let learningCurrentUser = null;
+let learningCurrentVideo = null;
+let learningNotesUnsubscribe = null;
+let learningVideosLoaded = false;
+const LEARNING_VIDEOS_PER_PAGE = 100;
+
+// Expose to global scope for global search
+window.learningAllVideos = learningAllVideos;
+window.playLearningVideo = null;
+
+try {
+  const app = initializeApp(firebaseConfig);
+  learningDb = getFirestore(app);
+  learningAuth = getAuth(app);
+  console.log("✅ Learning Firebase initialized");
+  
+  onAuthStateChanged(learningAuth, (user) => {
+    learningCurrentUser = user;
+    updateLearningAdminUI();
+    if (learningVideosLoaded) renderLearningVideos();
+  });
+  
+  onSnapshot(query(collection(learningDb, "videos"), orderBy("createdAt", "desc")),
+    (snapshot) => {
+      console.log("📹 Learning snapshot:", snapshot.size, "videos");
+      learningAllVideos = snapshot.docs.map(d => ({ firestoreId: d.id, ...d.data() }));
+      window.learningAllVideos = learningAllVideos;
+      learningVideosLoaded = true;
+      populateLearningFilters();
+      applyLearningFilters();
+    },
+    (error) => {
+      console.error("❌ Learning error:", error);
+      document.getElementById('learningVideoGrid').innerHTML = `<div class="state-msg"><i class="fas fa-exclamation-triangle"></i><p>Error loading videos</p></div>`;
+    }
+  );
+  
+  onSnapshot(doc(learningDb, "settings", "videoPassword"), (docSnap) => {
+    if (docSnap.exists()) {
+      learningVideoPassword = docSnap.data().password || "Animator";
+    } else {
+      setDoc(doc(learningDb, "settings", "videoPassword"), { password: "Animator", updatedAt: serverTimestamp() });
+    }
+  });
+  
+} catch (error) {
+  console.error("Firebase init error:", error);
+}
+
+function updateLearningAdminUI() {
+  const addBtn = document.getElementById('learningAddVideoBtn');
+  const settingsBtn = document.getElementById('learningSettingsBtn');
+  const authBtn = document.getElementById('learningAuthBtn');
+  const userInfo = document.getElementById('learningUserInfo');
+  const userEmail = document.getElementById('learningUserEmail');
+  
+  if (learningCurrentUser) {
+    addBtn.style.display = 'flex';
+    settingsBtn.style.display = 'flex';
+    authBtn.innerHTML = '<i class="fas fa-sign-out-alt"></i> Logout';
+    authBtn.classList.add('logout');
+    userInfo.style.display = 'flex';
+    userEmail.textContent = learningCurrentUser.email;
+  } else {
+    addBtn.style.display = 'none';
+    settingsBtn.style.display = 'none';
+    authBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+    authBtn.classList.remove('logout');
+    userInfo.style.display = 'none';
+  }
+}
+
+function getLearningYouTubeId(url) {
+  if (!url) return null;
+  const match = url.trim().match(/^.*(youtu\.be\/|v\/|embed\/|watch\?v=)([^#&?]*).*/);
+  return (match && match[2].length === 11) ? match[2] : null;
+}
+
+function getLearningThumbnailUrl(item) {
+  if (item.type === "youtube") {
+    const id = getLearningYouTubeId(item.url || item.id);
+    return id ? `https://img.youtube.com/vi/${id}/mqdefault.jpg` : null;
+  } else if (item.type === "youtube-playlist") {
+    return item.firstVideoId ? `https://img.youtube.com/vi/${item.firstVideoId}/mqdefault.jpg` : null;
+  } else if ((item.type === "drive" || item.type === "pdf") && item.id) {
+    return `https://drive.google.com/thumbnail?id=${item.id}&sz=w640`;
+  }
+  return null;
+}
+
+function getLearningEmbedUrl(item) {
+  if (item.type === "youtube") {
+    const id = getLearningYouTubeId(item.url || item.id);
+    return id ? `https://www.youtube.com/embed/${id}?autoplay=1` : null;
+  } else if (item.type === "youtube-playlist") {
+    return `https://www.youtube.com/embed/videoseries?list=${item.id}&autoplay=1`;
+  } else if ((item.type === "drive" || item.type === "pdf") && item.id) {
+    return `https://drive.google.com/file/d/${item.id}/preview`;
+  }
+  return null;
+}
+
+function getLearningTypeBadge(type) {
+  return { 'youtube': 'YouTube', 'drive': 'Drive', 'pdf': 'PDF', 'youtube-playlist': 'Playlist' }[type] || 'Video';
+}
+
+function getLearningTypeClass(type) {
+  return { 'youtube': 'type-youtube', 'drive': 'type-drive', 'pdf': 'type-pdf', 'youtube-playlist': 'type-playlist' }[type] || '';
+}
+
+function getLearningTypeIcon(type) {
+  return { 'youtube': 'fa-youtube', 'drive': 'fa-google-drive', 'pdf': 'fa-file-pdf', 'youtube-playlist': 'fa-list' }[type] || 'fa-video';
+}
+
+function populateLearningFilters() {
+  const cats = [...new Set(learningAllVideos.map(v => (v.category || "Uncategorized").trim()))].sort();
+  const categoryFilter = document.getElementById('learningCategoryFilter');
+  categoryFilter.innerHTML = '<option value="">All Categories</option>';
+  cats.forEach(cat => {
+    const opt = document.createElement('option');
+    opt.value = cat;
+    opt.textContent = cat;
+    categoryFilter.appendChild(opt);
+  });
+  updateLearningSubcategories();
+}
+
+function updateLearningSubcategories() {
+  const cat = document.getElementById('learningCategoryFilter').value.trim();
+  const subcategoryFilter = document.getElementById('learningSubcategoryFilter');
+  const topicFilter = document.getElementById('learningTopicFilter');
+  subcategoryFilter.innerHTML = '<option value="">All Subcategories</option>';
+  topicFilter.innerHTML = '<option value="">All Topics</option>';
+  if (!cat) return;
+  const subs = [...new Set(learningAllVideos.filter(v => v.category === cat).map(v => v.subcategory).filter(Boolean))].sort();
+  subs.forEach(sub => {
+    const opt = document.createElement('option');
+    opt.value = sub;
+    opt.textContent = sub;
+    subcategoryFilter.appendChild(opt);
+  });
+  updateLearningTopics();
+}
+
+function updateLearningTopics() {
+  const cat = document.getElementById('learningCategoryFilter').value.trim();
+  const sub = document.getElementById('learningSubcategoryFilter').value.trim();
+  const topicFilter = document.getElementById('learningTopicFilter');
+  topicFilter.innerHTML = '<option value="">All Topics</option>';
+  if (!cat || !sub) return;
+  const topics = [...new Set(learningAllVideos.filter(v => v.category === cat && v.subcategory === sub).map(v => v.topic).filter(Boolean))].sort();
+  topics.forEach(top => {
+    const opt = document.createElement('option');
+    opt.value = top;
+    opt.textContent = top;
+    topicFilter.appendChild(opt);
+  });
+}
+
+function createLearningVideoCard(video) {
+  const card = document.createElement('div');
+  card.className = 'learning-card';
+  const thumbUrl = getLearningThumbnailUrl(video);
+  const meta = [video.category, video.subcategory, video.topic].filter(Boolean).join(' • ');
+  let thumbHtml = thumbUrl ? `<img src="${thumbUrl}" class="loaded">` : `<div class="placeholder"><i class="fas ${getLearningTypeIcon(video.type)}"></i></div>`;
+  const typeBadge = `<div class="learning-type-badge ${getLearningTypeClass(video.type)}"><i class="fas ${getLearningTypeIcon(video.type)} me-1"></i>${getLearningTypeBadge(video.type)}</div>`;
+  const adminActionsHtml = learningCurrentUser ? `
+    <div class="learning-admin-actions">
+      <button class="learning-admin-action-btn learning-notes-btn" title="Notes"><i class="fas fa-sticky-note"></i></button>
+      <button class="learning-admin-action-btn learning-edit-btn" title="Edit"><i class="fas fa-edit"></i></button>
+      <button class="learning-admin-action-btn learning-delete-btn" title="Delete"><i class="fas fa-trash"></i></button>
+    </div>` : '';
+  
+  card.innerHTML = `
+    <div class="learning-thumb">
+      ${thumbHtml}
+      ${typeBadge}
+      ${video.protected ? `<div class="learning-protected-badge"><i class="fas fa-lock"></i></div>` : ''}
+      ${adminActionsHtml}
+    </div>
+    <div class="learning-content">
+      <div class="learning-card-title">${video.title}</div>
+      <div class="learning-card-meta">${meta}</div>
+    </div>`;
+  
+  if (learningCurrentUser) {
+    card.querySelector('.learning-notes-btn')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openLearningNotesModal(video);
+    });
+    card.querySelector('.learning-edit-btn')?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openLearningEditModal(video);
+    });
+    card.querySelector('.learning-delete-btn')?.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      if (confirm(`Delete "${video.title}"?`)) {
+        await deleteDoc(doc(learningDb, "videos", video.firestoreId));
+      }
+    });
+  }
+  
+  if (thumbUrl) {
+    const img = card.querySelector('img');
+    img.onerror = () => { img.style.display = 'none'; card.querySelector('.placeholder').style.display = 'flex'; };
+  }
+  
+  card.addEventListener('click', () => openLearningVideo(video));
+  return card;
+}
+
+function openLearningVideo(video) {
+  if (video.protected && !learningCurrentUser) {
+    learningCurrentVideo = video;
+    document.getElementById('learningPasswordModal').style.display = 'flex';
+    document.getElementById('learningVideoPassword').value = '';
+    document.getElementById('learningPasswordError').style.display = 'none';
+  } else {
+    playLearningInPopup(video);
+  }
+}
+
+function playLearningInPopup(video) {
+  const url = getLearningEmbedUrl(video);
+  if (!url) { alert("Content not available"); return; }
+  document.getElementById('learningPopupTitle').textContent = video.title;
+  document.getElementById('learningPopupFrame').src = url;
+  document.getElementById('learningPopupModal').style.display = 'flex';
+}
+
+// Expose playLearningVideo to global scope
+window.playLearningVideo = (video) => {
+  openLearningVideo(video);
+};
+
+function validateLearningPassword() {
+  if (document.getElementById('learningVideoPassword').value === learningVideoPassword) {
+    document.getElementById('learningPasswordModal').style.display = 'none';
+    if (learningCurrentVideo) { playLearningInPopup(learningCurrentVideo); learningCurrentVideo = null; }
+  } else {
+    document.getElementById('learningPasswordError').style.display = 'block';
+  }
+}
+
+function applyLearningFilters() {
+  let list = [...learningAllVideos];
+  const cat = document.getElementById('learningCategoryFilter').value.trim();
+  const sub = document.getElementById('learningSubcategoryFilter').value.trim();
+  const top = document.getElementById('learningTopicFilter').value.trim();
+  const qry = document.getElementById('learningSearchBox').value.trim().toLowerCase();
+  if (cat) list = list.filter(v => v.category === cat);
+  if (sub) list = list.filter(v => v.subcategory === sub);
+  if (top) list = list.filter(v => v.topic === top);
+  if (qry) {
+    list = list.filter(v => v.title.toLowerCase().includes(qry) || v.category?.toLowerCase().includes(qry));
+  }
+  learningFilteredVideos = list;
+  learningCurrentPage = 1;
+  renderLearningVideos();
+}
+
+function renderLearningVideos() {
+  if (!learningAllVideos.length) {
+    document.getElementById('learningVideoGrid').innerHTML = `<div class="state-msg"><i class="fas fa-inbox"></i><p>No videos found</p></div>`;
+    document.getElementById('learningPagination').innerHTML = '';
+    return;
+  }
+  const totalPages = Math.max(1, Math.ceil(learningFilteredVideos.length / LEARNING_VIDEOS_PER_PAGE));
+  learningCurrentPage = Math.min(learningCurrentPage, totalPages);
+  const pageVideos = learningFilteredVideos.slice((learningCurrentPage - 1) * LEARNING_VIDEOS_PER_PAGE, learningCurrentPage * LEARNING_VIDEOS_PER_PAGE);
+  const grid = document.getElementById('learningVideoGrid');
+  grid.innerHTML = '';
+  pageVideos.forEach(v => grid.appendChild(createLearningVideoCard(v)));
+  renderLearningPagination(totalPages);
+}
+
+function renderLearningPagination(totalPages) {
+  const paginationEl = document.getElementById('learningPagination');
+  paginationEl.innerHTML = '';
+  if (totalPages <= 1) return;
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement('button');
+    btn.textContent = i;
+    if (i === learningCurrentPage) btn.classList.add('active');
+    btn.onclick = () => { learningCurrentPage = i; renderLearningVideos(); };
+    paginationEl.appendChild(btn);
+  }
+}
+
+function openLearningNotesModal(video) {
+  document.getElementById('learningNotesVideoTitle').textContent = `📹 ${video.title}`;
+  document.getElementById('learningNoteTextarea').value = '';
+  document.getElementById('learningNotesStatus').textContent = '';
+  document.getElementById('learningNotesModal').style.display = 'flex';
+}
+
+function openLearningEditModal(video) {
+  document.getElementById('learningEditVideoId').value = video.firestoreId;
+  document.getElementById('learningEditTitle').value = video.title;
+  document.getElementById('learningEditType').value = video.type;
+  document.getElementById('learningEditId').value = video.id || video.url;
+  document.getElementById('learningEditFirstVideoId').value = video.firstVideoId || '';
+  document.getElementById('learningEditCategory').value = video.category || '';
+  document.getElementById('learningEditSubcategory').value = video.subcategory || '';
+  document.getElementById('learningEditTopic').value = video.topic || '';
+  document.getElementById('learningEditProtected').checked = video.protected || false;
+  document.getElementById('learningEditVideoModal').style.display = 'flex';
+}
+
+// Event Listeners
+document.getElementById('learningCategoryFilter').addEventListener('change', () => { updateLearningSubcategories(); updateLearningTopics(); applyLearningFilters(); });
+document.getElementById('learningSubcategoryFilter').addEventListener('change', () => { updateLearningTopics(); applyLearningFilters(); });
+document.getElementById('learningTopicFilter').addEventListener('change', () => { applyLearningFilters(); });
+document.getElementById('learningSearchBox').addEventListener('input', () => { applyLearningFilters(); });
+document.getElementById('learningHeaderTitle').addEventListener('click', () => { 
+  document.getElementById('learningCategoryFilter').value = ''; 
+  document.getElementById('learningSubcategoryFilter').value = ''; 
+  document.getElementById('learningTopicFilter').value = ''; 
+  document.getElementById('learningSearchBox').value = ''; 
+  updateLearningSubcategories(); 
+  updateLearningTopics(); 
+  applyLearningFilters(); 
+});
+document.getElementById('learningClosePopup').addEventListener('click', () => { 
+  document.getElementById('learningPopupModal').style.display = 'none'; 
+  document.getElementById('learningPopupFrame').src = ''; 
+});
+document.getElementById('learningBackBtn').addEventListener('click', () => { 
+  document.getElementById('learningPopupModal').style.display = 'none'; 
+  document.getElementById('learningPopupFrame').src = ''; 
+});
+document.getElementById('learningSubmitPassword').addEventListener('click', validateLearningPassword);
+document.getElementById('learningVideoPassword').addEventListener('keypress', (e) => { if (e.key === 'Enter') validateLearningPassword(); });
+document.getElementById('learningCancelPassword').addEventListener('click', () => { 
+  document.getElementById('learningPasswordModal').style.display = 'none'; 
+  learningCurrentVideo = null; 
+});
+document.getElementById('learningAuthBtn').addEventListener('click', () => {
+  if (learningCurrentUser) { signOut(learningAuth); } else { document.getElementById('learningAuthModal').style.display = 'flex'; }
+});
+document.getElementById('learningAuthForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  try {
+    await signInWithEmailAndPassword(learningAuth, document.getElementById('learningAuthEmail').value, document.getElementById('learningAuthPassword').value);
+    document.getElementById('learningAuthModal').style.display = 'none';
+  } catch (error) {
+    document.getElementById('learningAuthError').textContent = error.message;
+    document.getElementById('learningAuthError').style.display = 'block';
+  }
+});
+document.getElementById('learningCancelAuth').addEventListener('click', () => { document.getElementById('learningAuthModal').style.display = 'none'; });
+document.getElementById('learningAddVideoBtn').addEventListener('click', () => {
+  if (learningCurrentUser) { document.getElementById('learningAddVideoModal').style.display = 'flex'; }
+});
+document.getElementById('learningCancelAddVideo').addEventListener('click', () => { document.getElementById('learningAddVideoModal').style.display = 'none'; });
+document.getElementById('learningAddVideoForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const newVideo = {
+    title: document.getElementById('learningNewTitle').value,
+    type: document.getElementById('learningNewType').value,
+    id: document.getElementById('learningNewId').value,
+    url: document.getElementById('learningNewId').value,
+    firstVideoId: document.getElementById('learningNewFirstVideoId').value.trim(),
+    category: document.getElementById('learningNewCategory').value,
+    subcategory: document.getElementById('learningNewSubcategory').value,
+    topic: document.getElementById('learningNewTopic').value,
+    protected: document.getElementById('learningNewProtected').checked,
+    createdAt: serverTimestamp(),
+    addedBy: learningCurrentUser.email
+  };
+  await addDoc(collection(learningDb, "videos"), newVideo);
+  document.getElementById('learningAddVideoStatus').textContent = '✅ Added!';
+  document.getElementById('learningAddVideoStatus').className = 'status-success';
+  setTimeout(() => { document.getElementById('learningAddVideoModal').style.display = 'none'; }, 1500);
+});
+document.getElementById('learningCancelEditVideo').addEventListener('click', () => { document.getElementById('learningEditVideoModal').style.display = 'none'; });
+document.getElementById('learningEditVideoForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  await updateDoc(doc(learningDb, "videos", document.getElementById('learningEditVideoId').value), {
+    title: document.getElementById('learningEditTitle').value,
+    type: document.getElementById('learningEditType').value,
+    id: document.getElementById('learningEditId').value,
+    url: document.getElementById('learningEditId').value,
+    firstVideoId: document.getElementById('learningEditFirstVideoId').value.trim(),
+    category: document.getElementById('learningEditCategory').value,
+    subcategory: document.getElementById('learningEditSubcategory').value,
+    topic: document.getElementById('learningEditTopic').value,
+    protected: document.getElementById('learningEditProtected').checked,
+    updatedAt: serverTimestamp()
+  });
+  document.getElementById('learningEditVideoStatus').textContent = '✅ Updated!';
+  document.getElementById('learningEditVideoStatus').className = 'status-success';
+  setTimeout(() => { document.getElementById('learningEditVideoModal').style.display = 'none'; }, 1500);
+});
+document.getElementById('learningSettingsBtn').addEventListener('click', () => { if (learningCurrentUser) document.getElementById('learningSettingsModal').style.display = 'flex'; });
+document.getElementById('learningCancelSettings').addEventListener('click', () => { document.getElementById('learningSettingsModal').style.display = 'none'; });
+document.getElementById('learningSettingsForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const newPass = document.getElementById('learningNewVideoPassword').value;
+  const confirmPass = document.getElementById('learningConfirmVideoPassword').value;
+  if (newPass !== confirmPass) {
+    document.getElementById('learningSettingsStatus').textContent = '❌ Passwords do not match';
+    document.getElementById('learningSettingsStatus').className = 'status-error';
+    return;
+  }
+  await setDoc(doc(learningDb, "settings", "videoPassword"), { password: newPass, updatedAt: serverTimestamp() });
+  learningVideoPassword = newPass;
+  document.getElementById('learningSettingsStatus').textContent = '✅ Password updated!';
+  document.getElementById('learningSettingsStatus').className = 'status-success';
+  setTimeout(() => { document.getElementById('learningSettingsModal').style.display = 'none'; }, 1500);
+});
+document.getElementById('learningCancelNotes').addEventListener('click', () => { document.getElementById('learningNotesModal').style.display = 'none'; });
+document.getElementById('learningSaveNote').addEventListener('click', async () => {
+  if (!learningCurrentUser) {
+    document.getElementById('learningNotesStatus').textContent = '❌ Please login';
+    document.getElementById('learningNotesStatus').className = 'status-error';
+    return;
+  }
+  const content = document.getElementById('learningNoteTextarea').value.trim();
+  if (!content) {
+    document.getElementById('learningNotesStatus').textContent = '❌ Note cannot be empty';
+    document.getElementById('learningNotesStatus').className = 'status-error';
+    return;
+  }
+  try {
+    await addDoc(collection(learningDb, "notes"), {
+      videoId: document.getElementById('learningNotesVideoTitle').textContent.replace('📹 ', ''),
+      userId: learningCurrentUser.uid,
+      userEmail: learningCurrentUser.email,
+      content,
+      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp()
+    });
+    document.getElementById('learningNotesStatus').textContent = '✅ Note saved!';
+    document.getElementById('learningNotesStatus').className = 'status-success';
+    document.getElementById('learningNoteTextarea').value = '';
+    setTimeout(() => { document.getElementById('learningNotesStatus').textContent = ''; }, 2000);
+  } catch (error) {
+    document.getElementById('learningNotesStatus').textContent = `❌ Failed: ${error.message}`;
+    document.getElementById('learningNotesStatus').className = 'status-error';
+  }
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.getElementById('learningPasswordModal').style.display = 'none';
+    document.getElementById('learningPopupModal').style.display = 'none'; 
+    document.getElementById('learningPopupFrame').src = '';
+    document.getElementById('learningAddVideoModal').style.display = 'none';
+    document.getElementById('learningEditVideoModal').style.display = 'none';
+    document.getElementById('learningSettingsModal').style.display = 'none';
+    document.getElementById('learningNotesModal').style.display = 'none';
+    document.getElementById('learningAuthModal').style.display = 'none';
+  }
+});
 </script>
 </body>
 </html>
