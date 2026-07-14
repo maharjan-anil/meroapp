@@ -49,6 +49,29 @@
   --np-white: #ffffff;
   --np-soft: #f8f9fc;
   --np-border: #e5e7eb;
+  
+  /* Nexus Learning Colors */
+  --bg-dark: #030305;
+  --bg-card-hover: #12121a;
+  --bg-glass: rgba(13, 13, 18, 0.85);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-accent: rgba(124, 58, 237, 0.3);
+  --accent-purple: #7c3aed;
+  --accent-blue: #3b82f6;
+  --accent-cyan: #06b6d4;
+  --accent-pink: #ec4899;
+  --accent-orange: #f97316;
+  --accent-green: #10b981;
+  --accent-red: #ef4444;
+  --gradient-primary: linear-gradient(135deg, #7c3aed 0%, #3b82f6 50%, #06b6d4 100%);
+  --gradient-glow: radial-gradient(ellipse at center, rgba(124, 58, 237, 0.15) 0%, transparent 70%);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+  --shadow-glow: 0 0 40px rgba(124, 58, 237, 0.2);
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
 }
 [data-theme="dark"] {
   --bg-body: #0a0e1a;
@@ -480,9 +503,10 @@ body.modal-open { overflow: hidden; }
   background: rgba(0,0,0,0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; z-index: 2;
 }
 
-.note-card { background: #fef3c7; border: none; transform: rotate(-1deg); transition: transform 0.2s; }
+/* DARK STICKY NOTES */
+.note-card { background: #1a1a2e; border: 1px solid #2a2a4a; transform: rotate(-1deg); transition: transform 0.2s; }
 .note-card:active { transform: rotate(0deg) scale(1.02); }
-.note-content { font-family: 'Courier New', monospace; font-size: 0.9rem; color: #1f2937; white-space: pre-wrap; margin-bottom: 12px; word-break: break-word; }
+.note-content { font-family: 'Courier New', monospace; font-size: 0.9rem; color: #e0e0e0; white-space: pre-wrap; margin-bottom: 12px; word-break: break-word; }
 
 .state-msg { text-align: center; padding: 60px 20px; color: var(--text-secondary); }
 .state-msg i { font-size: 3.5rem; color: var(--text-tertiary); margin-bottom: 16px; display: block; }
@@ -551,11 +575,11 @@ body.modal-open { overflow: hidden; }
 .toast-msg.success { background: var(--success); color: white; }
 .toast-msg.error { background: var(--danger); color: white; }
 
-/* Nepal Province Modal Styles */
+/* Nepal Province Modal - DARK THEME */
 .nepal-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.9);
+  background: rgba(0,0,0,0.95);
   z-index: 5000;
   display: none;
   align-items: center;
@@ -567,29 +591,31 @@ body.modal-open { overflow: hidden; }
   display: flex;
 }
 .nepal-modal-content {
-  background: var(--np-soft);
+  background: #0a0e1a;
   border-radius: 20px;
   width: 100%;
   max-width: 900px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8);
   animation: modalSlideIn 0.4s ease;
+  border: 1px solid #2a3142;
 }
 .nepal-hero {
   background: linear-gradient(135deg, var(--np-crimson) 0%, #a01030 50%, var(--np-blue) 100%);
-  color: white;
+  color: #fff;
   padding: 3rem 2rem;
   text-align: center;
   position: relative;
   overflow: hidden;
 }
 .nepal-hero::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.08) 0, transparent 40%),
-                    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.06) 0, transparent 40%);
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(255,255,255,0.08) 0, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(255,255,255,0.06) 0, transparent 40%);
   pointer-events: none;
 }
 .nepal-flag {
@@ -617,11 +643,11 @@ body.modal-open { overflow: hidden; }
   z-index: 1;
 }
 .nepal-stat-card {
-  background: white;
+  background: #151a28;
   border-radius: 14px;
   padding: 1.5rem;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-  border: 1px solid var(--np-border);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  border: 1px solid #2a3142;
   text-align: center;
 }
 .nepal-stat-icon {
@@ -655,9 +681,11 @@ body.modal-open { overflow: hidden; }
   width: 100%;
   padding: 1rem 1.25rem 1rem 3rem;
   border-radius: 999px;
-  border: 2px solid var(--np-border);
+  border: 2px solid #2a3142;
   font-size: 1rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition: border-color .2s, box-shadow .2s;
+  background: #151a28;
+  color: #f1f5f9;
 }
 .nepal-search-input:focus {
   border-color: var(--np-crimson);
@@ -681,14 +709,13 @@ body.modal-open { overflow: hidden; }
   margin-bottom: 1.5rem;
   position: relative;
   display: inline-block;
+  color: #f1f5f9;
 }
 .nepal-section-title::after {
-  content: '';
+  content: "";
   position: absolute;
-  left: 0;
-  bottom: -8px;
-  width: 60px;
-  height: 4px;
+  left: 0; bottom: -8px;
+  width: 60px; height: 4px;
   border-radius: 2px;
   background: linear-gradient(90deg, var(--np-crimson), var(--np-blue));
 }
@@ -696,11 +723,11 @@ body.modal-open { overflow: hidden; }
   margin-bottom: 1rem;
 }
 .nepal-province-item {
-  border: 1px solid var(--np-border);
-  border-radius: 12px;
+  border: 1px solid #2a3142;
+  border-radius: 12px !important;
   overflow: hidden;
   margin-bottom: 1rem;
-  background: white;
+  background: #151a28;
 }
 .nepal-province-header {
   padding: 1.25rem;
@@ -708,7 +735,7 @@ body.modal-open { overflow: hidden; }
   display: flex;
   align-items: center;
   gap: 1rem;
-  background: white;
+  background: #151a28;
   transition: background 0.2s;
 }
 .nepal-province-header:hover {
@@ -734,16 +761,17 @@ body.modal-open { overflow: hidden; }
 .nepal-province-name {
   font-weight: 700;
   font-size: 1.1rem;
+  color: #f1f5f9;
 }
 .nepal-province-capital {
   font-size: 0.85rem;
-  color: #6b7280;
+  color: #94a3b8;
 }
 .nepal-district-count {
   font-size: 0.85rem;
   font-weight: 600;
-  background: #f3f4f6;
-  color: #4b5563;
+  background: #2a3142;
+  color: #94a3b8;
   padding: 0.3rem 0.75rem;
   border-radius: 999px;
 }
@@ -760,15 +788,14 @@ body.modal-open { overflow: hidden; }
   gap: 0.75rem;
 }
 .nepal-district-card {
-  background: white;
-  border: 1px solid var(--np-border);
+  background: #1e2536;
+  border: 1px solid #2a3142;
   border-radius: 10px;
   padding: 0.85rem 1rem;
   text-align: center;
   font-weight: 600;
-  color: #374151;
-  transition: all 0.2s ease;
-  cursor: default;
+  color: #e2e8f0;
+  transition: all .2s ease;
 }
 .nepal-district-card:hover {
   transform: translateY(-3px);
@@ -779,19 +806,18 @@ body.modal-open { overflow: hidden; }
 .nepal-district-num {
   display: block;
   font-size: 0.72rem;
-  color: #9ca3af;
+  color: #64748b;
   font-weight: 500;
   margin-bottom: 2px;
 }
 .nepal-no-results {
   text-align: center;
   padding: 3rem 1rem;
-  color: #6b7280;
+  color: #94a3b8;
 }
-.nepal-no-results i {
-  font-size: 3rem;
-  color: #d1d5db;
-}
+.nepal-no-results i { font-size: 3rem; color: #475569; }
+.hidden-province { display: none !important; }
+.dim-district { opacity: 0.25; transform: scale(0.97); }
 .nepal-close-btn {
   position: fixed;
   top: 20px;
@@ -799,13 +825,13 @@ body.modal-open { overflow: hidden; }
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: white;
-  border: none;
-  color: var(--np-crimson);
+  background: #151a28;
+  border: 1px solid #2a3142;
+  color: #f1f5f9;
   font-size: 1.5rem;
   cursor: pointer;
   z-index: 5001;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.5);
   transition: transform 0.2s;
 }
 .nepal-close-btn:hover {
@@ -1253,7 +1279,7 @@ body.modal-open { overflow: hidden; }
         </div>
         <h3>Mero App</h3>
         <p>Tools, Directory, Documents, Links & Learning</p>
-        <span class="settings-version-badge">v22.3.0</span>
+        <span class="settings-version-badge">v22.4.0</span>
       </div>
       <div class="section-title">Preferences</div>
       <div class="settings-item">
@@ -1270,7 +1296,7 @@ body.modal-open { overflow: hidden; }
       <div class="section-title">About</div>
       <div class="settings-item">
         <div class="settings-icon-box blue"><i class="bi bi-info-circle-fill"></i></div>
-        <div class="settings-item-content"><h4>Version</h4><p>22.3.0 • July 2026</p></div>
+        <div class="settings-item-content"><h4>Version</h4><p>22.4.0 • July 2026</p></div>
       </div>
       <div class="settings-item">
         <div class="settings-icon-box pink"><i class="bi bi-heart-fill"></i></div>
@@ -1310,7 +1336,7 @@ body.modal-open { overflow: hidden; }
   </div>
 </div>
 
-<!-- Nepal Province Modal -->
+<!-- Nepal Province Modal - DARK THEME -->
 <div class="nepal-modal-overlay" id="nepalModal">
   <button class="nepal-close-btn" id="nepalCloseBtn"><i class="bi bi-x-lg"></i></button>
   <div class="nepal-modal-content">
@@ -1329,17 +1355,17 @@ body.modal-open { overflow: hidden; }
       <div class="nepal-stat-card">
         <div class="nepal-stat-icon red"><i class="bi bi-geo-alt-fill"></i></div>
         <div class="nepal-stat-number" data-count="7">0</div>
-        <div class="text-muted small fw-semibold">Provinces</div>
+        <div style="color: #94a3b8; font-size: 0.85rem; font-weight: 600;">Provinces</div>
       </div>
       <div class="nepal-stat-card">
         <div class="nepal-stat-icon blue"><i class="bi bi-pin-map-fill"></i></div>
         <div class="nepal-stat-number" data-count="77">0</div>
-        <div class="text-muted small fw-semibold">Districts</div>
+        <div style="color: #94a3b8; font-size: 0.85rem; font-weight: 600;">Districts</div>
       </div>
       <div class="nepal-stat-card">
         <div class="nepal-stat-icon dark"><i class="bi bi-people-fill"></i></div>
         <div class="nepal-stat-number" data-count="29" data-suffix="M+">0</div>
-        <div class="text-muted small fw-semibold">Population</div>
+        <div style="color: #94a3b8; font-size: 0.85rem; font-weight: 600;">Population</div>
       </div>
     </div>
     <div class="nepal-search position-relative">
@@ -1374,129 +1400,129 @@ body.modal-open { overflow: hidden; }
     <h5><i class="fas fa-lock me-2"></i>Secure Access</h5>
     <input type="password" id="learningVideoPassword" class="form-control" placeholder="Enter access code" autocomplete="off">
     <p id="learningPasswordError" class="learning-password-error"><i class="fas fa-exclamation-triangle me-2"></i>Incorrect password. Please try again.</p>
-    <div class="learning-password-actions">
-      <button class="btn-secondary" id="learningCancelPassword">Cancel</button>
-      <button class="btn-primary" id="learningSubmitPassword">Unlock</button>
+    <div class="d-flex justify-content-between mt-4">
+      <button id="learningCancelPassword" class="btn btn-secondary btn-sm">Cancel</button>
+      <button id="learningSubmitPassword" class="btn btn-primary btn-sm">Unlock</button>
     </div>
   </div>
 </div>
 
-<!-- Learning Add Video Modal -->
-<div class="learning-video-modal" id="learningAddVideoModal">
-  <div class="modal-content">
-    <h5><i class="fas fa-upload me-2"></i>Add New Video</h5>
-    <form id="learningAddVideoForm">
-      <div class="mb-3"><label class="form-label">Title</label><input type="text" id="learningNewTitle" class="form-control" required placeholder="Enter video title"></div>
-      <div class="mb-3"><label class="form-label">Type</label>
-        <select id="learningNewType" class="form-select" required>
-          <option value="youtube">YouTube</option>
-          <option value="drive">Google Drive</option>
-          <option value="pdf">PDF</option>
-          <option value="youtube-playlist">YouTube Playlist</option>
-        </select>
-      </div>
-      <div class="mb-3"><label class="form-label">ID / URL</label><input type="text" id="learningNewId" class="form-control" placeholder="Drive ID or YouTube URL" required></div>
-      <div class="mb-3" id="learningNewFirstVideoIdGroup" style="display:none;">
-        <label class="form-label"><i class="fas fa-film me-2"></i>First Video ID (for Thumbnail)</label>
-        <input type="text" id="learningNewFirstVideoId" class="form-control" placeholder="e.g., dQw4w9WgXcQ">
-      </div>
-      <div class="mb-3"><label class="form-label">Category</label><input type="text" id="learningNewCategory" class="form-control" list="learningCategoryList" required placeholder="Enter category"><datalist id="learningCategoryList"></datalist></div>
-      <div class="mb-3"><label class="form-label">Subcategory</label><input type="text" id="learningNewSubcategory" class="form-control" list="learningSubcategoryList" placeholder="Enter subcategory"><datalist id="learningSubcategoryList"></datalist></div>
-      <div class="mb-3"><label class="form-label">Topic</label><input type="text" id="learningNewTopic" class="form-control" list="learningTopicList" placeholder="Enter topic"><datalist id="learningTopicList"></datalist></div>
-      <div class="mb-3 form-check"><input type="checkbox" class="form-check-input" id="learningNewProtected"><label class="form-check-label" for="learningNewProtected"><i class="fas fa-lock me-2"></i>Password Protected</label></div>
-      <div id="learningAddVideoStatus"></div>
-      <div class="d-flex justify-content-between mt-4">
-        <button type="button" id="learningCancelAddVideo" class="btn btn-secondary">Cancel</button>
-        <button type="submit" class="btn btn-primary">Save Video</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- Learning Edit Video Modal -->
-<div class="learning-video-modal" id="learningEditVideoModal">
-  <div class="modal-content">
-    <h5><i class="fas fa-edit me-2"></i>Edit Video</h5>
-    <form id="learningEditVideoForm">
-      <input type="hidden" id="learningEditVideoId">
-      <div class="mb-3"><label class="form-label">Title</label><input type="text" id="learningEditTitle" class="form-control" required></div>
-      <div class="mb-3"><label class="form-label">Type</label>
-        <select id="learningEditType" class="form-select" required>
-          <option value="youtube">YouTube</option>
-          <option value="drive">Google Drive</option>
-          <option value="pdf">PDF</option>
-          <option value="youtube-playlist">YouTube Playlist</option>
-        </select>
-      </div>
-      <div class="mb-3"><label class="form-label">ID / URL</label><input type="text" id="learningEditId" class="form-control" required></div>
-      <div class="mb-3" id="learningEditFirstVideoIdGroup" style="display:none;">
-        <label class="form-label"><i class="fas fa-film me-2"></i>First Video ID (for Thumbnail)</label>
-        <input type="text" id="learningEditFirstVideoId" class="form-control" placeholder="e.g., dQw4w9WgXcQ">
-      </div>
-      <div class="mb-3"><label class="form-label">Category</label><input type="text" id="learningEditCategory" class="form-control" list="learningCategoryList" required></div>
-      <div class="mb-3"><label class="form-label">Subcategory</label><input type="text" id="learningEditSubcategory" class="form-control" list="learningSubcategoryList"></div>
-      <div class="mb-3"><label class="form-label">Topic</label><input type="text" id="learningEditTopic" class="form-control" list="learningTopicList"></div>
-      <div class="mb-3 form-check"><input type="checkbox" class="form-check-input" id="learningEditProtected"><label class="form-check-label" for="learningEditProtected"><i class="fas fa-lock me-2"></i>Password Protected</label></div>
-      <div id="learningEditVideoStatus"></div>
-      <div class="d-flex justify-content-between mt-4">
-        <button type="button" id="learningCancelEditVideo" class="btn btn-secondary">Cancel</button>
-        <button type="submit" class="btn btn-primary">Update Video</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- Learning Settings Modal -->
-<div class="learning-settings-modal" id="learningSettingsModal">
-  <div class="modal-content">
-    <h5><i class="fas fa-cog me-2"></i>Security Settings</h5>
-    <form id="learningSettingsForm">
-      <div class="mb-3"><label class="form-label">New Video Password</label><input type="text" id="learningNewVideoPassword" class="form-control" required></div>
-      <div class="mb-3"><label class="form-label">Confirm Password</label><input type="text" id="learningConfirmVideoPassword" class="form-control" required></div>
-      <div id="learningSettingsStatus"></div>
-      <div class="d-flex justify-content-between mt-4">
-        <button type="button" id="learningCancelSettings" class="btn btn-secondary">Cancel</button>
-        <button type="submit" class="btn btn-primary">Update Password</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- Learning Auth Modal -->
-<div class="learning-auth-modal" id="learningAuthModal">
-  <div class="modal-content">
-    <h5 id="learningAuthTitle"><i class="fas fa-sign-in-alt me-2"></i>Admin Login</h5>
-    <form id="learningAuthForm">
-      <div class="mb-3"><label class="form-label">Email</label><input type="email" id="learningAuthEmail" class="form-control" required></div>
-      <div class="mb-3"><label class="form-label">Password</label><input type="password" id="learningAuthPassword" class="form-control" required></div>
-      <p id="learningAuthError" class="status-error"></p>
-      <div class="d-flex justify-content-between mt-4">
-        <button type="button" id="learningCancelAuth" class="btn btn-secondary">Cancel</button>
-        <button type="submit" class="btn btn-primary">Login</button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- Learning Notes Modal -->
+<!-- Notes Modal -->
 <div class="learning-notes-modal" id="learningNotesModal">
   <div class="modal-content">
     <h5><i class="fas fa-sticky-note me-2"></i>Video Notes</h5>
-    <div id="learningNotesVideoTitle" style="text-align: center; color: var(--text-secondary); margin-bottom: 16px;"></div>
+    <div id="learningNotesVideoTitle" style="text-align: center; color: var(--text-secondary); margin-bottom: 1.5rem;"></div>
     <div class="notes-container">
       <div class="notes-list" id="learningNotesList">
         <div class="empty-notes"><i class="fas fa-clipboard"></i><p>No notes yet. Add your first note!</p></div>
       </div>
       <div class="mb-3">
         <label class="form-label"><i class="fas fa-pen me-2"></i>Add/Edit Note</label>
-        <textarea id="learningNoteTextarea" class="note-textarea" placeholder="Write your notes here..."></textarea>
+        <textarea id="noteTextarea" class="note-textarea" placeholder="Write your notes here..."></textarea>
       </div>
-      <div id="learningNotesStatus"></div>
+      <div id="notesStatus"></div>
       <div class="d-flex justify-content-between mt-4">
-        <button id="learningCancelNotes" class="btn btn-secondary">Close</button>
-        <button id="learningSaveNote" class="btn btn-primary"><i class="fas fa-save me-2"></i>Save Note</button>
+        <button id="cancelNotes" class="btn btn-secondary">Close</button>
+        <button id="saveNote" class="btn btn-primary"><i class="fas fa-save me-2"></i>Save Note</button>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Add Video Modal -->
+<div class="learning-video-modal" id="learningAddVideoModal">
+  <div class="modal-content">
+    <h5><i class="fas fa-upload me-2"></i>Add New Video</h5>
+    <form id="learningAddVideoForm">
+      <div class="mb-3"><label class="form-label">Title</label><input type="text" id="newTitle" class="form-control" required placeholder="Enter video title"></div>
+      <div class="mb-3"><label class="form-label">Type</label>
+        <select id="newType" class="form-select" required>
+          <option value="youtube">YouTube</option>
+          <option value="drive">Google Drive</option>
+          <option value="pdf">PDF</option>
+          <option value="youtube-playlist">YouTube Playlist</option>
+        </select>
+      </div>
+      <div class="mb-3"><label class="form-label">ID / URL</label><input type="text" id="newId" class="form-control" placeholder="Drive ID or YouTube URL" required></div>
+      <div class="mb-3" id="newFirstVideoIdGroup" style="display:none;">
+        <label class="form-label"><i class="fas fa-film me-2"></i>First Video ID (for Thumbnail)</label>
+        <input type="text" id="newFirstVideoId" class="form-control" placeholder="e.g., dQw4w9WgXcQ">
+      </div>
+      <div class="mb-3"><label class="form-label">Category</label><input type="text" id="newCategory" class="form-control" list="categoryList" required placeholder="Enter category"><datalist id="categoryList"></datalist></div>
+      <div class="mb-3"><label class="form-label">Subcategory</label><input type="text" id="newSubcategory" class="form-control" list="subcategoryList" placeholder="Enter subcategory"><datalist id="subcategoryList"></datalist></div>
+      <div class="mb-3"><label class="form-label">Topic</label><input type="text" id="newTopic" class="form-control" list="topicList" placeholder="Enter topic"><datalist id="topicList"></datalist></div>
+      <div class="mb-3 form-check"><input type="checkbox" class="form-check-input" id="newProtected"><label class="form-check-label" for="newProtected"><i class="fas fa-lock me-2"></i>Password Protected</label></div>
+      <div id="addVideoStatus"></div>
+      <div class="d-flex justify-content-between mt-4">
+        <button type="button" id="cancelAddVideo" class="btn btn-secondary">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Video</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Edit Video Modal -->
+<div class="learning-video-modal" id="learningEditVideoModal">
+  <div class="modal-content">
+    <h5><i class="fas fa-edit me-2"></i>Edit Video</h5>
+    <form id="learningEditVideoForm">
+      <input type="hidden" id="editVideoId">
+      <div class="mb-3"><label class="form-label">Title</label><input type="text" id="editTitle" class="form-control" required></div>
+      <div class="mb-3"><label class="form-label">Type</label>
+        <select id="editType" class="form-select" required>
+          <option value="youtube">YouTube</option>
+          <option value="drive">Google Drive</option>
+          <option value="pdf">PDF</option>
+          <option value="youtube-playlist">YouTube Playlist</option>
+        </select>
+      </div>
+      <div class="mb-3"><label class="form-label">ID / URL</label><input type="text" id="editId" class="form-control" required></div>
+      <div class="mb-3" id="editFirstVideoIdGroup" style="display:none;">
+        <label class="form-label"><i class="fas fa-film me-2"></i>First Video ID (for Thumbnail)</label>
+        <input type="text" id="editFirstVideoId" class="form-control" placeholder="e.g., dQw4w9WgXcQ">
+      </div>
+      <div class="mb-3"><label class="form-label">Category</label><input type="text" id="editCategory" class="form-control" list="categoryList" required></div>
+      <div class="mb-3"><label class="form-label">Subcategory</label><input type="text" id="editSubcategory" class="form-control" list="subcategoryList"></div>
+      <div class="mb-3"><label class="form-label">Topic</label><input type="text" id="editTopic" class="form-control" list="topicList"></div>
+      <div class="mb-3 form-check"><input type="checkbox" class="form-check-input" id="editProtected"><label class="form-check-label" for="editProtected"><i class="fas fa-lock me-2"></i>Password Protected</label></div>
+      <div id="editVideoStatus"></div>
+      <div class="d-flex justify-content-between mt-4">
+        <button type="button" id="cancelEditVideo" class="btn btn-secondary">Cancel</button>
+        <button type="submit" class="btn btn-primary">Update Video</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Settings Modal -->
+<div class="learning-settings-modal" id="learningSettingsModal">
+  <div class="modal-content">
+    <h5><i class="fas fa-cog me-2"></i>Security Settings</h5>
+    <form id="settingsForm">
+      <div class="mb-3"><label class="form-label">New Video Password</label><input type="text" id="newVideoPassword" class="form-control" required></div>
+      <div class="mb-3"><label class="form-label">Confirm Password</label><input type="text" id="confirmVideoPassword" class="form-control" required></div>
+      <div id="settingsStatus"></div>
+      <div class="d-flex justify-content-between mt-4">
+        <button type="button" id="cancelSettings" class="btn btn-secondary">Cancel</button>
+        <button type="submit" class="btn btn-primary">Update Password</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Auth Modal -->
+<div class="learning-auth-modal" id="learningAuthModal">
+  <div class="modal-content">
+    <h5 id="authTitle"><i class="fas fa-sign-in-alt me-2"></i>Admin Login</h5>
+    <form id="authForm">
+      <div class="mb-3"><label class="form-label">Email</label><input type="email" id="authEmail" class="form-control" required></div>
+      <div class="mb-3"><label class="form-label">Password</label><input type="password" id="authPassword" class="form-control" required></div>
+      <p id="authError" class="status-error"></p>
+      <div class="d-flex justify-content-between mt-4">
+        <button type="button" id="cancelAuth" class="btn btn-secondary">Cancel</button>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </div>
+    </form>
   </div>
 </div>
 
@@ -1622,7 +1648,6 @@ let learningNotesUnsubscribe = null;
 let learningVideosLoaded = false;
 const LEARNING_VIDEOS_PER_PAGE = 100;
 
-// Expose to global scope for global search
 window.learningAllVideos = learningAllVideos;
 window.playLearningVideo = null;
 
@@ -1640,7 +1665,7 @@ try {
   
   onSnapshot(query(collection(learningDb, "videos"), orderBy("createdAt", "desc")),
     (snapshot) => {
-      console.log("📹 Learning snapshot:", snapshot.size, "videos");
+      console.log(" Learning snapshot:", snapshot.size, "videos");
       learningAllVideos = snapshot.docs.map(d => ({ firestoreId: d.id, ...d.data() }));
       window.learningAllVideos = learningAllVideos;
       learningVideosLoaded = true;
@@ -1846,7 +1871,6 @@ function playLearningInPopup(video) {
   document.getElementById('learningPopupModal').style.display = 'flex';
 }
 
-// Expose playLearningVideo to global scope
 window.playLearningVideo = (video) => {
   openLearningVideo(video);
 };
@@ -1907,25 +1931,24 @@ function renderLearningPagination(totalPages) {
 
 function openLearningNotesModal(video) {
   document.getElementById('learningNotesVideoTitle').textContent = `📹 ${video.title}`;
-  document.getElementById('learningNoteTextarea').value = '';
-  document.getElementById('learningNotesStatus').textContent = '';
+  document.getElementById('noteTextarea').value = '';
+  document.getElementById('notesStatus').textContent = '';
   document.getElementById('learningNotesModal').style.display = 'flex';
 }
 
 function openLearningEditModal(video) {
-  document.getElementById('learningEditVideoId').value = video.firestoreId;
-  document.getElementById('learningEditTitle').value = video.title;
-  document.getElementById('learningEditType').value = video.type;
-  document.getElementById('learningEditId').value = video.id || video.url;
-  document.getElementById('learningEditFirstVideoId').value = video.firstVideoId || '';
-  document.getElementById('learningEditCategory').value = video.category || '';
-  document.getElementById('learningEditSubcategory').value = video.subcategory || '';
-  document.getElementById('learningEditTopic').value = video.topic || '';
-  document.getElementById('learningEditProtected').checked = video.protected || false;
+  document.getElementById('editVideoId').value = video.firestoreId;
+  document.getElementById('editTitle').value = video.title;
+  document.getElementById('editType').value = video.type;
+  document.getElementById('editId').value = video.id || video.url;
+  document.getElementById('editFirstVideoId').value = video.firstVideoId || '';
+  document.getElementById('editCategory').value = video.category || '';
+  document.getElementById('editSubcategory').value = video.subcategory || '';
+  document.getElementById('editTopic').value = video.topic || '';
+  document.getElementById('editProtected').checked = video.protected || false;
   document.getElementById('learningEditVideoModal').style.display = 'flex';
 }
 
-// Event Listeners
 document.getElementById('learningCategoryFilter').addEventListener('change', () => { updateLearningSubcategories(); updateLearningTopics(); applyLearningFilters(); });
 document.getElementById('learningSubcategoryFilter').addEventListener('change', () => { updateLearningTopics(); applyLearningFilters(); });
 document.getElementById('learningTopicFilter').addEventListener('change', () => { applyLearningFilters(); });
@@ -1956,88 +1979,88 @@ document.getElementById('learningCancelPassword').addEventListener('click', () =
 document.getElementById('learningAuthBtn').addEventListener('click', () => {
   if (learningCurrentUser) { signOut(learningAuth); } else { document.getElementById('learningAuthModal').style.display = 'flex'; }
 });
-document.getElementById('learningAuthForm').addEventListener('submit', async (e) => {
+document.getElementById('authForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   try {
-    await signInWithEmailAndPassword(learningAuth, document.getElementById('learningAuthEmail').value, document.getElementById('learningAuthPassword').value);
+    await signInWithEmailAndPassword(learningAuth, document.getElementById('authEmail').value, document.getElementById('authPassword').value);
     document.getElementById('learningAuthModal').style.display = 'none';
   } catch (error) {
-    document.getElementById('learningAuthError').textContent = error.message;
-    document.getElementById('learningAuthError').style.display = 'block';
+    document.getElementById('authError').textContent = error.message;
+    document.getElementById('authError').style.display = 'block';
   }
 });
-document.getElementById('learningCancelAuth').addEventListener('click', () => { document.getElementById('learningAuthModal').style.display = 'none'; });
+document.getElementById('cancelAuth').addEventListener('click', () => { document.getElementById('learningAuthModal').style.display = 'none'; });
 document.getElementById('learningAddVideoBtn').addEventListener('click', () => {
   if (learningCurrentUser) { document.getElementById('learningAddVideoModal').style.display = 'flex'; }
 });
-document.getElementById('learningCancelAddVideo').addEventListener('click', () => { document.getElementById('learningAddVideoModal').style.display = 'none'; });
+document.getElementById('cancelAddVideo').addEventListener('click', () => { document.getElementById('learningAddVideoModal').style.display = 'none'; });
 document.getElementById('learningAddVideoForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const newVideo = {
-    title: document.getElementById('learningNewTitle').value,
-    type: document.getElementById('learningNewType').value,
-    id: document.getElementById('learningNewId').value,
-    url: document.getElementById('learningNewId').value,
-    firstVideoId: document.getElementById('learningNewFirstVideoId').value.trim(),
-    category: document.getElementById('learningNewCategory').value,
-    subcategory: document.getElementById('learningNewSubcategory').value,
-    topic: document.getElementById('learningNewTopic').value,
-    protected: document.getElementById('learningNewProtected').checked,
+    title: document.getElementById('newTitle').value,
+    type: document.getElementById('newType').value,
+    id: document.getElementById('newId').value,
+    url: document.getElementById('newId').value,
+    firstVideoId: document.getElementById('newFirstVideoId').value.trim(),
+    category: document.getElementById('newCategory').value,
+    subcategory: document.getElementById('newSubcategory').value,
+    topic: document.getElementById('newTopic').value,
+    protected: document.getElementById('newProtected').checked,
     createdAt: serverTimestamp(),
     addedBy: learningCurrentUser.email
   };
   await addDoc(collection(learningDb, "videos"), newVideo);
-  document.getElementById('learningAddVideoStatus').textContent = '✅ Added!';
-  document.getElementById('learningAddVideoStatus').className = 'status-success';
+  document.getElementById('addVideoStatus').textContent = '✅ Added!';
+  document.getElementById('addVideoStatus').className = 'status-success';
   setTimeout(() => { document.getElementById('learningAddVideoModal').style.display = 'none'; }, 1500);
 });
-document.getElementById('learningCancelEditVideo').addEventListener('click', () => { document.getElementById('learningEditVideoModal').style.display = 'none'; });
+document.getElementById('cancelEditVideo').addEventListener('click', () => { document.getElementById('learningEditVideoModal').style.display = 'none'; });
 document.getElementById('learningEditVideoForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  await updateDoc(doc(learningDb, "videos", document.getElementById('learningEditVideoId').value), {
-    title: document.getElementById('learningEditTitle').value,
-    type: document.getElementById('learningEditType').value,
-    id: document.getElementById('learningEditId').value,
-    url: document.getElementById('learningEditId').value,
-    firstVideoId: document.getElementById('learningEditFirstVideoId').value.trim(),
-    category: document.getElementById('learningEditCategory').value,
-    subcategory: document.getElementById('learningEditSubcategory').value,
-    topic: document.getElementById('learningEditTopic').value,
-    protected: document.getElementById('learningEditProtected').checked,
+  await updateDoc(doc(learningDb, "videos", document.getElementById('editVideoId').value), {
+    title: document.getElementById('editTitle').value,
+    type: document.getElementById('editType').value,
+    id: document.getElementById('editId').value,
+    url: document.getElementById('editId').value,
+    firstVideoId: document.getElementById('editFirstVideoId').value.trim(),
+    category: document.getElementById('editCategory').value,
+    subcategory: document.getElementById('editSubcategory').value,
+    topic: document.getElementById('editTopic').value,
+    protected: document.getElementById('editProtected').checked,
     updatedAt: serverTimestamp()
   });
-  document.getElementById('learningEditVideoStatus').textContent = '✅ Updated!';
-  document.getElementById('learningEditVideoStatus').className = 'status-success';
+  document.getElementById('editVideoStatus').textContent = '✅ Updated!';
+  document.getElementById('editVideoStatus').className = 'status-success';
   setTimeout(() => { document.getElementById('learningEditVideoModal').style.display = 'none'; }, 1500);
 });
 document.getElementById('learningSettingsBtn').addEventListener('click', () => { if (learningCurrentUser) document.getElementById('learningSettingsModal').style.display = 'flex'; });
-document.getElementById('learningCancelSettings').addEventListener('click', () => { document.getElementById('learningSettingsModal').style.display = 'none'; });
-document.getElementById('learningSettingsForm').addEventListener('submit', async (e) => {
+document.getElementById('cancelSettings').addEventListener('click', () => { document.getElementById('learningSettingsModal').style.display = 'none'; });
+document.getElementById('settingsForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-  const newPass = document.getElementById('learningNewVideoPassword').value;
-  const confirmPass = document.getElementById('learningConfirmVideoPassword').value;
+  const newPass = document.getElementById('newVideoPassword').value;
+  const confirmPass = document.getElementById('confirmVideoPassword').value;
   if (newPass !== confirmPass) {
-    document.getElementById('learningSettingsStatus').textContent = '❌ Passwords do not match';
-    document.getElementById('learningSettingsStatus').className = 'status-error';
+    document.getElementById('settingsStatus').textContent = '❌ Passwords do not match';
+    document.getElementById('settingsStatus').className = 'status-error';
     return;
   }
   await setDoc(doc(learningDb, "settings", "videoPassword"), { password: newPass, updatedAt: serverTimestamp() });
   learningVideoPassword = newPass;
-  document.getElementById('learningSettingsStatus').textContent = '✅ Password updated!';
-  document.getElementById('learningSettingsStatus').className = 'status-success';
+  document.getElementById('settingsStatus').textContent = '✅ Password updated!';
+  document.getElementById('settingsStatus').className = 'status-success';
   setTimeout(() => { document.getElementById('learningSettingsModal').style.display = 'none'; }, 1500);
 });
-document.getElementById('learningCancelNotes').addEventListener('click', () => { document.getElementById('learningNotesModal').style.display = 'none'; });
-document.getElementById('learningSaveNote').addEventListener('click', async () => {
+document.getElementById('cancelNotes').addEventListener('click', () => { document.getElementById('learningNotesModal').style.display = 'none'; });
+document.getElementById('saveNote').addEventListener('click', async () => {
   if (!learningCurrentUser) {
-    document.getElementById('learningNotesStatus').textContent = '❌ Please login';
-    document.getElementById('learningNotesStatus').className = 'status-error';
+    document.getElementById('notesStatus').textContent = ' Please login';
+    document.getElementById('notesStatus').className = 'status-error';
     return;
   }
-  const content = document.getElementById('learningNoteTextarea').value.trim();
+  const content = document.getElementById('noteTextarea').value.trim();
   if (!content) {
-    document.getElementById('learningNotesStatus').textContent = '❌ Note cannot be empty';
-    document.getElementById('learningNotesStatus').className = 'status-error';
+    document.getElementById('notesStatus').textContent = ' Note cannot be empty';
+    document.getElementById('notesStatus').className = 'status-error';
     return;
   }
   try {
@@ -2049,13 +2072,13 @@ document.getElementById('learningSaveNote').addEventListener('click', async () =
       createdAt: serverTimestamp(),
       updatedAt: serverTimestamp()
     });
-    document.getElementById('learningNotesStatus').textContent = '✅ Note saved!';
-    document.getElementById('learningNotesStatus').className = 'status-success';
-    document.getElementById('learningNoteTextarea').value = '';
-    setTimeout(() => { document.getElementById('learningNotesStatus').textContent = ''; }, 2000);
+    document.getElementById('notesStatus').textContent = '✅ Note saved!';
+    document.getElementById('notesStatus').className = 'status-success';
+    document.getElementById('noteTextarea').value = '';
+    setTimeout(() => { document.getElementById('notesStatus').textContent = ''; }, 2000);
   } catch (error) {
-    document.getElementById('learningNotesStatus').textContent = `❌ Failed: ${error.message}`;
-    document.getElementById('learningNotesStatus').className = 'status-error';
+    document.getElementById('notesStatus').textContent = `❌ Failed: ${error.message}`;
+    document.getElementById('notesStatus').className = 'status-error';
   }
 });
 document.addEventListener('keydown', (e) => {
@@ -2172,7 +2195,6 @@ function handleGlobalSearch() {
   
   currentSearchResults = [];
   
-  // Search in Tools
   const tools = [
     { name: 'Existing Issues', type: 'Tool', desc: 'View IPO/FPO existing issues on ShareSansar', screen: 'tools', icon: 'bi-graph-up-arrow', color: 'tool' },
     { name: 'IPO Allotment', type: 'Tool', desc: 'Check IPO application status on CDSC', screen: 'tools', icon: 'bi-clipboard-check', color: 'tool' },
@@ -2205,7 +2227,6 @@ function handleGlobalSearch() {
     }
   });
   
-  // Search in Contacts
   if (typeof directoryData !== 'undefined' && directoryData.length > 0) {
     directoryData.forEach(contact => {
       const name = String(contact.Name || '');
@@ -2231,7 +2252,6 @@ function handleGlobalSearch() {
     });
   }
   
-  // Search in Documents
   if (typeof docData !== 'undefined' && docData.length > 0) {
     docData.forEach(doc => {
       const docName = String(doc.name || '');
@@ -2257,7 +2277,6 @@ function handleGlobalSearch() {
     });
   }
   
-  // Search in Links
   if (typeof allLinks !== 'undefined' && allLinks.length > 0) {
     allLinks.forEach(link => {
       const linkTitle = String(link.title || '');
@@ -2284,7 +2303,6 @@ function handleGlobalSearch() {
     });
   }
   
-  // Search in Learning Videos (NEW)
   if (typeof window.learningAllVideos !== 'undefined' && window.learningAllVideos.length > 0) {
     window.learningAllVideos.forEach(video => {
       const title = String(video.title || '');
@@ -2315,7 +2333,6 @@ function handleGlobalSearch() {
     });
   }
   
-  // Display results
   if (currentSearchResults.length === 0) {
     searchOverlayResults.innerHTML = `
       <div class="search-no-results">
@@ -2363,7 +2380,7 @@ const timeTextEl = document.getElementById('timeText');
 const nepaliDateText = document.getElementById('nepaliDateText');
 const nepaliMonthsDev = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मंसिर', 'पौष', 'माघ', 'फागुन', 'चैत'];
 const nepaliDaysDev = ['आइतबार', 'सोमबार', 'मङ्गलबार', 'बुधबार', 'बिहीबार', 'शुक्रबार', 'शनिबार'];
-const engToNepaliNum = { '0': '०', '1': '१', '2': '२', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '', '9': '९' };
+const engToNepaliNum = { '0': '०', '1': '', '2': '२', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '९' };
 function toNepaliNumber(num) { return num.toString().split('').map(d => engToNepaliNum[d] || d).join(''); }
 function convertToNepaliDate(date) {
   const year = date.getFullYear(); const month = date.getMonth(); const day = date.getDate();
@@ -2377,8 +2394,8 @@ function convertToNepaliDate(date) {
 function getNepalTime() { return new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kathmandu' })); }
 function updateDateTime() {
   const nepalNow = getNepalTime(); const hour = nepalNow.getHours(); let greeting, emoji;
-  if (hour >= 5 && hour < 12) { greeting = 'Good Morning,'; emoji = ''; }
-  else if (hour >= 12 && hour < 17) { greeting = 'Good Afternoon,'; emoji = '️'; }
+  if (hour >= 5 && hour < 12) { greeting = 'Good Morning,'; emoji = '🌅'; }
+  else if (hour >= 12 && hour < 17) { greeting = 'Good Afternoon,'; emoji = '☀️'; }
   else if (hour >= 17 && hour < 21) { greeting = 'Good Evening,'; emoji = '🌇'; }
   else { greeting = 'Good Night,'; emoji = '🌙'; }
   greetingText.textContent = greeting; greetingEmoji.textContent = emoji;
@@ -2575,7 +2592,6 @@ function renderNepalProvinces() {
     `;
   }).join('');
   
-  // Open first province by default
   setTimeout(() => toggleNepalProvince(1), 100);
 }
 
@@ -2583,7 +2599,6 @@ function toggleNepalProvince(id) {
   const header = document.querySelector(`.nepal-province-item:nth-child(${id}) .nepal-province-header`);
   const content = document.getElementById(`province-content-${id}`);
   
-  // Toggle active class
   header.classList.toggle('active');
   content.classList.toggle('active');
 }
@@ -2608,7 +2623,6 @@ function animateNepalStats() {
   });
 }
 
-// Nepal Search
 document.getElementById('nepalSearchInput').addEventListener('input', function() {
   const q = this.value.trim().toLowerCase();
   let anyMatch = false;
@@ -2706,7 +2720,6 @@ clearBtn.addEventListener('click', () => { searchInput.value = ''; clearBtn.clas
 document.getElementById('filterAll').addEventListener('click', () => { currentFilter = 'all'; document.getElementById('filterAll').classList.add('active'); document.getElementById('filterFavs').classList.remove('active'); handleSearch(); });
 document.getElementById('filterFavs').addEventListener('click', () => { currentFilter = 'favorites'; document.getElementById('filterFavs').classList.add('active'); document.getElementById('filterAll').classList.remove('active'); handleSearch(); });
 
-// ========== CONTACT FORM ==========
 const contactFormOverlay = document.getElementById('contactFormOverlay'); const contactFormTitle = document.getElementById('contactFormTitle'); const contactFormSave = document.getElementById('contactFormSave');
 document.getElementById('addContactBtn').addEventListener('click', () => openContactForm());
 document.getElementById('contactFormClose').addEventListener('click', closeContactForm);
@@ -2972,15 +2985,13 @@ async function deleteLink(id) {
   catch (error) { showToast('Error deleting', 'error'); fetchLinks(); }
 }
 
-// ========== REFRESH ==========
 document.getElementById('refreshData').addEventListener('click', () => { loadDirectory(); loadDocuments(); fetchLinks(); showToast('Refreshing...', 'success'); });
 
-// ========== UTILITIES ==========
 function debounce(fn, wait) { let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), wait); }; }
 function escapeHtml(text) { if (!text) return ''; return String(text).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); }
 function showToast(msg, type = 'success') { const toast = document.getElementById('toastMsg'); toast.textContent = msg; toast.className = `toast-msg show ${type}`; setTimeout(() => toast.classList.remove('show'), 2500); }
 
-if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').then(reg => console.log('✅ SW:', reg.scope)).catch(err => console.log(' SW:', err)); }); }
+if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').then(reg => console.log('✅ SW:', reg.scope)).catch(err => console.log('❌ SW:', err)); }); }
 </script>
 </body>
 </html>
