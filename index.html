@@ -1021,9 +1021,7 @@ padding: 12px; font-size: 0.95rem; resize: vertical;
     <h3 id="fullScreenToolTitle" style="margin:0; font-size:1.05rem; font-weight:700; color:var(--text-primary);">Tool</h3>
     <button id="fullScreenToolClose" style="width:36px; height:36px; border-radius:50%; background:var(--border); border:none; color:var(--text-primary); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.1rem; transition: background 0.2s;"><i class="bi bi-x"></i></button>
   </div>
-  <div style="flex:1; overflow:hidden; position:relative;">
-    <iframe id="fullScreenToolIframe" src="" style="width:100%; height:100%; border:none; background:white;" allowfullscreen></iframe>
-  </div>
+  <div id="fullScreenToolContent" style="flex:1; overflow:hidden; position:relative; background:#000;"></div>
 </div>
 <div class="learning-popup-modal" id="learningPopupModal">
 <div class="learning-popup-controls">
@@ -1681,7 +1679,7 @@ document.getElementById('learningNotesModal').style.display = 'none';
 document.getElementById('learningAuthModal').style.display = 'none';
 if (document.getElementById('fullScreenToolModal').style.display === 'flex') {
 document.getElementById('fullScreenToolModal').style.display = 'none';
-document.getElementById('fullScreenToolIframe').src = '';
+document.getElementById('fullScreenToolContent').innerHTML = '';
 document.body.classList.remove('modal-open');
 }
 }
@@ -1998,27 +1996,60 @@ document.getElementById('weatherRetry').addEventListener('click', fetchWeather);
 }
 fetchWeather(); setInterval(fetchWeather, 120000);
 document.addEventListener('visibilitychange', () => { if (!document.hidden) { updateDateTime(); fetchWeather(); } });
+// ========== SMART IMAGE DETECTION ==========
+function isImageUrl(url) {
+  if (!url) return false;
+  const lower = url.toLowerCase().split('?')[0].split('#')[0];
+  // Direct image file extensions
+  if (/\.(jpg|jpeg|png|gif|webp|svg|bmp|ico|tiff|tif|avif)$/.test(lower)) return true;
+  // Google Drive thumbnail URLs
+  if (lower.includes('drive.google.com/thumbnail')) return true;
+  // Google Drive image preview (uc?id=...)
+  if (lower.includes('drive.google.com') && (lower.includes('id=') || lower.includes('/view'))) return true;
+  // Dropbox direct image links
+  if (lower.includes('dropbox.com') && (lower.includes('dl=1') || lower.includes('raw=1') || lower.includes('raw=0'))) return true;
+  // Imgur direct links
+  if (lower.includes('i.imgur.com')) return true;
+  return false;
+}
+
 // ========== FULL SCREEN MODAL HELPER ==========
 function openFullScreenModal(title, url) {
-document.getElementById('fullScreenToolTitle').textContent = title;
-document.getElementById('fullScreenToolIframe').src = url;
-document.getElementById('fullScreenToolModal').style.display = 'flex';
-document.body.classList.add('modal-open');
+  document.getElementById('fullScreenToolTitle').textContent = title;
+  const container = document.getElementById('fullScreenToolContent');
+  
+  // ✅ FIX: If URL is an image, use <img> tag with object-fit:contain to fit the screen
+  if (isImageUrl(url)) {
+    container.innerHTML = `
+      <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#000; padding:8px;">
+        <img src="${url}" 
+             style="max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; display:block; border-radius:6px; box-shadow:0 4px 20px rgba(0,0,0,0.5);"
+             onerror="this.parentElement.innerHTML='<div style=\\'color:#fff;text-align:center;padding:20px;\\'>❌ Image failed to load</div>';">
+      </div>
+    `;
+  } else {
+    // For non-image URLs, use iframe as before
+    container.innerHTML = `<iframe src="${url}" style="width:100%; height:100%; border:none; background:white;" allowfullscreen></iframe>`;
+  }
+  
+  document.getElementById('fullScreenToolModal').style.display = 'flex';
+  document.body.classList.add('modal-open');
 }
+
 function closeFullScreenModal() {
-document.getElementById('fullScreenToolModal').style.display = 'none';
-document.getElementById('fullScreenToolIframe').src = '';
-document.body.classList.remove('modal-open');
+  document.getElementById('fullScreenToolModal').style.display = 'none';
+  document.getElementById('fullScreenToolContent').innerHTML = '';
+  document.body.classList.remove('modal-open');
 }
 // ========== TOOLS MODAL ==========
 const toolData = {
-gold: { title: 'Gold & Silver Price', iframe: 'https://www.ashesh.com.np/gold/widget.php?api=621113p553&header_color=0077e5', height: 270 },
-forex: { title: 'Foreign Exchange Rates', iframe: 'https://www.ashesh.com.np/forex/widget2.php?api=621117p597&header_color=38b45e&background_color=faf8ee&header_title=Nepal%20Exchange%20Rates', height: 550 },
+gold: { title: 'Gold & Silver Price', iframe: 'https://www.ashesh.com.np/gold/widget.php?api=621113p553&header_color=0077e5', height: 265 },
+forex: { title: 'Foreign Exchange Rates', iframe: 'https://www.ashesh.com.np/forex/widget2.php?api=621117p597&header_color=38b45e&background_color=faf8ee&header_title=Nepal%20Exchange%20Rates', height: 383 },
 fuel: { title: 'Fuel Rates', iframe: 'https://www.ashesh.com.np/fuel/widget.php?api=641110p120&title=Nepal%20Fuel%20Rates&header_color=dedede&header_text_color=303030', height: 275 },
-veg: { title: 'Falfulbazar', iframe: 'https://www.ashesh.com.np/vegetable/widget.php?api=641115p195&header_color=519122', height: 265, openIn: 'fullscreen' },
+veg: { title: 'Falfulbazar', iframe: 'https://www.ashesh.com.np/vegetable/widget.php?api=641115p195&header_color=519122', height: 265 },
 date: { title: 'Date Converter (BS ↔ AD)', iframe: 'https://www.ashesh.com.np/linkdate-converter.php?h_color=21ADE2&b_color=CFE4B1&api=641117p214', height: 186 },
-weather: { title: 'Nepal Weather', iframe: 'https://www.ashesh.com.np/weather/widget.php?title=Nepal%20Weather%20Observation&header_color=00a2e2&api=641112p367', height: 550 },
-unicode: { title: 'Nepali Unicode', iframe: 'https://www.ashesh.com.np/linknepali-unicode3.php?api=641111p353', height: 400, openIn: 'fullscreen' },
+weather: { title: 'Nepal Weather', iframe: 'https://www.ashesh.com.np/weather/widget.php?title=Nepal%20Weather%20Observation&header_color=00a2e2&api=641112p367', height: 383 },
+unicode: { title: 'Nepali Unicode', iframe: 'https://www.ashesh.com.np/linknepali-unicode3.php?api=641111p353', height: 400, openIn:'fullscreen' },
 panchang: { title: 'Nepali Panchang', iframe: 'https://www.ashesh.com.np/panchang/widget.php?header_title=Nepali%20Panchang&header_color=e6e5e2&api=641113p383', height: 365 },
 existingissues: { title: 'Existing Issues', url: 'https://www.sharesansar.com/existing-issues', openIn: 'fullscreen' },
 ipoallotment: { title: 'IPO Allotment', url: 'https://iporesult.cdsc.com.np/', openIn: 'newtab' },
@@ -2037,17 +2068,15 @@ const tool = card.dataset.tool;
 const data = toolData[tool];
 if (!data) return;
 
-// ✅ FIX: Check if openIn is defined (fullscreen or newtab)
 if (data.openIn === 'newtab') {
 window.open(data.url || data.iframe, '_blank');
 return;
 }
-if (data.openIn === 'fullscreen' || data.fullScreen) {
+if (data.openIn === 'fullscreen') {
 openFullScreenModal(data.title, data.url || data.iframe);
 return;
 }
 
-// Default small modal behavior for widgets
 toolModalTitle.textContent = data.title;
 toolModalBody.innerHTML = `<iframe src="${data.iframe}" style="width:100%; height:${data.height}px; border:none; border-radius:10px; background:white;" allowtransparency="true"></iframe>`;
 toolModalOverlay.style.display = 'flex';
