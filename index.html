@@ -39,13 +39,11 @@
 --gold-light: #e8c97a;
 --danger: #ef4444;
 --success: #10b981;
-/* Nepal Colors */
 --np-crimson: #dc143c;
 --np-blue: #003893;
 --np-white: #ffffff;
 --np-soft: #f8f9fc;
 --np-border: #e5e7eb;
-/* Nexus Learning Colors */
 --bg-dark: #030305;
 --bg-card-hover: #12121a;
 --bg-glass: rgba(13, 13, 18, 0.85);
@@ -139,7 +137,6 @@ background: var(--primary); border-radius: 0 0 2px 2px;
 transition: transform 0.25s;
 }
 .nav-btn.active::before { transform: translateX(-50%) scaleX(1); }
-/* Floating Action Button (FAB) - Search */
 .fab-search {
 position: fixed;
 bottom: calc(var(--nav-height) + var(--safe-bottom) + 16px);
@@ -163,7 +160,6 @@ transition: transform 0.2s, box-shadow 0.2s;
 transform: scale(0.92);
 box-shadow: 0 2px 8px rgba(0, 119, 229, 0.4);
 }
-/* Search Overlay */
 .search-overlay {
 position: fixed;
 inset: 0;
@@ -287,7 +283,6 @@ opacity: 0.3;
 margin-bottom: 12px;
 display: block;
 }
-/* Welcome Card */
 .welcome-card {
 background: linear-gradient(135deg, var(--primary), var(--primary-dark));
 color: white; border-radius: 20px;
@@ -336,17 +331,8 @@ display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center;
 .tool-icon.unicode { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
 .tool-icon.panchang { background: linear-gradient(135deg, #64748b, #475569); }
 .tool-icon.nepal { background: linear-gradient(135deg, #dc143c, #003893); }
-.share-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-.share-btn { color: white; border-radius: 16px; padding: 16px; display: flex; align-items: center; gap: 14px; cursor: pointer; transition: transform 0.15s, box-shadow 0.2s; box-shadow: var(--shadow-md); text-decoration: none; }
-.share-btn:active { transform: scale(0.98); }
-.share-btn.orange { background: linear-gradient(135deg, #fb923c, #f97316); }
-.share-btn.purple { background: linear-gradient(135deg, #a78bfa, #8b5cf6); }
-.share-icon { width: 48px; height: 48px; border-radius: 12px; background: rgba(255,255,255,0.25); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0; }
-.share-content { flex: 1; min-width: 0; }
-.share-title { font-size: 0.95rem; font-weight: 700; margin: 0 0 2px; color: white; }
-.share-subtitle { font-size: 0.7rem; opacity: 0.9; margin: 0; }
-.share-arrow { font-size: 1.2rem; flex-shrink: 0; transition: transform 0.2s; }
-.share-btn:hover .share-arrow { transform: translateX(4px); }
+.tool-icon.share { background: linear-gradient(135deg, #fb923c, #f97316); }
+.tool-icon.ipo { background: linear-gradient(135deg, #a78bfa, #8b5cf6); }
 .docs-header-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
 .docs-header-bar .section-title { margin: 0; }
 .btn-add-doc {
@@ -468,23 +454,23 @@ color: var(--text-tertiary); font-size: 0.85rem; cursor: pointer; display: flex;
 .link-icon-btn.delete:active { background: #fee2e2; color: var(--danger); }
 .link-card-url {
 display: block; color: var(--primary); text-decoration: none; font-size: 0.8rem; margin-bottom: 8px;
-white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
+white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; cursor: pointer;
 }
+.link-card-url:active { opacity: 0.7; }
 .link-card-desc { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: break-word; }
 .link-card-footer { display: flex; justify-content: space-between; align-items: center; padding-top: 10px; border-top: 1px solid var(--border); gap: 10px; }
 .link-badge { background: var(--bg-elevated); color: var(--text-secondary); padding: 3px 10px; border-radius: 8px; font-size: 0.75rem; white-space: nowrap; }
 .link-visit-btn {
 background: transparent; border: 1px solid var(--border); color: var(--text-primary); padding: 5px 12px; border-radius: 8px;
-font-size: 0.8rem; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; font-weight: 500; font-family: inherit; white-space: nowrap;
+font-size: 0.8rem; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; font-weight: 500; font-family: inherit; white-space: nowrap; cursor: pointer;
 }
-.link-visit-btn:active { background: var(--text-primary); color: var(--bg-body); border-color: var(--text-primary); }
+.link-visit-btn:active { background: var(--primary); color: white; border-color: var(--primary); }
 .video-card { position: relative; cursor: pointer; }
 .video-thumbnail { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; display: block; }
 .play-button {
 position: absolute; top: 90px; left: 50%; transform: translate(-50%, -50%); width: 60px; height: 60px;
 background: rgba(0,0,0,0.8); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; z-index: 2;
 }
-/* DARK STICKY NOTES */
 .note-card { background: #1a1a2e; border: 1px solid #2a2a4a; transform: rotate(-1deg); transition: transform 0.2s; }
 .note-card:active { transform: rotate(0deg) scale(1.02); }
 .note-content { font-family: 'Courier New', monospace; font-size: 0.9rem; color: #e0e0e0; white-space: pre-wrap; margin-bottom: 12px; word-break: break-word; }
@@ -549,7 +535,6 @@ background: rgba(0,0,0,0.8); border-radius: 50%; display: flex; align-items: cen
 .toast-msg.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 .toast-msg.success { background: var(--success); color: white; }
 .toast-msg.error { background: var(--danger); color: white; }
-/* Nepal Province Modal - DARK THEME */
 .nepal-modal-overlay {
 position: fixed;
 inset: 0;
@@ -811,7 +796,6 @@ transition: transform 0.2s;
 .nepal-close-btn:hover {
 transform: scale(1.1);
 }
-/* Learning Tab Styles */
 .learning-screen { background: var(--bg-body); color: var(--text-primary); font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
 .learning-header {
 background: var(--bg-elevated);
@@ -1126,25 +1110,17 @@ padding: 12px; font-size: 0.95rem; resize: vertical;
 <div class="weather-loading"><i class="bi bi-arrow-repeat spin"></i><span>Loading...</span></div>
 </div>
 </div>
-<div class="section-title">Share</div>
-<div class="share-buttons">
-<a href="https://www.sharesansar.com/existing-issues" target="_blank" rel="noopener" class="share-btn orange">
-<div class="share-icon"><i class="bi bi-graph-up-arrow"></i></div>
-<div class="share-content"><h3 class="share-title">Existing Issues</h3><p class="share-subtitle">View IPO/FPO results</p></div>
-<i class="bi bi-arrow-right share-arrow"></i>
-</a>
-<a href="https://iporesult.cdsc.com.np/" target="_blank" rel="noopener" class="share-btn purple">
-<div class="share-icon"><i class="bi bi-clipboard-check"></i></div>
-<div class="share-content"><h3 class="share-title">IPO Allotment</h3><p class="share-subtitle">Check application status</p></div>
-<i class="bi bi-arrow-right share-arrow"></i>
-</a>
-</div>
 <div class="section-title">Live Rates</div>
 <div class="tools-grid">
 <div class="tool-card" data-tool="gold"><div class="tool-icon gold"><i class="bi bi-coin"></i></div><div><h3>Gold & Silver</h3><p>Today's rates</p></div></div>
 <div class="tool-card" data-tool="forex"><div class="tool-icon forex"><i class="bi bi-currency-exchange"></i></div><div><h3>Forex Rates</h3><p>Currency exchange</p></div></div>
 <div class="tool-card" data-tool="fuel"><div class="tool-icon fuel"><i class="bi bi-fuel-pump"></i></div><div><h3>Fuel Rates</h3><p>Petrol, diesel</p></div></div>
 <div class="tool-card" data-tool="veg"><div class="tool-icon veg"><i class="bi bi-basket3"></i></div><div><h3>Falfulbazar</h3><p>Fruits & veggies</p></div></div>
+</div>
+<div class="section-title">Share Market</div>
+<div class="tools-grid">
+<div class="tool-card" data-tool="existingissues"><div class="tool-icon share"><i class="bi bi-graph-up-arrow"></i></div><div><h3>Existing Issues</h3><p>IPO/FPO results</p></div></div>
+<div class="tool-card" data-tool="ipoallotment"><div class="tool-icon ipo"><i class="bi bi-clipboard-check"></i></div><div><h3>IPO Allotment</h3><p>Check status</p></div></div>
 </div>
 <div class="section-title">Utilities</div>
 <div class="tools-grid">
@@ -1283,11 +1259,9 @@ padding: 12px; font-size: 0.95rem; resize: vertical;
 <button class="nav-btn" data-screen="settings"><i class="bi bi-gear-fill"></i><span>Settings</span></button>
 </nav>
 </div>
-<!-- Floating Action Button (FAB) - Search -->
 <button class="fab-search" id="fabSearch" aria-label="Search">
 <i class="bi bi-search"></i>
 </button>
-<!-- Search Overlay -->
 <div class="search-overlay" id="searchOverlay">
 <div class="search-overlay-header">
 <input type="text" class="search-overlay-input" id="searchOverlayInput" placeholder="Search tools, contacts, documents, links, learning...">
@@ -1302,7 +1276,6 @@ padding: 12px; font-size: 0.95rem; resize: vertical;
 </div>
 </div>
 </div>
-<!-- Nepal Province Modal - DARK THEME -->
 <div class="nepal-modal-overlay" id="nepalModal">
 <button class="nepal-close-btn" id="nepalCloseBtn"><i class="bi bi-x-lg"></i></button>
 <div class="nepal-modal-content">
@@ -1359,7 +1332,6 @@ fill="#fff"/>
     <iframe id="fullScreenToolIframe" src="" style="width:100%; height:100%; border:none; background:white;" allowfullscreen></iframe>
   </div>
 </div>
-<!-- Learning Video Popup Modal -->
 <div class="learning-popup-modal" id="learningPopupModal">
 <div class="learning-popup-controls">
 <button class="learning-back-btn" id="learningBackBtn" title="Back to list"><i class="fas fa-arrow-left"></i></button>
@@ -1368,7 +1340,6 @@ fill="#fff"/>
 </div>
 <iframe class="learning-popup-frame" id="learningPopupFrame" allowfullscreen></iframe>
 </div>
-<!-- Learning Password Modal -->
 <div class="learning-password-modal" id="learningPasswordModal">
 <div class="modal-content">
 <h5><i class="fas fa-lock me-2"></i>Secure Access</h5>
@@ -1380,7 +1351,6 @@ fill="#fff"/>
 </div>
 </div>
 </div>
-<!-- Notes Modal -->
 <div class="learning-notes-modal" id="learningNotesModal">
 <div class="modal-content">
 <h5><i class="fas fa-sticky-note me-2"></i>Video Notes</h5>
@@ -1401,7 +1371,6 @@ fill="#fff"/>
 </div>
 </div>
 </div>
-<!-- Add Video Modal -->
 <div class="learning-video-modal" id="learningAddVideoModal">
 <div class="modal-content">
 <h5><i class="fas fa-upload me-2"></i>Add New Video</h5>
@@ -1432,7 +1401,6 @@ fill="#fff"/>
 </form>
 </div>
 </div>
-<!-- Edit Video Modal -->
 <div class="learning-video-modal" id="learningEditVideoModal">
 <div class="modal-content">
 <h5><i class="fas fa-edit me-2"></i>Edit Video</h5>
@@ -1464,7 +1432,6 @@ fill="#fff"/>
 </form>
 </div>
 </div>
-<!-- Settings Modal -->
 <div class="learning-settings-modal" id="learningSettingsModal">
 <div class="modal-content">
 <h5><i class="fas fa-cog me-2"></i>Security Settings</h5>
@@ -1479,7 +1446,6 @@ fill="#fff"/>
 </form>
 </div>
 </div>
-<!-- Auth Modal -->
 <div class="learning-auth-modal" id="learningAuthModal">
 <div class="modal-content">
 <h5 id="authTitle"><i class="fas fa-sign-in-alt me-2"></i>Admin Login</h5>
@@ -1494,7 +1460,6 @@ fill="#fff"/>
 </form>
 </div>
 </div>
-<!-- Tool Modal -->
 <div id="toolModalOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; align-items:flex-end; justify-content:center;">
 <div id="toolModalBox" style="background:var(--bg-elevated); width:100%; max-width:500px; max-height:92vh; border-radius:20px 20px 0 0; transform:translateY(100%); transition:transform 0.3s; display:flex; flex-direction:column; overflow:hidden;">
 <div style="width:36px; height:4px; background:var(--border); border-radius:2px; margin:10px auto 0;"></div>
@@ -1505,7 +1470,6 @@ fill="#fff"/>
 <div id="toolModalBody" style="flex:1; overflow:auto; padding:16px; background:var(--bg-body);"></div>
 </div>
 </div>
-<!-- Document Modal -->
 <div class="doc-modal-overlay" id="docModalOverlay">
 <div class="doc-modal">
 <div class="doc-modal-header">
@@ -1519,14 +1483,12 @@ fill="#fff"/>
 </div>
 </div>
 </div>
-<!-- Video Modal -->
 <div class="video-modal-overlay" id="videoModalOverlay">
 <div class="video-modal-container">
 <button class="video-modal-close" id="videoModalClose">&times;</button>
 <div class="video-wrapper" id="videoWrapper"></div>
 </div>
 </div>
-<!-- Contact Form Modal -->
 <div class="form-overlay" id="contactFormOverlay">
 <div class="form-box">
 <div class="form-header"><h3 id="contactFormTitle">Add Contact</h3><button class="sheet-close" id="contactFormClose"><i class="bi bi-x"></i></button></div>
@@ -1541,7 +1503,6 @@ fill="#fff"/>
 <div class="form-footer"><button class="btn-form cancel" id="contactFormCancel">Cancel</button><button class="btn-form save" id="contactFormSave">Save</button></div>
 </div>
 </div>
-<!-- Document Form Modal -->
 <div class="form-overlay" id="docFormOverlay">
 <div class="form-box">
 <div class="form-header"><h3 id="docFormTitle">Add Document</h3><button class="sheet-close" id="docFormClose"><i class="bi bi-x"></i></button></div>
@@ -1557,7 +1518,6 @@ fill="#fff"/>
 <div class="form-footer"><button class="btn-form cancel" id="docFormCancel">Cancel</button><button class="btn-form save" id="docFormSave">Save</button></div>
 </div>
 </div>
-<!-- Link Form Modal -->
 <div class="form-overlay" id="linkFormOverlay">
 <div class="form-box">
 <div class="form-header"><h3 id="linkFormTitle">Add Link</h3><button class="sheet-close" id="linkFormClose"><i class="bi bi-x"></i></button></div>
@@ -2135,14 +2095,29 @@ currentSearchResults.push({
 ...tool,
 action: () => {
 document.querySelector('[data-screen="tools"]').click();
-if (tool.name === 'Existing Issues') {
-window.open('https://www.sharesansar.com/existing-issues', '_blank');
-} else if (tool.name === 'IPO Allotment') {
-window.open('https://iporesult.cdsc.com.np/', '_blank');
-} else if (tool.name === 'Nepal Provinces') {
+if (tool.name === 'Nepal Provinces') {
 openNepalModal();
-} else if (tool.name === 'World Explorer' || tool.name === 'World Date & Time') {
-setTimeout(() => document.querySelector(`.tool-card[data-tool="${tool.name === 'World Explorer' ? 'worldexplorer' : 'worlddatetime'}"]`).click(), 150);
+} else {
+const toolKey = tool.name.toLowerCase().replace(/\s+/g, '');
+const keyMap = {
+'existingissues': 'existingissues',
+'ipoallotment': 'ipoallotment',
+'gold&silver': 'gold',
+'forexrates': 'forex',
+'fuelrates': 'fuel',
+'falfulbazar': 'veg',
+'dateconverter': 'date',
+'weather': 'weather',
+'unicode': 'unicode',
+'panchang': 'panchang',
+'worldexplorer': 'worldexplorer',
+'worlddate&time': 'worlddatetime'
+};
+const mappedKey = keyMap[toolKey] || toolKey;
+setTimeout(() => {
+const card = document.querySelector(`.tool-card[data-tool="${mappedKey}"]`);
+if (card) card.click();
+}, 150);
 }
 closeSearchOverlay();
 }
@@ -2203,46 +2178,22 @@ const linkTitle = String(link.title || '');
 const linkDesc = String(link.description || '');
 const linkCat = String(link.category || '');
 const linkUrl = String(link.url || '');
+const linkType = link.type || 'link';
 if (linkTitle.toLowerCase().includes(query) || linkDesc.toLowerCase().includes(query) || linkCat.toLowerCase().includes(query) || linkUrl.toLowerCase().includes(query)) {
 currentSearchResults.push({
 name: linkTitle || 'Untitled',
-type: 'Link',
+type: linkType === 'video' ? 'Video' : (linkType === 'note' ? 'Note' : 'Link'),
 desc: linkDesc || linkUrl,
-icon: 'bi-link-45deg',
+icon: linkType === 'video' ? 'fa-video' : (linkType === 'note' ? 'fa-sticky-note' : 'bi-link-45deg'),
 color: 'link',
+linkData: link,
 action: () => {
 document.querySelector('[data-screen="links"]').click();
 setTimeout(() => {
-document.getElementById('linkSearchInput').value = query;
-filterLinks();
-}, 150);
-closeSearchOverlay();
-}
-});
-}
-});
-}
-if (typeof window.learningAllVideos !== 'undefined' && window.learningAllVideos.length > 0) {
-window.learningAllVideos.forEach(video => {
-const title = String(video.title || '');
-const category = String(video.category || '');
-const subcategory = String(video.subcategory || '');
-const topic = String(video.topic || '');
-const meta = [category, subcategory, topic].filter(Boolean).join(' ');
-if (title.toLowerCase().includes(query) || category.toLowerCase().includes(query) ||
-subcategory.toLowerCase().includes(query) || topic.toLowerCase().includes(query)) {
-currentSearchResults.push({
-name: title,
-type: 'Learning',
-desc: meta || 'Video',
-icon: 'fa-video',
-color: 'learning',
-videoData: video,
-action: () => {
-document.querySelector('[data-screen="learning"]').click();
-setTimeout(() => {
-if (typeof window.playLearningVideo === 'function') {
-window.playLearningVideo(video);
+if (linkType === 'video') {
+openVideoModal(linkUrl);
+} else if (linkType === 'link') {
+openFullScreenModal(linkTitle || 'Link', linkUrl);
 }
 }, 300);
 closeSearchOverlay();
@@ -2305,7 +2256,6 @@ greetingText.textContent = greeting; greetingEmoji.textContent = emoji;
 const now = new Date();
 welcomeDateEl.textContent = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 timeTextEl.textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-// Updated to requested static Nepali date
 nepaliDateText.textContent = '३२ असार २०८३, बिहिवार';
 }
 updateDateTime(); setInterval(updateDateTime, 30000);
@@ -2332,18 +2282,32 @@ document.getElementById('weatherRetry').addEventListener('click', fetchWeather);
 }
 fetchWeather(); setInterval(fetchWeather, 120000);
 document.addEventListener('visibilitychange', () => { if (!document.hidden) { updateDateTime(); fetchWeather(); } });
+// ========== FULL SCREEN MODAL HELPER ==========
+function openFullScreenModal(title, url) {
+document.getElementById('fullScreenToolTitle').textContent = title;
+document.getElementById('fullScreenToolIframe').src = url;
+document.getElementById('fullScreenToolModal').style.display = 'flex';
+document.body.classList.add('modal-open');
+}
+function closeFullScreenModal() {
+document.getElementById('fullScreenToolModal').style.display = 'none';
+document.getElementById('fullScreenToolIframe').src = '';
+document.body.classList.remove('modal-open');
+}
 // ========== TOOLS MODAL ==========
 const toolData = {
-gold: { title: 'Gold & Silver Price', iframe: 'https://www.ashesh.com.np/gold/widget.php?api=621113p553&header_color=0077e5', height: 265 },
-forex: { title: 'Foreign Exchange Rates', iframe: 'https://www.ashesh.com.np/forex/widget2.php?api=621117p597&header_color=38b45e&background_color=faf8ee&header_title=Nepal%20Exchange%20Rates', height: 383 },
-fuel: { title: 'Fuel Rates', iframe: 'https://www.ashesh.com.np/fuel/widget.php?api=641110p120&title=Nepal%20Fuel%20Rates&header_color=dedede&header_text_color=303030', height: 275 },
-veg: { title: 'Falfulbazar', iframe: 'https://www.ashesh.com.np/vegetable/widget.php?api=641115p195&header_color=519122', height: 265 },
-date: { title: 'Date Converter (BS ↔ AD)', iframe: 'https://www.ashesh.com.np/linkdate-converter.php?h_color=21ADE2&b_color=CFE4B1&api=641117p214', height: 186 },
-weather: { title: 'Nepal Weather', iframe: 'https://www.ashesh.com.np/weather/widget.php?title=Nepal%20Weather%20Observation&header_color=00a2e2&api=641112p367', height: 383 },
-unicode: { title: 'Nepali Unicode', iframe: 'https://www.ashesh.com.np/linknepali-unicode3.php?api=641111p353', height: 400 },
-panchang: { title: 'Nepali Panchang', iframe: 'https://www.ashesh.com.np/panchang/widget.php?header_title=Nepali%20Panchang&header_color=e6e5e2&api=641113p383', height: 365 },
-worldexplorer: { title: 'World Explorer', iframe: 'https://www.maharjan-anil.com.np/world', height: 500 },
-worlddatetime: { title: 'World Date & Time', iframe: 'https://www.maharjan-anil.com.np/worlddateandtime', height: 500 }
+gold: { title: 'Gold & Silver Price', iframe: 'https://www.ashesh.com.np/gold/widget.php?api=621113p553&header_color=0077e5', height: 265, fullScreen: false },
+forex: { title: 'Foreign Exchange Rates', iframe: 'https://www.ashesh.com.np/forex/widget2.php?api=621117p597&header_color=38b45e&background_color=faf8ee&header_title=Nepal%20Exchange%20Rates', height: 383, fullScreen: false },
+fuel: { title: 'Fuel Rates', iframe: 'https://www.ashesh.com.np/fuel/widget.php?api=641110p120&title=Nepal%20Fuel%20Rates&header_color=dedede&header_text_color=303030', height: 275, fullScreen: false },
+veg: { title: 'Falfulbazar', iframe: 'https://www.ashesh.com.np/vegetable/widget.php?api=641115p195&header_color=519122', height: 265, fullScreen: false },
+date: { title: 'Date Converter (BS ↔ AD)', iframe: 'https://www.ashesh.com.np/linkdate-converter.php?h_color=21ADE2&b_color=CFE4B1&api=641117p214', height: 186, fullScreen: false },
+weather: { title: 'Nepal Weather', iframe: 'https://www.ashesh.com.np/weather/widget.php?title=Nepal%20Weather%20Observation&header_color=00a2e2&api=641112p367', height: 383, fullScreen: false },
+unicode: { title: 'Nepali Unicode', iframe: 'https://www.ashesh.com.np/linknepali-unicode3.php?api=641111p353', height: 400, fullScreen: false },
+panchang: { title: 'Nepali Panchang', iframe: 'https://www.ashesh.com.np/panchang/widget.php?header_title=Nepali%20Panchang&header_color=e6e5e2&api=641113p383', height: 365, fullScreen: false },
+existingissues: { title: 'Existing Issues', iframe: 'https://www.sharesansar.com/existing-issues', fullScreen: true },
+ipoallotment: { title: 'IPO Allotment', iframe: 'https://iporesult.cdsc.com.np/', fullScreen: true },
+worldexplorer: { title: 'World Explorer', iframe: 'https://www.maharjan-anil.com.np/world', fullScreen: true },
+worlddatetime: { title: 'World Date & Time', iframe: 'https://www.maharjan-anil.com.np/worlddateandtime', fullScreen: true }
 };
 const toolModalOverlay = document.getElementById('toolModalOverlay');
 const toolModalBox = document.getElementById('toolModalBox');
@@ -2357,15 +2321,11 @@ if (tool === 'nepal') {
 openNepalModal();
 return;
 }
-if (tool === 'worldexplorer' || tool === 'worlddatetime') {
-const data = toolData[tool];
-document.getElementById('fullScreenToolTitle').textContent = data.title;
-document.getElementById('fullScreenToolIframe').src = data.iframe;
-document.getElementById('fullScreenToolModal').style.display = 'flex';
-document.body.classList.add('modal-open');
+const data = toolData[tool]; if (!data) return;
+if (data.fullScreen) {
+openFullScreenModal(data.title, data.iframe);
 return;
 }
-const data = toolData[tool]; if (!data) return;
 toolModalTitle.textContent = data.title;
 toolModalBody.innerHTML = `<iframe src="${data.iframe}" style="width:100%; height:${data.height}px; border:none; border-radius:10px; background:white;" allowtransparency="true"></iframe>`;
 toolModalOverlay.style.display = 'flex'; document.body.classList.add('modal-open');
@@ -2378,14 +2338,7 @@ setTimeout(() => { toolModalOverlay.style.display = 'none'; toolModalBody.innerH
 }
 toolModalClose.addEventListener('click', closeToolModal);
 toolModalOverlay.addEventListener('click', (e) => { if (e.target === toolModalOverlay) closeToolModal(); });
-
-// Close full screen tool modal
-document.getElementById('fullScreenToolClose').addEventListener('click', () => {
-document.getElementById('fullScreenToolModal').style.display = 'none';
-document.getElementById('fullScreenToolIframe').src = '';
-document.body.classList.remove('modal-open');
-});
-
+document.getElementById('fullScreenToolClose').addEventListener('click', closeFullScreenModal);
 // ========== NEPAL PROVINCE & DISTRICTS ==========
 const nepalProvinces = [
 {
@@ -2823,10 +2776,31 @@ return `<div class="link-card video-card" data-video-url="${escapeHtml(link.url)
 return `<div class="link-card note-card"><div class="link-card-header"><div class="link-title-wrapper"><h3 class="link-card-title">${escapeHtml(link.title || 'Note')}</h3></div><div class="link-card-actions"><button type="button" class="link-icon-btn" data-action="edit-link" data-id="${link.id}"><i class="bi bi-pencil"></i></button><button type="button" class="link-icon-btn delete" data-action="delete-link" data-id="${link.id}"><i class="bi bi-trash"></i></button></div></div><div class="note-content">${escapeHtml(link.note || link.description || '')}</div><div class="link-card-footer"><span class="link-badge">📝 Note</span></div></div>`;
 } else {
 const thumbUrl = getThumbnailUrl(link.url); const fallbackIcon = 'https://via.placeholder.com/36/1e293b/64748b?text=';
-return `<div class="link-card"><div class="link-card-header"><div class="link-title-wrapper"><img src="${thumbUrl}" class="site-thumbnail" onerror="this.src='${fallbackIcon}'" alt="icon"><h3 class="link-card-title">${escapeHtml(link.title || 'Untitled')}</h3></div><div class="link-card-actions"><button type="button" class="link-icon-btn" data-action="edit-link" data-id="${link.id}"><i class="bi bi-pencil"></i></button><button type="button" class="link-icon-btn delete" data-action="delete-link" data-id="${link.id}"><i class="bi bi-trash"></i></button></div></div><a href="${escapeHtml(link.url)}" target="_blank" rel="noopener" class="link-card-url">${escapeHtml(link.url)}</a>${link.description ? `<p class="link-card-desc">${escapeHtml(link.description)}</p>` : ''}<div class="link-card-footer">${link.category ? `<span class="link-badge">${escapeHtml(link.category)}</span>` : '<span></span>'}<a href="${escapeHtml(link.url)}" target="_blank" rel="noopener" class="link-visit-btn">Visit <i class="bi bi-arrow-up-right"></i></a></div></div>`;
+return `<div class="link-card" data-link-url="${escapeHtml(link.url)}" data-link-title="${escapeHtml(link.title || 'Link')}"><div class="link-card-header"><div class="link-title-wrapper"><img src="${thumbUrl}" class="site-thumbnail" onerror="this.src='${fallbackIcon}'" alt="icon"><h3 class="link-card-title">${escapeHtml(link.title || 'Untitled')}</h3></div><div class="link-card-actions"><button type="button" class="link-icon-btn" data-action="edit-link" data-id="${link.id}"><i class="bi bi-pencil"></i></button><button type="button" class="link-icon-btn delete" data-action="delete-link" data-id="${link.id}"><i class="bi bi-trash"></i></button></div></div><span class="link-card-url" data-open-link>${escapeHtml(link.url)}</span>${link.description ? `<p class="link-card-desc">${escapeHtml(link.description)}</p>` : ''}<div class="link-card-footer">${link.category ? `<span class="link-badge">${escapeHtml(link.category)}</span>` : '<span></span>'}<span class="link-visit-btn" data-open-link>Visit <i class="bi bi-arrow-up-right"></i></span></div></div>`;
 }
 }).join('');
 linksGrid.querySelectorAll('.video-card').forEach(card => { card.addEventListener('click', (e) => { if (e.target.closest('.link-icon-btn')) return; const url = card.dataset.videoUrl; openVideoModal(url); }); });
+linksGrid.querySelectorAll('.link-card[data-link-url]').forEach(card => {
+card.addEventListener('click', (e) => {
+if (e.target.closest('.link-icon-btn')) return;
+if (!e.target.closest('[data-open-link]') && e.target.closest('.link-card-header')) return;
+const url = card.dataset.linkUrl;
+const title = card.dataset.linkTitle || 'Link';
+openFullScreenModal(title, url);
+});
+});
+linksGrid.querySelectorAll('[data-open-link]').forEach(el => {
+el.addEventListener('click', (e) => {
+e.preventDefault();
+e.stopPropagation();
+const card = el.closest('.link-card');
+if (card) {
+const url = card.dataset.linkUrl;
+const title = card.dataset.linkTitle || 'Link';
+openFullScreenModal(title, url);
+}
+});
+});
 linksGrid.querySelectorAll('[data-action="edit-link"]').forEach(btn => { btn.addEventListener('click', () => { const id = parseInt(btn.dataset.id); const link = allLinks.find(l => l.id === id); if (link) openLinkForm(link); else showToast('Link not found', 'error'); }); });
 linksGrid.querySelectorAll('[data-action="delete-link"]').forEach(btn => { btn.addEventListener('click', () => { const id = parseInt(btn.dataset.id); deleteLink(id); }); });
 }
