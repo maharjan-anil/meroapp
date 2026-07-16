@@ -535,267 +535,6 @@ background: rgba(0,0,0,0.8); border-radius: 50%; display: flex; align-items: cen
 .toast-msg.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 .toast-msg.success { background: var(--success); color: white; }
 .toast-msg.error { background: var(--danger); color: white; }
-.nepal-modal-overlay {
-position: fixed;
-inset: 0;
-background: rgba(0,0,0,0.95);
-z-index: 5000;
-display: none;
-align-items: center;
-justify-content: center;
-padding: 16px;
-overflow-y: auto;
-}
-.nepal-modal-overlay.active {
-display: flex;
-}
-.nepal-modal-content {
-background: #0a0e1a;
-border-radius: 20px;
-width: 100%;
-max-width: 900px;
-max-height: 90vh;
-overflow-y: auto;
-box-shadow: 0 20px 60px rgba(0,0,0,0.8);
-animation: modalSlideIn 0.4s ease;
-border: 1px solid #2a3142;
-}
-.nepal-hero {
-background: linear-gradient(135deg, var(--np-crimson) 0%, #a01030 50%, var(--np-blue) 100%);
-color: #fff;
-padding: 3rem 2rem;
-text-align: center;
-position: relative;
-overflow: hidden;
-}
-.nepal-hero::before {
-content: "";
-position: absolute;
-inset: 0;
-background-image:
-radial-gradient(circle at 20% 30%, rgba(255,255,255,0.08) 0, transparent 40%),
-radial-gradient(circle at 80% 70%, rgba(255,255,255,0.06) 0, transparent 40%);
-pointer-events: none;
-}
-.nepal-flag {
-width: 80px;
-height: auto;
-margin-bottom: 1rem;
-filter: drop-shadow(0 4px 10px rgba(0,0,0,0.25));
-}
-.nepal-hero h2 {
-font-size: 2.5rem;
-font-weight: 800;
-margin-bottom: 0.5rem;
-}
-.nepal-hero p {
-opacity: 0.95;
-font-size: 1.1rem;
-}
-.nepal-stats {
-display: grid;
-grid-template-columns: repeat(3, 1fr);
-gap: 1rem;
-padding: 2rem;
-margin-top: -2rem;
-position: relative;
-z-index: 1;
-}
-.nepal-stat-card {
-background: #151a28;
-border-radius: 14px;
-padding: 1.5rem;
-box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-border: 1px solid #2a3142;
-text-align: center;
-}
-.nepal-stat-icon {
-width: 50px;
-height: 50px;
-border-radius: 12px;
-display: inline-flex;
-align-items: center;
-justify-content: center;
-font-size: 1.5rem;
-color: white;
-margin-bottom: 0.75rem;
-}
-.nepal-stat-icon.red { background: var(--np-crimson); }
-.nepal-stat-icon.blue { background: var(--np-blue); }
-.nepal-stat-icon.dark { background: #111827; }
-.nepal-stat-number {
-font-size: 2rem;
-font-weight: 800;
-background: linear-gradient(135deg, var(--np-crimson), var(--np-blue));
--webkit-background-clip: text;
-background-clip: text;
-color: transparent;
-}
-.nepal-search {
-max-width: 600px;
-margin: 2rem auto;
-padding: 0 2rem;
-}
-.nepal-search-input {
-width: 100%;
-padding: 1rem 1.25rem 1rem 3rem;
-border-radius: 999px;
-border: 2px solid #2a3142;
-font-size: 1rem;
-transition: border-color .2s, box-shadow .2s;
-background: #151a28;
-color: #f1f5f9;
-}
-.nepal-search-input:focus {
-border-color: var(--np-crimson);
-box-shadow: 0 0 0 4px rgba(220,20,60,0.15);
-outline: none;
-}
-.nepal-search-icon {
-position: absolute;
-left: 1.5rem;
-top: 50%;
-transform: translateY(-50%);
-color: #6b7280;
-font-size: 1.1rem;
-}
-.nepal-content {
-padding: 2rem;
-}
-.nepal-section-title {
-font-weight: 800;
-font-size: 1.5rem;
-margin-bottom: 1.5rem;
-position: relative;
-display: inline-block;
-color: #f1f5f9;
-}
-.nepal-section-title::after {
-content: "";
-position: absolute;
-left: 0; bottom: -8px;
-width: 60px; height: 4px;
-border-radius: 2px;
-background: linear-gradient(90deg, var(--np-crimson), var(--np-blue));
-}
-.nepal-accordion {
-margin-bottom: 1rem;
-}
-.nepal-province-item {
-border: 1px solid #2a3142;
-border-radius: 12px !important;
-overflow: hidden;
-margin-bottom: 1rem;
-background: #151a28;
-}
-.nepal-province-header {
-padding: 1.25rem;
-cursor: pointer;
-display: flex;
-align-items: center;
-gap: 1rem;
-background: #151a28;
-transition: background 0.2s;
-}
-.nepal-province-header:hover {
-background: linear-gradient(90deg, rgba(220,20,60,0.08), rgba(0,56,147,0.06));
-}
-.nepal-province-header.active {
-background: linear-gradient(90deg, rgba(220,20,60,0.08), rgba(0,56,147,0.06));
-}
-.nepal-province-badge {
-display: inline-flex;
-align-items: center;
-justify-content: center;
-width: 40px;
-height: 40px;
-border-radius: 10px;
-color: white;
-font-weight: 800;
-flex-shrink: 0;
-}
-.nepal-province-info {
-flex: 1;
-}
-.nepal-province-name {
-font-weight: 700;
-font-size: 1.1rem;
-color: #f1f5f9;
-}
-.nepal-province-capital {
-font-size: 0.85rem;
-color: #94a3b8;
-}
-.nepal-district-count {
-font-size: 0.85rem;
-font-weight: 600;
-background: #2a3142;
-color: #94a3b8;
-padding: 0.3rem 0.75rem;
-border-radius: 999px;
-}
-.nepal-province-content {
-display: none;
-padding: 0 1.25rem 1.25rem;
-}
-.nepal-province-content.active {
-display: block;
-}
-.nepal-districts-grid {
-display: grid;
-grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-gap: 0.75rem;
-}
-.nepal-district-card {
-background: #1e2536;
-border: 1px solid #2a3142;
-border-radius: 10px;
-padding: 0.85rem 1rem;
-text-align: center;
-font-weight: 600;
-color: #e2e8f0;
-transition: all .2s ease;
-}
-.nepal-district-card:hover {
-transform: translateY(-3px);
-border-color: var(--np-crimson);
-color: var(--np-crimson);
-box-shadow: 0 6px 18px rgba(220,20,60,0.12);
-}
-.nepal-district-num {
-display: block;
-font-size: 0.72rem;
-color: #64748b;
-font-weight: 500;
-margin-bottom: 2px;
-}
-.nepal-no-results {
-text-align: center;
-padding: 3rem 1rem;
-color: #94a3b8;
-}
-.nepal-no-results i { font-size: 3rem; color: #475569; }
-.hidden-province { display: none !important; }
-.dim-district { opacity: 0.25; transform: scale(0.97); }
-.nepal-close-btn {
-position: fixed;
-top: 20px;
-right: 20px;
-width: 44px;
-height: 44px;
-border-radius: 50%;
-background: #151a28;
-border: 1px solid #2a3142;
-color: #f1f5f9;
-font-size: 1.5rem;
-cursor: pointer;
-z-index: 5001;
-box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-transition: transform 0.2s;
-}
-.nepal-close-btn:hover {
-transform: scale(1.1);
-}
 .learning-screen { background: var(--bg-body); color: var(--text-primary); font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; }
 .learning-header {
 background: var(--bg-elevated);
@@ -1276,52 +1015,6 @@ padding: 12px; font-size: 0.95rem; resize: vertical;
 </div>
 </div>
 </div>
-<div class="nepal-modal-overlay" id="nepalModal">
-<button class="nepal-close-btn" id="nepalCloseBtn"><i class="bi bi-x-lg"></i></button>
-<div class="nepal-modal-content">
-<div class="nepal-hero">
-<svg class="nepal-flag" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
-<path d="M10 230 L10 10 L170 100 L60 100 L170 190 L10 140 Z"
-fill="#dc143c" stroke="#003893" stroke-width="6"/>
-<circle cx="60" cy="60" r="16" fill="#fff"/>
-<path d="M90 150 l8 18 l20 2 l-15 12 l5 19 l-18 -10 l-18 10 l5 -19 l-15 -12 l20 -2 z"
-fill="#fff"/>
-</svg>
-<h2>Nepal</h2>
-<p>Explore the 7 Provinces and 77 Districts of the Himalayan Nation</p>
-</div>
-<div class="nepal-stats">
-<div class="nepal-stat-card">
-<div class="nepal-stat-icon red"><i class="bi bi-geo-alt-fill"></i></div>
-<div class="nepal-stat-number" data-count="7">0</div>
-<div style="color: #94a3b8; font-size: 0.85rem; font-weight: 600;">Provinces</div>
-</div>
-<div class="nepal-stat-card">
-<div class="nepal-stat-icon blue"><i class="bi bi-pin-map-fill"></i></div>
-<div class="nepal-stat-number" data-count="77">0</div>
-<div style="color: #94a3b8; font-size: 0.85rem; font-weight: 600;">Districts</div>
-</div>
-<div class="nepal-stat-card">
-<div class="nepal-stat-icon dark"><i class="bi bi-people-fill"></i></div>
-<div class="nepal-stat-number" data-count="29" data-suffix="M+">0</div>
-<div style="color: #94a3b8; font-size: 0.85rem; font-weight: 600;">Population</div>
-</div>
-</div>
-<div class="nepal-search position-relative">
-<i class="bi bi-search nepal-search-icon"></i>
-<input type="text" id="nepalSearchInput" class="nepal-search-input" placeholder="Search any district (e.g. Mustang, Jhapa, Kathmandu)...">
-</div>
-<div class="nepal-content">
-<h3 class="nepal-section-title">Provinces & Districts</h3>
-<div id="nepalProvincesContent"></div>
-<div id="nepalNoResults" class="nepal-no-results d-none">
-<i class="bi bi-emoji-frown"></i>
-<h5 class="mt-3">No districts found</h5>
-<p class="mb-0">Try a different keyword.</p>
-</div>
-</div>
-</div>
-</div>
 <!-- Full Screen Tool Modal -->
 <div id="fullScreenToolModal" style="display:none; position:fixed; inset:0; background:var(--bg-body); z-index:5000; flex-direction:column;">
   <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 16px; background:var(--bg-elevated); border-bottom:1px solid var(--border);">
@@ -1537,6 +1230,13 @@ fill="#fff"/>
 <div class="form-group" id="noteGroup" style="display:none;"><label>Note Content *</label><textarea id="linkNote" placeholder="Enter your note here..." style="min-height: 120px;"></textarea></div>
 <div class="form-group"><label>Description</label><textarea id="linkDescription" placeholder="Brief description..."></textarea></div>
 <div class="form-group"><label>Category</label><input type="text" id="linkCategory" placeholder="e.g., Work, Social, News"></div>
+<div class="form-group">
+<label>Open Link In *</label>
+<select id="linkOpenIn" required>
+<option value="newtab">New Tab (Browser)</option>
+<option value="fullscreen">Full Screen (Inside App)</option>
+</select>
+</div>
 </form>
 </div>
 <div class="form-footer"><button class="btn-form cancel" id="linkFormCancel">Cancel</button><button class="btn-form save" id="linkFormSave">Save</button></div>
@@ -2095,9 +1795,6 @@ currentSearchResults.push({
 ...tool,
 action: () => {
 document.querySelector('[data-screen="tools"]').click();
-if (tool.name === 'Nepal Provinces') {
-openNepalModal();
-} else {
 const toolKey = tool.name.toLowerCase().replace(/\s+/g, '');
 const keyMap = {
 'existingissues': 'existingissues',
@@ -2110,6 +1807,7 @@ const keyMap = {
 'weather': 'weather',
 'unicode': 'unicode',
 'panchang': 'panchang',
+'nepalprovinces': 'nepal',
 'worldexplorer': 'worldexplorer',
 'worlddate&time': 'worlddatetime'
 };
@@ -2118,7 +1816,6 @@ setTimeout(() => {
 const card = document.querySelector(`.tool-card[data-tool="${mappedKey}"]`);
 if (card) card.click();
 }, 150);
-}
 closeSearchOverlay();
 }
 });
@@ -2179,6 +1876,7 @@ const linkDesc = String(link.description || '');
 const linkCat = String(link.category || '');
 const linkUrl = String(link.url || '');
 const linkType = link.type || 'link';
+const openIn = (link.openin || link.openIn || 'newtab').toLowerCase();
 if (linkTitle.toLowerCase().includes(query) || linkDesc.toLowerCase().includes(query) || linkCat.toLowerCase().includes(query) || linkUrl.toLowerCase().includes(query)) {
 currentSearchResults.push({
 name: linkTitle || 'Untitled',
@@ -2193,7 +1891,11 @@ setTimeout(() => {
 if (linkType === 'video') {
 openVideoModal(linkUrl);
 } else if (linkType === 'link') {
+if (openIn === 'fullscreen') {
 openFullScreenModal(linkTitle || 'Link', linkUrl);
+} else {
+window.open(linkUrl, '_blank');
+}
 }
 }, 300);
 closeSearchOverlay();
@@ -2245,9 +1947,22 @@ const greetingEmoji = document.getElementById('greetingEmoji');
 const welcomeDateEl = document.getElementById('welcomeDate');
 const timeTextEl = document.getElementById('timeText');
 const nepaliDateText = document.getElementById('nepaliDateText');
+const nepaliMonthsDev = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मंसिर', 'पौष', 'माघ', 'फागुन', 'चैत'];
+const nepaliDaysDev = ['आइतबार', 'सोमबार', 'मङ्गलबार', 'बुधबार', 'बिहीबार', 'शुक्रबार', 'शनिबार'];
+const engToNepaliNum = { '0': '०', '1': '१', '2': '२', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '९' };
+function toNepaliNumber(num) { return num.toString().split('').map(d => engToNepaliNum[d] || d).join(''); }
+function convertToNepaliDate(date) {
+const year = date.getFullYear(); const month = date.getMonth(); const day = date.getDate();
+let nepaliYear = year + 57; let nepaliMonth = month - 3; let nepaliDay = day;
+if (nepaliMonth < 0) { nepaliMonth += 12; nepaliYear -= 1; }
+if (day > 14) { nepaliDay = day - 14; }
+else { nepaliDay = day + 16; if (nepaliMonth === 0) { nepaliMonth = 11; nepaliYear -= 1; } else { nepaliMonth -= 1; } }
+if (nepaliDay > 32) nepaliDay -= 30; if (nepaliDay < 1) nepaliDay = 1;
+return { year: nepaliYear, month: nepaliMonth, day: nepaliDay, monthName: nepaliMonthsDev[nepaliMonth] };
+}
+function getNepalTime() { return new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kathmandu' })); }
 function updateDateTime() {
-const nepalNow = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kathmandu' }));
-const hour = nepalNow.getHours(); let greeting, emoji;
+const nepalNow = getNepalTime(); const hour = nepalNow.getHours(); let greeting, emoji;
 if (hour >= 5 && hour < 12) { greeting = 'Good Morning,'; emoji = '🌅'; }
 else if (hour >= 12 && hour < 17) { greeting = 'Good Afternoon,'; emoji = '☀️'; }
 else if (hour >= 17 && hour < 21) { greeting = 'Good Evening,'; emoji = '🌇'; }
@@ -2256,7 +1971,8 @@ greetingText.textContent = greeting; greetingEmoji.textContent = emoji;
 const now = new Date();
 welcomeDateEl.textContent = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
 timeTextEl.textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-nepaliDateText.textContent = '३२ असार २०८३, बिहिवार';
+const nepaliDate = convertToNepaliDate(now); const dayName = nepaliDaysDev[now.getDay()];
+nepaliDateText.textContent = `${toNepaliNumber(nepaliDate.day)} ${nepaliDate.monthName} ${toNepaliNumber(nepaliDate.year)}, ${dayName}`;
 }
 updateDateTime(); setInterval(updateDateTime, 30000);
 // ========== WEATHER ==========
@@ -2306,6 +2022,7 @@ unicode: { title: 'Nepali Unicode', iframe: 'https://www.ashesh.com.np/linknepal
 panchang: { title: 'Nepali Panchang', iframe: 'https://www.ashesh.com.np/panchang/widget.php?header_title=Nepali%20Panchang&header_color=e6e5e2&api=641113p383', height: 365, fullScreen: false },
 existingissues: { title: 'Existing Issues', iframe: 'https://www.sharesansar.com/existing-issues', fullScreen: true },
 ipoallotment: { title: 'IPO Allotment', iframe: 'https://iporesult.cdsc.com.np/', fullScreen: true },
+nepal: { title: 'Nepal Provinces', iframe: 'https://www.maharjan-anil.com.np/pd', fullScreen: true },
 worldexplorer: { title: 'World Explorer', iframe: 'https://www.maharjan-anil.com.np/world', fullScreen: true },
 worlddatetime: { title: 'World Date & Time', iframe: 'https://www.maharjan-anil.com.np/worlddateandtime', fullScreen: true }
 };
@@ -2317,15 +2034,13 @@ const toolModalClose = document.getElementById('toolModalClose');
 document.querySelectorAll('.tool-card').forEach(card => {
 card.addEventListener('click', () => {
 const tool = card.dataset.tool;
-if (tool === 'nepal') {
-openNepalModal();
-return;
-}
 const data = toolData[tool]; if (!data) return;
+
 if (data.fullScreen) {
 openFullScreenModal(data.title, data.iframe);
 return;
 }
+
 toolModalTitle.textContent = data.title;
 toolModalBody.innerHTML = `<iframe src="${data.iframe}" style="width:100%; height:${data.height}px; border:none; border-radius:10px; background:white;" allowtransparency="true"></iframe>`;
 toolModalOverlay.style.display = 'flex'; document.body.classList.add('modal-open');
@@ -2339,181 +2054,6 @@ setTimeout(() => { toolModalOverlay.style.display = 'none'; toolModalBody.innerH
 toolModalClose.addEventListener('click', closeToolModal);
 toolModalOverlay.addEventListener('click', (e) => { if (e.target === toolModalOverlay) closeToolModal(); });
 document.getElementById('fullScreenToolClose').addEventListener('click', closeFullScreenModal);
-// ========== NEPAL PROVINCE & DISTRICTS ==========
-const nepalProvinces = [
-{
-id: 1,
-name: "Koshi Province",
-capital: "Biratnagar",
-color: "#dc143c",
-districts: [
-"Bhojpur","Dhankuta","Ilam","Jhapa","Khotang","Morang",
-"Okhaldhunga","Panchthar","Sankhuwasabha","Solukhumbu",
-"Sunsari","Taplejung","Terhathum","Udayapur"
-]
-},
-{
-id: 2,
-name: "Madhesh Province",
-capital: "Janakpur",
-color: "#e67e22",
-districts: [
-"Bara","Dhanusha","Mahottari","Parsa",
-"Rautahat","Saptari","Sarlahi","Siraha"
-]
-},
-{
-id: 3,
-name: "Bagmati Province",
-capital: "Hetauda",
-color: "#27ae60",
-districts: [
-"Bhaktapur","Chitawan","Dhading","Dolakha","Kathmandu",
-"Kavrepalanchok","Lalitpur","Makwanpur","Nuwakot",
-"Ramechhap","Rasuwa","Sindhuli","Sindhupalchok"
-]
-},
-{
-id: 4,
-name: "Gandaki Province",
-capital: "Pokhara",
-color: "#2980b9",
-districts: [
-"Baglung","Gorkha","Kaski","Lamjung","Manang","Mustang",
-"Myagdi","Nawalparasi (West)","Parbat","Syangja","Tanahun"
-]
-},
-{
-id: 5,
-name: "Lumbini Province",
-capital: "Deukhuri",
-color: "#8e44ad",
-districts: [
-"Arghakhanchi","Banke","Bardiya","Dang","Gulmi","Kapilvastu",
-"Nawalparasi (East)","Palpa","Pyuthan","Rolpa","Rupandehi"
-]
-},
-{
-id: 6,
-name: "Karnali Province",
-capital: "Birendranagar",
-color: "#16a085",
-districts: [
-"Dailekh","Dolpa","Humla","Jajarkot","Jumla",
-"Kalikot","Mugu","Rukum (West)","Salyan","Surkhet"
-]
-},
-{
-id: 7,
-name: "Sudurpashchim Province",
-capital: "Godawari",
-color: "#c0392b",
-districts: [
-"Achham","Baitadi","Bajhang","Bajura","Dadeldhura",
-"Darchula","Doti","Kailali","Kanchanpur"
-]
-}
-];
-function openNepalModal() {
-document.getElementById('nepalModal').classList.add('active');
-document.body.classList.add('modal-open');
-renderNepalProvinces();
-animateNepalStats();
-}
-function closeNepalModal() {
-document.getElementById('nepalModal').classList.remove('active');
-document.body.classList.remove('modal-open');
-}
-document.getElementById('nepalCloseBtn').addEventListener('click', closeNepalModal);
-document.getElementById('nepalModal').addEventListener('click', (e) => {
-if (e.target === document.getElementById('nepalModal')) {
-closeNepalModal();
-}
-});
-function renderNepalProvinces() {
-const content = document.getElementById('nepalProvincesContent');
-content.innerHTML = nepalProvinces.map((p, idx) => {
-const districtCards = p.districts.map((d, i) => `
-<div class="nepal-district-card" data-district="${d.toLowerCase()}">
-<span class="nepal-district-num">#${String(i + 1).padStart(2, "0")}</span>
-${d}
-</div>
-`).join("");
-return `
-<div class="nepal-province-item" data-province="${p.name.toLowerCase()}">
-<div class="nepal-province-header" onclick="toggleNepalProvince(${p.id})">
-<div class="nepal-province-badge" style="background:${p.color}">${p.id}</div>
-<div class="nepal-province-info">
-<div class="nepal-province-name">${p.name}</div>
-<div class="nepal-province-capital"><i class="bi bi-building"></i> ${p.capital}</div>
-</div>
-<div class="nepal-district-count">${p.districts.length} districts</div>
-</div>
-<div class="nepal-province-content" id="province-content-${p.id}">
-<div class="nepal-districts-grid">
-${districtCards}
-</div>
-</div>
-</div>
-`;
-}).join('');
-setTimeout(() => toggleNepalProvince(1), 100);
-}
-function toggleNepalProvince(id) {
-const header = document.querySelector(`.nepal-province-item:nth-child(${id}) .nepal-province-header`);
-const content = document.getElementById(`province-content-${id}`);
-header.classList.toggle('active');
-content.classList.toggle('active');
-}
-function animateNepalStats() {
-const counters = document.querySelectorAll('.nepal-stat-number');
-counters.forEach(counter => {
-const target = +counter.dataset.count;
-const suffix = counter.dataset.suffix || "";
-const duration = 1400;
-const start = performance.now();
-const tick = (now) => {
-const progress = Math.min((now - start) / duration, 1);
-const eased = 1 - Math.pow(1 - progress, 3);
-counter.textContent = Math.floor(eased * target) + suffix;
-if (progress < 1) requestAnimationFrame(tick);
-else counter.textContent = target + suffix;
-};
-requestAnimationFrame(tick);
-});
-}
-document.getElementById('nepalSearchInput').addEventListener('input', function() {
-const q = this.value.trim().toLowerCase();
-let anyMatch = false;
-document.querySelectorAll('.nepal-province-item').forEach(prov => {
-const cards = prov.querySelectorAll('.nepal-district-card');
-let provHasMatch = false;
-cards.forEach(card => {
-const name = card.dataset.district;
-if (!q || name.includes(q)) {
-card.classList.remove('dim-district');
-provHasMatch = true;
-} else {
-card.classList.add('dim-district');
-}
-});
-if (!q || provHasMatch) {
-prov.classList.remove('hidden-province');
-anyMatch = true;
-if (q && provHasMatch) {
-const content = prov.querySelector('.nepal-province-content');
-const header = prov.querySelector('.nepal-province-header');
-if (!content.classList.contains('active')) {
-header.classList.add('active');
-content.classList.add('active');
-}
-}
-} else {
-prov.classList.add('hidden-province');
-}
-});
-document.getElementById('nepalNoResults').classList.toggle('d-none', anyMatch || !q);
-});
 // ========== DIRECTORY (Contacts) ==========
 let directoryData = []; let editingContactId = null; let currentFilter = 'all';
 const searchInput = document.getElementById('searchInput'); const clearBtn = document.getElementById('clearBtn'); const resultsContainer = document.getElementById('resultsContainer');
@@ -2769,6 +2309,9 @@ if (links.length === 0) { linksGrid.innerHTML = ''; linkEmptyState.classList.rem
 linkEmptyState.classList.add('d-none');
 linksGrid.innerHTML = links.map(link => {
 const type = link.type || 'link';
+// ✅ FIX: Google Apps Script returns lowercase 'openin', so we check both
+const openIn = (link.openin || link.openIn || 'newtab').toLowerCase();
+
 if (type === 'video') {
 const thumbUrl = getYouTubeThumbnail(link.url) || getThumbnailUrl(link.url);
 return `<div class="link-card video-card" data-video-url="${escapeHtml(link.url)}"><img src="${thumbUrl}" class="video-thumbnail" onerror="this.src='https://via.placeholder.com/400x225?text=Video'"><div class="play-button"><i class="bi bi-play-fill"></i></div><div class="link-card-header"><div class="link-title-wrapper"><h3 class="link-card-title">${escapeHtml(link.title || 'Video')}</h3></div><div class="link-card-actions"><button type="button" class="link-icon-btn" data-action="edit-link" data-id="${link.id}"><i class="bi bi-pencil"></i></button><button type="button" class="link-icon-btn delete" data-action="delete-link" data-id="${link.id}"><i class="bi bi-trash"></i></button></div></div>${link.description ? `<p class="link-card-desc">${escapeHtml(link.description)}</p>` : ''}<div class="link-card-footer">${link.category ? `<span class="link-badge">${escapeHtml(link.category)}</span>` : '<span></span>'}</div></div>`;
@@ -2776,33 +2319,72 @@ return `<div class="link-card video-card" data-video-url="${escapeHtml(link.url)
 return `<div class="link-card note-card"><div class="link-card-header"><div class="link-title-wrapper"><h3 class="link-card-title">${escapeHtml(link.title || 'Note')}</h3></div><div class="link-card-actions"><button type="button" class="link-icon-btn" data-action="edit-link" data-id="${link.id}"><i class="bi bi-pencil"></i></button><button type="button" class="link-icon-btn delete" data-action="delete-link" data-id="${link.id}"><i class="bi bi-trash"></i></button></div></div><div class="note-content">${escapeHtml(link.note || link.description || '')}</div><div class="link-card-footer"><span class="link-badge">📝 Note</span></div></div>`;
 } else {
 const thumbUrl = getThumbnailUrl(link.url); const fallbackIcon = 'https://via.placeholder.com/36/1e293b/64748b?text=';
-return `<div class="link-card" data-link-url="${escapeHtml(link.url)}" data-link-title="${escapeHtml(link.title || 'Link')}"><div class="link-card-header"><div class="link-title-wrapper"><img src="${thumbUrl}" class="site-thumbnail" onerror="this.src='${fallbackIcon}'" alt="icon"><h3 class="link-card-title">${escapeHtml(link.title || 'Untitled')}</h3></div><div class="link-card-actions"><button type="button" class="link-icon-btn" data-action="edit-link" data-id="${link.id}"><i class="bi bi-pencil"></i></button><button type="button" class="link-icon-btn delete" data-action="delete-link" data-id="${link.id}"><i class="bi bi-trash"></i></button></div></div><span class="link-card-url" data-open-link>${escapeHtml(link.url)}</span>${link.description ? `<p class="link-card-desc">${escapeHtml(link.description)}</p>` : ''}<div class="link-card-footer">${link.category ? `<span class="link-badge">${escapeHtml(link.category)}</span>` : '<span></span>'}<span class="link-visit-btn" data-open-link>Visit <i class="bi bi-arrow-up-right"></i></span></div></div>`;
+return `<div class="link-card regular-link-card" data-link-url="${escapeHtml(link.url)}" data-link-title="${escapeHtml(link.title || 'Link')}" data-open-in="${openIn}">
+<div class="link-card-header">
+<div class="link-title-wrapper">
+<img src="${thumbUrl}" class="site-thumbnail" onerror="this.src='${fallbackIcon}'" alt="icon">
+<h3 class="link-card-title">${escapeHtml(link.title || 'Untitled')}</h3>
+</div>
+<div class="link-card-actions">
+<button type="button" class="link-icon-btn" data-action="edit-link" data-id="${link.id}"><i class="bi bi-pencil"></i></button>
+<button type="button" class="link-icon-btn delete" data-action="delete-link" data-id="${link.id}"><i class="bi bi-trash"></i></button>
+</div>
+</div>
+<span class="link-card-url" data-open-link>${escapeHtml(link.url)}</span>
+${link.description ? `<p class="link-card-desc">${escapeHtml(link.description)}</p>` : ''}
+<div class="link-card-footer">
+${link.category ? `<span class="link-badge">${escapeHtml(link.category)}</span>` : '<span></span>'}
+<span class="link-visit-btn" data-open-link>Visit <i class="bi bi-arrow-up-right"></i></span>
+</div>
+</div>`;
 }
 }).join('');
-linksGrid.querySelectorAll('.video-card').forEach(card => { card.addEventListener('click', (e) => { if (e.target.closest('.link-icon-btn')) return; const url = card.dataset.videoUrl; openVideoModal(url); }); });
-linksGrid.querySelectorAll('.link-card[data-link-url]').forEach(card => {
+
+// Video cards
+linksGrid.querySelectorAll('.video-card').forEach(card => { 
+card.addEventListener('click', (e) => { 
+if (e.target.closest('.link-icon-btn')) return; 
+openVideoModal(card.dataset.videoUrl); 
+}); 
+});
+
+// ✅ FIX: Add event listener specifically for regular link cards to handle openIn logic
+linksGrid.querySelectorAll('.regular-link-card').forEach(card => {
 card.addEventListener('click', (e) => {
 if (e.target.closest('.link-icon-btn')) return;
-if (!e.target.closest('[data-open-link]') && e.target.closest('.link-card-header')) return;
+// Only trigger if clicking the URL text or the Visit button
+if (!e.target.closest('[data-open-link]')) return;
+
 const url = card.dataset.linkUrl;
-const title = card.dataset.linkTitle || 'Link';
+const title = card.dataset.linkTitle;
+const openIn = card.dataset.openIn;
+
+if (openIn === 'fullscreen') {
 openFullScreenModal(title, url);
-});
-});
-linksGrid.querySelectorAll('[data-open-link]').forEach(el => {
-el.addEventListener('click', (e) => {
-e.preventDefault();
-e.stopPropagation();
-const card = el.closest('.link-card');
-if (card) {
-const url = card.dataset.linkUrl;
-const title = card.dataset.linkTitle || 'Link';
-openFullScreenModal(title, url);
+} else {
+window.open(url, '_blank');
 }
 });
 });
-linksGrid.querySelectorAll('[data-action="edit-link"]').forEach(btn => { btn.addEventListener('click', () => { const id = parseInt(btn.dataset.id); const link = allLinks.find(l => l.id === id); if (link) openLinkForm(link); else showToast('Link not found', 'error'); }); });
-linksGrid.querySelectorAll('[data-action="delete-link"]').forEach(btn => { btn.addEventListener('click', () => { const id = parseInt(btn.dataset.id); deleteLink(id); }); });
+
+// Edit and Delete buttons
+linksGrid.querySelectorAll('[data-action="edit-link"]').forEach(btn => { 
+btn.addEventListener('click', (e) => {
+e.stopPropagation();
+const id = parseInt(btn.dataset.id); 
+const link = allLinks.find(l => l.id === id); 
+if (link) openLinkForm(link); 
+else showToast('Link not found', 'error'); 
+}); 
+});
+
+linksGrid.querySelectorAll('[data-action="delete-link"]').forEach(btn => { 
+btn.addEventListener('click', (e) => {
+e.stopPropagation();
+const id = parseInt(btn.dataset.id); 
+deleteLink(id); 
+}); 
+});
 }
 function openVideoModal(url) {
 const videoId = getYouTubeVideoId(url);
@@ -2818,7 +2400,13 @@ editingLinkId = link ? link.id : null; linkFormTitle.textContent = link ? 'Edit 
 document.getElementById('linkId').value = link ? link.id : ''; document.getElementById('linkType').value = link ? (link.type || 'link') : 'link';
 document.getElementById('linkTitle').value = link ? (link.title || '') : ''; document.getElementById('linkUrl').value = link ? (link.url || '') : '';
 document.getElementById('linkNote').value = link ? (link.note || '') : ''; document.getElementById('linkDescription').value = link ? (link.description || '') : '';
-document.getElementById('linkCategory').value = link ? (link.category || '') : ''; linkType.dispatchEvent(new Event('change'));
+document.getElementById('linkCategory').value = link ? (link.category || '') : '';
+
+// ✅ FIX: Check lowercase 'openin' because Google Apps Script converts headers to lowercase
+const openInValue = link ? (link.openin || link.openIn || 'newtab') : 'newtab';
+document.getElementById('linkOpenIn').value = openInValue;
+
+linkType.dispatchEvent(new Event('change'));
 linkFormOverlay.classList.add('active'); document.body.classList.add('modal-open'); setTimeout(() => document.getElementById('linkTitle').focus(), 100);
 }
 function closeLinkForm() { linkFormOverlay.classList.remove('active'); document.body.classList.remove('modal-open'); editingLinkId = null; }
@@ -2830,14 +2418,27 @@ linkFormSave.addEventListener('click', async () => {
 const type = document.getElementById('linkType').value; const title = document.getElementById('linkTitle').value.trim();
 const url = document.getElementById('linkUrl').value.trim(); const note = document.getElementById('linkNote').value.trim();
 const description = document.getElementById('linkDescription').value.trim(); const category = document.getElementById('linkCategory').value.trim();
+const openIn = document.getElementById('linkOpenIn').value; // 'newtab' or 'fullscreen'
+
 if (!title) { showToast('Title required', 'error'); return; }
 if (type === 'video' && !url) { showToast('Video URL required', 'error'); return; }
 if (type === 'note' && !note) { showToast('Note content required', 'error'); return; }
 if (type === 'link' && !url) { showToast('URL required', 'error'); return; }
-const action = editingLinkId ? 'update' : 'add'; const payload = { action, type, title, url, note, description, category }; if (editingLinkId) payload.id = editingLinkId;
+
+const action = editingLinkId ? 'update' : 'add'; 
+const payload = { action, type, title, url, note, description, category, openIn }; 
+if (editingLinkId) payload.id = editingLinkId;
+
 linkFormSave.disabled = true; linkFormSave.textContent = 'Saving...'; closeLinkForm(); showToast(action === 'add' ? 'Adding...' : 'Saving...', 'success');
-try { await fetch(LINKS_API_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) }); showToast(editingLinkId ? 'Updated!' : 'Added!', 'success'); setTimeout(fetchLinks, 800); }
-catch (error) { showToast('Error saving', 'error'); fetchLinks(); } finally { linkFormSave.disabled = false; linkFormSave.textContent = 'Save'; }
+try { 
+await fetch(LINKS_API_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) }); 
+showToast(editingLinkId ? 'Updated!' : 'Added!', 'success'); 
+setTimeout(fetchLinks, 800); 
+} catch (error) { 
+showToast('Error saving', 'error'); fetchLinks(); 
+} finally { 
+linkFormSave.disabled = false; linkFormSave.textContent = 'Save'; 
+}
 });
 async function deleteLink(id) {
 if (!confirm('Delete this link?')) return;
