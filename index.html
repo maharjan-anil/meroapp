@@ -1349,6 +1349,16 @@ fill="#fff"/>
 </div>
 </div>
 </div>
+<!-- Full Screen Tool Modal -->
+<div id="fullScreenToolModal" style="display:none; position:fixed; inset:0; background:var(--bg-body); z-index:5000; flex-direction:column;">
+  <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 16px; background:var(--bg-elevated); border-bottom:1px solid var(--border);">
+    <h3 id="fullScreenToolTitle" style="margin:0; font-size:1.05rem; font-weight:700; color:var(--text-primary);">Tool</h3>
+    <button id="fullScreenToolClose" style="width:36px; height:36px; border-radius:50%; background:var(--border); border:none; color:var(--text-primary); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.1rem; transition: background 0.2s;"><i class="bi bi-x"></i></button>
+  </div>
+  <div style="flex:1; overflow:hidden; position:relative;">
+    <iframe id="fullScreenToolIframe" src="" style="width:100%; height:100%; border:none; background:white;" allowfullscreen></iframe>
+  </div>
+</div>
 <!-- Learning Video Popup Modal -->
 <div class="learning-popup-modal" id="learningPopupModal">
 <div class="learning-popup-controls">
@@ -2009,6 +2019,11 @@ document.getElementById('learningSettingsModal').style.display = 'none';
 if (learningNotesUnsubscribe) { learningNotesUnsubscribe(); learningNotesUnsubscribe = null; }
 document.getElementById('learningNotesModal').style.display = 'none';
 document.getElementById('learningAuthModal').style.display = 'none';
+if (document.getElementById('fullScreenToolModal').style.display === 'flex') {
+document.getElementById('fullScreenToolModal').style.display = 'none';
+document.getElementById('fullScreenToolIframe').src = '';
+document.body.classList.remove('modal-open');
+}
 }
 });
 </script>
@@ -2126,10 +2141,8 @@ window.open('https://www.sharesansar.com/existing-issues', '_blank');
 window.open('https://iporesult.cdsc.com.np/', '_blank');
 } else if (tool.name === 'Nepal Provinces') {
 openNepalModal();
-} else if (tool.name === 'World Explorer') {
-setTimeout(() => document.querySelector('.tool-card[data-tool="worldexplorer"]').click(), 150);
-} else if (tool.name === 'World Date & Time') {
-setTimeout(() => document.querySelector('.tool-card[data-tool="worlddatetime"]').click(), 150);
+} else if (tool.name === 'World Explorer' || tool.name === 'World Date & Time') {
+setTimeout(() => document.querySelector(`.tool-card[data-tool="${tool.name === 'World Explorer' ? 'worldexplorer' : 'worlddatetime'}"]`).click(), 150);
 }
 closeSearchOverlay();
 }
@@ -2281,22 +2294,9 @@ const greetingEmoji = document.getElementById('greetingEmoji');
 const welcomeDateEl = document.getElementById('welcomeDate');
 const timeTextEl = document.getElementById('timeText');
 const nepaliDateText = document.getElementById('nepaliDateText');
-const nepaliMonthsDev = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मंसिर', 'पौष', 'माघ', 'फागुन', 'चैत'];
-const nepaliDaysDev = ['आइतबार', 'सोमबार', 'मङ्गलबार', 'बुधबार', 'बिहीबार', 'शुक्रबार', 'शनिबार'];
-const engToNepaliNum = { '0': '०', '1': '१', '2': '२', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '९' };
-function toNepaliNumber(num) { return num.toString().split('').map(d => engToNepaliNum[d] || d).join(''); }
-function convertToNepaliDate(date) {
-const year = date.getFullYear(); const month = date.getMonth(); const day = date.getDate();
-let nepaliYear = year + 57; let nepaliMonth = month - 3; let nepaliDay = day;
-if (nepaliMonth < 0) { nepaliMonth += 12; nepaliYear -= 1; }
-if (day > 14) { nepaliDay = day - 14; }
-else { nepaliDay = day + 16; if (nepaliMonth === 0) { nepaliMonth = 11; nepaliYear -= 1; } else { nepaliMonth -= 1; } }
-if (nepaliDay > 32) nepaliDay -= 30; if (nepaliDay < 1) nepaliDay = 1;
-return { year: nepaliYear, month: nepaliMonth, day: nepaliDay, monthName: nepaliMonthsDev[nepaliMonth] };
-}
-function getNepalTime() { return new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kathmandu' })); }
 function updateDateTime() {
-const nepalNow = getNepalTime(); const hour = nepalNow.getHours(); let greeting, emoji;
+const nepalNow = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kathmandu' }));
+const hour = nepalNow.getHours(); let greeting, emoji;
 if (hour >= 5 && hour < 12) { greeting = 'Good Morning,'; emoji = '🌅'; }
 else if (hour >= 12 && hour < 17) { greeting = 'Good Afternoon,'; emoji = '☀️'; }
 else if (hour >= 17 && hour < 21) { greeting = 'Good Evening,'; emoji = '🌇'; }
@@ -2357,6 +2357,14 @@ if (tool === 'nepal') {
 openNepalModal();
 return;
 }
+if (tool === 'worldexplorer' || tool === 'worlddatetime') {
+const data = toolData[tool];
+document.getElementById('fullScreenToolTitle').textContent = data.title;
+document.getElementById('fullScreenToolIframe').src = data.iframe;
+document.getElementById('fullScreenToolModal').style.display = 'flex';
+document.body.classList.add('modal-open');
+return;
+}
 const data = toolData[tool]; if (!data) return;
 toolModalTitle.textContent = data.title;
 toolModalBody.innerHTML = `<iframe src="${data.iframe}" style="width:100%; height:${data.height}px; border:none; border-radius:10px; background:white;" allowtransparency="true"></iframe>`;
@@ -2370,6 +2378,14 @@ setTimeout(() => { toolModalOverlay.style.display = 'none'; toolModalBody.innerH
 }
 toolModalClose.addEventListener('click', closeToolModal);
 toolModalOverlay.addEventListener('click', (e) => { if (e.target === toolModalOverlay) closeToolModal(); });
+
+// Close full screen tool modal
+document.getElementById('fullScreenToolClose').addEventListener('click', () => {
+document.getElementById('fullScreenToolModal').style.display = 'none';
+document.getElementById('fullScreenToolIframe').src = '';
+document.body.classList.remove('modal-open');
+});
+
 // ========== NEPAL PROVINCE & DISTRICTS ==========
 const nepalProvinces = [
 {
