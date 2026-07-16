@@ -2012,19 +2012,19 @@ document.body.classList.remove('modal-open');
 }
 // ========== TOOLS MODAL ==========
 const toolData = {
-gold: { title: 'Gold & Silver Price', iframe: 'https://www.ashesh.com.np/gold/widget.php?api=621113p553&header_color=0077e5', height: 265, fullScreen: false },
-forex: { title: 'Foreign Exchange Rates', iframe: 'https://www.ashesh.com.np/forex/widget2.php?api=621117p597&header_color=38b45e&background_color=faf8ee&header_title=Nepal%20Exchange%20Rates', height: 383, fullScreen: false },
-fuel: { title: 'Fuel Rates', iframe: 'https://www.ashesh.com.np/fuel/widget.php?api=641110p120&title=Nepal%20Fuel%20Rates&header_color=dedede&header_text_color=303030', height: 275, fullScreen: false },
-veg: { title: 'Falfulbazar', iframe: 'https://www.ashesh.com.np/vegetable/widget.php?api=641115p195&header_color=519122', height: 265, fullScreen: false },
-date: { title: 'Date Converter (BS ↔ AD)', iframe: 'https://www.ashesh.com.np/linkdate-converter.php?h_color=21ADE2&b_color=CFE4B1&api=641117p214', height: 186, fullScreen: false },
-weather: { title: 'Nepal Weather', iframe: 'https://www.ashesh.com.np/weather/widget.php?title=Nepal%20Weather%20Observation&header_color=00a2e2&api=641112p367', height: 383, fullScreen: false },
-unicode: { title: 'Nepali Unicode', iframe: 'https://www.ashesh.com.np/linknepali-unicode3.php?api=641111p353', height: 400, fullScreen: false },
-panchang: { title: 'Nepali Panchang', iframe: 'https://www.ashesh.com.np/panchang/widget.php?header_title=Nepali%20Panchang&header_color=e6e5e2&api=641113p383', height: 365, fullScreen: false },
-existingissues: { title: 'Existing Issues', iframe: 'https://www.sharesansar.com/existing-issues', fullScreen: true },
-ipoallotment: { title: 'IPO Allotment', iframe: 'https://iporesult.cdsc.com.np/', fullScreen: true },
-nepal: { title: 'Nepal Provinces', iframe: 'https://www.maharjan-anil.com.np/pd', fullScreen: true },
-worldexplorer: { title: 'World Explorer', iframe: 'https://www.maharjan-anil.com.np/world', fullScreen: true },
-worlddatetime: { title: 'World Date & Time', iframe: 'https://www.maharjan-anil.com.np/worlddateandtime', fullScreen: true }
+gold: { title: 'Gold & Silver Price', iframe: 'https://www.ashesh.com.np/gold/widget.php?api=621113p553&header_color=0077e5', height: 270 },
+forex: { title: 'Foreign Exchange Rates', iframe: 'https://www.ashesh.com.np/forex/widget2.php?api=621117p597&header_color=38b45e&background_color=faf8ee&header_title=Nepal%20Exchange%20Rates', height: 550 },
+fuel: { title: 'Fuel Rates', iframe: 'https://www.ashesh.com.np/fuel/widget.php?api=641110p120&title=Nepal%20Fuel%20Rates&header_color=dedede&header_text_color=303030', height: 275 },
+veg: { title: 'Falfulbazar', iframe: 'https://www.ashesh.com.np/vegetable/widget.php?api=641115p195&header_color=519122', height: 265, openIn: 'fullscreen' },
+date: { title: 'Date Converter (BS ↔ AD)', iframe: 'https://www.ashesh.com.np/linkdate-converter.php?h_color=21ADE2&b_color=CFE4B1&api=641117p214', height: 186 },
+weather: { title: 'Nepal Weather', iframe: 'https://www.ashesh.com.np/weather/widget.php?title=Nepal%20Weather%20Observation&header_color=00a2e2&api=641112p367', height: 550 },
+unicode: { title: 'Nepali Unicode', iframe: 'https://www.ashesh.com.np/linknepali-unicode3.php?api=641111p353', height: 400, openIn: 'fullscreen' },
+panchang: { title: 'Nepali Panchang', iframe: 'https://www.ashesh.com.np/panchang/widget.php?header_title=Nepali%20Panchang&header_color=e6e5e2&api=641113p383', height: 365 },
+existingissues: { title: 'Existing Issues', url: 'https://www.sharesansar.com/existing-issues', openIn: 'fullscreen' },
+ipoallotment: { title: 'IPO Allotment', url: 'https://iporesult.cdsc.com.np/', openIn: 'newtab' },
+nepal: { title: 'Nepal Provinces', url: 'https://www.maharjan-anil.com.np/pd', openIn: 'fullscreen' },
+worldexplorer: { title: 'World Explorer', url: 'https://www.maharjan-anil.com.np/world', openIn: 'fullscreen' },
+worlddatetime: { title: 'World Date & Time', url: 'https://www.maharjan-anil.com.np/worlddateandtime', openIn: 'fullscreen' }
 };
 const toolModalOverlay = document.getElementById('toolModalOverlay');
 const toolModalBox = document.getElementById('toolModalBox');
@@ -2034,16 +2034,24 @@ const toolModalClose = document.getElementById('toolModalClose');
 document.querySelectorAll('.tool-card').forEach(card => {
 card.addEventListener('click', () => {
 const tool = card.dataset.tool;
-const data = toolData[tool]; if (!data) return;
+const data = toolData[tool];
+if (!data) return;
 
-if (data.fullScreen) {
-openFullScreenModal(data.title, data.iframe);
+// ✅ FIX: Check if openIn is defined (fullscreen or newtab)
+if (data.openIn === 'newtab') {
+window.open(data.url || data.iframe, '_blank');
+return;
+}
+if (data.openIn === 'fullscreen' || data.fullScreen) {
+openFullScreenModal(data.title, data.url || data.iframe);
 return;
 }
 
+// Default small modal behavior for widgets
 toolModalTitle.textContent = data.title;
 toolModalBody.innerHTML = `<iframe src="${data.iframe}" style="width:100%; height:${data.height}px; border:none; border-radius:10px; background:white;" allowtransparency="true"></iframe>`;
-toolModalOverlay.style.display = 'flex'; document.body.classList.add('modal-open');
+toolModalOverlay.style.display = 'flex';
+document.body.classList.add('modal-open');
 setTimeout(() => { toolModalBox.style.transform = 'translateY(0)'; }, 10);
 });
 });
@@ -2309,7 +2317,6 @@ if (links.length === 0) { linksGrid.innerHTML = ''; linkEmptyState.classList.rem
 linkEmptyState.classList.add('d-none');
 linksGrid.innerHTML = links.map(link => {
 const type = link.type || 'link';
-// ✅ FIX: Google Apps Script returns lowercase 'openin', so we check both
 const openIn = (link.openin || link.openIn || 'newtab').toLowerCase();
 
 if (type === 'video') {
@@ -2340,7 +2347,6 @@ ${link.category ? `<span class="link-badge">${escapeHtml(link.category)}</span>`
 }
 }).join('');
 
-// Video cards
 linksGrid.querySelectorAll('.video-card').forEach(card => { 
 card.addEventListener('click', (e) => { 
 if (e.target.closest('.link-icon-btn')) return; 
@@ -2348,11 +2354,9 @@ openVideoModal(card.dataset.videoUrl);
 }); 
 });
 
-// ✅ FIX: Add event listener specifically for regular link cards to handle openIn logic
 linksGrid.querySelectorAll('.regular-link-card').forEach(card => {
 card.addEventListener('click', (e) => {
 if (e.target.closest('.link-icon-btn')) return;
-// Only trigger if clicking the URL text or the Visit button
 if (!e.target.closest('[data-open-link]')) return;
 
 const url = card.dataset.linkUrl;
@@ -2367,7 +2371,6 @@ window.open(url, '_blank');
 });
 });
 
-// Edit and Delete buttons
 linksGrid.querySelectorAll('[data-action="edit-link"]').forEach(btn => { 
 btn.addEventListener('click', (e) => {
 e.stopPropagation();
@@ -2402,7 +2405,6 @@ document.getElementById('linkTitle').value = link ? (link.title || '') : ''; doc
 document.getElementById('linkNote').value = link ? (link.note || '') : ''; document.getElementById('linkDescription').value = link ? (link.description || '') : '';
 document.getElementById('linkCategory').value = link ? (link.category || '') : '';
 
-// ✅ FIX: Check lowercase 'openin' because Google Apps Script converts headers to lowercase
 const openInValue = link ? (link.openin || link.openIn || 'newtab') : 'newtab';
 document.getElementById('linkOpenIn').value = openInValue;
 
@@ -2418,7 +2420,7 @@ linkFormSave.addEventListener('click', async () => {
 const type = document.getElementById('linkType').value; const title = document.getElementById('linkTitle').value.trim();
 const url = document.getElementById('linkUrl').value.trim(); const note = document.getElementById('linkNote').value.trim();
 const description = document.getElementById('linkDescription').value.trim(); const category = document.getElementById('linkCategory').value.trim();
-const openIn = document.getElementById('linkOpenIn').value; // 'newtab' or 'fullscreen'
+const openIn = document.getElementById('linkOpenIn').value;
 
 if (!title) { showToast('Title required', 'error'); return; }
 if (type === 'video' && !url) { showToast('Video URL required', 'error'); return; }
