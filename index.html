@@ -289,7 +289,29 @@ color: white; border-radius: 20px;
 padding: 18px; margin-bottom: 16px;
 box-shadow: var(--shadow-md);
 position: relative; overflow: hidden;
-display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center;
+display: grid; grid-template-columns: 1fr auto auto; gap: 14px; align-items: center;
+}
+@media (max-width: 420px) {
+  .welcome-card {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+  .greeting-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .weather-mini {
+    align-items: center;
+    text-align: center;
+  }
+  .weather-mini-details {
+    justify-content: center;
+  }
+  .weather-mini-loc {
+    justify-content: center;
+  }
 }
 .welcome-card::after { content: ''; position: absolute; top: -50%; right: -20%; width: 200px; height: 200px; background: rgba(255,255,255,0.1); border-radius: 50%; pointer-events: none; }
 .greeting-wrap { position: relative; z-index: 1; min-width: 0; }
@@ -893,8 +915,15 @@ transform: rotate(90deg);
 </div>
 <div class="nepali-date" onclick="openNepaliCalendar()">
 <i class="bi bi-calendar3"></i>
-<iframe scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true" src="https://www.ashesh.com.np/linknepali-time.php?dwn=only&font_color=ffffff&font_size=14&bikram_sambat=0&format=dmyw&api=751175q476" width="165" height="22"></iframe>
+<iframe scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true" src="https://www.ashesh.com.np/linknepali-time.php?dwn=only&font_color=ffffff&font_size=13&bikram_sambat=0&format=dmyw&api=751175q476" width="165" height="22"></iframe>
 </div>
+</div>
+<div class="world-clock-widget" style="display:flex; flex-direction:column; align-items:center; justify-content:center;">
+          <table>
+              <tr><td style="text-align: center;"><canvas id="canvas_tt6a5a020bede36" width="95" height="95"></canvas></td></tr>
+              <tr><td style="text-align: center; font-weight: bold"><a href="//24timezones.com/time-zone/npt" style="text-decoration: none" class="clock24" id="tz24-1784283659-tznpt-eyJzaXplIjoiMTI1IiwiYmdjb2xvciI6IjAwOTlGRiIsImxhbmciOiJlbiIsInR5cGUiOiJhIiwiY2FudmFzX2lkIjoiY2FudmFzX3R0NmE1YTAyMGJlZGUzNiJ9" title="NPT actual time" target="_blank" rel="nofollow"></a></td></tr>
+          </table>
+<script type="text/javascript" src="//w.24timezones.com/l.js" async></script>
 </div>
 <div class="weather-mini" id="weatherContainer">
 <div class="weather-loading"><i class="bi bi-arrow-repeat spin"></i><span>Loading...</span></div>
@@ -2009,7 +2038,7 @@ const welcomeDateEl = document.getElementById('welcomeDate');
 const timeTextEl = document.getElementById('timeText');
 const nepaliMonthsDev = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मंसिर', 'पौष', 'माघ', 'फागुन', 'चैत'];
 const nepaliDaysDev = ['आइतबार', 'सोमबार', 'मङ्गलबार', 'बुधबार', 'बिहीबार', 'शुक्रबार', 'शनिबार'];
-const engToNepaliNum = { '0': '', '1': '१', '2': '२', '3': '३', '4': '४', '5': '', '6': '६', '7': '७', '8': '', '9': '९' };
+const engToNepaliNum = { '0': '०', '1': '१', '2': '२', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '९' };
 function toNepaliNumber(num) { return num.toString().split('').map(d => engToNepaliNum[d] || d).join(''); }
 function convertToNepaliDate(date) {
 const year = date.getFullYear(); const month = date.getMonth(); const day = date.getDate();
@@ -2046,7 +2075,7 @@ document.body.classList.remove('modal-open');
 const weatherContainer = document.getElementById('weatherContainer');
 const KATHMANDU = { lat: 27.7172, lon: 85.3240, name: 'Kathmandu' };
 function decodeWeather(code, isDay) {
-const map = { 0: { icon: isDay ? '️' : '🌙', desc: 'Clear' }, 1: { icon: isDay ? '🌤️' : '', desc: 'Mainly clear' }, 2: { icon: isDay ? '⛅' : '☁️', desc: 'Partly cloudy' }, 3: { icon: '☁️', desc: 'Overcast' }, 45: { icon: '🌫️', desc: 'Foggy' }, 48: { icon: '🌫️', desc: 'Rime fog' }, 51: { icon: '🌦️', desc: 'Light drizzle' }, 53: { icon: '🌦️', desc: 'Drizzle' }, 55: { icon: '️', desc: 'Dense drizzle' }, 61: { icon: '🌧️', desc: 'Light rain' }, 63: { icon: '🌧️', desc: 'Rain' }, 65: { icon: '🌧️', desc: 'Heavy rain' }, 71: { icon: '🌨️', desc: 'Light snow' }, 73: { icon: '🌨️', desc: 'Snow' }, 75: { icon: '❄️', desc: 'Heavy snow' }, 80: { icon: '🌦️', desc: 'Rain showers' }, 81: { icon: '🌧️', desc: 'Heavy showers' }, 82: { icon: '⛈️', desc: 'Violent showers' }, 95: { icon: '⛈️', desc: 'Thunderstorm' }, 96: { icon: '⛈️', desc: 'Thunder + hail' }, 99: { icon: '⛈️', desc: 'Severe storm' } };
+const map = { 0: { icon: isDay ? '☀️' : '🌙', desc: 'Clear' }, 1: { icon: isDay ? '🌤️' : '☁️', desc: 'Mainly clear' }, 2: { icon: isDay ? '⛅' : '☁️', desc: 'Partly cloudy' }, 3: { icon: '☁️', desc: 'Overcast' }, 45: { icon: '🌫️', desc: 'Foggy' }, 48: { icon: '🌫️', desc: 'Rime fog' }, 51: { icon: '🌦️', desc: 'Light drizzle' }, 53: { icon: '🌦️', desc: 'Drizzle' }, 55: { icon: '🌧️', desc: 'Dense drizzle' }, 61: { icon: '🌧️', desc: 'Light rain' }, 63: { icon: '🌧️', desc: 'Rain' }, 65: { icon: '🌧️', desc: 'Heavy rain' }, 71: { icon: '🌨️', desc: 'Light snow' }, 73: { icon: '🌨️', desc: 'Snow' }, 75: { icon: '❄️', desc: 'Heavy snow' }, 80: { icon: '🌦️', desc: 'Rain showers' }, 81: { icon: '🌧️', desc: 'Heavy showers' }, 82: { icon: '⛈️', desc: 'Violent showers' }, 95: { icon: '⛈️', desc: 'Thunderstorm' }, 96: { icon: '⛈️', desc: 'Thunder + hail' }, 99: { icon: '⛈️', desc: 'Severe storm' } };
 return map[code] || { icon: '🌡️', desc: 'Unknown' };
 }
 async function fetchWeather() {
@@ -2083,58 +2112,55 @@ return false;
 }
 // ========== FULL SCREEN MODAL HELPER ==========
 function openFullScreenModal(title, url) {
-    document.getElementById('fullScreenToolTitle').textContent = title;
-    const container = document.getElementById('fullScreenToolContent');
-    container.style.position = 'relative';
-    
-    // Show loading spinner initially
-    container.innerHTML = `
-        <div id="fsLoader" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:var(--bg-body); z-index:10; transition: opacity 0.3s;">
-            <div style="text-align:center; color:var(--text-secondary);">
-                <i class="bi bi-arrow-repeat spin" style="font-size:2.5rem; color:var(--primary); display:block; margin-bottom:12px;"></i>
-                <p style="margin:0; font-size:0.9rem; font-weight:500;">Loading content...</p>
-            </div>
-        </div>
-    `;
-
-    if (isImageUrl(url)) {
-        const imgWrap = document.createElement('div');
-        imgWrap.style.cssText = 'width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#000; padding:8px; position:relative; z-index:5; opacity:0; transition: opacity 0.3s;';
-        imgWrap.innerHTML = `
-            <img src="${url}" 
-                 style="max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; display:block; border-radius:6px; box-shadow:0 4px 20px rgba(0,0,0,0.5);"
-                 onerror="this.parentElement.innerHTML='<div style=\\'color:#fff;text-align:center;padding:20px;\\'>❌ Image failed to load</div>';">
-        `;
-        const img = imgWrap.querySelector('img');
-        img.onload = () => {
-            imgWrap.style.opacity = '1';
-            const loader = document.getElementById('fsLoader');
-            if (loader) { loader.style.opacity = '0'; setTimeout(() => loader.remove(), 300); }
-        };
-        img.onerror = () => {
-            const loader = document.getElementById('fsLoader');
-            if (loader) loader.remove();
-        };
-        container.appendChild(imgWrap);
-    } else {
-        const iframe = document.createElement('iframe');
-        iframe.src = url;
-        iframe.style.cssText = 'width:100%; height:100%; border:none; background:white; position:relative; z-index:5; opacity:0; transition: opacity 0.3s;';
-        iframe.allowFullscreen = true;
-        iframe.onload = () => {
-            iframe.style.opacity = '1';
-            const loader = document.getElementById('fsLoader');
-            if (loader) { loader.style.opacity = '0'; setTimeout(() => loader.remove(), 300); }
-        };
-        iframe.onerror = () => {
-            const loader = document.getElementById('fsLoader');
-            if (loader) loader.remove();
-        };
-        container.appendChild(iframe);
-    }
-
-    document.getElementById('fullScreenToolModal').style.display = 'flex';
-    document.body.classList.add('modal-open');
+document.getElementById('fullScreenToolTitle').textContent = title;
+const container = document.getElementById('fullScreenToolContent');
+container.style.position = 'relative';
+// Show loading spinner initially
+container.innerHTML = `
+<div id="fsLoader" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:var(--bg-body); z-index:10; transition: opacity 0.3s;">
+<div style="text-align:center; color:var(--text-secondary);">
+<i class="bi bi-arrow-repeat spin" style="font-size:2.5rem; color:var(--primary); display:block; margin-bottom:12px;"></i>
+<p style="margin:0; font-size:0.9rem; font-weight:500;">Loading content...</p>
+</div>
+</div>
+`;
+if (isImageUrl(url)) {
+const imgWrap = document.createElement('div');
+imgWrap.style.cssText = 'width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#000; padding:8px; position:relative; z-index:5; opacity:0; transition: opacity 0.3s;';
+imgWrap.innerHTML = `
+<img src="${url}"
+style="max-width:100%; max-height:100%; width:auto; height:auto; object-fit:contain; display:block; border-radius:6px; box-shadow:0 4px 20px rgba(0,0,0,0.5);"
+onerror="this.parentElement.innerHTML='<div style=\\'color:#fff;text-align:center;padding:20px;\\'>❌ Image failed to load</div>';">
+`;
+const img = imgWrap.querySelector('img');
+img.onload = () => {
+imgWrap.style.opacity = '1';
+const loader = document.getElementById('fsLoader');
+if (loader) { loader.style.opacity = '0'; setTimeout(() => loader.remove(), 300); }
+};
+img.onerror = () => {
+const loader = document.getElementById('fsLoader');
+if (loader) loader.remove();
+};
+container.appendChild(imgWrap);
+} else {
+const iframe = document.createElement('iframe');
+iframe.src = url;
+iframe.style.cssText = 'width:100%; height:100%; border:none; background:white; position:relative; z-index:5; opacity:0; transition: opacity 0.3s;';
+iframe.allowFullscreen = true;
+iframe.onload = () => {
+iframe.style.opacity = '1';
+const loader = document.getElementById('fsLoader');
+if (loader) { loader.style.opacity = '0'; setTimeout(() => loader.remove(), 300); }
+};
+iframe.onerror = () => {
+const loader = document.getElementById('fsLoader');
+if (loader) loader.remove();
+};
+container.appendChild(iframe);
+}
+document.getElementById('fullScreenToolModal').style.display = 'flex';
+document.body.classList.add('modal-open');
 }
 function closeFullScreenModal() {
 document.getElementById('fullScreenToolModal').style.display = 'none';
