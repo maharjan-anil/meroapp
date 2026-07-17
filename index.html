@@ -19,8 +19,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<!-- Nepali Date Converter Library -->
-<script src="https://cdn.jsdelivr.net/npm/nepali-date-converter@3.0.0/dist/nepali-date-converter.umd.js"></script>
 <style>
 :root {
 --primary: #0077e5;
@@ -303,8 +301,9 @@ display: grid; grid-template-columns: 1fr auto; gap: 14px; align-items: center;
 .welcome-date { font-size: 0.72rem; opacity: 0.9; }
 .welcome-time { display: inline-flex; align-items: center; gap: 3px; background: rgba(255,255,255,0.18); padding: 2px 7px; border-radius: 14px; font-size: 0.7rem; font-weight: 600; border: 1px solid rgba(255,255,255,0.2); }
 .welcome-time i { font-size: 0.65rem; }
-.nepali-date { font-size: 0.7rem; opacity: 0.9; margin-top: 2px; display: flex; align-items: center; gap: 4px; }
+.nepali-date { font-size: 0.7rem; opacity: 0.9; margin-top: 2px; display: flex; align-items: center; gap: 4px; cursor: pointer; }
 .nepali-date i { font-size: 0.65rem; }
+.nepali-date iframe { border: none; }
 .weather-mini { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: flex-end; text-align: right; min-width: 110px; }
 .weather-mini-icon { font-size: 2rem; line-height: 1; margin-bottom: 2px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15)); }
 .weather-mini-temp { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1; margin-bottom: 2px; }
@@ -827,6 +826,53 @@ padding: 12px; font-size: 0.95rem; resize: vertical;
 .note-textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 119, 229, 0.1); }
 .empty-notes { text-align: center; padding: 20px; color: var(--text-tertiary); }
 .empty-notes i { font-size: 3rem; margin-bottom: 10px; opacity: 0.3; }
+/* Nepali Calendar Modal */
+.nepali-calendar-modal {
+display: none;
+position: fixed;
+inset: 0;
+background: rgba(0, 0, 0, 0.85);
+z-index: 6000;
+align-items: center;
+justify-content: center;
+padding: 16px;
+backdrop-filter: blur(4px);
+}
+.nepali-calendar-modal.active {
+display: flex;
+}
+.nepali-calendar-content {
+background: var(--bg-elevated);
+border-radius: 16px;
+padding: 20px;
+max-width: 340px;
+width: 100%;
+position: relative;
+box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+animation: modalSlideIn 0.3s ease;
+}
+.nepali-calendar-close {
+position: absolute;
+top: 12px;
+right: 12px;
+width: 32px;
+height: 32px;
+border-radius: 50%;
+background: var(--border);
+border: none;
+color: var(--text-primary);
+font-size: 1.1rem;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+transition: all 0.2s;
+}
+.nepali-calendar-close:hover {
+background: var(--danger);
+color: white;
+transform: rotate(90deg);
+}
 </style>
 </head>
 <body>
@@ -845,7 +891,10 @@ padding: 12px; font-size: 0.95rem; resize: vertical;
 <span class="welcome-date" id="welcomeDate">Loading...</span>
 <span class="welcome-time"><i class="bi bi-clock"></i><span id="timeText">--:--</span></span>
 </div>
-<div class="nepali-date"><i class="bi bi-calendar3"></i><span id="nepaliDateText">Loading...</span></div>
+<div class="nepali-date" onclick="openNepaliCalendar()">
+<i class="bi bi-calendar3"></i>
+<iframe scrolling="no" border="0" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true" src="https://www.ashesh.com.np/linknepali-time.php?dwn=only&font_color=ffffff&font_size=14&api=711178q055" width="165" height="22" id="nepaliDateIframe"></iframe>
+</div>
 </div>
 <div class="weather-mini" id="weatherContainer">
 <div class="weather-loading"><i class="bi bi-arrow-repeat spin"></i><span>Loading...</span></div>
@@ -872,7 +921,6 @@ padding: 12px; font-size: 0.95rem; resize: vertical;
 <div class="tool-card" data-tool="nepal"><div class="tool-icon nepal"><i class="bi bi-geo-alt-fill"></i></div><div><h3>Nepal Provinces</h3><p>7 Provinces & 77 Districts</p></div></div>
 <div class="tool-card" data-tool="worldexplorer"><div class="tool-icon" style="background: linear-gradient(135deg, #10b981, #059669);"><i class="bi bi-globe2"></i></div><div><h3>World Explorer</h3><p>Explore the world</p></div></div>
 <div class="tool-card" data-tool="worlddatetime"><div class="tool-icon" style="background: linear-gradient(135deg, #f59e0b, #d97706);"><i class="bi bi-clock-history"></i></div><div><h3>World Date & Time</h3><p>Global time zones</p></div></div>
-<div class="tool-card" data-tool="countdown"><div class="tool-icon" style="background: linear-gradient(135deg, #ec4899, #be185d);"><i class="bi bi-hourglass-split"></i></div><div><h3>Countdown</h3><p>Event countdown</p></div></div>
 </div>
 </section>
 <!-- Directory Screen -->
@@ -967,7 +1015,7 @@ padding: 12px; font-size: 0.95rem; resize: vertical;
 </div>
 <h3>Mero App</h3>
 <p>Tools, Directory, Documents, Links & Learning</p>
-<span class="settings-version-badge">v22.4.0</span>
+<span class="settings-version-badge">v1.0.0</span>
 </div>
 <div class="section-title">Preferences</div>
 <div class="settings-item">
@@ -984,7 +1032,7 @@ padding: 12px; font-size: 0.95rem; resize: vertical;
 <div class="section-title">About</div>
 <div class="settings-item">
 <div class="settings-icon-box blue"><i class="bi bi-info-circle-fill"></i></div>
-<div class="settings-item-content"><h4>Version</h4><p>22.4.0 • July 2026</p></div>
+<div class="settings-item-content"><h4>Version</h4><p>1.0.0 • July 2026</p></div>
 </div>
 <div class="settings-item">
 <div class="settings-icon-box pink"><i class="bi bi-heart-fill"></i></div>
@@ -1025,6 +1073,15 @@ padding: 12px; font-size: 0.95rem; resize: vertical;
 <button id="fullScreenToolClose" style="width:36px; height:36px; border-radius:50%; background:var(--border); border:none; color:var(--text-primary); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.1rem; transition: background 0.2s;"><i class="bi bi-x"></i></button>
 </div>
 <div id="fullScreenToolContent" style="flex:1; overflow:hidden; position:relative; background:#000;"></div>
+</div>
+<!-- Nepali Calendar Modal -->
+<div class="nepali-calendar-modal" id="nepaliCalendarModal">
+<div class="nepali-calendar-content">
+<button class="nepali-calendar-close" onclick="closeNepaliCalendar()">
+<i class="bi bi-x"></i>
+</button>
+<iframe src="https://www.ashesh.com.np/calendar-widget/calendar.php?tithi=0&header_color=6aa744&api=711175q357" frameborder="0" scrolling="no" marginwidth="0" marginheight="0" style="border:none; overflow:hidden; width:300px; height:290px; border-radius:5px; display: block; margin: 0 auto;" allowtransparency="true"></iframe>
+</div>
 </div>
 <div class="learning-popup-modal" id="learningPopupModal">
 <div class="learning-popup-controls">
@@ -1289,7 +1346,7 @@ populateLearningFilters();
 applyLearningFilters();
 },
 (error) => {
-console.error("❌ Learning error:", error);
+console.error(" Learning error:", error);
 document.getElementById('learningVideoGrid').innerHTML = `<div class="state-msg"><i class="fas fa-exclamation-triangle"></i><p>Error loading videos</p></div>`;
 }
 );
@@ -1685,6 +1742,9 @@ document.getElementById('fullScreenToolModal').style.display = 'none';
 document.getElementById('fullScreenToolContent').innerHTML = '';
 document.body.classList.remove('modal-open');
 }
+if (document.getElementById('nepaliCalendarModal').classList.contains('active')) {
+closeNepaliCalendar();
+}
 }
 });
 </script>
@@ -1721,7 +1781,7 @@ screens.forEach(s => s.classList.toggle('active', s.id === `screen-${target}`));
 });
 // ========== AUTO-FETCH ALL DATA ON APP LOAD ==========
 document.addEventListener('DOMContentLoaded', () => {
-console.log(' App initialized - fetching all data...');
+console.log('🚀 App initialized - fetching all data...');
 loadDirectory();
 loadDocuments();
 fetchLinks();
@@ -1788,8 +1848,7 @@ const tools = [
 { name: 'Panchang', type: 'Tool', desc: 'Hindu calendar', screen: 'tools', icon: 'bi-moon-stars', color: 'tool' },
 { name: 'Nepal Provinces', type: 'Tool', desc: '7 Provinces & 77 Districts', screen: 'tools', icon: 'bi-geo-alt-fill', color: 'tool' },
 { name: 'World Explorer', type: 'Tool', desc: 'Explore the world', screen: 'tools', icon: 'bi-globe2', color: 'tool' },
-{ name: 'World Date & Time', type: 'Tool', desc: 'Global time zones', screen: 'tools', icon: 'bi-clock-history', color: 'tool' },
-{ name: 'Countdown', type: 'Tool', desc: 'Event countdown timer', screen: 'tools', icon: 'bi-hourglass-split', color: 'tool' }
+{ name: 'World Date & Time', type: 'Tool', desc: 'Global time zones', screen: 'tools', icon: 'bi-clock-history', color: 'tool' }
 ];
 tools.forEach(tool => {
 if (tool.name.toLowerCase().includes(query) || tool.desc.toLowerCase().includes(query)) {
@@ -1811,8 +1870,7 @@ const keyMap = {
 'panchang': 'panchang',
 'nepalprovinces': 'nepal',
 'worldexplorer': 'worldexplorer',
-'worlddate&time': 'worlddatetime',
-'countdown': 'countdown'
+'worlddate&time': 'worlddatetime'
 };
 const mappedKey = keyMap[toolKey] || toolKey;
 setTimeout(() => {
@@ -1949,51 +2007,46 @@ const greetingText = document.getElementById('greetingText');
 const greetingEmoji = document.getElementById('greetingEmoji');
 const welcomeDateEl = document.getElementById('welcomeDate');
 const timeTextEl = document.getElementById('timeText');
-const nepaliDateText = document.getElementById('nepaliDateText');
-
+const nepaliMonthsDev = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मंसिर', 'पौष', 'माघ', 'फागुन', 'चैत'];
+const nepaliDaysDev = ['आइतबार', 'सोमबार', 'मङ्गलबार', 'बुधबार', 'बिहीबार', 'शुक्रबार', 'शनिबार'];
+const engToNepaliNum = { '0': '', '1': '१', '2': '२', '3': '३', '4': '४', '5': '', '6': '६', '7': '७', '8': '', '9': '९' };
+function toNepaliNumber(num) { return num.toString().split('').map(d => engToNepaliNum[d] || d).join(''); }
+function convertToNepaliDate(date) {
+const year = date.getFullYear(); const month = date.getMonth(); const day = date.getDate();
+let nepaliYear = year + 57; let nepaliMonth = month - 3; let nepaliDay = day;
+if (nepaliMonth < 0) { nepaliMonth += 12; nepaliYear -= 1; }
+if (day > 14) { nepaliDay = day - 14; }
+else { nepaliDay = day + 16; if (nepaliMonth === 0) { nepaliMonth = 11; nepaliYear -= 1; } else { nepaliMonth -= 1; } }
+if (nepaliDay > 32) nepaliDay -= 30; if (nepaliDay < 1) nepaliDay = 1;
+return { year: nepaliYear, month: nepaliMonth, day: nepaliDay, monthName: nepaliMonthsDev[nepaliMonth] };
+}
 function getNepalTime() { return new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kathmandu' })); }
-
 function updateDateTime() {
-    const now = new Date();
-    const nepalNow = getNepalTime();
-    const hour = nepalNow.getHours();
-    let greeting, emoji;
-    if (hour >= 5 && hour < 12) { greeting = 'Good Morning,'; emoji = '🌅'; }
-    else if (hour >= 12 && hour < 17) { greeting = 'Good Afternoon,'; emoji = '☀️'; }
-    else if (hour >= 17 && hour < 21) { greeting = 'Good Evening,'; emoji = '🌇'; }
-    else { greeting = 'Good Night,'; emoji = '🌙'; }
-    
-    greetingText.textContent = greeting;
-    greetingEmoji.textContent = emoji;
-    
-    welcomeDateEl.textContent = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-    timeTextEl.textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
-    
-    let nepaliDateStr = "मिति लोड हुँदैछ...";
-    try {
-        if (typeof NepaliDateConverter !== 'undefined') {
-            const converter = new NepaliDateConverter();
-            const nd = converter.englishToNepali(now);
-            const months = ['बैशाख', 'जेठ', 'असार', 'साउन', 'भदौ', 'असोज', 'कार्तिक', 'मंसिर', 'पौष', 'माघ', 'फागुन', 'चैत'];
-            const days = ['आइतबार', 'सोमबार', 'मङ्गलबार', 'बुधबार', 'बिहीबार', 'शुक्रबार', 'शनिबार'];
-            const engToNepaliNum = { '0': '०', '1': '१', '2': '२', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '९' };
-            const toNepali = (num) => num.toString().split('').map(d => engToNepaliNum[d] || d).join('');
-            nepaliDateStr = `${days[now.getDay()]}, ${toNepali(nd.day)} ${months[nd.month - 1]} ${toNepali(nd.year)}`;
-        } else {
-            nepaliDateStr = "बिहिवार, ३२ असार २०८३";
-        }
-    } catch (e) {
-        nepaliDateStr = "बिहिवार, ३२ असार २०८३";
-    }
-    nepaliDateText.textContent = nepaliDateStr;
+const nepalNow = getNepalTime(); const hour = nepalNow.getHours(); let greeting, emoji;
+if (hour >= 5 && hour < 12) { greeting = 'Good Morning,'; emoji = '🌅'; }
+else if (hour >= 12 && hour < 17) { greeting = 'Good Afternoon,'; emoji = '☀️'; }
+else if (hour >= 17 && hour < 21) { greeting = 'Good Evening,'; emoji = '🌇'; }
+else { greeting = 'Good Night,'; emoji = '🌙'; }
+greetingText.textContent = greeting; greetingEmoji.textContent = emoji;
+const now = new Date();
+welcomeDateEl.textContent = now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+timeTextEl.textContent = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
 }
 updateDateTime(); setInterval(updateDateTime, 30000);
-
+// ========== NEPALI CALENDAR FUNCTIONS ==========
+function openNepaliCalendar() {
+document.getElementById('nepaliCalendarModal').classList.add('active');
+document.body.classList.add('modal-open');
+}
+function closeNepaliCalendar() {
+document.getElementById('nepaliCalendarModal').classList.remove('active');
+document.body.classList.remove('modal-open');
+}
 // ========== WEATHER ==========
 const weatherContainer = document.getElementById('weatherContainer');
 const KATHMANDU = { lat: 27.7172, lon: 85.3240, name: 'Kathmandu' };
 function decodeWeather(code, isDay) {
-const map = { 0: { icon: isDay ? '☀️' : '🌙', desc: 'Clear' }, 1: { icon: isDay ? '🌤️' : '🌙', desc: 'Mainly clear' }, 2: { icon: isDay ? '⛅' : '☁️', desc: 'Partly cloudy' }, 3: { icon: '☁️', desc: 'Overcast' }, 45: { icon: '🌫️', desc: 'Foggy' }, 48: { icon: '🌫️', desc: 'Rime fog' }, 51: { icon: '🌦️', desc: 'Light drizzle' }, 53: { icon: '🌦️', desc: 'Drizzle' }, 55: { icon: '🌧️', desc: 'Dense drizzle' }, 61: { icon: '🌧️', desc: 'Light rain' }, 63: { icon: '🌧️', desc: 'Rain' }, 65: { icon: '🌧️', desc: 'Heavy rain' }, 71: { icon: '🌨️', desc: 'Light snow' }, 73: { icon: '🌨️', desc: 'Snow' }, 75: { icon: '❄️', desc: 'Heavy snow' }, 80: { icon: '🌦️', desc: 'Rain showers' }, 81: { icon: '🌧️', desc: 'Heavy showers' }, 82: { icon: '⛈️', desc: 'Violent showers' }, 95: { icon: '⛈️', desc: 'Thunderstorm' }, 96: { icon: '⛈️', desc: 'Thunder + hail' }, 99: { icon: '⛈️', desc: 'Severe storm' } };
+const map = { 0: { icon: isDay ? '️' : '🌙', desc: 'Clear' }, 1: { icon: isDay ? '🌤️' : '', desc: 'Mainly clear' }, 2: { icon: isDay ? '⛅' : '☁️', desc: 'Partly cloudy' }, 3: { icon: '☁️', desc: 'Overcast' }, 45: { icon: '🌫️', desc: 'Foggy' }, 48: { icon: '🌫️', desc: 'Rime fog' }, 51: { icon: '🌦️', desc: 'Light drizzle' }, 53: { icon: '🌦️', desc: 'Drizzle' }, 55: { icon: '️', desc: 'Dense drizzle' }, 61: { icon: '🌧️', desc: 'Light rain' }, 63: { icon: '🌧️', desc: 'Rain' }, 65: { icon: '🌧️', desc: 'Heavy rain' }, 71: { icon: '🌨️', desc: 'Light snow' }, 73: { icon: '🌨️', desc: 'Snow' }, 75: { icon: '❄️', desc: 'Heavy snow' }, 80: { icon: '🌦️', desc: 'Rain showers' }, 81: { icon: '🌧️', desc: 'Heavy showers' }, 82: { icon: '⛈️', desc: 'Violent showers' }, 95: { icon: '⛈️', desc: 'Thunderstorm' }, 96: { icon: '⛈️', desc: 'Thunder + hail' }, 99: { icon: '⛈️', desc: 'Severe storm' } };
 return map[code] || { icon: '🌡️', desc: 'Unknown' };
 }
 async function fetchWeather() {
@@ -2012,23 +2065,27 @@ document.getElementById('weatherRetry').addEventListener('click', fetchWeather);
 }
 fetchWeather(); setInterval(fetchWeather, 120000);
 document.addEventListener('visibilitychange', () => { if (!document.hidden) { updateDateTime(); fetchWeather(); } });
-
 // ========== SMART IMAGE DETECTION ==========
 function isImageUrl(url) {
 if (!url) return false;
 const lower = url.toLowerCase().split('?')[0].split('#')[0];
+// Direct image file extensions
 if (/\.(jpg|jpeg|png|gif|webp|svg|bmp|ico|tiff|tif|avif)$/.test(lower)) return true;
+// Google Drive thumbnail URLs
 if (lower.includes('drive.google.com/thumbnail')) return true;
+// Google Drive image preview (uc?id=...)
 if (lower.includes('drive.google.com') && (lower.includes('id=') || lower.includes('/view'))) return true;
+// Dropbox direct image links
 if (lower.includes('dropbox.com') && (lower.includes('dl=1') || lower.includes('raw=1') || lower.includes('raw=0'))) return true;
+// Imgur direct links
 if (lower.includes('i.imgur.com')) return true;
 return false;
 }
-
 // ========== FULL SCREEN MODAL HELPER ==========
 function openFullScreenModal(title, url) {
 document.getElementById('fullScreenToolTitle').textContent = title;
 const container = document.getElementById('fullScreenToolContent');
+// ✅ FIX: If URL is an image, use <img> tag with object-fit:contain to fit the screen
 if (isImageUrl(url)) {
 container.innerHTML = `
 <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#000; padding:8px;">
@@ -2038,6 +2095,7 @@ onerror="this.parentElement.innerHTML='<div style=\\'color:#fff;text-align:cente
 </div>
 `;
 } else {
+// For non-image URLs, use iframe as before
 container.innerHTML = `<iframe src="${url}" style="width:100%; height:100%; border:none; background:white;" allowfullscreen></iframe>`;
 }
 document.getElementById('fullScreenToolModal').style.display = 'flex';
@@ -2048,23 +2106,21 @@ document.getElementById('fullScreenToolModal').style.display = 'none';
 document.getElementById('fullScreenToolContent').innerHTML = '';
 document.body.classList.remove('modal-open');
 }
-
 // ========== TOOLS MODAL ==========
 const toolData = {
 gold: { title: 'Gold & Silver Price', iframe: 'https://www.ashesh.com.np/gold/widget.php?api=621113p553&header_color=0077e5', height: 265 },
 forex: { title: 'Foreign Exchange Rates', iframe: 'https://www.ashesh.com.np/forex/widget2.php?api=621117p597&header_color=38b45e&background_color=faf8ee&header_title=Nepal%20Exchange%20Rates', height: 383 },
 fuel: { title: 'Fuel Rates', iframe: 'https://www.ashesh.com.np/fuel/widget.php?api=641110p120&title=Nepal%20Fuel%20Rates&header_color=dedede&header_text_color=303030', height: 275 },
-veg: { title: 'Falfulbazar', iframe: 'https://www.ashesh.com.np/vegetable/widget.php?api=641115p195&header_color=519122', height: 450 },
+veg: { title: 'Falfulbazar', iframe: 'https://www.ashesh.com.np/vegetable/widget.php?api=641115p195&header_color=519122', height: 265 },
 date: { title: 'Date Converter (BS ↔ AD)', iframe: 'https://www.ashesh.com.np/linkdate-converter.php?h_color=21ADE2&b_color=CFE4B1&api=641117p214', height: 186 },
 weather: { title: 'Nepal Weather', iframe: 'https://www.ashesh.com.np/weather/widget.php?title=Nepal%20Weather%20Observation&header_color=00a2e2&api=641112p367', height: 383 },
-unicode: { title: 'Nepali Unicode', iframe: 'https://www.ashesh.com.np/linknepali-unicode3.php?api=641111p353', height: 400, openIn: 'fullscreen' },
+unicode: { title: 'Nepali Unicode', iframe: 'https://www.ashesh.com.np/linknepali-unicode3.php?api=641111p353', height: 400, openIn:'fullscreen' },
 panchang: { title: 'Nepali Panchang', iframe: 'https://www.ashesh.com.np/panchang/widget.php?header_title=Nepali%20Panchang&header_color=e6e5e2&api=641113p383', height: 365 },
 existingissues: { title: 'Existing Issues', url: 'https://www.sharesansar.com/existing-issues', openIn: 'fullscreen' },
 ipoallotment: { title: 'IPO Allotment', url: 'https://iporesult.cdsc.com.np/', openIn: 'newtab' },
 nepal: { title: 'Nepal Provinces', url: 'https://www.maharjan-anil.com.np/pd', openIn: 'fullscreen' },
 worldexplorer: { title: 'World Explorer', url: 'https://www.maharjan-anil.com.np/world', openIn: 'fullscreen' },
-worlddatetime: { title: 'World Date & Time', url: 'https://www.maharjan-anil.com.np/worlddateandtime', openIn: 'fullscreen' },
-countdown: { title: 'Countdown', url: 'https://maharjanil.github.io/countdown', openIn: 'fullscreen' }
+worlddatetime: { title: 'World Date & Time', url: 'https://www.maharjan-anil.com.np/worlddateandtime', openIn: 'fullscreen' }
 };
 const toolModalOverlay = document.getElementById('toolModalOverlay');
 const toolModalBox = document.getElementById('toolModalBox');
@@ -2098,7 +2154,6 @@ setTimeout(() => { toolModalOverlay.style.display = 'none'; toolModalBody.innerH
 toolModalClose.addEventListener('click', closeToolModal);
 toolModalOverlay.addEventListener('click', (e) => { if (e.target === toolModalOverlay) closeToolModal(); });
 document.getElementById('fullScreenToolClose').addEventListener('click', closeFullScreenModal);
-
 // ========== DIRECTORY (Contacts) ==========
 let directoryData = []; let editingContactId = null; let currentFilter = 'all';
 const searchInput = document.getElementById('searchInput'); const clearBtn = document.getElementById('clearBtn'); const resultsContainer = document.getElementById('resultsContainer');
@@ -2183,7 +2238,6 @@ contactFormSave.disabled = true; contactFormSave.textContent = 'Saving...'; clos
 try { await fetch(CONTACTS_API_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(payload) }); showToast(editingContactId ? 'Updated!' : 'Added!', 'success'); setTimeout(loadDirectory, 800); }
 catch (error) { showToast('Error saving', 'error'); } finally { contactFormSave.disabled = false; contactFormSave.textContent = 'Save'; }
 });
-
 // ========== DOCUMENTS ==========
 let docData = []; let editingDocId = null;
 const docGrid = document.getElementById('docGrid'); const docCount = document.getElementById('docCount'); const docSearchInput = document.getElementById('docSearchInput'); const docClearBtn = document.getElementById('docClearBtn');
@@ -2272,7 +2326,6 @@ if (!confirm('Delete this document?')) return;
 try { await fetch(DOCUMENTS_API_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ action: 'delete', id: id }) }); showToast('Deleted!', 'success'); setTimeout(loadDocuments, 800); }
 catch (error) { showToast('Error deleting', 'error'); loadDocuments(); }
 }
-
 // ========== LINKS ==========
 let allLinks = []; let editingLinkId = null; let currentLinkCategory = 'all';
 const linksGrid = document.getElementById('linksGrid'); const linkSearchInput = document.getElementById('linkSearchInput'); const linkResultCount = document.getElementById('linkResultCount');
@@ -2305,13 +2358,9 @@ let result;
 if (contentType && contentType.includes('application/json')) {
 result = await response.json();
 } else {
-try {
-result = await response.json();
-} catch (e) {
 const text = await response.text();
 console.error('Non-JSON response from Links API:', text.substring(0, 200));
 throw new Error('Invalid response from server. Please check your Apps Script deployment.');
-}
 }
 if (!result.success) throw new Error(result.error || 'Unknown error');
 allLinks = result.data || [];
@@ -2482,7 +2531,7 @@ document.getElementById('refreshData').addEventListener('click', () => { loadDir
 function debounce(fn, wait) { let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), wait); }; }
 function escapeHtml(text) { if (!text) return ''; return String(text).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); }
 function showToast(msg, type = 'success') { const toast = document.getElementById('toastMsg'); toast.textContent = msg; toast.className = `toast-msg show ${type}`; setTimeout(() => toast.classList.remove('show'), 2500); }
-if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').then(reg => console.log('✅ SW:', reg.scope)).catch(err => console.log('❌ SW:', err)); }); }
+if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('./sw.js').then(reg => console.log('✅ SW:', reg.scope)).catch(err => console.log(' SW:', err)); }); }
 </script>
 </body>
 </html>
